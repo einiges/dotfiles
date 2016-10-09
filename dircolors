@@ -1,0 +1,460 @@
+# LS_COLORS
+# vim:ft=dircolors
+
+
+                                 # --- core ---
+BLK                   38;5;68    # Block device drive
+CAPABILITY            38;5;17    # File with capability
+CHR                   38;5;113;1 # Character device driver
+DIR                   38;5;32;1  # Directory
+DOOR                  38;5;127   # Door
+EXEC                  38;5;208;1 # Executable
+FIFO                  38;5;126   # Fifo
+FILE                  0
+LINK                  target
+MULTIHARDLINK         38;5;222;1 # regular file with more than one link
+NORMAL                0
+ORPHAN                48;5;196;38;5;232;1 # Symlink to nonexistent file, or non-stat'able file ...
+OTHER_WRITABLE        38;5;220;1          # Directory that is other-writable (o+w) and not sticky
+SETGID                48;5;3;38;5;0       # file that is setuid (u+s)
+SETUID                38;5;220;1;3;100;1  # file that is setgid (g+s)
+SOCK                  38;5;197            # socket
+STICKY                38;5;86;48;5;234    # Directory with the sticky bit set (+t) and not other-writable
+STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3 # Directory that is sticky and other-writable (+t,o+w)
+
+
+*README               38;5;220;1 # documents
+*LICENSE              38;5;220;1
+*COPYING              38;5;220;1
+*INSTALL              38;5;220;1
+*COPYRIGHT            38;5;220;1
+*AUTHORS              38;5;220;1
+*HISTORY              38;5;220;1
+*CONTRIBUTORS         38;5;220;1
+*PATENTS              38;5;220;1
+*VERSION              38;5;220;1
+*NOTICE               38;5;220;1
+*CHANGES              38;5;220;1
+.log                  38;5;12
+
+.txt                  38;5;12 # plain-text
+
+.etx                  38;5;184 # markup
+.info                 38;5;184
+.markdown             38;5;184
+.md                   38;5;184
+.mkd                  38;5;184
+.nfo                  38;5;184
+.pod                  38;5;184
+.tex                  38;5;184
+.textile              38;5;184
+
+.json                 38;5;178 # key-value, non-relational data
+.msg                  38;5;178
+.pgn                  38;5;178
+.rss                  38;5;178
+.xml                  38;5;178
+.yml                  38;5;178
+.RData                38;5;178
+.rdata                38;5;178
+
+.cbr                  38;5;141 # binary
+.cbz                  38;5;141
+.chm                  38;5;141
+.djvu                 38;5;141
+.pdf                  38;5;141
+.PDF                  38;5;141
+
+.docm                 38;5;111;4 # words
+.doc                  38;5;111
+.docx                 38;5;111
+.eps                  38;5;111
+.ps                   38;5;111
+.odb                  38;5;111
+.odt                  38;5;111
+.rtf                  38;5;111
+
+.odp                  38;5;166   # -- presentation --
+.pps                  38;5;166
+.ppt                  38;5;166
+.pptx                 38;5;166
+.ppts                 38;5;166   # Powerpoint show
+.pptsm                38;5;166;4 # Powerpoint show macros
+.pptxm                38;5;166;4 # Powerpoint with macros
+
+
+.csv                  38;5;112   # -- spreadsheet --
+.ods                  38;5;112   # Open document spreadsheet
+.xla                  38;5;112
+.xls                  38;5;112   # Excel spreadsheet
+.xlsx                 38;5;112
+.xlsxm                38;5;112;4 # Excel spreadsheet with macros
+.xltm                 38;5;112;4  # Excel module
+.xltx                 38;5;112
+
+*cfg                  38;5;12 # -- configs --
+*conf                 38;5;12
+*rc                   38;5;12
+.ini                  38;5;12
+.toml                 38;5;12
+.viminfo              38;5;12 # vim
+.pcf                  38;5;12 # cisco VPN client configuration
+.psf                  38;5;12 # adobe photoshop proof settings file
+
+.git                  38;5;197 # git
+.gitignore            38;5;197
+.gitattributes        38;5;197
+.gitmodules           38;5;197
+
+.awk                  38;5;172 # shell
+.bash                 38;5;172
+.bat                  38;5;172
+.BAT                  38;5;172
+.sed                  38;5;172
+.sh                   38;5;172
+.zsh                  38;5;172
+.vim                  38;5;172
+
+.ahk                  38;5;208   # -- interpreted --
+.py                   38;5;208  # python
+.rb                   38;5;208  # ruby
+.pl                   38;5;208  # perl
+.msql                 38;5;208  # sql
+.mysql                38;5;208
+.pgsql                38;5;208
+.sql                  38;5;208
+
+                               #  -- compiled --
+.asm                  38;5;33  # assembly language
+.cl                   38;5;33  # LISP
+.lisp                 38;5;33
+.lua                  38;5;33  # lua
+.moon                 38;5;33  # Moonscript
+.c                    38;5;33  # C
+.C                    38;5;33
+.h                    38;5;110
+.H                    38;5;110
+.o                    38;5;12
+.tcc                  38;5;110
+.c++                  38;5;33  # C++
+.cpp                  38;5;33
+.cxx                  38;5;33
+.h++                  38;5;110
+.hpp                  38;5;110
+.hxx                  38;5;110
+.ii                   38;5;110
+.M                    38;5;110 # ObjC Method file
+.m                    38;5;110
+.cc                   38;5;33  # C#
+.cs                   38;5;33
+.cp                   38;5;33
+.cr                   38;5;33  # Crystal
+.go                   38;5;33  # Google golang
+.f                    38;5;33  # fortran
+.for                  38;5;33
+.ftn                  38;5;33
+.s                    38;5;33  # pascal
+.S                    38;5;33
+.rs                   38;5;33  # Rust
+.hs                   38;5;33  # haskell
+.lhs                  38;5;33
+.hi                   38;5;12  # interface file in GHC
+.java                 38;5;33  # java
+.class                38;5;12  # java Byte Code
+
+.pyc                  38;5;240 # compiled apps for interpreted languages
+
+.htm                  38;5;110 # html
+.html                 38;5;110
+.haml                 38;5;110
+.css                  38;5;110
+.sass                 38;5;110
+.scss                 38;5;110
+
+.coffee               38;5;110 # javascript
+.js                   38;5;110
+.jsm                  38;5;110
+.jsm                  38;5;110
+.jsp                  38;5;110
+
+.php                  38;5;110 # php
+.ctp                  38;5;110 #   CakePHP view scripts and helpers
+.twig                 38;5;110 #   Twig template engine
+
+.vb                   38;5;110 # VB(A)
+.vba                  38;5;110
+.vbs                  38;5;110
+
+*Makefile             38;5;131;1 # -- Build --
+*MANIFEST             38;5;243
+*pm_to_blib           38;5;240
+
+.am                   38;5;242   # automake
+.in                   38;5;242
+.hin                  38;5;242
+.scan                 38;5;242
+.m4                   38;5;242
+.old                  38;5;242
+.out                  38;5;242
+.SKIP                 38;5;244
+
+.patch                48;5;197;38;5;232;1 # patch files
+.diff                 48;5;197;38;5;232
+
+.bmp                  38;5;97 # -- graphics --
+.tiff                 38;5;97 # Matrix
+.tif                  38;5;97
+.TIFF                 38;5;97
+.cdr                  38;5;97
+.gif                  38;5;97
+.ico                  38;5;97
+.jpg                  38;5;97
+.JPG                  38;5;97
+.jpeg                 38;5;97
+.nth                  38;5;97
+.png                  38;5;97
+.psd                  38;5;97
+.xpm                  38;5;97
+
+.ai                   38;5;97 # vector
+.eps                  38;5;97
+.epsf                 38;5;97
+.drw                  38;5;97
+.ps                   38;5;97
+.svg                  38;5;97
+
+.xbm                  38;5;97 # Textbased
+.xpm								  38;5;97
+
+.avi                  38;5;113 # -- video --
+.divx                 38;5;113 # lossy
+.IFO                  38;5;113
+.m2v                  38;5;113
+.m4v                  38;5;113
+.mkv                  38;5;113
+.MOV                  38;5;113
+.mov                  38;5;113
+.mp4                  38;5;113
+.mpeg                 38;5;113
+.mpg                  38;5;113
+.ogm                  38;5;113
+.rmvb                 38;5;113
+.sample               38;5;113
+.wmv                  38;5;113
+
+.3g2                  38;5;113 # mobile/streaming
+.3gp                  38;5;113
+.asf                  38;5;113
+.f4v                  38;5;113
+.flv                  38;5;113
+.gp3                  38;5;113
+.gp4                  38;5;113
+.ogv                  38;5;113
+.ts                   38;5;113
+.webm                 38;5;113
+
+.VOB                  38;5;113 # lossless
+.vob                  38;5;113
+
+.3ga                  38;5;137 # -- audio --
+.S3M                  38;5;137 # lossy
+.aac                  38;5;137
+.au                   38;5;137
+.dat                  38;5;137
+.dts                  38;5;137
+.fcm                  38;5;137
+.m4a                  38;5;137
+.mid                  38;5;137
+.midi                 38;5;137
+.mod                  38;5;137
+.mp3                  38;5;137
+.mp4a                 38;5;137
+.oga                  38;5;137
+.ogg                  38;5;137
+.opus                 38;5;137
+.s3m                  38;5;137
+.sid                  38;5;137
+.wma                  38;5;137
+
+.ape                  38;5;137 # lossless
+.aiff                 38;5;137
+.cda                  38;5;137
+.flac                 38;5;137
+.alac                 38;5;137
+.midi                 38;5;137
+.pcm                  38;5;137
+.wav                  38;5;137
+.wv                   38;5;137
+.wvc                  38;5;137
+
+
+.afm                  38;5;66 # -- fonts --
+.fon                  38;5;66
+.fnt                  38;5;66
+.pfb                  38;5;66
+.pfm                  38;5;66
+.ttf                  38;5;66
+.otf                  38;5;66
+.PFA                  38;5;66 # postscript fonts
+.pfa                  38;5;66
+
+.7z                   38;5;40 # -- archives --
+.a                    38;5;40
+.arj                  38;5;40
+.bz2                  38;5;40
+.exe                  38;5;40
+.gz                   38;5;40
+.rar                  38;5;40
+.tar                  38;5;40
+.tgz                  38;5;40
+.xz                   38;5;40
+.zip                  38;5;40
+.zoo                  38;5;40
+  
+.apk                  38;5;215 # packaged apps
+.cab                  38;5;215
+.deb                  38;5;215
+.jad                  38;5;215
+.jar                  38;5;215
+.pak                  38;5;215
+.pk3                  38;5;215
+.vdf                  38;5;215
+.vpk                  38;5;215
+.bsp                  38;5;215
+.gem                  38;5;215
+
+.part                 38;5;239 # partial files
+
+.dmg                  38;5;124 # partition images
+.iso                  38;5;124
+.bin                  38;5;124
+.nrg                  38;5;124
+.qcow                 38;5;124
+.sparseimage          38;5;124
+.toast                38;5;124
+.vcd                  38;5;124
+.vmdk                 38;5;124
+
+.accdb                38;5;60 # databases
+.accde                38;5;60
+.accdr                38;5;60
+.accdt                38;5;60
+.db                   38;5;60
+.localstorage         38;5;60
+.mdb                  38;5;60
+.mde                  38;5;60
+.sqlite               38;5;60
+.typelib              38;5;60
+.nc                   38;5;60 # NetCDF database
+
+.swp                  38;5;244   # -- tempfiles --
+.swo                  38;5;244
+.tmp                  38;5;244
+.sassc                38;5;244
+.pid                  38;5;248   # state files
+.state                38;5;248
+*lockfile             38;5;248
+
+.pacnew               38;5;33    # pacman
+.pacsave              38;5;33
+.un~                  38;5;241   # undo files
+.orig                 38;5;241
+.bak                  38;5;241   # backups
+.o                    38;5;12
+.rlib                 38;5;241
+
+.err                  38;5;160;1 # error logs
+.error                38;5;160;1
+.stderr               38;5;160;1
+
+.dump                 38;5;241   # state dumps
+.stackdump            38;5;241
+.zcompdump            38;5;241
+.zwc                  38;5;241
+
+.pcap                 38;5;29    # tcpdump, network traffic capture
+.cap                  38;5;29
+.dmp                  38;5;29
+
+.allow                38;5;112 # -- hosts --
+.deny                 38;5;196 # /etc/hosts.{deny,allow}
+
+.service              38;5;45  # systemd
+*@.service            38;5;45
+.socket               38;5;45
+.swap                 38;5;45
+.device               38;5;45
+.mount                38;5;45
+.automount            38;5;45
+.target               38;5;45
+.path                 38;5;45
+.timer                38;5;45
+.snapshot             38;5;45
+
+.application          38;5;116  # metadata
+.cue                  38;5;116
+.description          38;5;116
+.directory            38;5;116
+.m3u                  38;5;116
+.m3u8                 38;5;116
+.md5                  38;5;116
+.properties           38;5;116
+.sfv                  38;5;116
+.srt                  38;5;116
+.theme                38;5;116
+.torrent              38;5;116
+.urlview              38;5;116
+
+
+# termcap
+TERM ansi
+TERM color-xterm
+TERM con132x25
+TERM con132x30
+TERM con132x43
+TERM con132x60
+TERM con80x25
+TERM con80x28
+TERM con80x30
+TERM con80x43
+TERM con80x50
+TERM con80x60
+TERM cons25
+TERM console
+TERM cygwin
+TERM dtterm
+TERM Eterm
+TERM eterm-color
+TERM gnome
+TERM gnome-256color
+TERM jfbterm
+TERM konsole
+TERM kterm
+TERM linux
+TERM linux-c
+TERM mach-color
+TERM mlterm
+TERM putty
+TERM rxvt
+TERM rxvt-256color
+TERM rxvt-cygwin
+TERM rxvt-cygwin-native
+TERM rxvt-unicode
+TERM rxvt-unicode-256color
+TERM rxvt-unicode256
+TERM screen
+TERM screen-256color
+TERM screen-256color-bce
+TERM screen-bce
+TERM screen-w
+TERM screen.linux
+TERM screen.rxvt
+TERM terminator
+TERM vt100
+TERM xterm
+TERM xterm-16color
+TERM xterm-256color
+TERM xterm-88color
+TERM xterm-color
+TERM xterm-debian
+

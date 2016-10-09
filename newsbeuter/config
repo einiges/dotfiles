@@ -1,0 +1,16 @@
+include "~/.config/newsbeuter/themes/solarized-light"
+
+prepopulate-query-feeds yes
+
+auto-reload yes
+reload-time 10
+notify-beep yes
+
+# Vim like navigation
+bind-key j down
+bind-key k up
+bind-key h left
+bind-key l right
+bind-key m toggle-show-read-feeds
+
+browser firefox

@@ -1,0 +1,1 @@
+setlocal re=1

@@ -1,0 +1,15 @@
+# backup files
+
+*~
+*.swp
+
+
+# build output
+
+*.o
+*.a
+*.class
+*.hi
+
+
+a.out

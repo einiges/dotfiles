@@ -1,0 +1,27 @@
+
+field academic   = Titel
+field firstname  = Vorname
+field middlename = Zweitname
+field surname    = Nachname
+field birthday   = Geburtstag, date
+
+view KONTAKT  = academic, name, firstname, middlename, surname, email
+view ADRESSE  = address, address2, state, zip, city, country
+view TELEFON  = phone, workphone, fax, mobile
+view ANDERE   = nick, url, notes, birthday
+
+#set index_format = " {firstname:12} {surname:15} {email:50} {phone} {workphone} {mobile}"
+set index_format = " {name:30} {email:50} {phone} {workphone} {mobile}"
+
+set autosave                     = true
+set mutt_command                 = mutt $xdg_mutt
+set www_command                  = $BROWSER
+set address_style                = eu
+set use_ascii_only               = false
+set sort_field                   = firstname
+set show_cursor                  = false
+set preserve_fields              = all
+
+set add_email_prevent_duplicates = true
+
+#set use_colors    = true

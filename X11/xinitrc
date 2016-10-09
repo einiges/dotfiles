@@ -1,0 +1,65 @@
+#! /bin/sh
+
+
+# -- Monitor Settings --
+xrandr --output HDMI-0 --auto --left-of DVI-1 --output DVI-1 --primary --auto
+
+
+# -- Keyboard Layout --
+setxkbmap -layout de -variant neo -option
+#setxkbmap -rules evdev -model evdev -layout us -variant altgr-intl -option caps:swapescape,eurosign:e
+
+
+# -- Mouse Cursor --
+xsetroot -cursor_name left_ptr -bg red -fg black
+
+
+# -- Background --
+feh --no-fehbg --bg-tile $HOME/Pictures/wallpapers/ds_anime1.jpg
+
+
+# -- Misc X --
+test -f $XDG_CONFIG_HOME/X11/xresources && xrdb -load $_
+test -f $XDG_CONFIG_HOME/X11/xmodmap    && xmodmap    $_
+
+
+# -- systemd: set DISPLAY and XAUTHORITY --
+test -f /etc/X11/xinit/xinitrc.d/50-systemd-user.sh && source $_
+
+
+# -- Start gpg-agent etc. --
+gpg-connect-agent /bye > /dev/null 2>&1
+
+
+# -- Automount --
+udiskie --use-udisks2 &
+
+
+# -- Disable DPMS --
+xset -dpms
+xset s noblank
+xset s off
+
+
+# -- Smart screenlock --
+#xautolock -corners +-+- -cornerredelay 30 -locker 'slock & sleep 1 ; xset dpms force off' &
+
+# Move mouse to the right Screen
+swarp 3000 0
+
+
+# -- Launch Applications --
+test ! -f $XDG_CONFIG_HOME/mpd/pid && mpd
+urxvtd -q -f -o
+
+( sleep  7; firefox ) &
+( sleep 10; urxvt -name ncmpcpp    -e ncmpcpp                ) &
+( sleep 10; urxvt -name mutt       -e mutt $xdg_mutt         ) &
+( sleep 10; urxvt -name calcurse   -e calcurse $xdg_calcurse ) &
+( sleep 10; urxvt -name newsbeuter -e newsbeuter             ) &
+
+
+# -- Start WM --
+exec xmonad
+#exec i3
+

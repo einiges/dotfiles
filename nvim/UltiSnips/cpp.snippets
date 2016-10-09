@@ -1,0 +1,46 @@
+snippet co "cout" b
+std::cout << 
+endsnippet
+
+snippet ci "cin" b
+std::cin >> 
+endsnippet
+
+snippet '([ \t]*cout (.* )*)e' "endl" r
+`!p snip.rv = match.group(1)`std::endl
+endsnippet
+
+snippet "^([ \t]*(std::)?(cout|cin).*)  " "<< or >> dependent on (cout|cin)" r
+`!p 
+if match.group(3) == "cout":
+	s = " << "
+else:
+	s = " >> "
+
+snip.rv = match.group(1) + s
+`
+endsnippet
+
+snippet mutex "New Mutex" b
+std::mutex ${1:mtx};$0
+endsnippet
+
+snippet #! "ifndef file wrapper" b
+#ifndef ${1:`!p snip.rv = snip.fn`}
+#define $1
+
+$0
+
+#endif // $1
+endsnippet
+
+snippet if "if{}" !b
+if (${1:var}) {
+	$0
+}
+endsnippet
+
+snippet iff "if" b
+if (${1:var})
+	$0
+endsnippet

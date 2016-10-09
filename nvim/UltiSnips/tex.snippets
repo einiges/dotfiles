@@ -1,0 +1,35 @@
+snippet [[ "Mathmode" w
+\[$1\]
+endsnippet
+
+snippet (( "Mathmode (inline)" w
+\($1\)
+endsnippet
+
+snippet up "Package (no options)" b
+\usepackage{${1:package}}$0
+endsnippet
+
+snippet upa "Package (no options)" b
+\usepackage[${1:option}]{${2:package}}$0
+endsnippet
+
+snippet si "SI environment" w
+\SI{${1:num}}{${2:sign}}$0
+endsnippet
+
+snippet per "percent" w
+\%
+endsnippet
+
+snippet left "left environment" b
+\begin{flushleft}
+	$1
+\end{flushleft}
+endsnippet
+
+snippet right "right environment" b
+\begin{flushright}
+	$1
+\end{flushright}
+endsnippet

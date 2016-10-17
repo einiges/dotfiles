@@ -14,7 +14,7 @@ export   PAGER=less
 export XDG_BIN_HOME=$HOME/.bin             #* not official
 
 # dircolors
-if [ -f $XDG_CONFIG_HOME/.dircolors ] && [ command -v dircolors > /dev/null 2>&1 ]; then
+if [ -f $XDG_CONFIG_HOME/dircolors ] && command -v dircolors > /dev/null 2>&1; then
 	eval $(dircolors "$XDG_CONFIG_HOME"/dircolors)
 fi
 

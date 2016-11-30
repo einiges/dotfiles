@@ -2,7 +2,7 @@
 
 
 # -- Monitor Settings --
-xrandr --output HDMI-0 --auto --left-of DVI-1 --output DVI-1 --primary --auto
+xrandr --output HDMI-1 --auto --left-of DVI-I-1 --output DVI-I-1 --primary --auto
 
 
 # -- Keyboard Layout --

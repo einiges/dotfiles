@@ -45,7 +45,7 @@ now_playing_suffix = $1‹$9$/b
 
 
 # -- Types --
-#
+
 search_engine_display_mode = columns
 playlist_display_mode = columns
 browser_display_mode = columns

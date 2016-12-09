@@ -44,10 +44,10 @@ selected_item_suffix = $9$/r$b$1‹$9$/b
 
 
 
-# -- Types --
+# -- Modes --
 
 search_engine_display_mode = columns
-playlist_display_mode = classic
+playlist_display_mode = columns
 browser_display_mode = columns
 user_interface = alternative
 

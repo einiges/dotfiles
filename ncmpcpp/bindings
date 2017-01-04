@@ -301,11 +301,11 @@ def_key "h"
 #def_key "b"
 #  seek_backward
 #
-#def_key "r"
-#  toggle_repeat
+def_key "r"
+  toggle_repeat
 #
-#def_key "z"
-#  toggle_random
+def_key "R"
+  toggle_random
 #
 #def_key "y"
 #  save_tag_changes
@@ -316,8 +316,8 @@ def_key "h"
 #def_key "y"
 #  toggle_single
 #
-#def_key "R"
-#  toggle_consume
+def_key "C"
+  toggle_consume
 #
 #def_key "Y"
 #  toggle_replay_gain_mode

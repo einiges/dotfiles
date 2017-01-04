@@ -6,30 +6,29 @@ lyrics_directory  = ~/Audio/lyrics
 mpd_music_dir     = ~/Audio
 ncmpcpp_directory = ~/.config/ncmpcpp
 
-mpd_host = localhost
-mpd_port = 6600
+#mpd_host = localhost
+#mpd_port = 6600
 
 
 
 # -- Formats --
-# Note: Background colors can be used like this $(fg_bg)%a$(end)
 # Yellow: 179, Red: 204, Green: 44, Blue: 40
 
 alternative_header_first_line_format = ╰──┚ {%t}|{%f} ┖──╯
 
-alternative_header_second_line_format =  ╭──┒ {$(40)%a$9}|{$(40)%A$9} ╭──╮ $(35)%b$9 ╭──╮ $(179)%y$9 ┎──╮
+alternative_header_second_line_format = ╭──┒ $(40){%a}|{%A}$9{ ╭──╮ $(35)%b$9}{ ╭──╮ $(179)%y$9} ┎──╮
 
 song_library_format = {%n│ }%t
 
 song_list_format = " $(179)[%l]$9 {$(204)%t$9}|{$(204)%f$9} {$(40)%a$9}|{$(40)%A$9} $(179)%y$9 $R $(35)%b$9 $(179)%n$9 "
 
-song_columns_list_format = (7f)[179]{lr} (20)[204]{t|f} (20)[40]{a|A} (30)[35]{br} (4f)[179]{n}
+song_columns_list_format = (3f)[16]{: } (6f)[179]{lr} (30)[204]{t|f:Title} (30)[40]{a|A:Artist} (30)[35]{br} (4f)[179]{nr} (3f)[16]{: }
 
 song_window_title_format = %t • {%a}|{%A}
 
 song_status_format = $2%t$1 • $5%a$1
 
-progressbar_look = ─╼─
+progressbar_look = ─╼┄
 
 
 
@@ -38,9 +37,9 @@ progressbar_look = ─╼─
 browser_playlist_prefix = $2list›$9
 modified_item_prefix = $2mod›$9
 now_playing_prefix = $b$1♪$9
-now_playing_suffix = $1♫$9$/b
-selected_item_prefix = $b$1›$9$/b$r$(209_1)
-selected_item_suffix = $9$/r$b$1‹$9$/b
+now_playing_suffix = $1♪$9$/b
+selected_item_prefix = $(70)$b»$/b
+selected_item_suffix = $b«$/b$9
 
 
 
@@ -67,7 +66,7 @@ header_visibility = no
 ignore_leading_the = yes
 jump_to_now_playing_song_at_start = yes
 media_library_primary_tag = album_artist
-playlist_disable_highlight_delay = 1
+playlist_disable_highlight_delay = 0
 playlist_separate_albums = no
 startup_screen = media_library
 titles_visibility = yes
@@ -76,7 +75,6 @@ use_console_editor = yes
 
 
 # -- Colors --
-# Note: Background colors can be used like this $fg_bg
 
 active_column_color = 204_1
 active_window_border = 127

@@ -48,14 +48,15 @@ swarp 3000 0
 test ! -f $XDG_CONFIG_HOME/mpd/pid && mpd
 urxvtd -q -f -o
 
-( sleep  7; firefox ) &
+( sleep  3; firefox ) &
 ( sleep 10; urxvt -name ncmpcpp    -e ncmpcpp                ) &
-( sleep 10; urxvt -name mutt       -e mutt $xdg_mutt         ) &
+( sleep 10; urxvt -name mutt       -e mutt -n                ) &
 ( sleep 10; urxvt -name calcurse   -e calcurse $xdg_calcurse ) &
 ( sleep 10; urxvt -name newsbeuter -e newsbeuter             ) &
 
 
 # -- Start WM --
-exec xmonad
+exec herbstluftwm --locked
+#exec xmonad
 #exec i3
 

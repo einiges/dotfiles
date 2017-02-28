@@ -22,14 +22,18 @@ zplug "zplug/zplug"
 
 zplug "zsh-users/zsh-history-substring-search"
 zplug "zsh-users/zsh-syntax-highlighting", \
-	nice:19, \
+	defer:2, \
 	hook-load:"[ -f $ZDOTDIR/hooks/syntax-highlighting-styles.zsh ] && source $ZDOTDIR/hooks/syntax-highlighting-styles.zsh"
 
 
 zplug "zsh-users/zsh-completions"
+zplug "supercrabtree/k"
+zplug "arzzen/calc.plugin.zsh", hook-load: "unalias calc"
 
+zplug "plugins/fancy-ctrl-z", from:oh-my-zsh
 
 
 # -- Load --
 
 zplug load
+

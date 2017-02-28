@@ -1,22 +1,27 @@
+#!/bin/zsh
+
+
 export BROWSER=firefox
-export  EDITOR=nvim
-export   PAGER=less
+export EDITOR=nvim
+export TERMINAL=urxvtc
+export PAGER=less
 
 #export http_proxy="localhost:8118"
 
-# zsh
-#export ZDOTDIR="$XDG_CONFIG_HOME"/zsh      # -- /etc/zsh/zshenv --
+export TIMEFMT=$'real\t%E\nuser\t%U\nsys\t%S'
+
+
 
 # XDG
 #export XDG_CONFIG_HOME=$HOME/.config       # -- /etc/zsh/zshenv --
 #export  XDG_CACHE_HOME=$HOME/.cache
 #export   XDG_DATA_HOME=$HOME/.local/share
-export XDG_BIN_HOME=$HOME/.bin             #* not official
+
+# zsh
+#export ZDOTDIR="$XDG_CONFIG_HOME"/zsh      # -- /etc/zsh/zshenv --
 
 # dircolors
-if [ -f $XDG_CONFIG_HOME/dircolors ] && command -v dircolors > /dev/null 2>&1; then
-	eval $(dircolors "$XDG_CONFIG_HOME"/dircolors)
-fi
+eval $(dircolors "$XDG_CONFIG_HOME"/dircolors)
 
 # alsa
 #export ALSA_CONFIG_PATH=/usr/share/alsa/alsa.conf:"$XDG_CONFIG_HOME"/alsa/asoundrc
@@ -28,6 +33,7 @@ export XAUTHORITY="$XDG_CACHE_HOME"/X11/xauthority
 
 # GnuPG
 export GNUPGHOME="$XDG_CONFIG_HOME"/gnupg
+export GPG_TTY="$(tty)"
 
 # urxvtd
 export RXVT_SOCKET="$XDG_CACHE_HOME"/urxvt/urxvtd-"$(hostname)"
@@ -39,8 +45,7 @@ export HISTFILE="$XDG_DATA_HOME/${SHELL##*/}"/history
 
 # pass
 export PASSWORD_STORE_DIR="$XDG_DATA_HOME"/password-store
-export PASSWORD_STORE_CLIP_TIME=3
-export PASSWORD_STORE_X_SELECTION=primary
+export PASSWORD_STORE_CLIP_TIME=7
 
 # less
 export LESSHISTFILE="$XDG_DATA_HOME"/less/history
@@ -90,7 +95,6 @@ export xdg_calcurse="-D $XDG_CONFIG_HOME/calcurse"
 export    xdg_conky="--config=$XDG_CONFIG_HOME/conky/conkyrc"
 export    xdg_irssi="--home=$XDG_CONFIG_HOME/irssi"
 export   xdg_mbsync="--config $XDG_CONFIG_HOME/mbsync/mbsyncrc"
-export     xdg_mutt="-nF $XDG_CONFIG_HOME/mutt/muttrc"
 export     xdg_tmux="-2 -f $XDG_CONFIG_HOME/tmux/tmux.conf"
 
 

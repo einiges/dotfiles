@@ -40,11 +40,12 @@ alias .,='cd ~-'
 alias n='nvim'
 alias o="xdg-open"
 
-alias  ls="ls -khF --group-directories-first --color=always "
+alias  ls="ls -khF --group-directories-first --color=auto "
 alias   l='ls'
 alias lsl='ls -l'
 alias  la='ls -A'
 alias lal='ls -lA'
+alias  lA='ls -a'
 
 alias  du='du --human-readable'
 alias dus='du -s'
@@ -76,10 +77,9 @@ alias lstbz="tar -tjf"
 
 # Fast Edit Configs
 alias en="nvim $XDG_CONFIG_HOME/nvim/init.vim"
-alias ez="$EDITOR $ZDOTDIR/.zshrc"
-alias eza="$EDITOR $ZDOTDIR/aliases.zsh"
-alias exmonad="$EDITOR $HOME/.xmonad/xmonad.hs"
+alias ehc="$EDITOR $XDG_CONFIG_HOME/herbstluftwm/autostart"
 
+alias     mutt="mutt -n"
 
 alias    abcde="abcde $xdg_abcde"
 alias    abook="abook $xdg_abook"
@@ -87,7 +87,6 @@ alias     anki="anki $xdg_anki"
 alias calcurse="calcurse $xdg_calcurse"
 alias    conky="conky $xdg_conky"
 alias    irssi="irssi $xdg_irssi"
-alias     mutt="mutt $xdg_mutt"
 alias     tmux="tmux $xdg_tmux"
 
 alias getWindowInfo="xprop | grep 'WM_CLASS\|WM_NAME'"

@@ -1,3 +1,5 @@
 
-keycode    94 = Escape Escape Escape Escape Escape Escape Escape Escape Escape
+keycode    94 = Escape  Escape  Escape  Escape  Escape  Escape  Escape  Escape  Escape
+keycode   133 = Alt_L   Alt_L   Alt_L   Alt_L   Alt_L   Alt_L   Alt_L   Alt_L   Alt_L
+keycode    64 = Super_L Super_L Super_L Super_L Super_L Super_L Super_L Super_L Super_L 
 

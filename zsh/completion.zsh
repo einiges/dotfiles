@@ -1,38 +1,65 @@
 #!/bin/zsh
 
 
-setopt ALWAYS_TO_END
-setopt COMPLETE_IN_WORD
-setopt EXTENDED_GLOB
-#setopt GLOB_COMPLETE
-setopt AUTO_LIST
-unsetopt LIST_AMBIGUOUS
-#setopt MENU_COMPLETE
+setopt always_to_end
+setopt auto_list
+setopt complete_aliases
+setopt complete_in_word
+setopt extended_glob
+unsetopt list_ambiguous
+setopt menu_complete
 
-
-#ZLE_REMOVE_SUFFIX_CHARS=$' '
-ZLE_SPACE_SUFFIX_CHARS=$'&|'
+setopt glob_star_short
 
 
 
 #zstyle ':completion:*' list-prompt ''
 #zstyle ':completion:*' select-prompt ''
-#zstyle ':completion:*'group-name ''
+#zstyle ':completion:*' group-name ''
+
+zstyle ':completion:*' menu select
+zstyle ':completion:*' verbose yes
+
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+
+
+
+zstyle ':completion:*:default'      list-prompt '%S%M matches%s'
+zstyle ':completion:*:corrections'  format ' %F{green}-- %d (errors: %e) --%f'
+zstyle ':completion:*:descriptions' format ' %F{yellow}-- %d --%f'
+zstyle ':completion:*:matches'      group 'yes'
+zstyle ':completion:*:messages'     format ' %F{purple}-- %d --%f'
+zstyle ':completion:*:warnings'     format ' %F{red}-- no matches found --%f'
+
+zstyle ':completion:*:options' auto-description '%d'
+zstyle ':completion:*:options' description 'yes'
 
 zstyle ':completion::complete:*' use-cache on
-zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 
-zstyle ':completion:*' verbose yes
-#zstyle ':completion:*:descriptions' format '%U%B%d%b%u'
-zstyle ':completion:*:messages' format '%d'
-zstyle ':completion:*:warnings' format '%BNo matches for: %d%b'
-zstyle ':completion:*' auto-description 'specify: %d'
 
-zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
-#zstyle -e ':completion:*:default' list-colors 'reply=("${PREFIX:+=(#bi)($PREFIX:t)(?)*==01;31=}:${(s.:.)LS_COLORS}")
+zstyle ':completion:*'               completer _complete _match _approximate
+zstyle ':completion:*:match:*'       original only
+zstyle ':completion:*:approximate:*' max-errors 1 numeric
 
-zstyle ':completion:*:*:kill:*' list-colors '=(#b) #([0-9]#)*( *[a-z])*=34=31=33'
-zstyle ':completion:*' menu select
-zstyle ':completion:*:*:(nvim|vim):*:*files' ignored-patterns '(*.class|*.o|*.hi)'
 
-zstyle ':completion:*:killall:*' command 'ps -u $USER -o cmd'
+
+# -- Ignore Patterns --
+
+zstyle ':completion:*:*files' ignored-patterns \
+	'.git' '.hg' '.svn' \
+	'*?.aux' '*?.out' '*?.so' \
+	'*?.class' '*?.hi' '*?.o' \
+	'.idea' \
+	'__pycache__'
+
+
+# -- kill --
+
+zstyle ':completion:*:*:*:*:processes'    command 'ps -u $USER -o pid,user,command -w'
+zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#) ([0-9a-z-]#)*=34=31=33'
+zstyle ':completion:*:*:kill:*'           menu yes select
+zstyle ':completion:*:*:kill:*'           force-list always
+zstyle ':completion:*:*:kill:*'           insert-ids single
+
+

@@ -1,4 +1,4 @@
-#!/bin/shell
+#!/bin/sh
 
 
 # +-----------------------+
@@ -10,17 +10,14 @@
 # +-----------+-----------+
 
 
+t() {
+	tmux $xdg_tmux "$@"
+}
 
-if [ ${xdg_tmux+x} ]; then
-	tmux=tmux $xdg_tmux
-else
-	tmux=tmux
-fi
 
-$tmux new-session -d -n "Development"
-#tmux new-window -n "Main"
-$tmux split-window -v -p 20
-$tmux select-pane -t 2
-$tmux split-window -h
-$tmux select-pane -t 1
-$tmux -2 attach-session -d
+t new-session -d -n "Development"
+t split-window -v -p 20
+t select-pane -t 2
+t split-window -h
+t select-pane -t 1
+t -2 attach-session -d

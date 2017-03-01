@@ -72,7 +72,6 @@ if [ "$TERM" = "st-256color" ]; then
 fi
 
 test -f $ZDOTDIR/plugins.zsh    && . $_
-test -f $ZDOTDIR/functions.zsh  && . $_
 test -f $ZDOTDIR/aliases.zsh    && . $_
 test -f $ZDOTDIR/dirhashes.zsh  && . $_
 test -f $ZDOTDIR/completion.zsh && . $_

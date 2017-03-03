@@ -182,7 +182,7 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3 # Directory that is sticky and other-w
 .out                  38;5;242
 .SKIP                 38;5;244
 
-.patch                48;5;197;38;5;232;1 # patch files
+.patch                48;5;197;38;5;232 # patch files
 .diff                 48;5;197;38;5;232
 
 .bmp                  38;5;97 # -- graphics --

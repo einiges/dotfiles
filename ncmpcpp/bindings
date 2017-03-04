@@ -316,7 +316,7 @@ def_key "R"
 #def_key "y"
 #  toggle_single
 #
-def_key "C"
+def_key "c"
   toggle_consume
 #
 #def_key "Y"
@@ -421,8 +421,8 @@ def_key "N"
 #def_key "c"
 #  clear_playlist
 #
-#def_key "c"
-#  clear_main_playlist
+def_key "C"
+  clear_main_playlist
 #
 #def_key "C"
 #  crop_playlist

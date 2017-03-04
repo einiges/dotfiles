@@ -48,28 +48,18 @@ setopt inc_append_history
 
 
 # Share command status and print in titlebar
-case $TERM in
-	xterm* | rxvt* | st*)
-		# Write some info to terminal title.
-		# This is seen when the shell prompts for input.
-		function precmd {
-			print -Pn "\e]0;%(1j,%j job%(2j|s|); ,)%~\a"
-		}
-		# Write command and args to terminal title.
-		# This is seen while the shell waits for a command to complete.
-		function preexec {
-			printf "\033]0;%s\a" "$1"
-		}
-		;;
-esac
+# Write some info to terminal title.
+# This is seen when the shell prompts for input.
+function precmd { print -Pn "\e]0;%(1j,%j job%(2j|s|); ,)%~\a" }
 
-if [ "$TERM" = "st-256color" ]; then
-	#tput smkx
-	function zle-line-init () { echoti smkx }
-	function zle-line-finish () { echoti rmkx }
-	zle -N zle-line-init
-	zle -N zle-line-finish
-fi
+# Write command and args to terminal title.
+# This is seen while the shell waits for a command to complete.
+function preexec { printf "\033]0;%s\a" "$1" }
+
+function zle-line-init () { echoti smkx }
+function zle-line-finish () { echoti rmkx }
+zle -N zle-line-init
+zle -N zle-line-finish
 
 test -f $ZDOTDIR/plugins.zsh    && . $_
 test -f $ZDOTDIR/aliases.zsh    && . $_

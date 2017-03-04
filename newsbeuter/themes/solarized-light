@@ -7,10 +7,10 @@
 
 color background default default
 color listnormal default default
-color listfocus white yellow
-color info default white
+color listfocus black yellow
+color info default black
 color article default default
-color listfocus_unread black yellow bold
+color listfocus_unread white yellow bold
 
 # highlights
 highlight article "^(Title):.*$" blue default

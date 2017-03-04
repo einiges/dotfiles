@@ -46,13 +46,12 @@ swarp 3000 0
 
 # -- Launch Applications --
 test ! -f $XDG_CONFIG_HOME/mpd/pid && mpd
-urxvtd -q -f -o
 
 ( sleep  3; firefox ) &
-( sleep 10; urxvt -name ncmpcpp    -e ncmpcpp                ) &
-( sleep 10; urxvt -name mutt       -e mutt -n                ) &
-( sleep 10; urxvt -name calcurse   -e calcurse $xdg_calcurse ) &
-( sleep 10; urxvt -name newsbeuter -e newsbeuter             ) &
+( sleep 10; st -n ncmpcpp    -e ncmpcpp                ) &
+( sleep 10; st -n mutt       -e mutt -n                ) &
+( sleep 10; st -n calcurse   -e calcurse $xdg_calcurse ) &
+( sleep 10; st -n newsbeuter -e newsbeuter             ) &
 
 
 # -- Start WM --

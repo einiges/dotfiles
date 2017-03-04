@@ -1,5 +1,7 @@
 
-set runtimepath^=$XDG_CACHE_HOME/nvim/dein/repos/github.com/Shougo/dein.vim
+set runtimepath+=$XDG_CACHE_HOME/nvim/dein/repos/github.com/Shougo/dein.vim
+
+let g:dein#enable_notification = 1
 
 if dein#load_state(expand('<sfile>'))
 
@@ -8,9 +10,10 @@ if dein#load_state(expand('<sfile>'))
 
 	"Colorschemes
 	call dein#add('altercation/vim-colors-solarized')
+	call dein#add('romainl/flattened')
 
 
-	" File Managing
+	" Navigation
 	call dein#add('christoomey/vim-tmux-navigator')
 	call dein#add('Shougo/denite.nvim')
 	
@@ -19,15 +22,15 @@ if dein#load_state(expand('<sfile>'))
 	call dein#add('vim-airline/vim-airline')
 	call dein#add('vim-airline/vim-airline-themes')
 	call dein#add('nathanaelkane/vim-indent-guides')
+	call dein#add('airblade/vim-gitgutter')
 	"call dein#add('ryanoasis/vim-devicons')
 
 
 	" Libs
 	call dein#add('Shougo/neco-vim',          { 'on_ft': ['vim'] })
-	call dein#add('Shougo/neoinclude.vim',    { 'on_ft': ['vim'] })
 	call dein#add('kchmck/vim-coffee-script', { 'on_ft': ['coffee'] })
 	call dein#add('carlitux/deoplete-ternjs', { 'on_ft': ['javascript'], 'if': 0 })
-	"call dein#add('zchee/deoplete-clang',     { 'on_ft': ['c', 'cpp'] })
+	call dein#add('zchee/deoplete-clang',     { 'on_ft': ['c', 'cpp'] })
 	call dein#add('osyo-manga/vim-monster',   { 'on_ft': ['ruby'] })
 	call dein#add('artur-shaik/vim-javacomplete2', { 'on_ft': ['java'] })
 
@@ -39,11 +42,12 @@ if dein#load_state(expand('<sfile>'))
 	call dein#add('Konfekt/FastFold')
 	call dein#add('Shougo/deoplete.nvim')
 	call dein#add('Shougo/vimproc.vim', { 'build' : 'make' })
+	call dein#add('Shougo/neoinclude.vim')
 	call dein#add('godlygeek/tabular')
 
 
 	" Formatter
-	call dein#add('rhysd/vim-clang-format', { 'on_ft': ['c', 'cpp'] })
+	call dein#add('rhysd/vim-clang-format', { 'on_ft': ['c', 'cpp', 'java', 'js', 'ts'] })
 
 	
 	" Snippets
@@ -51,7 +55,9 @@ if dein#load_state(expand('<sfile>'))
 	call dein#add('honza/vim-snippets')
 
 
-	call dein#add('tpope/vim-rails', { 'on_ft': ['ruby'] })
+	"call dein#add('tpope/vim-rails', { 'on_ft': ['ruby'] })
+	call dein#add('Quramy/tsuquyomi', {'lazy': 1 })
+	call dein#add('JuliaEditorSupport/julia-vim')
 	
 
 	" Syntax
@@ -131,12 +137,12 @@ let g:deoplete#omni#input_patterns.java = [
 
 
 " vim-airline
-let g:airline_powerline_fonts = 1
-let g:airline_section_c = '%F'
-"let g:airline#extensions#tabline#enabled=1
 if !exists('g:airline_symbols')
 	let g:airline_symbols = {}
 endif
+let g:airline_powerline_fonts = 1
+let g:airline_section_c = '%F'
+"let g:airline#extensions#tabline#enabled=1
 
 
 " ultisnips
@@ -188,13 +194,21 @@ endfunction
 
 
 
-" -- Global Settings --
+" -- Colors --
 
-colorscheme solarized
-set background=light
-syntax on
+if $TERM =~ '\(st\|screen\)-256color'
+	colorscheme flattened_light
+	set termguicolors
+else
+	colorscheme solarized
+	set background=light
+endif
 
-"set encoding=utf-8
+
+
+" -- Vim Basics --
+
+syntax enable
 "set foldmethod=indent
 "set foldlevel=0
 "set foldnestmax=1
@@ -226,8 +240,9 @@ set incsearch
 "set nohlsearch
 set pastetoggle=<F10>
 
-set listchars=tab:▸\ ,eol:¬,precedes:<,extends:>
-"set list
+",eol:¬
+set listchars=tab:→\ ,precedes:◀,extends:▶
+set list
 
 set title
 set laststatus=2
@@ -238,11 +253,18 @@ set wildmenu
 set completeopt+=noselect
 set wildignore+=*/.git/*,*/.hg/*,*/.svn/*
 set wildignore+=tags,*.tags
-set wildignore+=*.o,*.obj,*.exe,*.dll,*.manifest,*.so,*.out,*.class,*.jpg,*jpeg,*.bmp,*.gif,*.png
+set wildignore+=*.o,*.obj,*.hi,*.exe,*.dll,*.manifest,*.so,*.out,*.class,*.jpg,*jpeg,*.bmp,*.gif,*.png
 set wildignore+=*.swp,*.swo,*.swn
 
 
 let g:tex_flavor = 'tex' " disable plaintex
+
+
+
+" -- Color Adjustments --
+
+hi SpecialKey  cterm=NONE  ctermfg=12  gui=NONE  guifg=#AEBBC0  guibg=NONE
+hi NonText     cterm=NONE  ctermfg=12  gui=NONE  guifg=#AEBBC0  guibg=NONE
 
 
 
@@ -254,11 +276,18 @@ command W w !sudo tee % > /dev/null
 
 " -- Mapping --
 
-inoremap <F5> <ESC> :Dispatch<Return>a
-noremap <F5> :Dispatch<esc>
+inoremap <F5> <ESC> :Dispatch<RETURN>a
+noremap <F5> :Dispatch<ESC>
 
 
-"nnoremap q <Nop>
+" annoying delelte behavior in st terminal
+noremap  <F1> x
+noremap! <F1> <DEL>
+
+nnoremap <BS> X
+vnoremap <BS> x
+
+nnoremap q <Nop>
 
 nnoremap <silent><Down> gj
 inoremap <silent><Down> <C-o>gj
@@ -276,7 +305,8 @@ nnoremap <silent>j gj
 nnoremap <silent>k gk
 nnoremap <silent> <C-l> :nohl<CR><C-l>
 
-nnoremap <silent><S-Left> <C-w>>
+nnoremap <silent><S-Left> <C-w><
 nnoremap <silent><S-Down> <C-w>-
 nnoremap <silent><S-Up>   <C-w>+
-nnoremap <silent><S-Right> <C-w><
+nnoremap <silent><S-Right> <C-w>>
+

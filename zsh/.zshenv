@@ -3,7 +3,7 @@
 
 export BROWSER=firefox
 export EDITOR=nvim
-export TERMINAL=urxvtc
+export TERMINAL=st
 export PAGER=less
 
 #export http_proxy="localhost:8118"

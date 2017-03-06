@@ -56,10 +56,12 @@ function precmd { print -Pn "\e]0;%(1j,%j job%(2j|s|); ,)%~\a" }
 # This is seen while the shell waits for a command to complete.
 function preexec { printf "\033]0;%s\a" "$1" }
 
-function zle-line-init () { echoti smkx }
-function zle-line-finish () { echoti rmkx }
-zle -N zle-line-init
-zle -N zle-line-finish
+if [[ $TERM =~ "(st|screen)-256color" ]]; then
+	function zle-line-init () { echoti smkx }
+	function zle-line-finish () { echoti rmkx }
+	zle -N zle-line-init
+	zle -N zle-line-finish
+fi
 
 test -f $ZDOTDIR/plugins.zsh    && . $_
 test -f $ZDOTDIR/aliases.zsh    && . $_

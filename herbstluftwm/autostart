@@ -72,12 +72,12 @@ hc keybind $Mod-adiaeresis close_or_remove
 hc keybind $Mod-Shift-adiaeresis remove
 
 
-hc keybind $Mod-Shift-space set_layout max
-hc keybind $Mod-space                                          \
-            or , and . compare tags.focus.curframe_wcount = 2  \
-                     . cycle_layout +1 vertical horizontal     \
-               , compare tags.focus.curframe_wcount le 1       \
-               , cycle_layout +1
+hc keybind $Mod-Shift-space and .           \
+    compare tags.focus.curframe_wcount gt 1 \
+  . cycle_layout +1 max grid
+hc keybind $Mod-space and .                 \
+    compare tags.focus.curframe_wcount gt 1 \
+  . cycle_layout +1 vertical horizontal      
 
 
 # -- Mouse --

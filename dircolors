@@ -299,6 +299,7 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3 # Directory that is sticky and other-w
 .toast                38;5;215
 .vcd                  38;5;215
 .vmdk                 38;5;215
+.img                  38;5;215
 
 .accdb                38;5;172 # databases
 .accde                38;5;172

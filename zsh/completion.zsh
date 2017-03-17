@@ -7,7 +7,6 @@ setopt complete_aliases
 setopt complete_in_word
 setopt extended_glob
 unsetopt list_ambiguous
-setopt menu_complete
 
 setopt glob_star_short
 

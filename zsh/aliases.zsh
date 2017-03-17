@@ -47,6 +47,7 @@ alias  la='ls -A'
 alias lal='ls -lA'
 alias  lA='ls -a'
 
+
 alias  du='du --human-readable'
 alias dus='du -s'
 alias cpr="cp -r"
@@ -89,7 +90,10 @@ alias    conky="conky $xdg_conky"
 alias    irssi="irssi $xdg_irssi"
 alias     tmux="tmux $xdg_tmux"
 
-alias getWindowInfo="xprop | grep 'WM_CLASS\|WM_NAME'"
+alias t=tmux
+
+
+alias getWindowInfo="xprop | grep 'WM_CLASS\|WM_NAME\|WM_WINDOW_ROLE\|_NET_WM_WINDOW_TYPE'"
 
 #alias sudo='nocorrect sudo'
 

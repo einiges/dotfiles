@@ -53,9 +53,8 @@ test ! -f $XDG_CONFIG_HOME/mpd/pid && mpd
 ( sleep 10; st -n calcurse   -e calcurse $xdg_calcurse ) &
 ( sleep 10; st -n newsbeuter -e newsbeuter             ) &
 
+sxhkd &
 
 # -- Start WM --
 exec herbstluftwm --locked
-#exec xmonad
-#exec i3
 

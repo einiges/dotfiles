@@ -1,0 +1,91 @@
+
+
+# -- Herbstluftwm --
+
+# - quit herbstluftwm
+alt + {control,shift} q
+	herbstclient {reload,quit}
+
+# - focus clients
+alt + {s,n,r,t}
+	herbstclient focus {left,down,up,right}
+
+# - move clients
+alt + shift + {s,n,r,t}
+	herbstclient shift {left,down,up,right}
+
+# - resize frames
+alt + control + {s,n,r,t}
+	herbstclient resize {left,down,up,right} +0.05
+
+# - split frames
+alt + mod5 + {s,n,r,t}
+	herbstclient split {left,bottom,top,right} 0.5
+
+# - each client in frame gets subframe
+alt + control + space
+	herbstclient split explod
+
+# - {focus, move client to} next monitor 
+alt + {_,shift} + g
+	herbstclient {cycle_monitor,shift_to_monitor +1}
+
+# - fullsceen
+alt + f
+	herbstclient fullscreen
+
+# - close client or remove frame
+alt + {_,shift} + adiaeresis
+	herbstclient {close_or_remove,remove}
+
+# - cycle through basic layouts
+alt + space 
+	herbstclient and .						\
+	  compare tags.focus.curframe_wcount gt 1 \
+	. cycle_layout +1 horizontal vertical
+	  
+# - cycle through basic layouts2
+alt + shift + space
+	herbstclient and .						\
+	  compare tags.focus.curframe_wcount gt 1 \
+	. cycle_layout +1 max grid
+
+
+
+# -- application launching --
+
+# - terminal
+alt + Return
+	$TERMINAL
+
+# - application launcher
+alt + l
+	dmenu_run
+
+# - pass
+alt + x
+	PINENTRY_USER_DATA=gtk passmenu
+
+# - screenshots
+{_,shift} + Print
+	import {_,-window root} ~/Pictures/Screenshots/$(date +%Y-%m-%d_%H:%M:%S).png
+
+
+
+# -- media keys --
+
+# - navigate playlist
+XF86Audio{Play,Stop,Next,Prev}
+	mpc -q {toggle,stop,next,prev}
+
+# - volume (mpd)
+shift + XF86Audio{Raise,Lower}Volume 
+	mpc -q volume {+,-}1
+
+# - volume (basic)
+XF86Audio{RaiseVolume,LowerVolume,Mute}
+	amixer -q set Master {1+,1-,toggle}
+
+
+
+

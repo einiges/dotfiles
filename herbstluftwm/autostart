@@ -11,75 +11,6 @@ hc keyunbind --all
 
 
 
-# -- Keybindings --
-
-Mod=Mod1
-
-# - Basics -
-
-hc keybind $Mod-Shift-q   quit
-hc keybind $Mod-Control-q reload
-
-
-# focusing clients
-hc keybind $Mod-s          focus left
-hc keybind $Mod-n          focus down
-hc keybind $Mod-r          focus up
-hc keybind $Mod-t          focus right
-                           
-
-# moving clients           
-hc keybind $Mod-Shift-s    shift left
-hc keybind $Mod-Shift-n    shift down
-hc keybind $Mod-Shift-r    shift up
-hc keybind $Mod-Shift-t    shift right
-                           
-
-# resizing frames          
-resizestep=0.05            
-hc keybind $Mod-Control-s  resize left  +$resizestep
-hc keybind $Mod-Control-n  resize down  +$resizestep
-hc keybind $Mod-Control-r  resize up    +$resizestep
-hc keybind $Mod-Control-t  resize right +$resizestep
-
-
-# splitting frames
-hc keybind $Mod-u          split left    0.5
-hc keybind $Mod-i          split top     0.5
-hc keybind $Mod-a          split bottom  0.5
-hc keybind $Mod-e          split right   0.5
-
-
-# let the current frame explode into subframes
-hc keybind $Mod-Control-space split explode
-
-
-
-# -- Navigation --
-
-hc keybind $Mod-g           cycle_monitor
-hc keybind $Mod-Shift-g     shift_to_monitor +1
-
-# cycle through tags
-hc keybind $Mod-period use_index +1 --skip-visible
-hc keybind $Mod-comma  use_index -1 --skip-visible
-
-
-hc keybind $Mod-f fullscreen
-
-
-hc keybind $Mod-adiaeresis close_or_remove
-hc keybind $Mod-Shift-adiaeresis remove
-
-
-hc keybind $Mod-Shift-space and .           \
-    compare tags.focus.curframe_wcount gt 1 \
-  . cycle_layout +1 max grid
-hc keybind $Mod-space and .                 \
-    compare tags.focus.curframe_wcount gt 1 \
-  . cycle_layout +1 vertical horizontal      
-
-
 # -- Mouse --
 
 hc mouseunbind --all
@@ -89,36 +20,6 @@ hc mousebind $Mod-Button1 move
 hc mousebind $Mod-Button2 zoom
 hc mousebind $Mod-Button3 resize
 
-
-
-# -- Applications --
-
-hc keybind $Mod-Return spawn $TERMINAL
-
-hc keybind $Mod-l spawn dmenu_run
-hc keybind $Mod-x spawn sh -c "PINENTRY_USER_DATA=gtk passmenu"
-
-# Date is set when hl is launched.
-# TODO Put in script or find better solution. 
-date=$(date +%Y-%m-%d_%H:%M:%S)
-hc keybind Print       spawn import -window root ~/Pictures/Screenshots/$date.png
-hc keybind Shift-Print spawn import ~/Pictures/Screenshots/$date.png
-
-
-
-# -- Media Keys --
-
-hc keybind XF86AudioPlay              spawn mpc -q toggle
-hc keybind XF86AudioStop              spawn mpc -q stop
-hc keybind XF86AudioNext              spawn mpc -q next
-hc keybind XF86AudioPrev              spawn mpc -q prev
-
-hc keybind XF86AudioRaiseVolume       spawn amixer -q set Master 1+
-hc keybind XF86AudioLowerVolume       spawn amixer -q set Master 1-
-hc keybind XF86AudioMute              spawn amixer -q set Master toggle
-
-hc keybind Shift+XF86AudioRaiseVolume spawn mpc -q volume +1
-hc keybind Shift+XF86AudioLowerVolume spawn mpc -q volume -1
 
 
 # -- Appearance --
@@ -135,6 +36,7 @@ hc set window_gap 0
 hc set frame_padding 0
 hc set smart_window_surroundings 0
 hc set smart_frame_surroundings 1
+hc set tree_style '╾│ ├└╼─┐'
 hc set mouse_recenter_gap 0
 
 
@@ -165,6 +67,8 @@ hc attr theme.background_color   '#141414'
 
 
 # -- Tags --
+
+Mod=Alt
 # idx        0       1   2   3   4   5       6
 tag_names=( "1:WEB" "2" "3" "4" "5" "9:KOM" "0:MISC")
 tag_keys=( {1..5} 9 0 )
@@ -183,7 +87,6 @@ done
 
 
 # -- Layouts --
-
 
 
 hc load ${tag_names[6]} '
@@ -231,12 +134,12 @@ hc rule  instance='newsbeuter' tag=${tag_names[6]} index=11
 
 
 
-# -- Misc --
+# -- Unlock --
 
 # unlock, just to be sure
 hc unlock
 
-hc set tree_style '╾│ ├└╼─┐'
+
 
 
 # -- Monitor Setup --

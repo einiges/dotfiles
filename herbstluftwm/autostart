@@ -191,7 +191,7 @@ hc load ${tag_names[6]} '
  (clients vertical:0)
  (split vertical:0.7:1
   (clients vertical:0)
-	(clients vertical:0)
+  (clients vertical:0)
  )
 )
 '
@@ -216,6 +216,8 @@ hc rule windowtype~'_NET_WM_WINDOW_TYPE_(NOTIFICATION|DOCK|DESKTOP)' manage=off
 
 hc rule class~'Pinentry.*' focus=on manage=off pseudotile=on
 hc rule class='Gifview' pseudotile=on
+
+hc rule class~'feh' focus=on
 
 hc rule  class='Firefox' windowrole='browser' tag=${tag_names[0]}
 hc rule  instance='mutt'       tag=${tag_names[5]}
@@ -247,12 +249,9 @@ hc detect_monitors
 
 # -- Panel --
 
-panel=~/.config/herbstluftwm/panel.sh
+panel=$XDG_CONFIG_HOME/herbstluftwm/panel.sh
 [ -x "$panel" ] || panel=/etc/xdg/herbstluftwm/panel.sh
-for monitor in $(herbstclient list_monitors | cut -d: -f1) ; do
-    # start it on each monitor
-    "$panel" $monitor &
-done
+"$panel" 0 &
 
 
 

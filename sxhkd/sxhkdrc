@@ -40,13 +40,13 @@ alt + {_,shift} + adiaeresis
 
 # - cycle through basic layouts
 alt + space 
-	herbstclient and .						\
+	herbstclient and .                        \
 	  compare tags.focus.curframe_wcount gt 1 \
 	. cycle_layout +1 horizontal vertical
-	  
+  
 # - cycle through basic layouts2
 alt + shift + space
-	herbstclient and .						\
+	herbstclient and .                        \
 	  compare tags.focus.curframe_wcount gt 1 \
 	. cycle_layout +1 max grid
 
@@ -83,9 +83,15 @@ shift + XF86Audio{Raise,Lower}Volume
 	mpc -q volume {+,-}1
 
 # - volume (basic)
-XF86Audio{RaiseVolume,LowerVolume,Mute}
-	amixer -q set Master {1+,1-,toggle}
+XF86AudioMute
+	amixer -q set Master toggle
+
+XF86Audio{Raise,Lower}Volume
+	amixer -q set Master 1{+,-}
+
+control + XF86Audio{Raise,Lower}Volume
+	amixer -q set Master 5{+,-}
 
 
-
+# vim:ft=conf
 

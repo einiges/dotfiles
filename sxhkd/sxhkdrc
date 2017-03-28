@@ -87,10 +87,10 @@ XF86AudioMute
 	amixer -q set Master toggle
 
 XF86Audio{Raise,Lower}Volume
-	amixer -q set Master 1{+,-}
+	amixer -qM set Master 1{+,-}
 
 control + XF86Audio{Raise,Lower}Volume
-	amixer -q set Master 5{+,-}
+	amixer -qM set Master 5{+,-}
 
 
 # vim:ft=conf

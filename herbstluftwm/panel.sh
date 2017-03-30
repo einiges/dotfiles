@@ -101,10 +101,10 @@ ppLocalIp() {
 	local cmd=$(ip a | grep 'state UP' -A2 | tail -n1 | awk '{print $2}' | cut -f1 -d\/ | xargs printf "%.15s")
 	local icon=$(colorize $ICONCOLOR $(ppIcon building))
 	echo "%{A:herbstclient emit_hook publicip:}" \
-		     "%{A3:herbstclient emit_hook localip:}" \
-		       "${icon}${cmd}" \
-		     "%{A}" \
-		   "%{A}"
+	       "%{A3:herbstclient emit_hook localip:}" \
+	         "${icon}${cmd}" \
+	       "%{A}" \
+	     "%{A}"
 }
 
 
@@ -144,7 +144,7 @@ ppClock() {
 ppSong() {
 	local cmd=$(mpc current --format '%title%' | head -c 30)
 	local icon=$(colorize $ICONCOLOR $(ppIcon headphones))
-	local icon2=""
+	#local icon2=""
 
 	#if $(mpc | grep -q paused); then
 	#	icon2=$(ppIcon paused)
@@ -153,10 +153,10 @@ ppSong() {
 	#fi
 
 	echo "%{A2:mpd --kill && mpd && herbstclient emit_hook mpd:}" \
-		     "%{A:mpc -q toggle:}" \
-		       "${icon}${cmd}" \
-		     "%{A}" \
-		   "%{A}"
+	       "%{A:mpc -q toggle:}" \
+	         "${icon}${cmd}" \
+	       "%{A}" \
+	     "%{A}"
 }
 
 
@@ -264,7 +264,7 @@ ppTags() {
 {
 # -- Event generator --
 
-	# Loops are responsing after first sleep,
+	# Loops are responding after first sleep,
 	# cause of, herbstclient starts idling after
 	# setting up the loop. This results in not 
 	# generated events at start.

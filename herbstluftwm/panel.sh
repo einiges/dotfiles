@@ -42,41 +42,49 @@ overline() {
 
 # -- Icons --
 
-# $( ppIconNoOffset key)
+# $( ppIconNoOffset key [color] )
 ppIconNoOffset() {
+	local icon=""
+
 	case $1 in
-		at           )  echo "\uf1fa" ;;     # 
-		building     )  echo "\uf0f7" ;;     # 
-		calendar     )  echo "\uf133" ;;     #  
-		circle       )  echo "\uf1db" ;;     # 
-		circlefilled )  echo "\uf111" ;;     #  
-		clock        )  echo "\uf017" ;;     # 
-		code         )  echo "\uf121" ;;     # 
-		cubes        )  echo "\uf1b3" ;;     # 
-		dot          )  echo "•"      ;;
-		firefox      )  echo "\uf269" ;;     # 
-		globe        )  echo "\uf0ac" ;;     # 
-		headphones   )  echo "\uf025" ;;     # 
-		mail         )  echo "\uf003" ;;     # 
-		microchip    )  echo "\uf2db" ;;     # 
-		paused       )  echo "\uf04c" ;;     # 
-		playing      )  echo "\uf04b" ;;     # 
-		power        )  echo "\uf011" ;;     # 
-		squarefilled )  echo "\uf0c8" ;;     # 
-		square       )  echo "\uf096" ;;     # 
-		stop         )  echo "\uf04d" ;;     # 
-		terminal     )  echo "\uf120" ;;     # 
-		user         )  echo "\uf2c0" ;;     # 
-		volumehigh   )  echo "\uf028" ;;     # 
-		volumelow    )  echo "\uf027" ;;     # 
-		volumeoff    )  echo "\uf026" ;;     # 
-		*            )  echo "?"      ;;
+		at           )  icon="\uf1fa" ;;     # 
+		building     )  icon="\uf0f7" ;;     # 
+		calendar     )  icon="\uf133" ;;     # 
+		circle       )  icon="\uf1db" ;;     # 
+		circlefilled )  icon="\uf111" ;;     # 
+		clock        )  icon="\uf017" ;;     # 
+		code         )  icon="\uf121" ;;     # 
+		cubes        )  icon="\uf1b3" ;;     # 
+		dot          )  icon="•"      ;;
+		firefox      )  icon="\uf269" ;;     # 
+		globe        )  icon="\uf0ac" ;;     # 
+		headphones   )  icon="\uf025" ;;     # 
+		mail         )  icon="\uf003" ;;     # 
+		microchip    )  icon="\uf2db" ;;     # 
+		paused       )  icon="\uf04c" ;;     # 
+		playing      )  icon="\uf04b" ;;     # 
+		power        )  icon="\uf011" ;;     # 
+		squarefilled )  icon="\uf0c8" ;;     # 
+		square       )  icon="\uf096" ;;     # 
+		stop         )  icon="\uf04d" ;;     # 
+		terminal     )  icon="\uf120" ;;     # 
+		user         )  icon="\uf2c0" ;;     # 
+		volumehigh   )  icon="\uf028" ;;     # 
+		volumelow    )  icon="\uf027" ;;     # 
+		volumeoff    )  icon="\uf026" ;;     # 
+		*            )  icon="?"      ;;
 	esac
+
+	if [ -z $2 ]; then
+		echo "$icon"
+	else
+		echo "$(colorize $2 $icon)"
+	fi
 }
 
-# $( ppIcon key )
+# $( ppIcon key [color] )
 ppIcon() {
-	echo "$(ppIconNoOffset $1)%{O5}"
+	echo "$(ppIconNoOffset $1 $2)%{O5}"
 }
 
 
@@ -85,37 +93,37 @@ ppIcon() {
 
 ppUser() {
 	local cmd=${USER}
-	local icon=$(colorize $ICONCOLOR $(ppIcon user))
+	local icon=$(ppIcon user $ICONCOLOR)
 	echo "${icon}${cmd}"
 }
 
 
 ppHostname() {
 	local cmd=$(hostname)
-	local icon=$(colorize $ICONCOLOR $(ppIcon at))
+	local icon=$(ppIcon at $ICONCOLOR)
 	echo "${icon}${cmd}"
 }
 
 
 ppLocalIp() {
 	local cmd=$(ip a | grep 'state UP' -A2 | tail -n1 | awk '{print $2}' | cut -f1 -d\/ | xargs printf "%.15s")
-	local icon=$(colorize $ICONCOLOR $(ppIcon building))
-	echo "%{A:herbstclient emit_hook publicip:}" \
-	       "%{A3:herbstclient emit_hook localip:}" \
-	         "${icon}${cmd}" \
-	       "%{A}" \
-	     "%{A}"
+	local icon=$(ppIcon building $ICONCOLOR)
+	echo -n "%{A:herbstclient emit_hook publicip:}"
+	echo -n   "%{A3:herbstclient emit_hook localip:}"
+	echo -n     "${icon}${cmd}"
+	echo -n   "%{A}"
+	echo    "%{A}"
 }
 
 
 ppPublicIp() {
 	local cmd=$(curl -s https://ipinfo.io/ip | xargs printf "%.15s")
-	local icon=$(colorize $ICONCOLOR $(ppIcon globe))
-	echo "%{A:herbstclient emit_hook localip:}" \
-	       "%{A3:herbstclient emit_hook publicip:}" \
-	         "${icon}${cmd}" \
-	       "%{A}" \
-	     "%{A}"
+	local icon=$(ppIcon globe $ICONCOLOR)
+	echo -n "%{A:herbstclient emit_hook localip:}"
+	echo -n   "%{A3:herbstclient emit_hook publicip:}"
+	echo -n     "${icon}${cmd}"
+	echo -n   "%{A}"
+	echo    "%{A}"
 }
 
 
@@ -128,7 +136,7 @@ ppTitle() {
 ppDay() {
 	#                            %a,       %d.           %b
 	local cmd=$(date "+%%{F$GRAY}%a, %%{F-}%d. %%{F$GRAY}%b%%{F-}")
-	local icon=$(colorize $ICONCOLOR $(ppIcon calendar))
+	local icon=$(ppIcon calendar "$ICONCOLOR")
 	echo ${icon}${cmd}
 }
 
@@ -136,7 +144,7 @@ ppDay() {
 ppClock() {
 	#                 #%H          :      %M
 	local cmd=$(date "+%H%%{F$GRAY}:%%{F-}%M")
-	local icon=$(colorize $ICONCOLOR $(ppIcon clock))
+	local icon=$(ppIcon clock $ICONCOLOR)
 	echo "${icon}${cmd}"
 }
 
@@ -152,11 +160,11 @@ ppSong() {
 	#	icon2=$(ppIcon playing)
 	#fi
 
-	echo "%{A2:mpd --kill && mpd && herbstclient emit_hook mpd:}" \
-	       "%{A:mpc -q toggle:}" \
-	         "${icon}${cmd}" \
-	       "%{A}" \
-	     "%{A}"
+	echo -n "%{A2:mpd --kill && mpd && herbstclient emit_hook mpd:}"
+	echo -n   "%{A:mpc -q toggle:}"
+	echo -n     "${icon}${cmd}"
+	echo -n   "%{A}"
+	echo    "%{A}"
 }
 
 
@@ -179,9 +187,9 @@ ppVolume() {
 		icon=$(colorize $ICONCOLOR $icon)
 	fi
 
-	echo "%{A:amixer -q set Master toggle:}" \
-		     "${icon}${cmd}" \
-		   "%{A}"
+	echo -n "%{A:amixer -q set Master toggle:}"
+	echo -n   "${icon}${cmd}"
+	echo    "%{A}"
 }
 
 
@@ -195,14 +203,14 @@ ppMpdVolume() {
 # TODO Find better solution.
 ppCpu() {
 	local cmd=$(ps -A -o pcpu | tail -n+2 | paste -sd+ | bc )
-	local icon=$(colorize $ICONCOLOR $(ppIcon squarefilled))
+	local icon=$(ppIcon squarefilled "$ICONCOLOR")
 	echo "${icon}${cmd}"
 }
 
 
 ppMemory() {
 	local cmd=$(free -m | grep Mem | awk '{print $3 }')
-	local icon=$(ppIcon microchip)
+	local icon=$(ppIcon microchip "$ICONCOLOR")
 	local unit=$(colorize $GRAY M)
 	echo "${icon}${cmd}${unit}"
 }

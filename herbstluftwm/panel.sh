@@ -50,12 +50,9 @@ ppIconNoOffset() {
 		at           )  icon="\uf1fa" ;;     # 
 		building     )  icon="\uf0f7" ;;     # 
 		calendar     )  icon="\uf133" ;;     # 
-		circle       )  icon="\uf1db" ;;     # 
-		circlefilled )  icon="\uf111" ;;     # 
 		clock        )  icon="\uf017" ;;     # 
 		code         )  icon="\uf121" ;;     # 
 		cubes        )  icon="\uf1b3" ;;     # 
-		dot          )  icon="•"      ;;
 		firefox      )  icon="\uf269" ;;     # 
 		globe        )  icon="\uf0ac" ;;     # 
 		headphones   )  icon="\uf025" ;;     # 
@@ -133,6 +130,7 @@ ppTitle() {
 }
 
 
+# $( ppDay )
 ppDay() {
 	#                            %a,       %d.           %b
 	local cmd=$(date "+%%{F$GRAY}%a, %%{F-}%d. %%{F$GRAY}%b%%{F-}")
@@ -141,6 +139,7 @@ ppDay() {
 }
 
 
+# $( ppClock )
 ppClock() {
 	#                 #%H          :      %M
 	local cmd=$(date "+%H%%{F$GRAY}:%%{F-}%M")
@@ -149,16 +148,10 @@ ppClock() {
 }
 
 
+# $( ppSong )
 ppSong() {
 	local cmd=$(mpc current --format '%title%' | head -c 30)
 	local icon=$(colorize $ICONCOLOR $(ppIcon headphones))
-	#local icon2=""
-
-	#if $(mpc | grep -q paused); then
-	#	icon2=$(ppIcon paused)
-	#else
-	#	icon2=$(ppIcon playing)
-	#fi
 
 	echo -n "%{A2:mpd --kill && mpd && herbstclient emit_hook mpd:}"
 	echo -n   "%{A:mpc -q toggle:}"
@@ -168,6 +161,7 @@ ppSong() {
 }
 
 
+# $( ppVolume )
 ppVolume() {
 	local cmd=$(amixer -M get Master | tail -1 | sed 's/.*\[\([0-9]*\)\%\].*/\1/' | xargs printf "%3s")
 	local icon=""
@@ -193,6 +187,7 @@ ppVolume() {
 }
 
 
+# $( ppMpdVolume )
 ppMpdVolume() {
 	local cmd=$(mpc volume | sed 's/.*: *\([0-9]*\)\%/\1/' | xargs printf "%3s")
 
@@ -200,14 +195,15 @@ ppMpdVolume() {
 }
 
 
-# TODO Find better solution.
+# $( ppCpu usage )
 ppCpu() {
-	local cmd=$(ps -A -o pcpu | tail -n+2 | paste -sd+ | bc )
+	local cmd=$(printf "%3s" $1)
 	local icon=$(ppIcon squarefilled "$ICONCOLOR")
 	echo "${icon}${cmd}"
 }
 
 
+# $( ppMemory )
 ppMemory() {
 	local cmd=$(free -m | grep Mem | awk '{print $3 }')
 	local icon=$(ppIcon microchip "$ICONCOLOR")
@@ -216,6 +212,7 @@ ppMemory() {
 }
 
 
+# $( ppTags )
 ppTags() {
 	local cmd=( $(herbstclient tag_status $MONITOR) )
 	for tag in "${cmd[@]}"; do
@@ -288,13 +285,17 @@ ppTags() {
 	pids[1]=$!
 
 
+	conky -c $XDG_CONFIG_HOME/herbstluftwm/conky.conf &
+	pids[2]=$!
+
+
 	while :; do
 		# 5 Seconds past each minute change
 		sleep $(( $(date '+65-%S') )) || break
 
 		herbstclient emit_hook clock
 	done &
-	pids[2]=$!
+	pids[3]=$!
 
 
 	while :; do
@@ -305,16 +306,15 @@ ppTags() {
 
 		herbstclient emit_hook day
 	done &
-	pids[3]=$!
+	pids[4]=$!
 
 
 	while :; do
 		sleep 5 || break
 
-		herbstclient emit_hook hardware
+		herbstclient emit_hook memory
 	done &
-	pids[4]=$!
-
+	pids[5]=$!
 
 	herbstclient --idle
 
@@ -333,7 +333,6 @@ ppTags() {
 	day=$(ppDay)
 	clock=$(ppClock)
 	memory=$(ppMemory)
-	cpu=$(ppCpu)
 	song=$(ppSong)
 	volume=$(ppVolume)
 	mpdvolume=$(ppMpdVolume)
@@ -392,9 +391,12 @@ ppTags() {
 				volume=$(ppVolume)
 				;;
 
-			hardware | cpu | memory )
+			cpu_usage )
+				cpu=$(ppCpu "${cmd[@]:1}")
+				;;
+
+			memory )
 				memory=$(ppMemory)
-				cpu=$(ppCpu)
 				;;
 
 			host )

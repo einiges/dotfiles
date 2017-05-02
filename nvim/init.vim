@@ -21,17 +21,15 @@ if dein#load_state(expand('<sfile>'))
 	" Interface
 	call dein#add('vim-airline/vim-airline')
 	call dein#add('vim-airline/vim-airline-themes')
-	call dein#add('nathanaelkane/vim-indent-guides')
 	call dein#add('airblade/vim-gitgutter')
-	"call dein#add('ryanoasis/vim-devicons')
 
 
 	" Libs
 	call dein#add('Shougo/neco-vim',          { 'on_ft': ['vim'] })
 	call dein#add('kchmck/vim-coffee-script', { 'on_ft': ['coffee'] })
 	call dein#add('carlitux/deoplete-ternjs', { 'on_ft': ['javascript'], 'if': 0 })
-	call dein#add('zchee/deoplete-clang',     { 'on_ft': ['c', 'cpp'] })
-	call dein#add('osyo-manga/vim-monster',   { 'on_ft': ['ruby'] })
+	call dein#add('tweekmonster/deoplete-clang2', { 'on_ft': ['c', 'cpp'] })
+	call dein#add('fishbullet/deoplete-ruby', { 'on_ft': ['ruby'] })
 	call dein#add('artur-shaik/vim-javacomplete2', { 'on_ft': ['java'] })
 
 
@@ -58,7 +56,7 @@ if dein#load_state(expand('<sfile>'))
 	"call dein#add('tpope/vim-rails', { 'on_ft': ['ruby'] })
 	call dein#add('Quramy/tsuquyomi', {'lazy': 1 })
 	call dein#add('JuliaEditorSupport/julia-vim')
-	
+	call dein#add('lervag/vimtex')
 
 	" Syntax
 	call dein#add('justinmk/vim-syntax-extra')              " C / C++
@@ -87,6 +85,7 @@ nnoremap <silent><C-Down> :TmuxNavigateDown<cr>
 nnoremap <silent><C-Up> :TmuxNavigateUp<cr>
 nnoremap <silent><C-Right> :TmuxNavigateRight<cr>
 
+
 " deoplete
 "let g:deoplete#auto_complete_delay = 0
 let g:deoplete#max_list = 20
@@ -98,42 +97,6 @@ let g:deoplete#enable_completed_snippet = 1
 let g:deoplete#auto_complete_start_length = 0
 let g:deoplete#ignore_sources = {}
 let b:deoplete_ignore_sources = ['buffer']
-
-
-" deoplete-clang
-let g:deoplete#sources#clang#libclang_path = '/usr/lib/libclang.so'
-let g:deoplete#sources#clang#clang_header = '/usr/include/clang'
-let g:deoplete#sources#clang#std = { 'cpp': 'c++14', 'c': 'c14' }
-"let g:deoplete#sources#clang#sort_algo = 'priority' " or 'alphabetic'
-autocmd CompleteDone * pclose!
-
-" vim-monster (Ruby)
-let g:monster#completion#rcodetools#backend = "async_rct_complete"
-let g:deoplete#omni#input_patterns = get(g:,'deoplete#omni#input_patterns',{})
-let g:deoplete#omni#input_patterns.ruby = [
-			\'[^. *\t]\.\w*',
-			\'[a-zA-Z_]\w*::'
-			\]
-
-" Javacomplete2
-autocmd FileType java setlocal omnifunc=javacomplete#Complete
-let g:JavaComplete_ClosingBrace = 1
-let g:deoplete#ignore_sources.java = ['javacomplete2']
-
-if 1
-	let g:deoplete#ignore_sources.java = ['omni']
-	call deoplete#custom#set('javacomplete2', 'mark', '')
-else
-	let g:deoplete#ignore_sources.java = ['javacomplete2']
-	call deoplete#custom#set('omni', 'mark', '')
-endif
-
-
-let g:deoplete#omni#input_patterns.java = [
-			\'[^. \t0-9]\.\w*',
-			\'[^. \t0-9]\->\w*',
-			\'[^. \t0-9]\::\w*',
-			\]
 
 
 " vim-airline
@@ -152,11 +115,6 @@ let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 let g:UltiSnipsEditSplit = "vertical"
 
 
-" vim-indent-guides
-let g:indent_guides_start_level = 2
-let g:indent_guides_guide_size = 1
-let g:indent_guides_enable_on_vim_startup = 0
-
 " FastFold
 let g:tex_fold_enable=1
 let g:vimsyn_folding='af'
@@ -174,8 +132,6 @@ let g:neomake_error_sign = {
 			\ 'texthl': 'ErrorMsg',
 			\ }
 
-" solarized
-let g:solarized_visibility = "low"
 
 
 " https://gist.github.com/tpope/287147
@@ -241,7 +197,7 @@ set incsearch
 set pastetoggle=<F10>
 
 ",eol:¬
-set listchars=tab:→\ ,precedes:◀,extends:▶
+set listchars=tab:│\ ,precedes:◀,extends:▶
 set list
 
 set title
@@ -260,11 +216,10 @@ set wildignore+=*.swp,*.swo,*.swn
 let g:tex_flavor = 'tex' " disable plaintex
 
 
-
 " -- Color Adjustments --
 
-hi SpecialKey  cterm=NONE  ctermfg=12  gui=NONE  guifg=#AEBBC0  guibg=NONE
-hi NonText     cterm=NONE  ctermfg=12  gui=NONE  guifg=#AEBBC0  guibg=NONE
+hi SpecialKey  cterm=NONE  ctermfg=12  gui=NONE  guifg=#C7D4D9  guibg=NONE
+hi NonText     cterm=NONE  ctermfg=12  gui=NONE  guifg=#C7D4D9  guibg=NONE
 
 
 
@@ -276,16 +231,22 @@ command W w !sudo tee % > /dev/null
 
 " -- Mapping --
 
+let mapleader = "ß"
+let maplocalleader = "ü"
+
+
 inoremap <F5> <ESC> :Dispatch<RETURN>a
 noremap <F5> :Dispatch<ESC>
 
 
-" annoying delelte behavior in st terminal
+" annoying delete behavior in st terminal
 noremap  <F1> x
 noremap! <F1> <DEL>
 
 nnoremap <BS> X
 vnoremap <BS> x
+
+noremap Y y$
 
 nnoremap q <Nop>
 
@@ -301,8 +262,6 @@ nnoremap <silent><END> $
 inoremap <silent><END> <C-o>$
 
 
-nnoremap <silent>j gj
-nnoremap <silent>k gk
 nnoremap <silent> <C-l> :nohl<CR><C-l>
 
 nnoremap <silent><S-Left> <C-w><

@@ -47,23 +47,20 @@ ppIconNoOffset() {
 	local icon=""
 
 	case $1 in
-		at           )  icon="\uf1fa" ;;     # 
 		building     )  icon="\uf0f7" ;;     # 
-		calendar     )  icon="\uf133" ;;     # 
+		calendar     )  icon="\uf073" ;;     # 
 		clock        )  icon="\uf017" ;;     # 
 		code         )  icon="\uf121" ;;     # 
 		cubes        )  icon="\uf1b3" ;;     # 
 		firefox      )  icon="\uf269" ;;     # 
 		globe        )  icon="\uf0ac" ;;     # 
 		headphones   )  icon="\uf025" ;;     # 
+		home         )  icon="\uf015" ;;     # 
 		mail         )  icon="\uf003" ;;     # 
 		microchip    )  icon="\uf2db" ;;     # 
-		paused       )  icon="\uf04c" ;;     # 
-		playing      )  icon="\uf04b" ;;     # 
 		power        )  icon="\uf011" ;;     # 
-		squarefilled )  icon="\uf0c8" ;;     # 
 		square       )  icon="\uf096" ;;     # 
-		stop         )  icon="\uf04d" ;;     # 
+		squarefilled )  icon="\uf0c8" ;;     # 
 		terminal     )  icon="\uf120" ;;     # 
 		user         )  icon="\uf2c0" ;;     # 
 		volumehigh   )  icon="\uf028" ;;     # 
@@ -97,7 +94,7 @@ ppUser() {
 
 ppHostname() {
 	local cmd=$(hostname)
-	local icon=$(ppIcon at $ICONCOLOR)
+	local icon=$(ppIcon home $ICONCOLOR)
 	echo "${icon}${cmd}"
 }
 

@@ -165,6 +165,7 @@ endif
 " -- Vim Basics --
 
 syntax enable
+set guicursor=n-v-c:block-Cursor/lCursor-blinkon0,i-ci:ver25-Cursor/lCursor,r-cr:hor20-Cursor/lCursor
 "set foldmethod=indent
 "set foldlevel=0
 "set foldnestmax=1
@@ -197,7 +198,7 @@ set incsearch
 set pastetoggle=<F10>
 
 ",eol:¬
-set listchars=tab:│\ ,precedes:◀,extends:▶
+set listchars=tab:│\ ,precedes:◀,extends:▶,trail:█
 set list
 
 set title

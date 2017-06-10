@@ -1,4 +1,7 @@
 
+# - Reload sxhkd -
+alt + super + q
+	pkill --signal SIGUSR1 sxhkd
 
 # -- Herbstluftwm --
 

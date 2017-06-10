@@ -1,8 +1,4 @@
 
-# -- Monitor Settings --
-xrandr --output HDMI-1 --auto --left-of DVI-I-1 --output DVI-I-1 --primary --auto
-
-
 # -- Keyboard Layout --
 setxkbmap -layout de -variant neo -option
 #setxkbmap -rules evdev -model evdev -layout us -variant altgr-intl -option caps:swapescape,eurosign:e

@@ -35,7 +35,6 @@ swarp 3000 0
 
 
 # -- Launch Applications --
-test ! -f $XDG_CONFIG_HOME/mpd/pid && mpd
 
 ( sleep  3; firefox ) &
 ( sleep 10; st -n ncmpcpp    -e ncmpcpp                ) &

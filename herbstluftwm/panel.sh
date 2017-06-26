@@ -6,9 +6,9 @@ GEOMETRY=( $(herbstclient monitor_rect "${MONITOR}") )
 X=${GEOMETRY[0]}
 Y=${GEOMETRY[1]}
 W=${GEOMETRY[2]}
-H=16
+H=20
 
-herbstclient pad $MONITOR $H 
+herbstclient pad $MONITOR $H
 
 FONT="Source Code Pro-9"
 FONT_ICONS="FontAwesome-10"
@@ -22,6 +22,8 @@ WHITE='#FFFFFFFF'
 GRAY='#FF82898B'
 RED='#FFFF0000'
 ICONCOLOR="#FF777777"
+ISPACER="%{O8}"
+SPACER="%{O20}"
 
 # $( colorize fontcolor text )
 colorize() {
@@ -78,13 +80,15 @@ ppIconNoOffset() {
 
 # $( ppIcon key [color] )
 ppIcon() {
-	echo "$(ppIconNoOffset $1 $2)%{O5}"
+	echo "$(ppIconNoOffset $1 $2)${ISPACER}"
 }
 
 
 
 # -- Pretty printer --
 
+
+# $( ppUser )
 ppUser() {
 	local cmd=${USER}
 	local icon=$(ppIcon user $ICONCOLOR)
@@ -92,6 +96,7 @@ ppUser() {
 }
 
 
+# $( ppHostname )
 ppHostname() {
 	local cmd=$(hostname)
 	local icon=$(ppIcon home $ICONCOLOR)
@@ -99,6 +104,7 @@ ppHostname() {
 }
 
 
+# $( ppLocalIp )
 ppLocalIp() {
 	local cmd=$(ip a | grep 'state UP' -A2 | tail -n1 | awk '{print $2}' | cut -f1 -d\/ | xargs printf "%.15s")
 	local icon=$(ppIcon building $ICONCOLOR)
@@ -110,6 +116,7 @@ ppLocalIp() {
 }
 
 
+# $( ppPublicIp )
 ppPublicIp() {
 	local cmd=$(curl -s https://ipinfo.io/ip | xargs printf "%.15s")
 	local icon=$(ppIcon globe $ICONCOLOR)
@@ -138,7 +145,7 @@ ppDay() {
 
 # $( ppClock )
 ppClock() {
-	#                 #%H          :      %M
+	#                  %H          :      %M
 	local cmd=$(date "+%H%%{F$GRAY}:%%{F-}%M")
 	local icon=$(ppIcon clock $ICONCOLOR)
 	echo "${icon}${cmd}"
@@ -160,8 +167,7 @@ ppSong() {
 
 # $( ppVolume )
 ppVolume() {
-	local cmd=$(amixer -M get Master | tail -1 | sed 's/.*\[\([0-9]*\)\%\].*/\1/' | xargs printf "%3s")
-	local icon=""
+	local cmd=$(amixer -M get Master | tail -1 | sed 's/.*\[\([0-9]*\)\%\].*/\1/' | xargs printf "%-4s")
 
 	if [ $cmd -ge 75 ]; then
 		icon=$(ppIcon volumehigh)
@@ -186,7 +192,7 @@ ppVolume() {
 
 # $( ppMpdVolume )
 ppMpdVolume() {
-	local cmd=$(mpc volume | sed 's/.*: *\([0-9]*\)\%/\1/' | xargs printf "%3s")
+	local cmd=$(mpc volume | sed 's/.*: *\([0-9]*\)\%/\1/' | xargs printf "%-3s")
 
 	echo "${cmd}"
 }
@@ -194,7 +200,7 @@ ppMpdVolume() {
 
 # $( ppCpu usage )
 ppCpu() {
-	local cmd=$(printf "%3s" $1)
+	local cmd=$(printf "%-3s" $1)
 	local icon=$(ppIcon squarefilled "$ICONCOLOR")
 	echo "${icon}${cmd}"
 }
@@ -257,7 +263,7 @@ ppTags() {
 				;;
 		esac
 
-		echo -n "%{O8}$(colorize $color $icon)%{O8}"
+		echo -n "${ISPACER}$(colorize $color $icon)${ISPACER}"
 	done
 
 }
@@ -412,14 +418,18 @@ ppTags() {
 				ip=$(ppPublicIp)
 				;;
 
+			* )
+				continue
+				;;
+
 		esac
 
-		echo -en "%{l}${user} ${hostname} ${ip} ${windowtitle}"
+		echo -en "%{l}${SPACER}${user}${SPACER}${hostname}${SPACER}${ip}${SPACER}${windowtitle}"
 		echo -en "%{c}${tags}"
-		echo -e  "%{r}${song} ${volume} ${mpdvolume} ${cpu} ${memory} ${day} ${clock} "
+		echo -e  "%{r}${song}${SPACER}${volume} ${mpdvolume}${SPACER}${cpu}${SPACER}${memory}${SPACER}${day}${SPACER}${clock}${SPACER}"
 	done
 
-} | lemonbar -g ${W}x${H}+${X}+${Y} -B $BLACK -F $WHITE -o -2 -f "$FONT" -o -3 -f "$FONT_ICONS" | sh > /dev/null 2>&1
+} | lemonbar -g ${W}x${H}+${X}+${Y} -B $BLACK -F $WHITE -u 2 -o -2 -f "$FONT" -o -3 -f "$FONT_ICONS" | sh > /dev/null 2>&1
 
 
 

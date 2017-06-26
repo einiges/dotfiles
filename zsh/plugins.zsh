@@ -20,10 +20,11 @@ source $ZPLUG_HOME/init.zsh
 
 zplug "zplug/zplug"
 
-zplug "zsh-users/zsh-history-substring-search"
+zplug "zsh-users/zsh-history-substring-search", \
+	hook-load:"source $ZDOTDIR/hooks/history-substring-keys.zsh"
 zplug "zsh-users/zsh-syntax-highlighting", \
 	defer:2, \
-	hook-load:"[ -f $ZDOTDIR/hooks/syntax-highlighting-styles.zsh ] && source $ZDOTDIR/hooks/syntax-highlighting-styles.zsh"
+	hook-load:"source $ZDOTDIR/hooks/syntax-highlighting-styles.zsh"
 
 
 zplug "zsh-users/zsh-completions"

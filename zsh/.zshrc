@@ -66,9 +66,9 @@ fi
 test -f $ZDOTDIR/plugins.zsh    && . $_
 test -f $ZDOTDIR/aliases.zsh    && . $_
 test -f $ZDOTDIR/dirhashes.zsh  && . $_
-test -f $ZDOTDIR/completion.zsh && . $_
-test -f $ZDOTDIR/keybinding.zsh && . $_
-test -f $ZDOTDIR/prompt.zsh     && . $_
+test -f $ZDOTDIR/completions.zsh && . $_
+test -f $ZDOTDIR/keybindings.zsh && . $_
+test -f $ZDOTDIR/prompts.zsh     && . $_
 
 
 

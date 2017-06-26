@@ -16,8 +16,8 @@ MULTIHARDLINK         38;5;222;1 # regular file with more than one link
 NORMAL                0
 ORPHAN                48;5;196;38;5;232;1 # Symlink to nonexistent file, or non-stat'able file ...
 OTHER_WRITABLE        38;5;220;1          # Directory that is other-writable (o+w) and not sticky
-SETGID                48;5;3;38;5;0       # file that is setuid (u+s)
-SETUID                38;5;220;1;3;100;1  # file that is setgid (g+s)
+SETGID                48;5;3;38;5;0       # file that is setuid (g+s)
+SETUID                38;5;220;1;3;100;1  # file that is setgid (u+s)
 SOCK                  38;5;197            # socket
 STICKY                38;5;86;48;5;234    # Directory with the sticky bit set (+t) and not other-writable
 STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3 # Directory that is sticky and other-writable (+t,o+w)

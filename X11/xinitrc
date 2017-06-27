@@ -4,10 +4,6 @@ setxkbmap -layout de -variant neo -option
 #setxkbmap -rules evdev -model evdev -layout us -variant altgr-intl -option caps:swapescape,eurosign:e
 
 
-# -- Mouse Cursor --
-xsetroot -cursor_name left_ptr -bg red -fg black
-
-
 # -- Background --
 feh --no-fehbg --bg-tile $HOME/Pictures/wallpapers/ds_anime1.jpg
 

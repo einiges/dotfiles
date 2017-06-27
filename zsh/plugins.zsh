@@ -32,6 +32,8 @@ zplug "supercrabtree/k"
 zplug "arzzen/calc.plugin.zsh", hook-load: "unalias calc"
 
 zplug "plugins/fancy-ctrl-z", from:oh-my-zsh
+zplug "plugins/git-prompt", from:oh-my-zsh, \
+	hook-load:"source $ZDOTDIR/hooks/git-prompt.zsh"
 
 
 # -- Load --

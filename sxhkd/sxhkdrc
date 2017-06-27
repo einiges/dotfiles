@@ -81,19 +81,15 @@ alt + x
 XF86Audio{Play,Stop,Next,Prev}
 	mpc -q {toggle,stop,next,prev}
 
-# - volume (mpd)
-shift + XF86Audio{Raise,Lower}Volume
-	mpc -q volume {+,-}1
-
 # - volume (basic)
 XF86AudioMute
-	amixer -q set Master toggle
+	amixer -qD pulse set Master toggle
 
 XF86Audio{Raise,Lower}Volume
-	amixer -qM set Master 1{+,-}
+	amixer -qD pulse set Master 1%{+,-}
 
 control + XF86Audio{Raise,Lower}Volume
-	amixer -qM set Master 5{+,-}
+	amixer -qD pulse set Master 5%{+,-}
 
 
 # vim:ft=conf

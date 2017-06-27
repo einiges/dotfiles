@@ -167,7 +167,7 @@ ppSong() {
 
 # $( ppVolume )
 ppVolume() {
-	local cmd=$(amixer -M get Master | tail -1 | sed 's/.*\[\([0-9]*\)\%\].*/\1/' | xargs printf "%-4s")
+	local cmd=$(amixer -M get Master | tail -1 | sed 's/.*\[\([0-9]*\)\%\].*/\1/' | xargs printf "%-3s")
 
 	if [ $cmd -ge 75 ]; then
 		icon=$(ppIcon volumehigh)
@@ -187,14 +187,6 @@ ppVolume() {
 	echo -n "%{A:amixer -q set Master toggle:}"
 	echo -n   "${icon}${cmd}"
 	echo    "%{A}"
-}
-
-
-# $( ppMpdVolume )
-ppMpdVolume() {
-	local cmd=$(mpc volume | sed 's/.*: *\([0-9]*\)\%/\1/' | xargs printf "%-3s")
-
-	echo "${cmd}"
 }
 
 
@@ -280,7 +272,7 @@ ppTags() {
 	# Process IDs
 	declare -a pids
 
-	mpc idleloop player mixer &
+	mpc idleloop player &
 	pids[0]=$!
 
 
@@ -338,7 +330,6 @@ ppTags() {
 	memory=$(ppMemory)
 	song=$(ppSong)
 	volume=$(ppVolume)
-	mpdvolume=$(ppMpdVolume)
 	ip=$(ppLocalIp)
 
 	# Loops once through event handler
@@ -381,13 +372,8 @@ ppTags() {
 				song=$(ppSong)
 				;;
 
-			mixer )
-				mpdvolume=$(ppMpdVolume)
-				;;
-
 			mpd )
 				song=$(ppSong)
-				mpdvolume=$(ppMpdVolume)
 				;;
 
 			card* )
@@ -426,7 +412,7 @@ ppTags() {
 
 		echo -en "%{l}${SPACER}${user}${SPACER}${hostname}${SPACER}${ip}${SPACER}${windowtitle}"
 		echo -en "%{c}${tags}"
-		echo -e  "%{r}${song}${SPACER}${volume} ${mpdvolume}${SPACER}${cpu}${SPACER}${memory}${SPACER}${day}${SPACER}${clock}${SPACER}"
+		echo -e  "%{r}${song}${SPACER}${volume}${SPACER}${cpu}${SPACER}${memory}${SPACER}${day}${SPACER}${clock}${SPACER}"
 	done
 
 } | lemonbar -g ${W}x${H}+${X}+${Y} -B $BLACK -F $WHITE -u 2 -o -2 -f "$FONT" -o -3 -f "$FONT_ICONS" | sh > /dev/null 2>&1

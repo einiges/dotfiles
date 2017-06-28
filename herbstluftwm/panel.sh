@@ -11,6 +11,7 @@ H=20
 herbstclient pad $MONITOR $H
 
 FONT="Source Code Pro-9"
+FONT_J="IPAGothic-9"
 FONT_ICONS="FontAwesome-10"
 
 
@@ -415,7 +416,7 @@ ppTags() {
 		echo -e  "%{r}${song}${SPACER}${volume}${SPACER}${cpu}${SPACER}${memory}${SPACER}${day}${SPACER}${clock}${SPACER}"
 	done
 
-} | lemonbar -g ${W}x${H}+${X}+${Y} -B $BLACK -F $WHITE -u 2 -o -2 -f "$FONT" -o -3 -f "$FONT_ICONS" | sh > /dev/null 2>&1
+} | lemonbar -g ${W}x${H}+${X}+${Y} -B $BLACK -F $WHITE -u 2 -o -2 -f "$FONT" -f "$FONT_J" -o -4 -f "$FONT_ICONS" | sh > /dev/null 2>&1
 
 
 

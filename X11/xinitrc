@@ -5,7 +5,7 @@ setxkbmap -layout de -variant neo -option
 
 
 # -- Background --
-feh --no-fehbg --bg-tile $HOME/Pictures/wallpapers/ds_anime1.jpg
+feh --no-fehbg --bg-tile $HOME/Pictures/wallpapers/ds_forest.png
 
 
 # -- Misc X --

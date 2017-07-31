@@ -131,7 +131,7 @@ ppPublicIp() {
 
 # $( ppTitle title )
 ppTitle() {
-	head -c 50 <<< $1
+	sed -e 's/\\/\\\\/g' <<< $1 | head -c 50
 }
 
 

@@ -3,57 +3,6 @@
 alt + super + q
 	pkill --signal SIGUSR1 sxhkd
 
-# -- Herbstluftwm --
-
-# - quit herbstluftwm
-alt + {control,shift} + q
-	herbstclient {reload,quit}
-
-# - focus clients
-alt + {s,n,r,t}
-	herbstclient focus {left,down,up,right}
-
-# - move clients
-alt + shift + {s,n,r,t}
-	herbstclient shift {left,down,up,right}
-
-# - resize frames
-alt + control + {s,n,r,t}
-	herbstclient resize {left,down,up,right} +0.05
-
-# - split frames
-alt + mod5 + {s,n,r,t}
-	herbstclient split {left,bottom,top,right} 0.5
-
-# - each client in frame gets subframe
-alt + control + space
-	herbstclient split explod
-
-# - {focus, move client to} next monitor
-alt + {_,shift} + g
-	herbstclient {cycle_monitor,shift_to_monitor +1}
-
-# - fullsceen
-alt + f
-	herbstclient fullscreen
-
-# - close client or remove frame
-alt + {_,shift} + adiaeresis
-	herbstclient {close_or_remove,remove}
-
-# - cycle through basic layouts
-alt + space
-	herbstclient and .                        \
-	  compare tags.focus.curframe_wcount gt 1 \
-	. cycle_layout +1 horizontal vertical
-
-# - cycle through basic layouts2
-alt + shift + space
-	herbstclient and .                        \
-	  compare tags.focus.curframe_wcount gt 1 \
-	. cycle_layout +1 max grid
-
-
 
 # -- application launching --
 

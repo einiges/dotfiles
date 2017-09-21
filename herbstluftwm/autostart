@@ -6,14 +6,12 @@ hc() {
 
 hc emit_hook reload
 
-# remove all existing keybindings
 hc keyunbind --all
+hc mouseunbind --all
 
 
 
 # -- Mouse --
-
-hc mouseunbind --all
 
 hc set focus_follows_mouse 0
 hc mousebind $Mod-Button1 move
@@ -31,7 +29,7 @@ hc set frame_bg_transparent 1
 hc set frame_transparent_width 5
 hc set frame_gap 0
 hc set always_show_frame 1
-#hc set default_frame_layout 1
+hc set default_frame_layout 1
 hc set window_gap 0
 hc set frame_padding 0
 hc set smart_window_surroundings 0
@@ -43,7 +41,7 @@ hc set mouse_recenter_gap 0
 hc set frame_border_active_color '#8d3000'
 hc set frame_border_normal_color '#000000'
 hc set frame_bg_normal_color '#000000'
-hc set frame_bg_active_color '#cd4500' 
+hc set frame_bg_active_color '#cd4500'
 
 hc attr theme.tiling.reset 1
 hc attr theme.floating.reset 1
@@ -69,8 +67,7 @@ hc attr theme.background_color   '#141414'
 # -- Tags --
 
 Mod=Alt
-# idx        0       1   2   3   4   5       6
-tag_names=( "1:WEB" "2" "3" "4" "5" "9:KOM" "0:MISC")
+tag_names=( "1" "2" "3" "4" "5" "6" "7")
 tag_keys=( {1..5} 9 0 )
 
 hc rename default "${tag_names[0]}" || true
@@ -129,16 +126,11 @@ hc rule  instance='ncmpcpp'    tag=${tag_names[6]} index=0
 hc rule  instance='calcurse'   tag=${tag_names[6]} index=10
 hc rule  instance='newsbeuter' tag=${tag_names[6]} index=11
 
-#hc rule class='dia' windowrole='toolbox_window' index=0
-#hc rule class='dia' windowrole='diagram_window' pseudotile=on index=1
-
 
 
 # -- Unlock --
 
-# unlock, just to be sure
 hc unlock
-
 
 
 

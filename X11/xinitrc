@@ -1,6 +1,6 @@
 
 # -- Keyboard Layout --
-setxkbmap -layout de -variant neo -option
+setxkbmap -layout de -variant neo -option altwin:swap_lalt_lwin
 #setxkbmap -rules evdev -model evdev -layout us -variant altgr-intl -option caps:swapescape,eurosign:e
 
 

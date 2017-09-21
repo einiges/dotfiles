@@ -1,22 +1,22 @@
 
 # - Reload sxhkd -
-alt + super + q
+super + alt + q
 	pkill --signal SIGUSR1 sxhkd
 
 
 # -- application launching --
 
 # - terminal
-alt + Return
+super + Return
 	$TERMINAL
 
 # - application launcher
-alt + l
 	dmenu_run
+super + l
 
 # - pass
-alt + x
 	PINENTRY_USER_DATA=gtk passmenu
+super + x
 
 # - screenshots
 {_,shift} + Print

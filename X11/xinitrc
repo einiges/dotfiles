@@ -17,6 +17,10 @@ test -f $XDG_CONFIG_HOME/X11/xmodmap    && xmodmap    $_
 test -f /etc/X11/xinit/xinitrc.d/50-systemd-user.sh && . $_
 
 
+# -- Mouse Cursor --
+xsetroot -cursor_name left_ptr
+
+
 # -- Disable DPMS --
 xset -dpms
 xset s noblank

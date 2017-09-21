@@ -11,12 +11,12 @@ super + Return
 	$TERMINAL
 
 # - application launcher
-	dmenu_run
 super + l
+	rofi -show drun
 
 # - pass
-	PINENTRY_USER_DATA=gtk passmenu
 super + x
+	PINENTRY_USER_DATA=gtk passmenu-rofi
 
 # - screenshots
 {_,shift} + Print

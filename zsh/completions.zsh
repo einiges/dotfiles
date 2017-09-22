@@ -43,16 +43,6 @@ zstyle ':completion:*:approximate:*' max-errors 1 numeric
 
 
 
-# -- Ignore Patterns --
-
-zstyle ':completion:*:*files' ignored-patterns \
-	'.git' '.hg' '.svn' \
-	'*?.aux' '*?.out' '*?.so' \
-	'*?.class' '*?.hi' '*?.o' \
-	'.idea' \
-	'__pycache__'
-
-
 # -- kill --
 
 zstyle ':completion:*:*:*:*:processes'    command 'ps -u $USER -o pid,user,command -w'

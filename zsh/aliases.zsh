@@ -2,7 +2,6 @@
 
 alias -g L='| less -r'
 alias -g G='| grep --color'
-alias -g H=' --help | less -RSFXi'
 alias -g W='| wc'
 
 alias -s java=$EDITOR
@@ -34,9 +33,10 @@ alias uiae='setxkbmap -rules evdev -model evdev -layout us -variant altgr-intl -
 alias   ...='cd ../..'
 alias  ....='cd ../../..'
 alias .....='cd ../../../..'
-alias ,,='popd'
+alias ,='popd'
 alias .,='cd ~-'
 
+alias e='echo'
 alias n='nvim'
 alias o="xdg-open"
 
@@ -88,7 +88,8 @@ alias     anki="anki $xdg_anki"
 alias calcurse="calcurse $xdg_calcurse"
 alias    conky="conky $xdg_conky"
 alias    irssi="irssi $xdg_irssi"
-alias     tmux="tmux $xdg_tmux"
+alias   mbsync="mbsync $xdg_mbsync"
+alias     tmux="tmux -2 $xdg_tmux"
 
 alias t=tmux
 

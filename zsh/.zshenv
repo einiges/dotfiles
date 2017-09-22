@@ -95,6 +95,6 @@ export xdg_calcurse="-D $XDG_CONFIG_HOME/calcurse"
 export    xdg_conky="--config=$XDG_CONFIG_HOME/conky/conkyrc"
 export    xdg_irssi="--home=$XDG_CONFIG_HOME/irssi"
 export   xdg_mbsync="--config $XDG_CONFIG_HOME/mbsync/mbsyncrc"
-export     xdg_tmux="-2 -f $XDG_CONFIG_HOME/tmux/tmux.conf"
+export     xdg_tmux="-f $XDG_CONFIG_HOME/tmux/tmux.conf"
 
 

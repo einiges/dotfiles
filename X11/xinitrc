@@ -1,4 +1,8 @@
 
+# -- Monitor Setup --
+xrandr --output $MONITOR0 --auto --primary --output $MONITOR1 --auto --left-of $MONITOR0
+
+
 # -- Keyboard Layout --
 setxkbmap -layout de -variant neo -option altwin:swap_lalt_lwin
 #setxkbmap -rules evdev -model evdev -layout us -variant altgr-intl -option caps:swapescape,eurosign:e

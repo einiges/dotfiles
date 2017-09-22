@@ -6,6 +6,9 @@ export EDITOR=nvim
 export TERMINAL=st
 export PAGER=less
 
+export MONITOR0="DVI-I-1"
+export MONITOR1="HDMI-A-0"
+
 #export http_proxy="localhost:8118"
 
 export TIMEFMT=$'real\t%E\nuser\t%U\nsys\t%S'

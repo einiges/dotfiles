@@ -1,0 +1,42 @@
+#! /bin/sh
+
+bspc monitor $MONITOR0 -d 1 3 4 5 6 7 8 9 0
+bspc monitor $MONITOR1 -d 2
+
+bspc config normal_border_color   '#000000'
+bspc config active_border_color   '#444444'
+bspc config focused_border_color  '#cd4500'
+bspc config presel_feedback_color '#073642'
+
+border_width=4
+bspc config border_width         $border_width
+bspc config window_gap          -$border_width
+for side in top right bottom left; do
+	bspc config ${side}_padding $border_width
+done
+
+bspc config split_ratio             0.52
+bspc config borderless_monocle      false
+bspc config gapless_monocle         false
+
+bspc config pointer_modifier        mod1
+bspc config focus_follows_pointer   true
+bspc config pointer_follows_focus   false
+bspc config pointer_follows_monitor true
+
+bspc rule -r *:*
+bspc rule -a Pinentry-gtk-2  state=floating
+bspc rule -a Firefox         desktop=1
+bspc rule -a discord         desktop=8
+bspc rule -a *:mutt          desktop=9
+bspc rule -a *:ncmpcpp       desktop=0
+bspc rule -a *:calcurse      desktop=0
+bspc rule -a *:newsbeuter    desktop=0
+# Libreoffice 5.x starts with Soffice and changes it after launch... WTF?
+bspc rule -a Soffice         state=tiled
+bspc rule -a *:libreoffice   state=tiled
+
+panel=$XDG_CONFIG_HOME/bspwm/panel.sh
+[ -x "$panel" ] && $panel &
+
+

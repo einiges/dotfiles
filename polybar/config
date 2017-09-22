@@ -1,0 +1,338 @@
+[bar/bspwm-desktop-top]
+monitor = ${env:MONITOR0}
+monitor-fallback = ${env:MONITOR1}
+
+locale = de_DE.UTF-8
+fixed-center = false
+bottom = false
+
+width = 100%
+height = 30
+offset-x = 0
+offset-y = 0
+
+background = #000
+foreground = ${vars.bright-foreground}
+
+line-size = 1
+line-color = ${vars.highlight-color}
+
+separator = " "
+
+font-0 = Noto Sans:pixelsize=9;0
+font-1 = Source Code Pro:size=9;0
+font-2 = FontAwesome:size=9;0
+font-3 = Noto Mono:pixelsize=9;0
+
+modules-left = powermenu bspwm
+modules-center = xwindow
+modules-right = mpd cpu memory volume keyboard date time
+
+wm-restack = bspwm
+
+
+
+[vars]
+bright-background = #2f2f2f
+dark-background = #1c1c1c
+bright-foreground = #dddddd
+dark-foreground = #505050
+
+highlight-color = #5294e2
+warning-color = #cd4500
+
+margin = 1
+module-padding = 5
+workspace-padding = 4
+
+
+
+[module/powermenu]
+type = custom/menu
+
+
+label-open = 
+label-open-padding = ${vars.module-padding}
+label-open-foreground = ${vars.highlight-color}
+label-open-background = ${vars.bright-background}
+
+label-close = 
+label-close-padding = ${vars.module-padding}
+label-close-foreground = #f00
+label-close-background = ${vars.bright-background}
+label-close-margin-right = ${vars.margin}
+
+menu-0-0 = 
+menu-0-0-exec = slock
+menu-0-0-padding = ${vars.module-padding}
+menu-0-0-background = ${vars.bright-background}
+menu-0-0-margin-right = ${vars.margin}
+
+menu-0-1 = 
+menu-0-1-exec = bspc quit
+menu-0-1-padding = 4
+menu-0-1-background = ${vars.bright-background}
+menu-0-1-margin-right = ${vars.margin}
+
+menu-0-2 = 
+menu-0-2-exec = halt
+menu-0-2-padding = 4
+menu-0-2-background = ${vars.bright-background}
+menu-0-2-margin-right = ${vars.margin}
+
+menu-0-3 = 
+menu-0-3-exec = reboot
+menu-0-3-padding = ${vars.module-padding}
+menu-0-3-background = ${vars.bright-background}
+menu-0-3-margin-right = ${vars.margin}
+
+menu-0-4 = 
+menu-0-4-exec = poweroff
+menu-0-4-padding = ${vars.module-padding}
+menu-0-4-background = ${vars.bright-background}
+
+
+
+[module/bspwm]
+type = internal/bspwm
+
+pin-workspaces = false
+enable-click = false
+enable-scroll = false
+
+ws-icon-0 = 1;¹ 
+ws-icon-1 = 2;² 
+ws-icon-2 = 3;³ 
+ws-icon-3 = 4;⁴ 
+ws-icon-4 = 5;⁵ 
+ws-icon-5 = 6;⁶ 
+ws-icon-6 = 7;⁷ 
+ws-icon-7 = 8;⁸ 
+ws-icon-8 = 9;⁹ 
+ws-icon-9 = 0;⁰ 
+
+label-focused = %icon%
+label-focused-background = ${vars.bright-background}
+label-focused-overline = ${vars.highlight-color}
+label-focused-padding = ${vars.workspace-padding}
+label-focused-margin-right = ${vars.margin}
+
+label-occupied = %icon%
+label-occupied-background = ${vars.dark-background}
+label-occupied-padding = ${vars.workspace-padding}
+label-occupied-margin-right = ${vars.margin}
+
+label-urgent = %icon%
+label-urgent-background = ${vars.dark-background}
+label-urgent-overline= ${vars.warning-color}
+label-urgent-padding = ${vars.workspace-padding}
+label-urgent-margin-right = ${vars.margin}
+
+label-empty = %icon%
+label-empty-foreground = ${vars.dark-foreground}
+label-empty-background = ${vars.dark-background}
+label-empty-padding = ${vars.workspace-padding}
+label-empty-margin-right = ${vars.margin}
+
+label-dimmed-focused-background = ${vars.dark-background}
+
+format = <label-state>
+
+
+
+
+
+[module/xwindow]
+type = internal/xwindow
+
+format-padding = ${vars.module-padding}
+format-background = ${vars.dark-background}
+format-foreground = ${vars.highlight-color}
+format-overline = ${vars.bright-background}
+
+label-foreground = ${vars.bright-foreground}
+
+label = %title:0:90:…%
+format =    <label>
+
+
+
+
+; date and time in one module
+; TODO Find a pretty way to put date and time in one module
+[module/datetime]
+type = internal/date
+
+interval = 1
+
+date = %a %d. %b
+date-alt = %d.%m.%Y
+
+time = %H:%M
+time-alt = %H:%M:%S
+
+format-background = ${vars.bright-background}
+format-overline = ${vars.highlight-color}
+format-padding = 0
+
+; this is sooo ugly
+label = "        %date%     %{B- -o} %{B#2b2b2b +o}     %time%     "
+format = <label>
+
+
+
+[module/time]
+type = internal/date
+
+interval = 1
+
+time = %H:%M
+time-alt = %H:%M:%S
+
+format-background = ${vars.bright-background}
+format-overline = ${vars.highlight-color}
+format-padding = ${vars.module-padding}
+
+label = %time%
+format = <label>
+
+
+
+[module/date]
+type = internal/date
+
+interval = 60
+
+date = %a %d. %b
+date-alt = %d.%m.%Y
+
+format-background = ${vars.bright-background}
+format-overline = ${vars.highlight-color}
+format-padding = ${vars.module-padding}
+
+label = %date%
+format =    <label>
+
+
+
+[module/keyboard]
+type = internal/xkeyboard
+
+format-padding = ${vars.module-padding}
+format-background = ${vars.bright-background}
+format-overline = ${vars.warning-color}
+
+label-layout = %layout%
+format =    <label-layout>
+
+
+
+[module/volume]
+type = internal/volume
+
+ramp-volume-0 = 
+ramp-volume-1 = 
+ramp-volume-2 = 
+ramp-headphones-0 = 
+
+label-muted-foreground  = ${vars.warning-color}
+format-muted-background = ${vars.bright-background}
+format-muted-padding = ${vars.module-padding}
+
+format-volume-background = ${vars.bright-background}
+format-volume-padding = ${vars.module-padding}
+
+label-muted-font = 4
+label-unmuted-font = 4
+
+label-muted = %percentage:3%
+format-muted =  <label-muted>
+
+label-volume = %percentage:3%
+format-volume = <ramp-volume> <label-volume>
+
+
+
+[module/memory]
+type = internal/memory
+
+interval = 3
+
+format-padding = ${vars.module-padding}
+format-background = ${vars.bright-background}
+
+label-font = 4
+
+label = %percentage_used:3%
+format =  <label>
+
+
+
+[module/cpu]
+type = internal/cpu
+
+interval = 1
+
+format-padding = ${vars.module-padding}
+format-background = ${vars.bright-background}
+
+label-font = 4
+
+label = %percentage:3%
+format =  <label>
+
+
+
+[module/mpd]
+type = internal/mpd
+
+host = ::1
+port = 6600
+password =
+
+format-online-padding = ${vars.module-padding}
+format-online-background = ${vars.bright-background}
+format-online-overline = ${vars.highlight-color}
+
+format-paused-padding = ${vars.module-padding}
+format-paused-background = ${vars.bright-background}
+format-paused-overline = ${vars.warning-color}
+
+format-playing-padding = ${vars.module-padding}
+format-playing-background = ${vars.bright-background}
+format-playing-overline = ${vars.highlight-color}
+
+format-stopped-padding = ${vars.module-padding}
+format-stopped-background = ${vars.bright-background}
+format-stopped-overline = ${vars.warning-color}
+
+format-offline-padding = ${vars.module-padding}
+format-offline-background = ${vars.bright-background}
+label-offline-foreground = ${vars.warning-color}
+format-offline-overline = ${vars.warning-color}
+
+label-offline = mpd offline
+format-offline =    <label-offline>
+
+label-song = %title:0:30:…%
+format-online =    <label-song>
+
+
+
+[module/network]
+type = internal/network
+interface = enp7s0
+
+interval = 3
+
+label-connected =   %downspeed%      %upspeed%
+
+format-connected-padding = ${vars.module-padding}
+format-connected-background = ${vars.bright-background}
+format-connected =    <label-connected>
+
+label-disconnected = disconnected
+format-disconnected =    <label-disconnected>
+
+
+; vim:ft=dosini

@@ -1,0 +1,58 @@
+# -- bswm --
+
+# quit bspwm
+super + shift + q
+	bspc quit
+
+# reload config
+super + control + q
+	$XDG_CONFIG_HOME/bspwm/bspwmrc
+
+# close/kill node
+super + {_,shift} + adiaeresis
+	bspc node -{c,k}
+
+# focus/swap with biggest node at current monitor
+super + {_,shift} + space
+	bspc node -{f,s} biggest.local
+
+super + ctrl + space
+	bspc node -f last
+
+# alternate between the tiled and monocle layout
+super + f
+	bspc desktop -l next
+
+super + ctrl + f
+	bspc node -t tiled
+
+# focus the node in the given direction
+super + {_,shift} + {s,n,r,t}
+	bspc node -{f,s} {west,south,north,east}
+
+super + {comma,period}
+	bspc node -f {prev,next}.local
+
+
+# expand a window by moving one of its side outward
+super + ctrl + {s,n,r,t}
+	bspc node -z {left -25 0,bottom 0 20,top 0 -20,right 25 0}
+
+# preselect
+super + mod5 + {s,n,r,t,d}
+	bspc node -p {west,south,north,east,cancel}
+
+# focus next monitor
+super + {_,shift} + g
+	bspc {monitor -f,node -m} next
+
+# move node to next monitor and focus it
+super + ctrl + g
+	bspc node -m next && \
+	bspc node -f last
+
+# focus or send to the given desktop
+# each desktop is available at any monitor (like in herbstluftwm and xmonad)
+super + {_,shift} + {1-9,0}
+	bspc {desktop -s,node -d} '{1-9,0}'
+

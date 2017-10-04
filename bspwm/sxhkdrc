@@ -1,4 +1,4 @@
-# -- bswm --
+# -- bspwm --
 
 # quit bspwm
 super + shift + q
@@ -23,23 +23,31 @@ super + ctrl + space
 super + f
 	bspc desktop -l next
 
+# Toggle node between floating and tiled
 super + ctrl + f
-	bspc node -t tiled
-
-# focus the node in the given direction
-super + {_,shift} + {s,n,r,t}
-	bspc node -{f,s} {west,south,north,east}
+	if [ -z "$(bspc query -N -n focused.floating)" ]; then \
+		bspc node -t floating; \
+	else \
+		bspc node -t tiled; \
+	fi
 
 super + {comma,period}
 	bspc node -f {prev,next}.local
 
+# focus the node in the given direction
+super + {_,shift} + {n,r,t,d}
+	bspc node -{f,s} {west,south,north,east}
 
-# expand a window by moving one of its side outward
-super + ctrl + {s,n,r,t}
+# Increase window size
+super + ctrl +  {n,r,t,d}
 	bspc node -z {left -25 0,bottom 0 20,top 0 -20,right 25 0}
 
+# Decrease window size
+super + alt + {n,r,t,d}
+	bspc node -z {left 25 0,bottom 0 -20,top 0 20,right -25 0}
+
 # preselect
-super + mod5 + {s,n,r,t,d}
+super + mod5 + {n,r,t,d,y}
 	bspc node -p {west,south,north,east,cancel}
 
 # focus next monitor

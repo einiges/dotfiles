@@ -39,6 +39,7 @@ bright-foreground = #ffffff
 dark-foreground = #505050
 
 highlight-color = #76b9ed
+eye-catch-color = #a40fb0
 warning-color = #ff5400
 urgent-line-color = #ff7200
 urgent-background = #995219
@@ -334,10 +335,36 @@ format-offline-prefix = 
 format-offline-prefix-padding-right = ${vars.icon-padding-right}
 format-offline-prefix-foreground = ${vars.icon-color}
 
+; Icon
+
+icon-pause = 
+icon-pause-padding-right = 3
+icon-pause-foreground = ${vars.eye-catch-color}
+
+icon-play = 
+icon-play-padding-right = 3
+
+icon-random = 
+icon-random-padding-right = 3
+
+icon-repeat = 
+icon-repeat-padding-right = 3
+
+icon-repeatone = 
+
+; DIRTY
+icon-next = " "
+icon-next-background = ${bar/bspwm-desktop-top.background}
+icon-next-margin-right = ${self.label-song-padding-right}
+
+
+toggle-on-foreground = ${vars.highlight-color}
+
 label-offline = offline
 format-offline = <label-offline>
 
 label-song = %title:0:30:…%
+label-song-padding-right = 3
 format-online = <label-song>
 
 

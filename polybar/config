@@ -26,7 +26,7 @@ font-3 = Noto Mono:pixelsize=9;0
 
 modules-left = powermenu bspwm
 modules-center = xwindow
-modules-right = mpd cpu memory volume keyboard date time
+modules-right = mpd cpu memory pkg volume keyboard date time
 
 wm-restack = bspwm
 
@@ -248,6 +248,28 @@ label-volume-font = ${vars.font-mono}
 
 label-volume = %percentage:3%
 format-volume = <label-volume>
+
+
+
+
+[module/pkg]
+type = custom/script
+
+interval = 1200
+
+format-background = ${vars.bright-background}
+format-padding = ${vars.module-padding}
+format-prefix = 
+format-prefix-padding-right = ${vars.icon-padding-right}
+format-prefix-foreground = ${vars.icon-color}
+
+label-font = ${vars.font-mono}
+
+label = %output:3%
+format = <label>
+
+exec-if = ping -q -w 1 -c 1 $(ip r | grep default | cut -d ' ' -f 3) > /dev/null
+exec = checkupdates | wc -l | mol -x 2
 
 
 

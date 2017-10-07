@@ -51,9 +51,9 @@ workspace-padding = 4
 type = custom/menu
 
 
-label-open = 
+label-open = 
 label-open-padding = ${vars.module-padding}
-label-open-foreground = ${vars.highlight-color}
+label-open-foreground = #1793d1
 label-open-background = ${vars.bright-background}
 
 label-close = 
@@ -70,13 +70,13 @@ menu-0-0-margin-right = ${vars.margin}
 
 menu-0-1 = 
 menu-0-1-exec = bspc quit
-menu-0-1-padding = 4
+menu-0-1-padding = ${vars.module-padding}
 menu-0-1-background = ${vars.bright-background}
 menu-0-1-margin-right = ${vars.margin}
 
 menu-0-2 = 
 menu-0-2-exec = halt
-menu-0-2-padding = 4
+menu-0-2-padding = ${vars.module-padding}
 menu-0-2-background = ${vars.bright-background}
 menu-0-2-margin-right = ${vars.margin}
 

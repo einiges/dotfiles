@@ -369,20 +369,124 @@ format-online = <label-song>
 
 
 
-[module/network]
+
+
+; -- unused modules --
+
+
+[module/wired-network]
 type = internal/network
 interface = enp7s0
 
 interval = 3
 
-label-connected =   %downspeed%      %upspeed%
-
-format-connected-padding = ${vars.module-padding}
 format-connected-background = ${vars.bright-background}
-format-connected =    <label-connected>
+format-connected-padding = ${vars.module-padding}
 
-label-disconnected = disconnected
-format-disconnected =    <label-disconnected>
+format-disconnected-overline = ${vars.warning-color}
+format-disconnected-background = ${vars.bright-background}
+format-disconnected-padding = ${vars.module-padding}
 
+format-connected = 
+format-disconnected = 
+
+
+
+[module/wireless-network]
+type = internal/network
+
+interface = wlp3s0
+interval = 5
+
+format-disconnected-background = ${vars.bright-background}
+format-disconnected-overline = ${vars.warning-color}
+format-disconnected-padding = ${vars.module-padding}
+format-disconnected-prefix = 
+format-disconnected-prefix-padding-right = ${vars.icon-padding-right}
+format-disconnected-prefix-foreground = ${vars.icon-color}
+
+label-disconnected = ""
+format-disconnected = ""
+
+format-connected-background = ${vars.bright-background}
+format-connected-padding = ${vars.module-padding}
+format-connected-prefix = 
+format-connected-prefix-padding-right = ${vars.icon-padding-right}
+format-connected-prefix-foreground = ${vars.icon-color}
+
+label-connected = %essid%
+format-connected = <label-connected>
+
+
+
+[module/bluetooth]
+type = custom/script
+
+interval = 5
+
+format-background = ${vars.bright-background}
+format-padding = ${vars.module-padding}
+format-connected-prefix = 
+format-connected-prefix-padding-right = ${vars.icon-padding-right}
+format-connected-prefix-foreground = ${vars.icon-color}
+
+label-font = ${vars.font-mono}
+
+label = %output:3%
+format = <label>
+
+exec = test $(systemctl is-active bluetooth.service) = "active" && echo "on" || echo "off"
+
+
+
+[module/battery]
+type = internal/battery
+
+full-at = 99
+
+battery = BAT0
+adapter = ADP1
+
+time-format = %_H:%_M
+
+; Ramp
+
+ramp-capacity-0 = 
+ramp-capacity-1 = 
+ramp-capacity-2 = 
+ramp-capacity-3 = 
+ramp-capacity-4 = 
+
+ramp-capacity-padding-right = ${vars.icon-padding-right}
+ramp-capacity-foreground = ${vars.icon-color}
+
+; Discharging
+
+label-discharging-font = ${vars.font-mono}
+
+label-discharging = %percentage:3% %time%
+format-discharging = <ramp-capacity> <label-discharging>
+
+; Charging
+
+format-charging-prefix = 
+format-charging-prefix-padding-right = ${vars.icon-padding-right}
+format-charging-prefix-foreground = ${vars.icon-color}
+
+label-charging-font = ${vars.font-mono}
+
+label-charging = %percentage:3% %time%
+format-charging = <label-charging>
+
+; Full
+
+format-full-prefix = 
+format-full-prefix-padding-right = ${vars.icon-padding-right}
+format-full-prefix-foreground = ${vars.icon-color}
+
+label-full-font = ${vars.font-mono}
+
+label-full = %percentage:3% %time%
+format-full = <label-full>
 
 ; vim:ft=dosini

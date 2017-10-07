@@ -47,6 +47,7 @@ margin = 1
 module-padding = 5
 workspace-padding = 4
 
+font-mono = 4
 
 
 [module/powermenu]
@@ -102,16 +103,16 @@ pin-workspaces = false
 enable-click = false
 enable-scroll = false
 
-ws-icon-0 = 1;¹ 
-ws-icon-1 = 2;² 
-ws-icon-2 = 3;³ 
-ws-icon-3 = 4;⁴ 
-ws-icon-4 = 5;⁵ 
-ws-icon-5 = 6;⁶ 
-ws-icon-6 = 7;⁷ 
-ws-icon-7 = 8;⁸ 
-ws-icon-8 = 9;⁹ 
-ws-icon-9 = 0;⁰ 
+ws-icon-0 = 1;¹  
+ws-icon-1 = 2;²  
+ws-icon-2 = 3;³  
+ws-icon-3 = 4;⁴  
+ws-icon-4 = 5;⁵  
+ws-icon-5 = 6;⁶  
+ws-icon-6 = 7;⁷  
+ws-icon-7 = 8;⁸  
+ws-icon-8 = 9;⁹  
+ws-icon-9 = 0;⁰  
 
 label-focused = %icon%
 label-focused-background = ${vars.bright-background}
@@ -158,28 +159,6 @@ label = %title:0:90:…%
 format =    <label>
 
 
-
-
-; date and time in one module
-; TODO Find a pretty way to put date and time in one module
-[module/datetime]
-type = internal/date
-
-interval = 1
-
-date = %a %d. %b
-date-alt = %d.%m.%Y
-
-time = %H:%M
-time-alt = %H:%M:%S
-
-format-background = ${vars.bright-background}
-format-overline = ${vars.highlight-color}
-format-padding = 0
-
-; this is sooo ugly
-label = "        %date%     %{B- -o} %{B#2b2b2b +o}     %time%     "
-format = <label>
 
 
 
@@ -240,15 +219,16 @@ ramp-headphones-0 = 
 label-muted-foreground  = ${vars.warning-color}
 format-muted-background = ${vars.bright-background}
 format-muted-padding = ${vars.module-padding}
+label-muted-font = ${vars.font-mono}
+
 
 format-volume-background = ${vars.bright-background}
 format-volume-padding = ${vars.module-padding}
 
-label-muted-font = 4
-label-unmuted-font = 4
 
 label-muted = %percentage:3%
 format-muted =  <label-muted>
+label-volume-font = ${vars.font-mono}
 
 label-volume = %percentage:3%
 format-volume = <ramp-volume> <label-volume>
@@ -263,7 +243,7 @@ interval = 3
 format-padding = ${vars.module-padding}
 format-background = ${vars.bright-background}
 
-label-font = 4
+label-font = ${vars.font-mono}
 
 label = %percentage_used:3%
 format =  <label>
@@ -278,7 +258,7 @@ interval = 1
 format-padding = ${vars.module-padding}
 format-background = ${vars.bright-background}
 
-label-font = 4
+label-font = ${vars.font-mono}
 
 label = %percentage:3%
 format =  <label>

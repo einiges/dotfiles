@@ -11,7 +11,7 @@ height = 30
 offset-x = 0
 offset-y = 0
 
-background = #000
+background = #101010
 foreground = ${vars.bright-foreground}
 
 line-size = 1
@@ -33,13 +33,15 @@ wm-restack = bspwm
 
 
 [vars]
-bright-background = #2f2f2f
+bright-background = #333333
 dark-background = #1c1c1c
-bright-foreground = #dddddd
+bright-foreground = #ffffff
 dark-foreground = #505050
 
-highlight-color = #5294e2
-warning-color = #cd4500
+highlight-color = #76b9ed
+warning-color = #ff5400
+urgent-line-color = #ff7200
+urgent-background = #995219
 
 margin = 1
 module-padding = 5
@@ -123,8 +125,8 @@ label-occupied-padding = ${vars.workspace-padding}
 label-occupied-margin-right = ${vars.margin}
 
 label-urgent = %icon%
-label-urgent-background = ${vars.dark-background}
-label-urgent-overline= ${vars.warning-color}
+label-urgent-background = ${vars.urgent-background}
+label-urgent-overline= ${vars.urgent-line-color}
 label-urgent-padding = ${vars.workspace-padding}
 label-urgent-margin-right = ${vars.margin}
 

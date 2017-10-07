@@ -35,6 +35,7 @@ bspc rule -a *:newsbeuter    desktop=0
 # Libreoffice 5.x starts with Soffice and changes it after launch... WTF?
 bspc rule -a Soffice         state=tiled
 bspc rule -a *:libreoffice   state=tiled
+bspc rule -a Zathura         state=tiled
 
 panel=$XDG_CONFIG_HOME/bspwm/panel.sh
 [ -x "$panel" ] && $panel &

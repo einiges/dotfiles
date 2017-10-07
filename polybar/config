@@ -20,8 +20,8 @@ line-color = ${vars.highlight-color}
 separator = " "
 
 font-0 = Noto Sans:pixelsize=9;0
-font-1 = Source Code Pro:size=9;0
-font-2 = FontAwesome:size=9;0
+font-1 = Noto Sans CJK JP:pixelsize=9;0
+font-2 = 3270Medium Nerd Font:pixelsize=9;0
 font-3 = Noto Mono:pixelsize=9;0
 
 modules-left = powermenu bspwm

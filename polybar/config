@@ -167,8 +167,8 @@ type = internal/date
 
 interval = 1
 
-time = %H:%M
-time-alt = %H:%M:%S
+time = %_H %_M
+time-alt = %_H %_M %_S
 
 format-background = ${vars.bright-background}
 format-overline = ${vars.highlight-color}
@@ -184,7 +184,7 @@ type = internal/date
 
 interval = 60
 
-date = %a %d. %b
+date = %a %_d  %b
 date-alt = %d.%m.%Y
 
 format-background = ${vars.bright-background}

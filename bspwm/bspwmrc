@@ -36,4 +36,6 @@ bspc rule -a Zathura         state=tiled
 panel=$XDG_CONFIG_HOME/bspwm/panel.sh
 [ -x "$panel" ] && $panel &
 
+compton=$XDG_CONFIG_HOME/bspwm/compton.conf
+[ ! $(pgrep compton) ] && [ -f "$compton" ] && compton --config $compton &
 

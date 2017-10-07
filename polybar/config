@@ -14,7 +14,7 @@ offset-y = 0
 background = #101010
 foreground = ${vars.bright-foreground}
 
-line-size = 1
+line-size = 2
 line-color = ${vars.highlight-color}
 
 separator = " "

@@ -7,7 +7,7 @@ fixed-center = false
 bottom = false
 
 width = 100%
-height = 30
+height = 26
 offset-x = 0
 offset-y = 0
 
@@ -19,10 +19,10 @@ line-color = ${vars.highlight-color}
 
 separator = " "
 
-font-0 = Noto Sans:pixelsize=9;0
-font-1 = Noto Sans CJK JP:pixelsize=9;0
-font-2 = 3270Medium Nerd Font:pixelsize=9;0
-font-3 = Noto Mono:pixelsize=9;0
+font-0 = Noto Sans:pixelsize=9;2
+font-1 = Noto Sans CJK JP:pixelsize=9;2
+font-2 = 3270Medium Nerd Font:pixelsize=9;2
+font-3 = Noto Mono:pixelsize=9;2
 
 modules-left = powermenu bspwm
 modules-center = xwindow

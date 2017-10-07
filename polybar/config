@@ -43,6 +43,10 @@ warning-color = #ff5400
 urgent-line-color = #ff7200
 urgent-background = #995219
 
+icon-color = #e5dc9d
+icon-padding-right = 3
+
+
 margin = 1
 module-padding = 5
 workspace-padding = 4
@@ -190,9 +194,13 @@ date-alt = %d.%m.%Y
 format-background = ${vars.bright-background}
 format-overline = ${vars.highlight-color}
 format-padding = ${vars.module-padding}
+format-prefix = 
+format-prefix-padding-right = ${vars.icon-padding-right}
+format-prefix-foreground = ${vars.icon-color}
 
 label = %date%
-format =    <label>
+format = <label>
+
 
 
 
@@ -201,37 +209,44 @@ type = internal/xkeyboard
 
 format-padding = ${vars.module-padding}
 format-background = ${vars.bright-background}
-format-overline = ${vars.warning-color}
+format-prefix = 
+format-prefix-padding-right = ${vars.icon-padding-right}
+format-prefix-foreground = ${vars.icon-color}
 
 label-layout = %layout%
-format =    <label-layout>
+format = <label-layout>
 
 
 
 [module/volume]
 type = internal/volume
 
-ramp-volume-0 = 
-ramp-volume-1 = 
-ramp-volume-2 = 
-ramp-headphones-0 = 
+; Muted
 
-label-muted-foreground  = ${vars.warning-color}
 format-muted-background = ${vars.bright-background}
+format-muted-overline = ${vars.warning-color}
 format-muted-padding = ${vars.module-padding}
+format-muted-prefix = 
+format-muted-prefix-padding-right = ${vars.icon-padding-right}
+format-muted-prefix-foreground = ${vars.icon-color}
+
 label-muted-font = ${vars.font-mono}
 
+label-muted = %percentage:3%
+format-muted = <label-muted>
+
+; Volume / Unmuted
 
 format-volume-background = ${vars.bright-background}
 format-volume-padding = ${vars.module-padding}
+format-volume-prefix = 
+format-volume-prefix-padding-right = ${vars.icon-padding-right}
+format-volume-prefix-foreground = ${vars.icon-color}
 
-
-label-muted = %percentage:3%
-format-muted =  <label-muted>
 label-volume-font = ${vars.font-mono}
 
 label-volume = %percentage:3%
-format-volume = <ramp-volume> <label-volume>
+format-volume = <label-volume>
 
 
 
@@ -242,11 +257,14 @@ interval = 3
 
 format-padding = ${vars.module-padding}
 format-background = ${vars.bright-background}
+format-prefix = 
+format-prefix-padding-right = ${vars.icon-padding-right}
+format-prefix-foreground = ${vars.icon-color}
 
 label-font = ${vars.font-mono}
 
 label = %percentage_used:3%
-format =  <label>
+format = <label>
 
 
 
@@ -257,11 +275,14 @@ interval = 1
 
 format-padding = ${vars.module-padding}
 format-background = ${vars.bright-background}
+format-prefix = 
+format-prefix-padding-right = ${vars.icon-padding-right}
+format-prefix-foreground = ${vars.icon-color}
 
 label-font = ${vars.font-mono}
 
 label = %percentage:3%
-format =  <label>
+format = <label>
 
 
 
@@ -272,32 +293,52 @@ host = ::1
 port = 6600
 password =
 
+; Online
+
 format-online-padding = ${vars.module-padding}
 format-online-background = ${vars.bright-background}
-format-online-overline = ${vars.highlight-color}
+format-online-prefix = 
+format-online-prefix-padding-right = ${vars.icon-padding-right}
+format-online-prefix-foreground = ${vars.icon-color}
+
+; Paused
 
 format-paused-padding = ${vars.module-padding}
 format-paused-background = ${vars.bright-background}
-format-paused-overline = ${vars.warning-color}
+format-paused-prefix = 
+format-paused-prefix-padding-right = ${vars.icon-padding-right}
+format-paused-prefix-foreground = ${vars.icon-color}
+
+; Playing
 
 format-playing-padding = ${vars.module-padding}
 format-playing-background = ${vars.bright-background}
-format-playing-overline = ${vars.highlight-color}
+format-playing-prefix = 
+format-playing-prefix-padding-right = ${vars.icon-padding-right}
+format-playing-prefix-foreground = ${vars.icon-color}
+
+; Stopped
 
 format-stopped-padding = ${vars.module-padding}
 format-stopped-background = ${vars.bright-background}
-format-stopped-overline = ${vars.warning-color}
+format-stopped-prefix = 
+format-stopped-prefix-padding-right = ${vars.icon-padding-right}
+format-stopped-prefix-foreground = ${vars.icon-color}
+
+; Offline
 
 format-offline-padding = ${vars.module-padding}
 format-offline-background = ${vars.bright-background}
-label-offline-foreground = ${vars.warning-color}
-format-offline-overline = ${vars.warning-color}
+format-offline-foreground = ${vars.warning-color}
+format-offline-prefix = 
+format-offline-prefix-padding-right = ${vars.icon-padding-right}
+format-offline-prefix-foreground = ${vars.icon-color}
 
-label-offline = mpd offline
-format-offline =    <label-offline>
+label-offline = offline
+format-offline = <label-offline>
 
 label-song = %title:0:30:…%
-format-online =    <label-song>
+format-online = <label-song>
 
 
 

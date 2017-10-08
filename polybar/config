@@ -360,10 +360,12 @@ format-offline-prefix-foreground = ${vars.icon-color}
 ; Icon
 
 icon-pause = 
+icon-pause-padding-left = ${self.label-song-padding-right}
 icon-pause-padding-right = 3
 icon-pause-foreground = ${vars.eye-catch-color}
 
 icon-play = 
+icon-play-padding-left = ${self.label-song-padding-right}
 icon-play-padding-right = 3
 
 icon-random = 
@@ -372,13 +374,8 @@ icon-random-padding-right = 3
 icon-repeat = 
 icon-repeat-padding-right = 3
 
+; The most right icon does not need a padding
 icon-repeatone = 
-
-; DIRTY
-icon-next = " "
-icon-next-background = ${bar/bspwm-desktop-top.background}
-icon-next-margin-right = ${self.label-song-padding-right}
-
 
 toggle-on-foreground = ${vars.highlight-color}
 

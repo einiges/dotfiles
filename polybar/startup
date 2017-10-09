@@ -8,5 +8,7 @@ while pgrep -x polybar >/dev/null; do
 	sleep .1
 done
 
-polybar -q bspwm-desktop-top
+for bar in "$@"; do
+	polybar -q "$bar" &
+done
 

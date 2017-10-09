@@ -36,8 +36,8 @@ bspc rule -a Soffice         state=tiled
 bspc rule -a *:libreoffice   state=tiled
 bspc rule -a Zathura         state=tiled
 
-panel=$XDG_CONFIG_HOME/bspwm/panel.sh
-[ -x "$panel" ] && $panel &
+panel=$XDG_CONFIG_HOME/polybar/startup
+[ -x "$panel" ] && $panel bspwm-desktop-top &
 
 compton=$XDG_CONFIG_HOME/bspwm/compton.conf
 [ ! $(pgrep compton) ] && [ -f "$compton" ] && compton --config $compton &

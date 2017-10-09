@@ -384,7 +384,7 @@ format-offline = <label-offline>
 
 label-song = %title:0:30:…%
 label-song-padding-right = 3
-format-online = <label-song> <icon-next> <toggle> <icon-random> <icon-repeat> <icon-repeatone>
+format-online = <label-song> %{B#f} %{B-} <toggle> <icon-random> <icon-repeat> <icon-repeatone>
 
 
 

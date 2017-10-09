@@ -89,15 +89,3 @@ export KDEHOME="$XDG_CONFIG_HOME"/kde
 #export GEM_PATH="$XDG_DATA_HOME"/gem
 
 
-# One global setting with script support
-# $xdg_prog
-export    xdg_abcde="-c $XDG_CONFIG_HOME/abcde/abcde.conf"
-export    xdg_abook="--config $XDG_CONFIG_HOME/abook/abookrc --datafile $XDG_DATA_HOME/abook/addressbook"
-export     xdg_anki="-b $XDG_DATA_HOME/anki"
-export xdg_calcurse="-D $XDG_CONFIG_HOME/calcurse"
-export    xdg_conky="--config=$XDG_CONFIG_HOME/conky/conkyrc"
-export    xdg_irssi="--home=$XDG_CONFIG_HOME/irssi"
-export   xdg_mbsync="--config $XDG_CONFIG_HOME/mbsync/mbsyncrc"
-export     xdg_tmux="-f $XDG_CONFIG_HOME/tmux/tmux.conf"
-
-

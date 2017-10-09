@@ -75,21 +75,16 @@ alias totbz="tar -cjf"  # bz
 alias untbz="tar -xjkf"
 alias lstbz="tar -tjf"
 
-
-# Fast Edit Configs
-alias en="nvim $XDG_CONFIG_HOME/nvim/init.vim"
-alias ehc="$EDITOR $XDG_CONFIG_HOME/herbstluftwm/autostart"
-
 alias     mutt="mutt -n"
 
-alias    abcde="abcde $xdg_abcde"
-alias    abook="abook $xdg_abook"
-alias     anki="anki $xdg_anki"
-alias calcurse="calcurse $xdg_calcurse"
-alias    conky="conky $xdg_conky"
-alias    irssi="irssi $xdg_irssi"
-alias   mbsync="mbsync $xdg_mbsync"
-alias     tmux="tmux -2 $xdg_tmux"
+alias    abcde="abcde.xdg"
+alias    abook="abook.xdg"
+alias     anki="anki.xdg"
+alias calcurse="calcurse.xdg"
+alias    conky="conky.xdg"
+alias    irssi="irssi.xdg"
+alias   mbsync="mbsync.xdg"
+alias     tmux="tmux.xdg -2"
 
 alias t=tmux
 

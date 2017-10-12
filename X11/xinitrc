@@ -5,15 +5,14 @@ xrandr --output $MONITOR0 --auto --primary --output $MONITOR1 --auto --left-of $
 
 # -- Keyboard Layout --
 setxkbmap -layout de -variant neo -option altwin:swap_lalt_lwin
-#setxkbmap -rules evdev -model evdev -layout us -variant altgr-intl -option caps:swapescape,eurosign:e
 
 
 # -- Background --
-feh --no-fehbg --bg-tile $HOME/Pictures/wallpapers/current
+feh --no-fehbg --bg-fill $HOME/Pictures/wallpapers/current
 
 
 # -- Misc X --
-test -f $XDG_CONFIG_HOME/X11/xresources && xrdb -load $_
+test -f $XDG_CONFIG_HOME/X11/xresources && xrdb -merge $_
 test -f $XDG_CONFIG_HOME/X11/xmodmap    && xmodmap    $_
 
 

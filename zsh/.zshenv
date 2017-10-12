@@ -24,7 +24,7 @@ export TIMEFMT=$'real\t%E\nuser\t%U\nsys\t%S'
 #export ZDOTDIR="$XDG_CONFIG_HOME"/zsh      # -- /etc/zsh/zshenv --
 
 # dircolors
-eval $(dircolors "$XDG_CONFIG_HOME"/dircolors)
+. <(dircolors "$XDG_CONFIG_HOME"/dircolors)
 
 # alsa
 #export ALSA_CONFIG_PATH=/usr/share/alsa/alsa.conf:"$XDG_CONFIG_HOME"/alsa/asoundrc

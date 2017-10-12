@@ -75,17 +75,6 @@ alias totbz="tar -cjf"  # bz
 alias untbz="tar -xjkf"
 alias lstbz="tar -tjf"
 
-alias     mutt="mutt -n"
-
-alias    abcde="abcde.xdg"
-alias    abook="abook.xdg"
-alias     anki="anki.xdg"
-alias calcurse="calcurse.xdg"
-alias    conky="conky.xdg"
-alias    irssi="irssi.xdg"
-alias   mbsync="mbsync.xdg"
-alias     tmux="tmux.xdg -2"
-
 alias t=tmux
 
 

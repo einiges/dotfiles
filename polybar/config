@@ -26,10 +26,11 @@ font-3 = Noto Mono:pixelsize=9;2
 
 modules-left = powermenu bspwm
 modules-center = xwindow
-modules-right = mpd cpu memory pkg volume keyboard date time
+modules-right = mpd cpu memory pkg volume microphone keyboard date time 
 
 wm-restack = bspwm
 
+enable-ipc = true
 
 
 [vars]
@@ -250,6 +251,21 @@ label-volume-font = ${vars.font-mono}
 
 label-volume = %percentage:3%
 format-volume = <label-volume>
+
+
+
+[module/microphone]
+type = custom/ipc
+
+hook-0 = amixer -D pulse sset Capture toggle | grep -q off && echo "" || echo ""
+hook-1 = amixer -D pulse sget Capture | grep -q off && echo "" || echo ""
+initial = 2
+
+format-background = ${vars.bright-background}
+format-foreground = ${vars.icon-color}
+format-padding = ${vars.module-padding}
+
+click-left = polybar-msg -p %pid% hook microphone 1
 
 
 

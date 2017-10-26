@@ -33,7 +33,7 @@ bspc rule -a discord         desktop=8
 bspc rule -a *:mutt          desktop=9
 bspc rule -a *:ncmpcpp       desktop=0
 bspc rule -a *:calcurse      desktop=0
-bspc rule -a *:newsbeuter    desktop=0
+bspc rule -a *:newsboat      desktop=0
 # Libreoffice 5.x starts with Soffice and changes it after launch... WTF?
 bspc rule -a Soffice         state=tiled
 bspc rule -a *:libreoffice   state=tiled

@@ -41,7 +41,7 @@ xset s off
 	$TERMINAL -n ncmpcpp    -e ncmpcpp &
 	$TERMINAL -n mutt       -e $SHELL -c mutt -n &
 	$TERMINAL -n calcurse   -e calcurse $xdg_calcurse &
-	$TERMINAL -n newsbeuter -e newsbeuter &
+	$TERMINAL -n newsboat   -e newsboat &
 } &
 
 

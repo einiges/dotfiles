@@ -38,6 +38,12 @@ super + {comma,period}
 super + {_,shift} + {n,r,t,d}
 	bspc node -{f,s} {west,south,north,east}
 
+super + {_,shift} + m
+	bspc node @/ -F {vertical,horizontal}
+
+super + {_,shift} + b
+	bspc node @/ -R {90,270}
+
 # Increase window size
 super + ctrl +  {n,r,t,d}
 	bspc node -z {left -25 0,bottom 0 20,top 0 -20,right 25 0}

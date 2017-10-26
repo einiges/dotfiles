@@ -26,15 +26,12 @@ alias -s  html=$BROWSER
 alias -s xhtml=$BROWSER
 alias -s   pdf='zathura'
 
-# Switch Keyboardlayout
-alias asdf='setxkbmap -layout de -variant neo -option'
-alias uiae='setxkbmap -rules evdev -model evdev -layout us -variant altgr-intl -option caps:swapescape,eurosign:e'
-
 alias   ...='cd ../..'
 alias  ....='cd ../../..'
 alias .....='cd ../../../..'
 alias ,='popd'
 alias .,='cd ~-'
+alias ,,='cd $_'
 
 alias e='echo'
 alias n='nvim'

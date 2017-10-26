@@ -1,10 +1,8 @@
 [global]
 follow = keyboard
 font = Noto Sans 11
-format = "<b>%a</b>: %s\n%b"
-# x = window_gap:15 + right_padding:-5
-# y = panel_height:26 + window_gap:15 + top_padding:-5
-geometry = "350x10-10+36"
+format = "<b>%s</b>\n%b"
+geometry = "350x10-0+100"
 history_length = 0
 horizontal_padding = 15
 icon_position = left

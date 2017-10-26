@@ -99,8 +99,8 @@ rofi.kb-row-down:                    Down,Control+Down,Control+n
 rofi.kb-row-tab:
 rofi.kb-page-prev:                   Prior
 rofi.kb-page-next:                   Next
-rofi.kb-row-first:                   Home
-rofi.kb-row-last:                    End
+rofi.kb-row-first:                   Control+t
+rofi.kb-row-last:                    Control+r
 rofi.kb-row-select:                  Control+space
 rofi.kb-screenshot:
 rofi.kb-toggle-case-sensitivity:
@@ -126,3 +126,10 @@ rofi.kb-custom-17:
 rofi.kb-custom-18:
 rofi.kb-custom-19:
 
+rofi.ml-row-left:                    Mouse9
+rofi.ml-row-right:                   Mouse8
+!rofi.ml-row-up:                      Mouse4
+!rofi.ml-row-down:                    Mouse5
+rofi.me-select-entry:
+rofi.me-accept-entry:                Mouse1
+rofi.me-accept-custom:               Control+Mouse1

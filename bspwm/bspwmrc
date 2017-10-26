@@ -31,6 +31,7 @@ bspc rule -a Pinentry-gtk-2  state=floating
 bspc rule -a Firefox         desktop=1
 bspc rule -a discord         desktop=8
 bspc rule -a *:mutt          desktop=9
+bspc rule -a *:neomutt       desktop=9
 bspc rule -a *:ncmpcpp       desktop=0
 bspc rule -a *:calcurse      desktop=0
 bspc rule -a *:newsboat      desktop=0

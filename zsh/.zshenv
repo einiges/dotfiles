@@ -3,8 +3,9 @@
 
 export BROWSER=firefox
 export EDITOR=nvim
-export TERMINAL=st
 export PAGER=less
+export TERMINAL=st
+export TERMCMD=$TERMINAL
 
 export MONITOR0="DVI-I-1"
 export MONITOR1="HDMI-A-0"
@@ -26,10 +27,6 @@ export TIMEFMT=$'real\t%E\nuser\t%U\nsys\t%S'
 # dircolors
 . <(dircolors "$XDG_CONFIG_HOME"/dircolors)
 
-# alsa
-#export ALSA_CONFIG_PATH=/usr/share/alsa/alsa.conf:"$XDG_CONFIG_HOME"/alsa/asoundrc
-#export ALSA_CONFIG_PATH="$XDG_CONFIG_HOME"/alsa/asoundrc
-
 # X11
 export    XINITRC="$XDG_CONFIG_HOME"/X11/xinitrc
 export XAUTHORITY="$XDG_CACHE_HOME"/X11/xauthority
@@ -37,9 +34,6 @@ export XAUTHORITY="$XDG_CACHE_HOME"/X11/xauthority
 # GnuPG
 export GNUPGHOME="$XDG_CONFIG_HOME"/gnupg
 export GPG_TTY="$(tty)"
-
-# urxvtd
-export RXVT_SOCKET="$XDG_CACHE_HOME"/urxvt/urxvtd-"$(hostname)"
 
 # history
 export SAVEHIST=10000
@@ -59,9 +53,6 @@ export   LESSKEYDEF="$XDG_CONFIG_HOME"/less/keydef #*
 export     MYSQL_HOME="$XDG_CONFIG_HOME"/mysql
 export MYSQL_HISTFILE="$XDG_DATA_HOME"/mysql/history
 
-# calc
-export CALCRC="$XDG_CONFIG_HOME"/calc/calcrc
-
 # irb
 export IRBRC="$XDG_CONFIG_HOME"/irb/irbrc
 
@@ -74,10 +65,6 @@ export MPLAYER_HOME="$XDG_CONFIG_HOME"/mplayer
 # gimp
 export GIMP2_DIRECTORY="$XDG_CONFIG_HOME"/gimp
 
-# vimperator (Firefox Plugin)
-export VIMPERATOR_RUNTIME="$XDG_CONFIG_HOME"/vimperator
-export VIMPERATOR_INIT=":source $VIMPERATOR_RUNTIME/vimperatorrc"
-
 # KDE
 export KDEHOME="$XDG_CONFIG_HOME"/kde
 
@@ -85,6 +72,7 @@ export KDEHOME="$XDG_CONFIG_HOME"/kde
 #export TEXMFHOME="$XDG_DATA_HOME"/texlive
 
 # Ruby Gems
+#export GEM_HOME=$(ruby -e 'print Gem.user_dir')
 #export GEM_HOME="$XDG_DATA_HOME"/gem
 #export GEM_PATH="$XDG_DATA_HOME"/gem
 

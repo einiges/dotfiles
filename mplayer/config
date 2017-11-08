@@ -1,6 +1,0 @@
-
-# Default DVD Player
-dvd-device = /dev/sr0
-fullscreen=yes
-sub=no
-

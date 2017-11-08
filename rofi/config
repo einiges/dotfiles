@@ -48,14 +48,14 @@ rofi.m:                              -1
 ! rofi.dpi:                            -1
 ! rofi.threads:                        0
 ! rofi.scrollbar-width:                8
-! rofi.scroll-method:                  0
+rofi.scroll-method:                  1
 ! rofi.fake-background:                screenshot
 ! "Window Format. w (desktop name), t (title), n (name), r (role), c (class)" Set from: Default
 ! rofi.window-format:                  {w}   {c}   {t}
 ! rofi.click-to-exit:                  true
 ! rofi.show-match:                     true
 ! rofi.pid:                            /run/user/1000/rofi.pid
-
+rofi.show-icons:                     false
 
 
 ! Displays
@@ -105,7 +105,7 @@ rofi.kb-row-select:                  Control+space
 rofi.kb-screenshot:
 rofi.kb-toggle-case-sensitivity:
 rofi.kb-toggle-sort:
-rofi.kb-cancel:                      Escape,Control+g
+rofi.kb-cancel:                      Super_L,Escape
 rofi.kb-custom-1:
 rofi.kb-custom-2:
 rofi.kb-custom-3:

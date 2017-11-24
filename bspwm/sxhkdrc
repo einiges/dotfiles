@@ -46,11 +46,11 @@ super + {_,shift} + b
 
 # Increase window size
 super + ctrl +  {n,r,t,d}
-	bspc node -z {left -25 0,bottom 0 20,top 0 -20,right 25 0}
+	bspc node -z {left -25 0,bottom 0 17,top 0 -17,right 25 0}
 
 # Decrease window size
 super + alt + {n,r,t,d}
-	bspc node -z {left 25 0,bottom 0 -20,top 0 20,right -25 0}
+	bspc node -z {left 25 0,bottom 0 -17,top 0 17,right -25 0}
 
 # preselect
 super + mod5 + {n,r,t,d,y}

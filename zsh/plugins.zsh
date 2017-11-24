@@ -4,15 +4,12 @@
 ZPLUG_REPOS=$XDG_CACHE_HOME/zsh/plugins
 ZPLUG_HOME=$ZPLUG_REPOS/zplug/zplug
 
-if [ ! -d $ZPLUG_HOME ]; then
-	return
-fi
-
+[ ! -d $ZPLUG_HOME ] && return
 
 
 # -- Init --
 
-source $ZPLUG_HOME/init.zsh
+. $ZPLUG_HOME/init.zsh
 
 
 
@@ -21,19 +18,19 @@ source $ZPLUG_HOME/init.zsh
 zplug "zplug/zplug"
 
 zplug "zsh-users/zsh-history-substring-search", \
-	hook-load:"source $ZDOTDIR/hooks/history-substring-keys.zsh"
+	hook-load:". $ZDOTDIR/hooks/history-substring-keys.zsh"
 zplug "zsh-users/zsh-syntax-highlighting", \
 	defer:2, \
-	hook-load:"source $ZDOTDIR/hooks/syntax-highlighting-styles.zsh"
-
-
-zplug "zsh-users/zsh-completions"
-zplug "supercrabtree/k"
-zplug "arzzen/calc.plugin.zsh", hook-load: "unalias calc"
+	hook-load:". $ZDOTDIR/hooks/syntax-highlighting-styles.zsh"
 
 zplug "plugins/fancy-ctrl-z", from:oh-my-zsh
-zplug "plugins/git-prompt", from:oh-my-zsh, \
-	hook-load:"source $ZDOTDIR/hooks/git-prompt.zsh"
+zplug "plugins/extract", from:oh-my-zsh
+zplug "zsh-users/zsh-completions"
+zplug "arzzen/calc.plugin.zsh"
+
+zplug "mafredri/zsh-async"
+zplug "Shrvi/nspure", as:theme, \
+	hook-load:". $ZDOTDIR/hooks/nspurer.zsh"
 
 
 # -- Load --

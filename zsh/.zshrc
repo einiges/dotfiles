@@ -40,13 +40,6 @@ setopt share_history
 setopt inc_append_history
 
 
-# Run TMUX by default
-# -------------------
-#if command -v tmux>/dev/null; then
-#	[[ ! $TERM =~ screen ]] && [ -z $TMUX ] && exec tmux
-#fi
-
-
 # Share command status and print in titlebar
 # Write some info to terminal title.
 # This is seen when the shell prompts for input.
@@ -68,7 +61,5 @@ test -f $ZDOTDIR/aliases.zsh    && . $_
 test -f $ZDOTDIR/dirhashes.zsh  && . $_
 test -f $ZDOTDIR/completions.zsh && . $_
 test -f $ZDOTDIR/keybindings.zsh && . $_
-test -f $ZDOTDIR/prompts.zsh     && . $_
-
 
 

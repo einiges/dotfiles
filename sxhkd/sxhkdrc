@@ -3,6 +3,9 @@
 super + alt + q
 	pkill --signal SIGUSR1 sxhkd
 
+@super + ctrl + v
+	xdotool type --delay 0 --clearmodifiers "$(xclip -o)"
+
 
 # -- application launching --
 

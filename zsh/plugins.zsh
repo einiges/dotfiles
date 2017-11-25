@@ -17,8 +17,8 @@ zgen () {
 if [[ ! -s "$ZGEN_INIT" ]]; then
 
 	zgen load "zsh-users/zsh-history-substring-search"
-	zgen load "zsh-users/zsh-syntax-highlighting"
 	zgen load "zsh-users/zsh-completions"
+	zgen load "zdharma/fast-syntax-highlighting"
 
 	zgen oh-my-zsh "plugins/fancy-ctrl-z"
 	zgen oh-my-zsh "plugins/extract"
@@ -35,7 +35,7 @@ fi
 . ${ZGEN_INIT}
 
 . ${ZDOTDIR}/hooks/history-substring-keys.zsh
-. ${ZDOTDIR}/hooks/syntax-highlighting-styles.zsh
+. ${ZDOTDIR}/hooks/fast-syntax-highlighting.zsh
 . ${ZDOTDIR}/hooks/nspurer.zsh
 
 

@@ -1,39 +1,41 @@
 #!/bin/zsh
 
+ZGEN_DIR="${XDG_CACHE_HOME}/zsh/zgen"
+ZGEN_INIT="$ZDOTDIR/.zgen-plugins.zsh"
 
-ZPLUG_REPOS=$XDG_CACHE_HOME/zsh/plugins
-ZPLUG_HOME=$ZPLUG_REPOS/zplug/zplug
-
-[ ! -d $ZPLUG_HOME ] && return
-
-
-# -- Init --
-
-. $ZPLUG_HOME/init.zsh
-
-
-
-# -- Select --
-
-zplug "zplug/zplug"
-
-zplug "zsh-users/zsh-history-substring-search", \
-	hook-load:". $ZDOTDIR/hooks/history-substring-keys.zsh"
-zplug "zsh-users/zsh-syntax-highlighting", \
-	defer:2, \
-	hook-load:". $ZDOTDIR/hooks/syntax-highlighting-styles.zsh"
-
-zplug "plugins/fancy-ctrl-z", from:oh-my-zsh
-zplug "plugins/extract", from:oh-my-zsh
-zplug "zsh-users/zsh-completions"
-zplug "arzzen/calc.plugin.zsh"
-
-zplug "mafredri/zsh-async"
-zplug "Shrvi/nspure", as:theme, \
-	hook-load:". $ZDOTDIR/hooks/nspurer.zsh"
+zgen () {
+	if [[ ! -s $ZGEN_DIR/zgen.zsh ]]; then
+		mkdir -p ${ZGEN_DIR:h}
+		git clone --recursive https://github.com/tarjoilija/zgen.git $ZGEN_DIR
+	fi
+	. $ZGEN_DIR/zgen.zsh
+	zgen "$@"
+}
 
 
-# -- Load --
+# Generate zgen init script if needed
+if [[ ! -s "$ZGEN_INIT" ]]; then
 
-zplug load
+	zgen load "zsh-users/zsh-history-substring-search"
+	zgen load "zsh-users/zsh-syntax-highlighting"
+	zgen load "zsh-users/zsh-completions"
+
+	zgen oh-my-zsh "plugins/fancy-ctrl-z"
+	zgen oh-my-zsh "plugins/extract"
+	zgen load "arzzen/calc.plugin.zsh"
+
+	zgen load "mafredri/zsh-async"
+	zgen load "Shrvi/nspure"
+
+	zgen save
+	zcompile $ZGEN_INIT
+fi
+
+# Static load plugins
+. ${ZGEN_INIT}
+
+. ${ZDOTDIR}/hooks/history-substring-keys.zsh
+. ${ZDOTDIR}/hooks/syntax-highlighting-styles.zsh
+. ${ZDOTDIR}/hooks/nspurer.zsh
+
 

@@ -34,8 +34,11 @@ fi
 # Static load plugins
 . ${ZGEN_INIT}
 
-. ${ZDOTDIR}/hooks/zsh-history-substring-search.zsh
-. ${ZDOTDIR}/hooks/fast-syntax-highlighting.zsh
-. ${ZDOTDIR}/hooks/nspurer.zsh
+if [ -d ${ZDOTDIR}/hooks ]; then
+	for h in ${ZDOTDIR}/hooks/?*.zsh ; do
+		[ -f "$h" ] && . "$h"
+	done
+	unset h
+fi
 
 

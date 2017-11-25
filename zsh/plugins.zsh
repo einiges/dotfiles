@@ -34,7 +34,7 @@ fi
 # Static load plugins
 . ${ZGEN_INIT}
 
-. ${ZDOTDIR}/hooks/history-substring-keys.zsh
+. ${ZDOTDIR}/hooks/zsh-history-substring-search.zsh
 . ${ZDOTDIR}/hooks/fast-syntax-highlighting.zsh
 . ${ZDOTDIR}/hooks/nspurer.zsh
 

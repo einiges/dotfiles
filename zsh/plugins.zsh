@@ -19,6 +19,7 @@ if [[ ! -s "$ZGEN_INIT" ]]; then
 	zgen load "zsh-users/zsh-history-substring-search"
 	zgen load "zsh-users/zsh-completions"
 	zgen load "zdharma/fast-syntax-highlighting"
+	zgen load "zsh-users/zsh-autosuggestions"
 
 	zgen oh-my-zsh "plugins/fancy-ctrl-z"
 	zgen oh-my-zsh "plugins/extract"

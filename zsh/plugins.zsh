@@ -20,6 +20,8 @@ if [[ ! -s "$ZGEN_INIT" ]]; then
 	zgen load "zsh-users/zsh-completions"
 	zgen load "zdharma/fast-syntax-highlighting"
 	zgen load "zsh-users/zsh-autosuggestions"
+	zgen load "hlissner/zsh-autopair"
+	zgen load "Tarrasch/zsh-bd"
 
 	zgen oh-my-zsh "plugins/fancy-ctrl-z"
 	zgen oh-my-zsh "plugins/extract"

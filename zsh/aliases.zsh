@@ -62,16 +62,6 @@ alias ylList2mp3='ylUrl2mp3 -a'
 
 alias yv='youtube-viewer --player=mplayer'
 
-alias totgz="tar -czf"  # -- Archives --
-alias untgz="tar -xzkf" # tar.gz
-alias lstgz="tar -tzf"
-alias totar="tar -cf"   # tar
-alias untar="tar -xkf"
-alias lstar="tar -tf"
-alias totbz="tar -cjf"  # bz
-alias untbz="tar -xjkf"
-alias lstbz="tar -tjf"
-
 alias t=tmux
 
 

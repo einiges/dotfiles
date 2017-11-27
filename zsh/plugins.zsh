@@ -17,7 +17,7 @@ zgen () {
 if [[ ! -s "$ZGEN_INIT" ]]; then
 
 	zgen load "zsh-users/zsh-history-substring-search"
-	zgen load "zsh-users/zsh-completions"
+	zgen load "zsh-users/zsh-completions" src
 	zgen load "zdharma/fast-syntax-highlighting"
 	zgen load "zsh-users/zsh-autosuggestions"
 	zgen load "hlissner/zsh-autopair"

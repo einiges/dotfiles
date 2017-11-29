@@ -1,7 +1,7 @@
 #!/bin/zsh
 
 
-export BROWSER=firefox
+export BROWSER=qutebrowser
 export EDITOR=nvim
 export PAGER=less
 export TERMINAL=st

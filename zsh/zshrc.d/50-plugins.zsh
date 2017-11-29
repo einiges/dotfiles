@@ -42,7 +42,7 @@ plugin_hook_dir="${ZDOTDIR}/zshrc.d/plugin-hooks"
 
 if [ -d ${plugin_hook_dir} ]; then
 	for h in ${plugin_hook_dir}/?*.zsh ; do
-		[ $(command stat -c '%U' "$h") = "$USER" ] && [ -f "$h" ] && . "$h"
+		 [ -f "$h" ] && [ $(command stat -c '%U' "$h") = "$USER" ] && . "$h"
 	done
 	unset h
 fi

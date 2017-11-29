@@ -51,7 +51,7 @@ function preexec { printf "\033]0;%s\a" "$1" }
 
 if [ -d ${ZDOTDIR}/zshrc.d ]; then
 	for h in ${ZDOTDIR}/zshrc.d/?*.zsh ; do
-		[ $(command stat -c '%U' "$h") = "$USER" ] && [ -f "$h" ] && . "$h"
+		 [ -f "$h" ] && [ $(command stat -c '%U' "$h") = "$USER" ] && . "$h"
 	done
 	unset h
 fi

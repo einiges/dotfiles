@@ -3,7 +3,7 @@
 
 #autoload -Uz compinit && compinit -d $XDG_CACHE_HOME/zsh/zcompdump
 autoload -U colors && colors
-#autoload -U promptinit && promptinit
+autoload -Uz add-zsh-hook
 
 autoload -Uz url-quote-magic
 zle -N self-insert url-quote-magic
@@ -39,15 +39,6 @@ setopt hist_verify
 setopt share_history
 setopt inc_append_history
 
-
-# Share command status and print in titlebar
-# Write some info to terminal title.
-# This is seen when the shell prompts for input.
-function precmd { print -Pn "\e]0;%(1j,%j job%(2j|s|); ,)%~\a" }
-
-# Write command and args to terminal title.
-# This is seen while the shell waits for a command to complete.
-function preexec { printf "\033]0;%s\a" "$1" }
 
 if [ -d ${ZDOTDIR}/zshrc.d ]; then
 	for h in ${ZDOTDIR}/zshrc.d/?*.zsh ; do

@@ -3,7 +3,6 @@
 
 setopt always_to_end
 setopt auto_list
-setopt complete_aliases
 setopt complete_in_word
 setopt extended_glob
 unsetopt list_ambiguous

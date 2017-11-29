@@ -33,9 +33,14 @@ alias ,='popd'
 alias .,='cd ~-'
 alias ,,='cd $_'
 
+# -- shorties --
+
 alias e='echo'
 alias n='nvim'
 alias o="xdg-open"
+alias g='git'
+alias t='tmux'
+alias ta='tmux attach -t'
 
 alias  ls="ls -khF --group-directories-first --color=auto "
 alias   l='ls'
@@ -52,18 +57,13 @@ alias cpr="cp -r"
 alias feh='feh -.'
 alias scanlnet='nmap -sP 192.168.2.1/24'
 
-alias rsync='rsync --human-readable'
-alias snc='rsync --progress'
-alias snc2='rsync --info=progress2'
+alias rs='rsync --recursive --perms --owner --group --human-readable --backup --backup-dir=/tmp/rsync.bak'
 
 alias yl='youtube-dl --output "%(title)s.%(ext)s" --ignore-errors'
 alias ylUrl2mp3='yl --extract-audio --audio-format mp3 --audio-quality 0'
 alias ylList2mp3='ylUrl2mp3 -a'
 
 alias yv='youtube-viewer --player=mplayer'
-
-alias t=tmux
-
 
 alias getWindowInfo="xprop | grep 'WM_CLASS\|WM_NAME\|WM_WINDOW_ROLE\|_NET_WM_WINDOW_TYPE'"
 

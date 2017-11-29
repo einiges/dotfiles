@@ -15,6 +15,7 @@ zgen () {
 
 # Generate zgen init script if needed
 if [[ ! -s "$ZGEN_INIT" ]]; then
+	[ -f ${ZDOTDIR}/.zcompdump ] && rm -f ${ZDOTDIR}/.zcompdump
 
 	zgen load "zsh-users/zsh-history-substring-search"
 	zgen load "zsh-users/zsh-completions" src
@@ -22,26 +23,29 @@ if [[ ! -s "$ZGEN_INIT" ]]; then
 	zgen load "zsh-users/zsh-autosuggestions"
 	zgen load "hlissner/zsh-autopair"
 	zgen load "Tarrasch/zsh-bd"
+	zgen load "arzzen/calc.plugin.zsh"
 
+	zgen oh-my-zsh "plugins/wd"
 	zgen oh-my-zsh "plugins/fancy-ctrl-z"
 	zgen oh-my-zsh "plugins/extract"
-	zgen load "arzzen/calc.plugin.zsh"
 
 	zgen load "mafredri/zsh-async"
 	zgen load "Shrvi/nspure"
 
 	zgen save
-	zcompile $ZGEN_INIT
 fi
 
 # Static load plugins
 . ${ZGEN_INIT}
 
-if [ -d ${ZDOTDIR}/hooks ]; then
-	for h in ${ZDOTDIR}/hooks/?*.zsh ; do
-		[ -f "$h" ] && . "$h"
+plugin_hook_dir="${ZDOTDIR}/zshrc.d/plugin-hooks"
+
+if [ -d ${plugin_hook_dir} ]; then
+	for h in ${plugin_hook_dir}/?*.zsh ; do
+		[ $(command stat -c '%U' "$h") = "$USER" ] && [ -f "$h" ] && . "$h"
 	done
 	unset h
 fi
 
+unset plugin_hook_dir
 

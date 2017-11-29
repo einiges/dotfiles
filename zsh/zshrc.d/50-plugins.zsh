@@ -1,7 +1,7 @@
 #!/bin/zsh
 
 ZGEN_DIR="${XDG_CACHE_HOME}/zsh/zgen"
-ZGEN_INIT="$ZDOTDIR/.zgen-plugins.zsh"
+ZGEN_INIT="${XDG_CACHE_HOME}/zsh/zgen-plugins-loader.zsh"
 
 zgen () {
 	if [[ ! -s $ZGEN_DIR/zgen.zsh ]]; then

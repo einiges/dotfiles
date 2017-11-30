@@ -4,28 +4,6 @@ alias -g L='| less -r'
 alias -g G='| grep --color'
 alias -g W='| wc'
 
-alias -s java=$EDITOR
-alias -s    c=$EDITOR
-alias -s    h=$EDITOR
-alias -s  cpp=$EDITOR
-alias -s  hpp=$EDITOR
-alias -s   hs=$EDITOR
-
-alias -s haml=$EDITOR
-alias -s  css=$EDITOR
-alias -s scss=$EDITOR
-alias -s  xml=$EDITOR
-alias -s  yml=$EDITOR
-alias -s   js=$EDITOR
-alias -s  php=$EDITOR
-
-alias -s  txt=$EDITOR
-alias -s  tex=$EDITOR
-
-alias -s  html=$BROWSER
-alias -s xhtml=$BROWSER
-alias -s   pdf='zathura'
-
 alias   ...='cd ../..'
 alias  ....='cd ../../..'
 alias .....='cd ../../../..'

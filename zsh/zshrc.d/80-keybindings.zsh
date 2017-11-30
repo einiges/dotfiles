@@ -3,11 +3,18 @@
 # Vim Mode
 bindkey -v
 
-
-# This is terminal specific
-bindkey "^[[H"     beginning-of-line     # Home
 bindkey "^[[4~"    end-of-line           # End
-bindkey "^[[P"     delete-char           # Delete
 bindkey "^[[5~"    backward-word         # PageUp/Prior
 bindkey "^[[6~"    forward-word          # PageDown/Next
+
+case $TERM in
+	tmux* )
+		bindkey "^[[1~"    beginning-of-line     # Home
+		bindkey "^[[3~"    delete-char           # Delete
+		;;
+	st* )
+		bindkey "^[[H"     beginning-of-line     # Home
+		bindkey "^[[P"     delete-char           # Delete
+		;;
+esac
 

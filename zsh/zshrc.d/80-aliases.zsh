@@ -9,7 +9,7 @@ alias  ....='cd ../../..'
 alias .....='cd ../../../..'
 alias ,='popd'
 alias .,='cd ~-'
-alias ,,='cd $_'
+alias ,,='test -d "$_" && cd "${_:P}" || test -f "$_" && cd "${_:h:P}" || printf "cannot create valid path from %s\n" ${_} >&2 && return 1'
 
 # -- shorties --
 

@@ -56,6 +56,10 @@ super + alt + {n,r,t,d}
 super + mod5 + {n,r,t,d,y}
 	bspc node -p {west,south,north,east,cancel}
 
+# move to preselcted area
+super + mod5 + space
+	bspc query -N -n focused.automatic && bspc node -n last.!automatic || bspc node last.leaf -n focused
+
 # focus next monitor
 super + {_,shift} + g
 	bspc {monitor -f,node -m} next

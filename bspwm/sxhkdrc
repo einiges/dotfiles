@@ -36,7 +36,7 @@ super + {comma,period}
 
 # focus the node in the given direction
 super + {_,shift} + {n,r,t,d}
-	bspc node -{f,s} {west,south,north,east}
+	bspc node -{f,s} {west,south,north,east}.local
 
 super + {_,shift} + m
 	bspc node @/ -F {vertical,horizontal}

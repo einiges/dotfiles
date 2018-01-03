@@ -8,7 +8,7 @@ setxkbmap -layout de -variant neo -option altwin:swap_lalt_lwin
 
 
 # -- Background --
-feh --no-fehbg --bg-fill $HOME/Pictures/wallpapers/current
+feh --no-fehbg --bg-fill --no-xinerama $HOME/Pictures/wallpapers/current
 
 
 # -- Misc X --

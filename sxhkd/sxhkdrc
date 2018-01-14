@@ -19,7 +19,8 @@ super + Return
 
 # - pass
 @super + x
-	PINENTRY_USER_DATA=gtk passmenu-rofi
+	PINENTRY_USER_DATA=gtk passmenu-rofi && \
+	notify-send 'pass' 'copied'
 
 # - screenshots
 @{_,shift} + Print

@@ -22,6 +22,9 @@ super + Return
 	PINENTRY_USER_DATA=gtk passmenu-rofi && \
 	notify-send 'pass' 'copied'
 
+super + shift + l
+	i3lock -ef c 000000
+
 # - screenshots
 @{_,shift} + Print
 	scrot {_,-s} -e 'mv $f ~/Pictures/Screenshots'

@@ -265,8 +265,8 @@ def_key "h"
 #def_key "@"
 #  show_server_info
 #
-#def_key "s"
-#  stop
+def_key "P"
+  stop
 #
 #def_key "p"
 #  pause
@@ -313,8 +313,8 @@ def_key "R"
 #def_key "y"
 #  start_searching
 #
-#def_key "y"
-#  toggle_single
+def_key "s"
+  toggle_single
 #
 def_key "c"
   toggle_consume

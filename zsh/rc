@@ -1,8 +1,7 @@
 #!/bin/zsh
 
-
 #autoload -Uz compinit && compinit -d $XDG_CACHE_HOME/zsh/zcompdump
-autoload -U colors && colors
+#autoload -Uz colors && colors
 autoload -Uz add-zsh-hook
 
 autoload -Uz url-quote-magic
@@ -11,38 +10,51 @@ zle -N self-insert url-quote-magic
 autoload -Uz bracketed-paste-magic
 zle -N bracketed-paste bracketed-paste-magic
 
-setopt autocd               # dir = cd dir
-setopt auto_pushd           # cd = pushd
-setopt pushd_silent         # disable pushd stack message
-setopt pushd_to_home        # pushd = pushd ~
-setopt pushd_minus          # change pushd +2 to -2 and - to +
-#setopt pushd_ignore_dups    # ignore dups in stack
 
-setopt prompt_subst
-setopt auto_name_dirs
-setopt rm_star_wait         # Wait 10 sec before delete *
-setopt correct              # correct me
-unsetopt correct_all        # but not to much
+setopt    autocd
+setopt    auto_pushd
+setopt    pushd_silent
+setopt    pushd_to_home
+setopt    pushd_minus
+setopt no_pushd_ignore_dups
+
+setopt    auto_name_dirs
+setopt    auto_param_keys
+setopt    auto_param_slash
+setopt    auto_resume
 setopt no_beep
+setopt    correct
+setopt no_correct_all
+setopt    magic_equal_subst
+setopt    multios
+setopt    rm_star_wait
+
+# -- History --
+
+setopt    append_history
+setopt    hist_expire_dups_first
+setopt    hist_find_no_dups
+setopt    hist_ignore_all_dups
+setopt    hist_ignore_dups
+setopt    hist_ignore_space
+setopt    hist_no_store
+setopt    hist_reduce_blanks
+setopt    hist_save_no_dups
+setopt    hist_verify
+setopt    inc_append_history
+setopt    share_history
 
 
-setopt hist_expire_dups_first  # -- History --
-setopt hist_find_no_dups
-setopt hist_ignore_all_dups
-setopt hist_ignore_dups
-setopt hist_ignore_space
-setopt hist_reduce_blanks
-setopt hist_no_store
-setopt hist_reduce_blanks
-setopt hist_save_no_dups
-setopt hist_verify
-setopt share_history
-setopt inc_append_history
+setopt    always_to_end
+setopt    auto_list
+setopt    extended_glob
+setopt no_list_ambiguous
+setopt    glob_star_short
 
 
-if [ -d ${ZDOTDIR}/zshrc.d ]; then
+if [[ -d ${ZDOTDIR}/zshrc.d ]]; then
 	for h in ${ZDOTDIR}/zshrc.d/?*.zsh ; do
-		 [ -f "$h" ] && [ $(command stat -c '%U' "$h") = "$USER" ] && . "$h"
+		 [[ -f "$h" && $(command stat -c '%U' "$h") = "$USER" ]] && . "$h"
 	done
 	unset h
 fi

@@ -1,16 +1,5 @@
 #!/bin/zsh
 
-
-setopt always_to_end
-setopt auto_list
-setopt complete_in_word
-setopt extended_glob
-unsetopt list_ambiguous
-
-setopt glob_star_short
-
-
-
 #zstyle ':completion:*' list-prompt ''
 #zstyle ':completion:*' select-prompt ''
 #zstyle ':completion:*' group-name ''

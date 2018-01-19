@@ -25,13 +25,12 @@ xsetroot -cursor_name left_ptr
 
 
 # -- Disable DPMS --
-xset -dpms
-xset s noblank
-xset s off
+xset dpms 0 800 800
 
 
 # -- Smart screenlock --
-#xautolock -corners +-+- -cornerredelay 30 -locker 'slock & sleep 1 ; xset dpms force off' &
+locker="i3lock -nefc 333333"
+xautolock -time 8 -corners '--00' -cornersize 20 -detectsleep -locker "xsssmart $locker" -nowlocker "$locker" &
 
 
 # -- Launch Applications --

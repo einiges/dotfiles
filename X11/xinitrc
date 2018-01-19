@@ -39,7 +39,7 @@ xautolock -time 8 -corners '--00' -cornersize 20 -detectsleep -locker "xsssmart 
 	$BROWSER &
 	$TERMINAL -n ncmpcpp    -e ncmpcpp &
 	$TERMINAL -n neomutt    -e $SHELL -c neomutt &
-	$TERMINAL -n calcurse   -e calcurse $xdg_calcurse &
+	$TERMINAL -n calcurse   -e calcurse &
 	$TERMINAL -n newsboat   -e newsboat &
 } &
 

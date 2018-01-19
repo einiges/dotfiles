@@ -45,17 +45,8 @@ xautolock -time 8 -corners '--00' -cornersize 20 -detectsleep -locker "xsssmart 
 
 
 # -- Start WM --
-
-case $1 in
-	herbstluftwm )
-		sxhkd -m -1 $XDG_CONFIG_HOME/herbstluftwm/sxhkdrc &
-		exec herbstluftwm --locked
-		;;
-	* )
-		sxhkd -m -1 $XDG_CONFIG_HOME/bspwm/sxhkdrc &
-		exec bspwm
-		;;
-esac
+sxhkd -m -1 $XDG_CONFIG_HOME/bspwm/sxhkdrc &
+exec bspwm
 
 
 # vim:ft=sh

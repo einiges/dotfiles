@@ -27,7 +27,7 @@ generic-add-todo  ^A
 generic-prev-day  T ^H 
 generic-next-day  t ^L 
 generic-prev-week  W ^K 
-generic-next-week  w ^J 
+generic-next-week  w RET 
 generic-prev-month  M 
 generic-next-month  m 
 generic-prev-year  Y 

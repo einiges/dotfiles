@@ -63,7 +63,7 @@ type = custom/menu
 label-open = 
 label-open-padding = ${vars.module-padding}
 label-open-foreground = #1793d1
-label-open-background = ${vars.bright-background}
+label-open-background = ${vars.dark-background}
 
 label-close = 
 label-close-padding = ${vars.module-padding}

@@ -80,6 +80,8 @@ c.colors.statusbar.command.bg = maincolor
 # c.colors.statusbar.insert.fg = 'white'
 c.colors.statusbar.normal.bg = maincolor
 # c.colors.statusbar.normal.fg = 'white'
+# c.colors.statusbar.passthrough.bg = '#000000'
+# c.colors.statusbar.passthrough.fg = '#ffffff'
 c.colors.statusbar.private.bg = '#25003E'
 # c.colors.statusbar.private.fg = 'white'
 # c.colors.statusbar.progress.bg = 'white'
@@ -112,12 +114,15 @@ c.colors.tabs.indicator.error = '#FF5400'
 
 # c.completion.cmd_history_max_items = 100
 c.completion.height = '30%'
+# c.completion.delay = 1
+# c.completion.min_chars = 1
 # c.completion.quick = True
 c.completion.scrollbar.padding = 3
 c.completion.scrollbar.width = 17
 # c.completion.show = 'always'
 c.completion.shrink = True
 c.completion.timestamp_format = '%d.%m.%Y'
+# c.completion.use_best_match = False
 # c.completion.web_history_max_items = -1
 c.confirm_quit = ['downloads']
 # c.content.cache.appcache = True
@@ -163,6 +168,7 @@ c.content.headers.accept_language = 'en-US,en,de-DE,de'
 # c.content.ssl_strict = 'ask'
 # c.content.user_stylesheets = glob.glob(home + '.local/etc/solarized-everything-css/css/solarized-*-light.css')
 # c.content.webgl = True
+c.content.windowed_fullscreen = True
 # c.content.xss_auditing = False
 # c.downloads.location.directory = None
 # c.downloads.location.prompt = True
@@ -225,7 +231,7 @@ c.hints.prev_regexes = [
 # c.hints.scatter = True
 # c.hints.uppercase = False
 # c.history_gap_interval = 30
-# c.ignore_case = 'smart'
+# c.search.ignore_case = 'smart'
 # c.input.forward_unbound_keys = 'auto'
 # c.input.insert_mode.auto_leave = True
 c.input.insert_mode.auto_load = True
@@ -236,6 +242,7 @@ c.input.insert_mode.auto_load = True
 # c.input.spatial_navigation = False
 # c.keyhint.blacklist = []
 # c.keyhint.delay = 500
+# c.keyhint.radius = 0
 # c.messages.timeout = 2000
 # c.messages.unfocused = False
 # c.new_instance_open_target = 'tab'
@@ -245,9 +252,11 @@ c.input.insert_mode.auto_load = True
 # c.qt.args = []
 # c.qt.force_platform = None
 # c.qt.force_software_rendering = False
+# c.qt.highdpi = False
 c.scrolling.bar = True
 c.scrolling.smooth = True
-# c.session_default_name = None
+# c.session.default_name = None
+c.session.lazy_restore = True
 # c.spellcheck.languages = []
 # c.statusbar.hide = False
 c.statusbar.padding = {'top': 6, 'bottom': 6, 'left': 0, 'right': 0}
@@ -256,12 +265,13 @@ c.tabs.background = True
 # c.tabs.close_mouse_button = 'middle'
 # c.tabs.favicons.scale = 1.0
 # c.tabs.favicons.show = True
-# c.tabs.indicator_padding = {'top': 2, 'bottom': 2, 'left': 0, 'right': 4}
 c.tabs.last_close = 'blank'
 c.tabs.mousewheel_switching = False
 # c.tabs.new_position.related = 'next'
 # c.tabs.new_position.unrelated = 'last'
 c.tabs.padding = {'top': 6, 'bottom': 6, 'left': 6, 'right': 6}
+# c.tabs.persist_mode_on_change = False
+# c.tabs.pinned.shrink = True
 # c.tabs.position = 'top'
 # c.tabs.select_on_remove = 'next'
 # c.tabs.show = 'always'
@@ -270,8 +280,9 @@ c.tabs.padding = {'top': 6, 'bottom': 6, 'left': 6, 'right': 6}
 # c.tabs.title.alignment = 'left'
 c.tabs.title.format = '{title}'
 c.tabs.title.format_pinned = ''
-# c.tabs.width.bar = '20%'
-c.tabs.width.indicator = 5
+# c.tabs.width = '20%'
+# c.tabs.indicator.padding = {'top': 2, 'bottom': 2, 'left': 0, 'right': 4}
+c.tabs.indicator.width = 5
 # c.tabs.wrap = True
 # c.url.auto_search = 'naive'
 c.url.default_page = 'about:blank'
@@ -442,10 +453,7 @@ config.bind('t', 'set-cmd-text -s :open -t')
 # config.bind('wo', 'set-cmd-text -s :open -w')
 # config.bind('wp', 'open -w -- {clipboard}')
 # config.bind('xO', 'set-cmd-text :open -b -r {url:pretty}')
-# config.bind('xb', 'config-cycle statusbar.hide')
 # config.bind('xo', 'set-cmd-text -s :open -b')
-# config.bind('xt', 'config-cycle tabs.show always switching')
-# config.bind('xx', 'config-cycle statusbar.hide ;; config-cycle tabs.show always switching')
 # config.bind('yD', 'yank domain -s')
 # config.bind('yP', 'yank pretty-url -s')
 # config.bind('yT', 'yank title -s')

@@ -223,7 +223,7 @@ format = <label-layout>
 
 
 [module/volume]
-type = internal/volume
+type = internal/alsa
 
 ; Muted
 

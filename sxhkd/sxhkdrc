@@ -22,7 +22,7 @@ super + Return
 	PINENTRY_USER_DATA=gtk passmenu-rofi | xargs -I '@' notify-send 'copied' '@'
 
 super + shift + l
-	i3lock -ef c 000000
+	xautolock -locknow
 
 # - screenshots
 @{_,shift} + Print

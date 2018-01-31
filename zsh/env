@@ -6,6 +6,7 @@ export EDITOR=nvim
 export PAGER=less
 export TERMINAL=st
 export TERMCMD=$TERMINAL
+export LOCKER='i3lock -nefc 333333'
 
 export MONITOR0="DVI-I-1"
 export MONITOR1="HDMI-A-0"

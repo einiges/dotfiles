@@ -342,14 +342,6 @@ format-online-prefix = 
 format-online-prefix-padding-right = ${vars.icon-padding-right}
 format-online-prefix-foreground = ${vars.icon-color}
 
-; Paused
-
-format-paused-padding = ${vars.module-padding}
-format-paused-background = ${vars.bright-background}
-format-paused-prefix = 
-format-paused-prefix-padding-right = ${vars.icon-padding-right}
-format-paused-prefix-foreground = ${vars.icon-color}
-
 ; Playing
 
 format-playing-padding = ${vars.module-padding}
@@ -358,25 +350,9 @@ format-playing-prefix = 
 format-playing-prefix-padding-right = ${vars.icon-padding-right}
 format-playing-prefix-foreground = ${vars.icon-color}
 
-; Stopped
-
-format-stopped-padding = ${vars.module-padding}
-format-stopped-background = ${vars.bright-background}
-format-stopped-prefix = 
-format-stopped-prefix-padding-right = ${vars.icon-padding-right}
-format-stopped-prefix-foreground = ${vars.icon-color}
-
-; Offline
-
-format-offline-padding = ${vars.module-padding}
-format-offline-background = ${vars.bright-background}
-format-offline-foreground = ${vars.warning-color}
-format-offline-prefix = 
-format-offline-prefix-padding-right = ${vars.icon-padding-right}
-format-offline-prefix-foreground = ${vars.icon-color}
-
-label-offline = offline
-format-offline = <label-offline>
+format-offline =
+format-paused =
+format-stopped =
 
 label-song = %title:0:30:…%
 format-online = <label-song>

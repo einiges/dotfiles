@@ -19,7 +19,7 @@ rofi.yoffset:                        26
 rofi.xoffset:                        0
 
 rofi.fixed-num-lines:                false
-rofi.terminal:                       rofi-sensible-terminal
+rofi.terminal:                       terminal
 ! rofi.ssh-client:                     ssh
 ! rofi.ssh-command:                    {terminal} -e {ssh-client} {host}
 ! rofi.run-command:                    {cmd}

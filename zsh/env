@@ -18,12 +18,12 @@ export TIMEFMT=$'real\t%E\nuser\t%U\nsys\t%S'
 
 
 # XDG
-#export XDG_CONFIG_HOME=$HOME/.config       # -- /etc/zsh/zshenv --
-#export  XDG_CACHE_HOME=$HOME/.cache
-#export   XDG_DATA_HOME=$HOME/.local/share
+[[ -v XDG_CONFIG_HOME ]] || export XDG_CONFIG_HOME="$HOME/.config"
+[[ -v XDG_CACHE_HOME  ]] || export  XDG_CACHE_HOME="$HOME/.cache"
+[[ -v XDG_DATA_HOME   ]] || export   XDG_DATA_HOME="$HOME/.local/share"
 
 # zsh
-#export ZDOTDIR="$XDG_CONFIG_HOME"/zsh      # -- /etc/zsh/zshenv --
+[[ -v ZDOTDIR ]] || export ZDOTDIR="$XDG_CONFIG_HOME"/zsh
 
 # dircolors
 . <(dircolors "$XDG_CONFIG_HOME"/dircolors)

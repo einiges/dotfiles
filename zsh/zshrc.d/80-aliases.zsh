@@ -9,8 +9,8 @@ alias .,='cd ~-'
 
 # -- shorties --
 
-alias c='cat'
 alias e='echo'
+alias l=${PAGER:-less}
 alias n='nvim'
 alias o='xdg-open'
 alias g='git'
@@ -18,7 +18,6 @@ alias t='tmux'
 alias ta='tmux attach -t'
 
 alias  ls='ls -khF --group-directories-first --color=auto'
-alias   l='ls'
 alias lsl='ls -l'
 alias  la='ls -A'
 alias lal='ls -lA'

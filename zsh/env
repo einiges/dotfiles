@@ -5,7 +5,7 @@ export BROWSER=qutebrowser
 export EDITOR=nvim
 export PAGER=less
 export TERMINAL=st
-export TERMCMD=$TERMINAL
+export TERMCMD=$TERMINAL # ranger
 export LOCKER='i3lock -nefc 333333'
 
 export MONITOR0="DVI-I-1"

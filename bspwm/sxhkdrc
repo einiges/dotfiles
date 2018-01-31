@@ -1,7 +1,7 @@
 # -- bspwm --
 
 # quit bspwm
-super + shift + q
+super + shift + q; super + shift + q; super + q
 	bspc quit
 
 # reload config

@@ -26,7 +26,9 @@ export TIMEFMT=$'real\t%E\nuser\t%U\nsys\t%S'
 [[ -v ZDOTDIR ]] || export ZDOTDIR="$XDG_CONFIG_HOME"/zsh
 
 # dircolors
-. <(dircolors "$XDG_CONFIG_HOME"/dircolors)
+DIRCOLORS="$XDG_CONFIG_HOME"/dircolors
+DIRCOLORS_STATIC="$XDG_DATA_HOME"/zsh/dircolors.sh
+. $DIRCOLORS_STATIC
 
 # X11
 export    XINITRC="$XDG_CONFIG_HOME"/X11/xinitrc

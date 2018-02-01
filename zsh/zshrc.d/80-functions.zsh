@@ -12,3 +12,12 @@ function title_work {
 
 add-zsh-hook precmd  title_idle
 add-zsh-hook preexec title_work
+
+
+function dircolors-static {
+	if [[ -v DIRCOLORS && -v DIRCOLORS_STATIC ]]; then
+		dircolors "$DIRCOLORS" > "$DIRCOLORS_STATIC"
+	else
+		return 1
+	fi
+}

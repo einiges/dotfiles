@@ -15,21 +15,20 @@ zgen () {
 
 # Generate zgen init script if needed
 if [[ ! -s "$ZGEN_INIT" ]]; then
-	[ -f ${ZDOTDIR}/.zcompdump ] && rm -f ${ZDOTDIR}/.zcompdump
+	[[ -f ${ZDOTDIR}/.zcompdump ]] && rm -f ${ZDOTDIR}/.zcompdump
 
 	zgen load "zsh-users/zsh-history-substring-search"
-	zgen load "zdharma/fast-syntax-highlighting"
 	zgen load "zsh-users/zsh-autosuggestions"
-	zgen load "hlissner/zsh-autopair"
-	zgen load "Tarrasch/zsh-bd"
+	zgen load "zdharma/fast-syntax-highlighting"
 	zgen load "arzzen/calc.plugin.zsh"
+	zgen load "rupa/z"
 
-	zgen oh-my-zsh "plugins/wd"
 	zgen oh-my-zsh "plugins/fancy-ctrl-z"
 	zgen oh-my-zsh "plugins/extract"
 
 	zgen load "mafredri/zsh-async"
-	zgen load "Shrvi/nspure"
+	zgen load "$HOME/projects/public/nspure"
+	zgen load "$HOME/projects/public/zsh-bd"
 
 	zgen save
 fi

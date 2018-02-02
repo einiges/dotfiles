@@ -126,10 +126,10 @@ rofi.kb-custom-17:
 rofi.kb-custom-18:
 rofi.kb-custom-19:
 
-rofi.ml-row-left:                    Mouse9
-rofi.ml-row-right:                   Mouse8
-!rofi.ml-row-up:                      Mouse4
-!rofi.ml-row-down:                    Mouse5
+rofi.ml-row-left:                    MouseForward
+rofi.ml-row-right:                   MouseBack
+!rofi.ml-row-up:                      ScrollUp
+!rofi.ml-row-down:                    ScrollDown
 rofi.me-select-entry:
-rofi.me-accept-entry:                Mouse1
-rofi.me-accept-custom:               Control+Mouse1
+rofi.me-accept-entry:                MousePrimary
+rofi.me-accept-custom:               Control+MousePrimary

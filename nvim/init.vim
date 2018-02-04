@@ -1,8 +1,6 @@
 
 set runtimepath+=$XDG_CACHE_HOME/nvim/dein/repos/github.com/Shougo/dein.vim
 
-let g:dein#enable_notification = 1
-
 if dein#load_state(expand('<sfile>'))
 
 	call dein#begin(expand($XDG_CACHE_HOME.'/nvim/dein'))
@@ -16,7 +14,7 @@ if dein#load_state(expand('<sfile>'))
 	" Navigation
 	call dein#add('christoomey/vim-tmux-navigator')
 	call dein#add('Shougo/denite.nvim')
-	
+
 
 	" Interface
 	call dein#add('vim-airline/vim-airline')
@@ -24,48 +22,38 @@ if dein#load_state(expand('<sfile>'))
 	call dein#add('airblade/vim-gitgutter')
 
 
-	" Libs
-	call dein#add('Shougo/neco-vim',          { 'on_ft': ['vim'] })
-	call dein#add('kchmck/vim-coffee-script', { 'on_ft': ['coffee'] })
-	call dein#add('carlitux/deoplete-ternjs', { 'on_ft': ['javascript'], 'if': 0 })
-	call dein#add('tweekmonster/deoplete-clang2', { 'on_ft': ['c', 'cpp'] })
-	call dein#add('fishbullet/deoplete-ruby', { 'on_ft': ['ruby'] })
-	call dein#add('artur-shaik/vim-javacomplete2', { 'on_ft': ['java'] })
+	" Deoplete
+	"call dein#add('Shougo/neco-vim',          { 'on_ft': ['vim'] })
+	"call dein#add('tweekmonster/deoplete-clang2', { 'on_ft': ['c', 'cpp'] })
+	"call dein#add('artur-shaik/vim-javacomplete2', { 'on_ft': ['java'] })
+
+
+	"call dein#add('Quramy/tsuquyomi', {'lazy': 1 })
 
 
 	" Helper
 	call dein#add('tpope/vim-fugitive')
-	call dein#add('tpope/vim-dispatch')
-	call dein#add('benekastah/neomake')
-	call dein#add('Konfekt/FastFold')
+	call dein#add('w0rp/ale')
 	call dein#add('Shougo/deoplete.nvim')
-	call dein#add('Shougo/vimproc.vim', { 'build' : 'make' })
+	"call dein#add('Shougo/vimproc.vim', { 'build' : 'make' })
 	call dein#add('Shougo/neoinclude.vim')
-	call dein#add('godlygeek/tabular')
 
 
 	" Formatter
-	call dein#add('rhysd/vim-clang-format', { 'on_ft': ['c', 'cpp', 'java', 'js', 'ts'] })
+	"call dein#add('rhysd/vim-clang-format', { 'on_ft': ['c', 'cpp', 'java', 'js', 'ts'] })
+	"call dein#add('kana/vim-operator-user')
+	call dein#add('Chiel92/vim-autoformat')
 
-	
+
+
 	" Snippets
 	call dein#add('SirVer/ultisnips')
 	call dein#add('honza/vim-snippets')
 
-
-	"call dein#add('tpope/vim-rails', { 'on_ft': ['ruby'] })
-	call dein#add('Quramy/tsuquyomi', {'lazy': 1 })
-	call dein#add('JuliaEditorSupport/julia-vim')
-	call dein#add('lervag/vimtex')
-
 	" Syntax
 	call dein#add('justinmk/vim-syntax-extra')              " C / C++
-	call dein#add('othree/javascript-libraries-syntax.vim') " Java- / Coffescript
-	call dein#add('hail2u/vim-css3-syntax')                 " css
-	call dein#add('tmux-plugins/vim-tmux')                  " tmux.conf
-	call dein#add('cespare/vim-toml')                       " toml
-	call dein#add('plasticboy/vim-markdown')                " Markdown
-	call dein#add('leafgarland/typescript-vim')             " Typescript
+	call dein#add('kovetskiy/sxhkd-vim')
+	call dein#add('ap/vim-css-color', { 'if': '0' })
 
 
 	call dein#end()
@@ -80,79 +68,58 @@ filetype plugin indent on
 
 " vim-tmux-navigator
 let g:tmux_navigator_no_mappings = 1
-nnoremap <silent><C-Left> :TmuxNavigateLeft<cr>
-nnoremap <silent><C-Down> :TmuxNavigateDown<cr>
-nnoremap <silent><C-Up> :TmuxNavigateUp<cr>
-nnoremap <silent><C-Right> :TmuxNavigateRight<cr>
+nnoremap <silent> <C-Left>  :TmuxNavigateLeft<cr>
+nnoremap <silent> <C-Down>  :TmuxNavigateDown<cr>
+nnoremap <silent> <C-Up>    :TmuxNavigateUp<cr>
+nnoremap <silent> <C-Right> :TmuxNavigateRight<cr>
+
+
+" vim-autoformat
+noremap <F3> :Autoformat<CR>
+"let g:autoformat_autoindent = 0
+"let g:autoformat_retab = 0
+"let g:autoformat_remove_trailing_spaces = 0
 
 
 " deoplete
-"let g:deoplete#auto_complete_delay = 0
-let g:deoplete#max_list = 20
 let g:deoplete#enable_at_startup = 1
-let g:deoplete#enable_smart_case = 1
 let g:deoplete#enable_camel_case = 1
-"let g:deoplete#enable_refresh_always = 1
+let g:deoplete#enable_smart_case = 1
 let g:deoplete#enable_completed_snippet = 1
-let g:deoplete#auto_complete_start_length = 0
-let g:deoplete#ignore_sources = {}
-let b:deoplete_ignore_sources = ['buffer']
+let g:deoplete#max_menu_width = 100
 
 
 " vim-airline
-if !exists('g:airline_symbols')
-	let g:airline_symbols = {}
-endif
 let g:airline_powerline_fonts = 1
 let g:airline_section_c = '%F'
-"let g:airline#extensions#tabline#enabled=1
+let g:airline#extensions#whitespace#enabled = 0
+let g:airline#extensions#ale#enabled = 1
+let g:airline#extensions#tabline#enabled=1
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = '│'
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = '│'
 
 
 " ultisnips
 let g:UltiSnipsExpandTrigger = "<tab>"
 let g:UltiSnipsJumpForwardTrigger = "<tab>"
 let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
-let g:UltiSnipsEditSplit = "vertical"
 
 
-" FastFold
-let g:tex_fold_enable=1
-let g:vimsyn_folding='af'
-let g:xml_syntax_folding=1
-let g:php_folding=1
-
-" neomake
-let g:neomake_open_list = 2
-let g:neomake_warning_sign = {
-			\ 'text': 'ω',
-			\ 'texthl': 'WarningMsg',
-			\ }
-let g:neomake_error_sign = {
-			\ 'text': '∃',
-			\ 'texthl': 'ErrorMsg',
-			\ }
-
-
-
-" https://gist.github.com/tpope/287147
-inoremap <silent> <Bar>   <Bar><Esc>:call <SID>align()<CR>a
-
-function! s:align()
-  let p = '^\s*|\s.*\s|\s*$'
-  if exists(':Tabularize') && getline('.') =~# '^\s*|' && (getline(line('.')-1) =~# p || getline(line('.')+1) =~# p)
-    let column = strlen(substitute(getline('.')[0:col('.')],'[^|]','','g'))
-    let position = strlen(matchstr(getline('.')[0:col('.')],'.*|\s*\zs.*'))
-    Tabularize/|/l1
-    normal! 0
-    call search(repeat('[^|]*|',column).'\s\{-\}'.repeat('.',position),'ce',line('.'))
-  endif
-endfunction
+" ale
+let g:ale_sign_error = '∃'
+let g:ale_sign_warning = 'ω'
+let g:ale_linters = { 'c': ['gcc']}
+let g:ale_lint_delay = 1000
+let g:ale_lint_on_text_changed = 'never'
+nmap <leader>n <Plug>(ale_next_wrap)
+nmap <leader>r <Plug>(ale_previous_wrap)
 
 
 
 " -- Colors --
-
-if $TERM =~ '\(st\|screen\)-256color'
+if $TERM =~ '\(st\|tmux\)-256color'
 	colorscheme flattened_light
 	set termguicolors
 else
@@ -165,7 +132,6 @@ endif
 " -- Vim Basics --
 
 syntax enable
-set guicursor=n-v-c:block-Cursor/lCursor-blinkon0,i-ci:ver25-Cursor/lCursor,r-cr:hor20-Cursor/lCursor
 "set foldmethod=indent
 "set foldlevel=0
 "set foldnestmax=1
@@ -175,7 +141,7 @@ set cursorline
 "set lazyredraw
 set number
 set relativenumber
-set timeoutlen=150
+set timeoutlen=300
 set autoindent
 set smartindent
 set tabstop=2
@@ -190,6 +156,9 @@ set hidden
 set history=100
 set scrolloff=5
 set sidescroll=8
+set nostartofline
+set splitbelow
+set splitright
 
 set ignorecase
 set smartcase
@@ -208,6 +177,7 @@ set mouse=n
 set wildmode=longest,list,full
 set wildmenu
 set completeopt+=noselect
+set completeopt-=preview
 set wildignore+=*/.git/*,*/.hg/*,*/.svn/*
 set wildignore+=tags,*.tags
 set wildignore+=*.o,*.obj,*.hi,*.exe,*.dll,*.manifest,*.so,*.out,*.class,*.jpg,*jpeg,*.bmp,*.gif,*.png
@@ -226,47 +196,33 @@ hi NonText     cterm=NONE  ctermfg=12  gui=NONE  guifg=#C7D4D9  guibg=NONE
 
 " -- Commands --
 
-command W w !sudo tee % > /dev/null
-
+command W w !sudo tee > /dev/null %
 
 
 " -- Mapping --
 
-let mapleader = "ß"
-let maplocalleader = "ü"
+map <Space> <leader>
+map <localleader> <S-Space>
 
+nnoremap <leader>l :ALELint<Cr>
 
-inoremap <F5> <ESC> :Dispatch<RETURN>a
-noremap <F5> :Dispatch<ESC>
-
-
-" annoying delete behavior in st terminal
-noremap  <F1> x
-noremap! <F1> <DEL>
-
-nnoremap <BS> X
-vnoremap <BS> x
 
 noremap Y y$
+nnoremap <C-J> i<CR><Esc>k$
 
 nnoremap q <Nop>
 
-nnoremap <silent><Down> gj
-inoremap <silent><Down> <C-o>gj
-nnoremap <silent><Up> gk
-inoremap <silent><Up> <C-o>gk
-
-nnoremap <silent><HOME> ^
-inoremap <silent><HOME> <C-o>^
-
-nnoremap <silent><END> $
-inoremap <silent><END> <C-o>$
-
+nnoremap <silent> <Backspace> X
+nnoremap <silent> <Down> gj
+nnoremap <silent> <Up> gk
+nnoremap <silent> <HOME> ^
+nnoremap <silent> <END> $
 
 nnoremap <silent> <C-l> :nohl<CR><C-l>
 
-nnoremap <silent><S-Left> <C-w><
-nnoremap <silent><S-Down> <C-w>-
-nnoremap <silent><S-Up>   <C-w>+
-nnoremap <silent><S-Right> <C-w>>
+nnoremap <silent> <S-Left> <C-w><
+nnoremap <silent> <S-Down> <C-w>-
+nnoremap <silent> <S-Up>   <C-w>+
+nnoremap <silent> <S-Right> <C-w>>
+
 

@@ -1,0 +1,88 @@
+* {
+	font: "Noto 18";
+	bold: "Noto Bold 18";
+
+	pad-below: 0 0 0.7em 0;
+	indent: 0 0 0 26px;
+
+	transparent: rgba(0,0,0,0);
+
+	text-color: #93A1A1;
+	highlight: None;
+	background-color: @transparent;
+}
+
+window {
+	background-color: #212128EA;
+	location: center;
+	anchor: center;
+	transparency: "real";
+	fullscreen: true;
+	orientation: vertical;
+	children: [ mainbox];
+}
+
+mainbox {
+	expand: false;
+	orientation: vertical;
+	width: 300px;
+	margin: 40% 20% 0 25%;
+	children: [ case-indicator, message, inputbar, listview ];
+}
+
+inputbar {
+	font: @bold;
+	padding: @pad-below;
+	children: [ textbox-prompt-colon, entry ];
+}
+
+textbox {
+	text-color: #657B83;
+	padding: @pad-below;
+	margin: @indent;
+}
+
+listview {
+	padding: @indent;
+	spacing: 0.7em;
+	lines: 5;
+}
+
+textbox-prompt-colon {
+	expand: false;
+	font: "Nerd 14";
+	vertical-align: 0.5;
+	str: "";
+}
+
+case-indicator {
+	padding: @pad-below;
+	text-color: #6C71C4;
+}
+
+element {
+	vertical-align: 0;
+}
+
+element selected active,
+element selected normal,
+element selected urgent {
+	text-color: #6C71C4;
+}
+
+element normal urgent,
+element alternate urgent {
+	text-color: #CB4B16;
+}
+
+element normal active,
+element alternate active {
+	text-color: #2AA198;
+}
+
+element normal normal,
+element alternate normal {
+	text-color: #93A1A1;
+}
+
+// vim: ft=scss

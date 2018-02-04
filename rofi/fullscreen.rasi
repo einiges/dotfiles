@@ -61,7 +61,7 @@ case-indicator {
 }
 
 element {
-	vertical-align: 0;
+	vertical-align: 0.5;
 }
 
 element selected active,

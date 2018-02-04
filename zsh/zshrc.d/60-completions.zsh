@@ -33,8 +33,8 @@ zstyle ':completion:*:approximate:*' max-errors 1 numeric
 
 # -- kill --
 
-zstyle ':completion:*:*:*:*:processes'    command 'ps -u $USER -o pid,user,command -w'
-zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#) ([0-9a-z-]#)*=34=31=33'
+zstyle ':completion:*:*:*:*:processes'    command 'ps -u $USER -o pid,command -w'
+zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9a-z-]#)*=34=31'
 zstyle ':completion:*:*:kill:*'           menu yes select
 zstyle ':completion:*:*:kill:*'           force-list always
 zstyle ':completion:*:*:kill:*'           insert-ids single

@@ -9,7 +9,6 @@ alias .,='cd ~-'
 
 # -- shorties --
 
-alias e='echo'
 alias l=${PAGER:-less}
 alias n='nvim'
 alias o='xdg-open'

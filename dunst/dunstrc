@@ -2,7 +2,8 @@
 follow = keyboard
 font = Noto Sans 11
 format = "<b>%s</b>\n%b"
-geometry = "350x10-0+100"
+# (1920-350)/2
+geometry = "350x10+758+50"
 history_length = 0
 horizontal_padding = 15
 icon_position = left
@@ -15,7 +16,7 @@ separator_color = auto
 separator_height = 1
 shrink = false
 sort = false
-transparency = 0
+transparency = 20
 
 #dmenu = "/usr/bin/dmenu -p dunst: -nb #FFFFFF -nf #000000 -sb $94DBFF -sf "000000"
 #browser = /usr/bin/firefox
@@ -29,12 +30,12 @@ history =
 context =
 
 [urgency_low]
-background = "#4A3335"
+background = "#212128"
 foreground = "#eeeeee"
 timeout = 2
 
 [urgency_normal]
-background = "#4A3335"
+background = "#212128"
 foreground = "#eeeeee"
 timeout = 5
 

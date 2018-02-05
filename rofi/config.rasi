@@ -4,7 +4,6 @@ configuration {
 	terminal: "terminal";
 	auto-select: false;
 	matching: "fuzzy";
-	levenshtein-sort: true;
 	tokenize: true;
 	monitor: "-1";
 	scroll-method: 1;

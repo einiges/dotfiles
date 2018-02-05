@@ -1,15 +1,21 @@
 * {
 	font: "Noto 18";
-	bold: "Noto Bold 18";
 
 	pad-below: 0 0 0.7em 0;
 	indent: 0 0 0 26px;
 
 	transparent: rgba(0,0,0,0);
 
+	selected-fc: #6C71C4;
+	urgent-fc: #CB4B16;
+	active-fc: #2AA198;
+	normal-fc: #93A1A1;
+	ci-fc: @selected-fc;
+	textbox-fc: #657B83;
+
 	text-color: #93A1A1;
-	highlight: None;
 	background-color: @transparent;
+	highlight: None;
 }
 
 window {
@@ -19,31 +25,29 @@ window {
 	transparency: "real";
 	fullscreen: true;
 	orientation: vertical;
-	children: [ mainbox];
+	children: [ mainbox ];
 }
 
 mainbox {
 	expand: false;
-	orientation: vertical;
-	width: 300px;
 	margin: 40% 20% 0 25%;
+	orientation: vertical;
 	children: [ case-indicator, message, inputbar, listview ];
 }
 
 inputbar {
-	font: @bold;
 	padding: @pad-below;
 	children: [ textbox-prompt-colon, entry ];
 }
 
 textbox {
-	text-color: #657B83;
+	text-color: @textbox-fc;
 	padding: @pad-below;
 	margin: @indent;
 }
 
 listview {
-	padding: @indent;
+	margin: @indent;
 	spacing: 0.7em;
 	lines: 5;
 }
@@ -57,7 +61,7 @@ textbox-prompt-colon {
 
 case-indicator {
 	padding: @pad-below;
-	text-color: #6C71C4;
+	text-color: @case-indicator;
 }
 
 element {
@@ -67,22 +71,22 @@ element {
 element selected active,
 element selected normal,
 element selected urgent {
-	text-color: #6C71C4;
+	text-color: @selected-fc;
 }
 
 element normal urgent,
 element alternate urgent {
-	text-color: #CB4B16;
+	text-color: @urgent-fc;
 }
 
 element normal active,
 element alternate active {
-	text-color: #2AA198;
+	text-color: @active-fc;
 }
 
 element normal normal,
 element alternate normal {
-	text-color: #93A1A1;
+	text-color: @normal-fc;
 }
 
 // vim: ft=scss

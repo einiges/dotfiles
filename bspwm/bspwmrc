@@ -30,20 +30,20 @@ bspc config focus_follows_pointer   true
 bspc config pointer_follows_focus   false
 bspc config pointer_follows_monitor true
 
-bspc rule -r *:*
-bspc rule -a Pinentry  state=floating
-bspc rule -a discord         desktop=8
-bspc rule -a *:mutt          desktop=9
-bspc rule -a *:neomutt       desktop=9
-bspc rule -a *:ncmpcpp       desktop=0
-bspc rule -a *:calcurse      desktop=0
-bspc rule -a *:newsboat      desktop=0
+bspc rule -r '*:*'
+bspc rule -a 'Pinentry'  state=floating
+bspc rule -a 'discord'         desktop=8
+bspc rule -a '*:mutt'          desktop=9
+bspc rule -a '*:neomutt'       desktop=9
+bspc rule -a '*:ncmpcpp'       desktop=0
+bspc rule -a '*:calcurse'      desktop=0
+bspc rule -a '*:newsboat'      desktop=0
 # Libreoffice 5.x starts with Soffice and changes it after launch... WTF?
-bspc rule -a Soffice         state=tiled
-bspc rule -a *:libreoffice   state=tiled
-bspc rule -a Zathura         state=tiled
-bspc rule -a Pavucontrol     state=floating
-bspc rule -a *:scratchpad    state=floating
+bspc rule -a 'Soffice'         state=tiled
+bspc rule -a '*:libreoffice'   state=tiled
+bspc rule -a 'Zathura'         state=tiled
+bspc rule -a 'Pavucontrol'     state=floating
+bspc rule -a '*:scratchpad'    state=floating
 
 panel=$XDG_CONFIG_HOME/polybar/startup
 [ -x "$panel" ] && $panel bspwm-desktop-top &

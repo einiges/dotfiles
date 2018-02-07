@@ -8,7 +8,7 @@ export TERMINAL=st
 export TERMCMD=$TERMINAL # ranger
 export LOCKER='i3lock -nefc 333333'
 
-export MONITOR0="DVI-I-1"
+export MONITOR0="DVI-D-1"
 export MONITOR1="HDMI-A-0"
 
 #export http_proxy="localhost:8118"

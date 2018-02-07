@@ -28,7 +28,7 @@ if [[ ! -s "$ZGEN_INIT" ]]; then
 
 	zgen load "mafredri/zsh-async"
 	zgen load "$HOME/projects/public/nspure"
-	zgen load "$HOME/projects/public/zsh-bd"
+	zgen load "$HOME/projects/public/zsh-bdi"
 
 	zgen save
 fi

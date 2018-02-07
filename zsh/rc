@@ -10,6 +10,7 @@ zle -N self-insert url-quote-magic
 autoload -Uz bracketed-paste-magic
 zle -N bracketed-paste bracketed-paste-magic
 
+zmodload -F zsh/stat b:zstat
 
 setopt    autocd
 setopt    auto_pushd
@@ -54,7 +55,7 @@ setopt    glob_star_short
 
 if [[ -d ${ZDOTDIR}/zshrc.d ]]; then
 	for h in ${ZDOTDIR}/zshrc.d/?*.zsh ; do
-		 [[ -f "$h" && $(command stat -c '%U' "$h") = "$USER" ]] && . "$h"
+		 [[ -f "$h" && $(zstat +uid "$h") == "$UID" ]] && . "$h"
 	done
 	unset h
 fi

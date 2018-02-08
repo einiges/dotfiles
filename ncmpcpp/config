@@ -17,7 +17,7 @@ alternative_header_first_line_format = ╰──┚ {%t}|{%f} ┖──╯
 
 alternative_header_second_line_format = ╭──┒ $(40){%a}|{%A}$9{ ╭──╮ $(35)%b$9}{ ╭──╮ $(179)%y$9} ┎──╮
 
-song_library_format = {%n│ }%t
+song_library_format = " {%n │ }%t"
 
 song_list_format = " $(179)[%l]$9 {$(204)%t$9}|{$(204)%f$9} {$(40)%a$9}|{$(40)%A$9} $(179)%y$9 $R $(35)%b$9 $(179)%n$9 "
 

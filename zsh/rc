@@ -26,6 +26,7 @@ setopt    auto_resume
 setopt no_beep
 setopt    correct
 setopt no_correct_all
+setopt    interactive_comments
 setopt    magic_equal_subst
 setopt    multios
 setopt    rm_star_wait

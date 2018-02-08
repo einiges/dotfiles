@@ -44,7 +44,7 @@ xautolock -time 8 -corners '--00' -cornersize 20 -detectsleep -locker "xsssmart 
 
 
 # -- Start WM --
-sxhkd -m -1 $XDG_CONFIG_HOME/bspwm/sxhkdrc &
+sxhkd -m 1 $XDG_CONFIG_HOME/bspwm/sxhkdrc &
 exec bspwm
 
 

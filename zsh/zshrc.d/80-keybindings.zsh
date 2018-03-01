@@ -28,9 +28,6 @@ else
 	return
 fi
 
-insert-space() { LBUFFER+=" " }
-zle -N insert-space
-
 [[ -n ${key[Backspace]} ]]    && bindkey "${key[Backspace]}" backward-delete-char
 [[ -n ${key[C-Backspace]} ]]  && bindkey "${key[C-Backspace]}" backward-kill-word-match
 [[ -n ${key[S-Backspace]} ]]  && bindkey "${key[S-Backspace]}" backward-delete-char
@@ -48,6 +45,6 @@ zle -N insert-space
 [[ -n ${key[Left]} ]]         && bindkey "${key[Left]}" backward-char
 [[ -n ${key[Down]} ]]         && bindkey "${key[Down]}" down-line-or-search
 [[ -n ${key[Right]} ]]        && bindkey "${key[Right]}" forward-char
-[[ -n ${key[S-Space]} ]]      && bindkey "${key[S-Space]}" insert-space
+[[ -n ${key[S-Space]} ]]      && bindkey "${key[S-Space]}" magic-space
 [[ -n ${key[S-Return]} ]]     && bindkey "${key[S-Return]}" accept-line
 

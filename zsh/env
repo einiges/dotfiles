@@ -31,7 +31,7 @@ export XDG_DATA_DIRS="/usr/local/share/:/usr/share/"
 # dircolors
 DIRCOLORS="$XDG_CONFIG_HOME"/dircolors
 DIRCOLORS_STATIC="$XDG_DATA_HOME"/zsh/dircolors.sh
-. $DIRCOLORS_STATIC
+source $DIRCOLORS_STATIC
 
 # X11
 export    XINITRC="$XDG_CONFIG_HOME"/X11/xinitrc
@@ -60,6 +60,10 @@ export   LESSKEYDEF="$XDG_CONFIG_HOME"/less/keydef #*
 export     MYSQL_HOME="$XDG_CONFIG_HOME"/mysql
 export MYSQL_HISTFILE="$XDG_DATA_HOME"/mysql/history
 
+# ncurses
+#export TERMINFO="$XDG_DATA_HOME"/terminfo
+#export TERMINFO_DIRS="$TERMINFO"
+
 # irb
 export IRBRC="$XDG_CONFIG_HOME"/irb/irbrc
 
@@ -75,8 +79,13 @@ export GIMP2_DIRECTORY="$XDG_CONFIG_HOME"/gimp
 # KDE
 export KDEHOME="$XDG_CONFIG_HOME"/kde
 
+# readline
+#export INPUTRC="$XDG_CONFIG_HOME"/readline/inputrc
+
 # TeX
-#export TEXMFHOME="$XDG_DATA_HOME"/texlive
+export TEXMFHOME="$XDG_DATA_HOME"/texlive/texmf
+export TEXMFCONFIG="$XDG_DATA_HOME"/texlive/texmf-config
+export TEXMFVAR="$XDG_DATA_HOME"/texlive/texmf-var
 
 # Ruby Gems
 #export GEM_HOME=$(ruby -e 'print Gem.user_dir')

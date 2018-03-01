@@ -14,6 +14,7 @@ zmodload -F zsh/stat b:zstat
 
 setopt    autocd
 setopt    auto_pushd
+setopt    cdable_vars
 setopt    pushd_silent
 setopt    pushd_to_home
 setopt    pushd_minus
@@ -24,6 +25,7 @@ setopt    auto_param_keys
 setopt    auto_param_slash
 setopt    auto_resume
 setopt no_beep
+setopt no_clobber
 setopt    correct
 setopt no_correct_all
 setopt    interactive_comments

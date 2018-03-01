@@ -29,6 +29,10 @@ bspc config pointer_modifier        mod4
 bspc config focus_follows_pointer   true
 bspc config pointer_follows_focus   false
 bspc config pointer_follows_monitor true
+bspc config remove_unplugged_monitors true
+bspc config remove_disabled_monitors true
+bspc config ignore_ewmh_focus true
+
 
 bspc rule -r '*:*'
 bspc rule -a 'Pinentry'  state=floating

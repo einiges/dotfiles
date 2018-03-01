@@ -1,48 +1,70 @@
 # -- bspwm --
 
+# -- hotkeys --
+
 # quit bspwm
-super + shift + q; super + shift + q; super + q
+super + shift + Escape
 	bspc quit
 
 # reload config
-super + control + q
+super + Escape
 	$XDG_CONFIG_HOME/bspwm/bspwmrc
 
 # close/kill node
 super + {_,shift} + adiaeresis
 	bspc node -{c,k}
 
-# focus/swap with biggest node at current monitor
-super + {_,shift} + space
-	bspc node -{f,s} biggest.local
-
-super + ctrl + space
-	bspc node -f last
-
 # alternate between the tiled and monocle layout
 super + f
 	bspc desktop -l next
 
+
+# -- state/flags --
+
 # Toggle node between floating and tiled
 super + ctrl + f
-	if [ -z "$(bspc query -N -n focused.floating)" ]; then \
-		bspc node -t floating; \
-	else \
-		bspc node -t tiled; \
-	fi
+	bspc query -N -n focused.floating && bspc node -t tiled || bspc node -t floating
 
+
+# -- focus/swap
+
+# focus desktop when available on current desktop
+# otherwise swap
+super + {1-9,0}
+	d='{1-9,0}'; \
+	bspc query -T -m | jq -e --arg desk $d '.desktops[] | select(.name | contains($desk))' > /dev/null && \
+	bspc desktop -f $d || bspc desktop -s $d
+
+# send node to desktops
+super + shift + {1-9,0}
+	bspc node -d '{1-9,0}'
+
+# focus node in given direction
+super + {n,r,t,d}
+	bspc node -f {west,south,north,east}
+
+# swap node in given direction and follow across monitors
+super + shift + {n,r,t,d}
+	bspc node -s {west,south,north,east} --follow
+
+# focus/swap with biggest node at current monitor
+super + {_,shift} + space
+	bspc node -{f,s} biggest.local
+
+# focus prev/next node (to get acces to floating nodes)
 super + {comma,period}
 	bspc node -f {prev,next}.local
 
-# focus the node in the given direction
-super + {_,shift} + {n,r,t,d}
-	bspc node -{f,s} {west,south,north,east}.local
-
+# Flip layout
 super + {_,shift} + m
 	bspc node @/ -F {vertical,horizontal}
 
+# Rotate Layout
 super + {_,shift} + b
 	bspc node @/ -R {90,270}
+
+
+# -- Resize --
 
 # Increase window size
 super + ctrl +  {n,r,t,d}
@@ -52,25 +74,27 @@ super + ctrl +  {n,r,t,d}
 super + alt + {n,r,t,d}
 	bspc node -z {left 25 0,bottom 0 -17,top 0 17,right -25 0}
 
-# preselect
-super + mod5 + {n,r,t,d,y}
-	bspc node -p {west,south,north,east,cancel}
+
+# -- preselect --
+
+# preselect the direction
+super + mod5 + {n,r,t,d}
+	bspc node -p \~{west,south,north,east}
 
 # move to preselcted area
 super + mod5 + space
-	bspc query -N -n focused.automatic && bspc node -n last.!automatic || bspc node last.leaf -n focused
+	bspc query -N -n focused.automatic && bspc node -n last.!automatic
+
+
+# -- monitors --
 
 # focus next monitor
 super + {_,shift} + g
 	bspc {monitor -f,node -m} next
 
-# move node to next monitor and focus it
-super + ctrl + g
-	bspc node -m next && \
-	bspc node -f last
+# swap current desktop with focused desktop of next monitor
+super + mod5 + g
+	bspc desktop -s next:focused
 
-# focus or send to the given desktop
-# each desktop is available at any monitor (like in herbstluftwm and xmonad)
-super + {_,shift} + {1-9,0}
-	bspc {desktop -s,node -d} '{1-9,0}'
+
 

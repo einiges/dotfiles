@@ -1,6 +1,6 @@
 
 # - Reload sxhkd -
-super + alt + q
+super + alt + Escape
 	pkill --signal SIGUSR1 sxhkd
 
 @super + ctrl + v

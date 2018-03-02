@@ -1,3 +1,4 @@
+autoload -Uz add-zsh-hook
 
 # Set window title, when waiting for command
 function title_idle {

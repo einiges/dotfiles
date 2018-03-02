@@ -4,13 +4,12 @@
 #zstyle ':completion:*' select-prompt ''
 #zstyle ':completion:*' group-name ''
 
+zstyle ':completion:*' rehash true
 zstyle ':completion:*' menu select
 zstyle ':completion:*' verbose yes
 
-zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+zstyle ':completion:*' matcher-list 'm:{a-züöäß}={A-ZÜÖÄẞ}'
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
-
-
 
 zstyle ':completion:*:default'      list-prompt '%S%M matches%s'
 zstyle ':completion:*:corrections'  format ' %F{green}-- %d (errors: %e) --%f'
@@ -29,6 +28,8 @@ zstyle ':completion:*'               completer _complete _match _approximate
 zstyle ':completion:*:match:*'       original only
 zstyle ':completion:*:approximate:*' max-errors 1 numeric
 
+
+zstyle ':completion:*:*:cd:*' ignore-patterns '(*/)#lost+found' parent pwd
 
 
 # -- kill --

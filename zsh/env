@@ -15,7 +15,16 @@ export MONITOR1="HDMI-A-0"
 
 export TIMEFMT=$'real\t%E\nuser\t%U\nsys\t%S'
 
+#export XKB_DEFAULT_RULES=
+#export XKB_DEFAULT_MODEL='pc105'
+#export XKB_DEFAULT_LAYOUT='de'
+#export XKB_DEFAULT_VARIANT='neo'
+#export XKB_DEFAULT_OPTIONS='altwin:swap_lalt_lwin'
+#lv3:caps_switch'
+#lv5:rwin_switch_lock'
+#shift:both_capslock_cancel'
 
+#lv5:lsgt_switch_lock'
 
 # XDG
 [[ -v XDG_CONFIG_HOME ]] || export XDG_CONFIG_HOME="$HOME/.config"

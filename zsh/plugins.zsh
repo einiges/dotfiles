@@ -33,25 +33,15 @@ if [[ ! -s "$ZGEN_INIT" ]]; then
 	zgen save
 fi
 
-plugin_hook_dir="${ZDOTDIR}/zshrc.d/plugin-hooks"
-
-if [[ -d ${plugin_hook_dir} ]]; then
-	for h in ${plugin_hook_dir}/?*.pre.zsh ; do
-		 [[ -f "$h" && $(zstat +uid "$h") == "$UID" ]] && . "$h"
-	done
-	unset h
-fi
+for f in ${ZDOTDIR}/plugin-hook-source/*.pre.zsh; do
+	source $f
+done
 
 # Static load plugins
 . ${ZGEN_INIT}
 
 
-if [[ -d ${plugin_hook_dir} ]]; then
-	for h in ${plugin_hook_dir}/?*.post.zsh ; do
-		 [[ -f "$h" && $(zstat +uid "$h") == "$UID" ]] && . "$h"
-	done
-	unset h
-fi
-
-unset plugin_hook_dir
+for f in ${ZDOTDIR}/plugin-hook-source/*.post.zsh; do
+	source $f
+done
 

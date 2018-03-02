@@ -13,16 +13,16 @@ zle -N kill-word-match
 # Vim Mode
 bindkey -v
 
-bindkey -r '^E' '^G' '^H' '^K' '^O' '^P' '^Q' '^S' '^W' '^J'
+bindkey -r '^E' '^G' '^H' '^K' '^O' '^P' '^Q' '^S' '^W' '^J' '^Y'
 
 
-helper=${ZDOTDIR}/zshrc.d/keys/${TERM}
-if [[ $TERM =~ '^tmux-.*' ]]
-then helper+="_${$(tmux show-environment -g TERM)#*=}"
-fi
+# FIXME: Why does tmux receives different sequences?
+keyfile=${ZDOTDIR}/keydef/${TERM}
+[[ $TERM =~ '^tmux-.*' ]] &&
+	keyfile+="_${$(tmux show-environment -g TERM)#*=}"
 
-if [[ -f $helper ]]; then
-	source $helper
+if [[ -f $keyfile ]]; then
+	source $keyfile
 	unset helper
 else
 	return

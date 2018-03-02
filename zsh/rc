@@ -55,6 +55,13 @@ setopt    extended_glob
 setopt no_list_ambiguous
 setopt    glob_star_short
 
+autoload -Uz ${ZDOTDIR}/functions/*
+
+for f in $ZDOTDIR/{*,hooks/*}.zsh; do
+	source "$f"
+done
+
+return
 
 if [[ -d ${ZDOTDIR}/zshrc.d ]]; then
 	for h in ${ZDOTDIR}/zshrc.d/?*.zsh ; do

@@ -54,7 +54,7 @@ listview {
 
 textbox-prompt-colon {
 	expand: false;
-	font: "Nerd 14";
+	margin: 0 8px 0 0;
 	vertical-align: 0.5;
 	str: "";
 }

@@ -24,6 +24,9 @@ super + Return
 super + shift + l
 	xautolock -locknow
 
+super + ctrl + l
+	xautolock -toggle
+
 # - screenshots
 @{_,shift} + Print
 	scrot {_,-s} -e 'mv $f ~/Pictures/Screenshots'

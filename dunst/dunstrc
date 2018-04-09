@@ -3,11 +3,11 @@ follow = keyboard
 font = Noto Sans 11
 format = "<b>%s</b>\n%b"
 # (1920-350)/2
-geometry = "350x10+758+50"
+geometry = "=350x10+758+110"
 history_length = 0
 horizontal_padding = 15
 icon_position = left
-idle_threshold = 30
+idle_threshold = 0
 ignore_newline = false
 indicate_hidden = true
 markup = full
@@ -24,8 +24,8 @@ max_icon_size = 32
 icon_folders = /usr/share/icons/hicolor/scalable/apps/:/usr/share/icons/hicolor/48x48/apps/:/usr/share/icons/hicolor/16x16/apps/:/home/june/.local/share/icons/hicolor/48x48/
 
 [shortcuts]
-close = ctrl+space
-close_all =
+close =
+close_all = ctrl+space
 history =
 context =
 

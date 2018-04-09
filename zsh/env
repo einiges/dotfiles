@@ -73,6 +73,9 @@ export MYSQL_HISTFILE="$XDG_DATA_HOME"/mysql/history
 #export TERMINFO="$XDG_DATA_HOME"/terminfo
 #export TERMINFO_DIRS="$TERMINFO"
 
+# notmuch
+export NOTMUCH_CONFIG="$XDG_CONFIG_HOME"/notmuch/config
+
 # irb
 export IRBRC="$XDG_CONFIG_HOME"/irb/irbrc
 

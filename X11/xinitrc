@@ -29,7 +29,7 @@ xset dpms 0 800 800
 
 
 # -- Smart screenlock --
-xautolock -time 8 -corners '--00' -cornersize 20 -detectsleep -locker "xsssmart $LOCKER" -nowlocker "$LOCKER" &
+xautolock -time 8 -corners '--00' -cornersize 20 -detectsleep -locker "xsssmart -r $LOCKER" -nowlocker "$LOCKER" &
 
 
 # -- Launch Applications --
@@ -37,7 +37,7 @@ xautolock -time 8 -corners '--00' -cornersize 20 -detectsleep -locker "xsssmart 
 	sleep 3
 	$BROWSER &
 	$TERMINAL -n ncmpcpp    -e ncmpcpp &
-	$TERMINAL -n neomutt    -e $SHELL -c neomutt &
+	$TERMINAL -n neomutt    -e neomutt &
 	$TERMINAL -n calcurse   -e calcurse &
 	$TERMINAL -n newsboat   -e newsboat &
 } &

@@ -60,13 +60,4 @@ for f in $ZDOTDIR/{*,hooks/*}.zsh; do
 	source "$f"
 done
 
-return
-
-if [[ -d ${ZDOTDIR}/zshrc.d ]]; then
-	for h in ${ZDOTDIR}/zshrc.d/?*.zsh ; do
-		 [[ -f "$h" && $(zstat +uid "$h") == "$UID" ]] && . "$h"
-	done
-	unset h
-fi
-
 

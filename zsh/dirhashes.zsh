@@ -1,9 +1,13 @@
 #!/bin/zsh
 
-hash -d music=~/Audio/Music
-hash -d radioplay=~/Audio/RadioPlay
-hash -d wall=~/Pictures/Wallpapers
-hash -d screenshots=~/Pictures/Screenshots
+hash -d Load=~/Downloads
+hash -d Doc=~/Documents
+hash -d Pic=~/Pictures
+hash -d Vid=~/Videos
+hash -d Music=~/Audio/Music
+hash -d Radioplay=~/Audio/RadioPlay
+hash -d Wall=~/Pictures/Wallpapers
+hash -d Screenshots=~/Pictures/Screenshots
 
 hash -d  zsh="$XDG_CONFIG_HOME"/zsh
 hash -d nvim="$XDG_CONFIG_HOME"/nvim

@@ -19,10 +19,9 @@ line-color = ${vars.highlight-color}
 
 separator = " "
 
-font-0 = Noto Sans:pixelsize=9;3
-font-1 = Noto Sans CJK JP:pixelsize=9;2
-font-2 = 3270Medium Nerd Font:pixelsize=9;2
-font-3 = Noto Mono:pixelsize=9;3
+font-0 = NotoSans Nerd Font:pixelsize=9;3
+font-1 = IPAPGothic:pixelsize=9;2
+font-2 = NotoMono Nerd Font:pixelsize=9;3
 
 modules-left = powermenu bspwm
 modules-center = xwindow
@@ -53,14 +52,14 @@ margin = 1
 module-padding = 5
 workspace-padding = 4
 
-font-mono = 4
+font-mono = 3
 
 
 [module/powermenu]
 type = custom/menu
 
 
-label-open = 
+label-open = 
 label-open-padding = ${vars.module-padding}
 label-open-foreground = #1793d1
 label-open-background = ${vars.dark-background}
@@ -298,7 +297,7 @@ interval = 3
 
 format-padding = ${vars.module-padding}
 format-background = ${vars.bright-background}
-format-prefix = 
+format-prefix = 
 format-prefix-padding-right = ${vars.icon-padding-right}
 format-prefix-foreground = ${vars.icon-color}
 
@@ -316,7 +315,7 @@ interval = 1
 
 format-padding = ${vars.module-padding}
 format-background = ${vars.bright-background}
-format-prefix = 
+format-prefix = ﬙
 format-prefix-padding-right = ${vars.icon-padding-right}
 format-prefix-foreground = ${vars.icon-color}
 

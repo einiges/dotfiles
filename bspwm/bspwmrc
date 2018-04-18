@@ -50,9 +50,4 @@ bspc rule -a 'Zathura'         state=tiled
 bspc rule -a 'Pavucontrol'     state=floating
 bspc rule -a '*:scratchpad'    state=floating
 
-panel=$XDG_CONFIG_HOME/polybar/startup
-[ -x "$panel" ] && $panel bspwm-desktop-top &
-
-compton=$XDG_CONFIG_HOME/bspwm/compton.conf
-[ ! $(pgrep -x compton) ] && [ -f "$compton" ] && compton --config $compton &
 

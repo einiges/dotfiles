@@ -1,7 +1,10 @@
 
 # - Reload sxhkd -
-super + alt + Escape
+super + Escape ; s
 	pkill --signal SIGUSR1 sxhkd
+
+super + Escape ; p
+	polybar-msg cmd restart
 
 @super + ctrl + v
 	xdotool type --delay 0 --clearmodifiers "$(xclip -o)"

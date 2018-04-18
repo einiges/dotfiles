@@ -7,7 +7,7 @@ super + shift + Escape
 	bspc quit
 
 # reload config
-super + Escape
+super + Escape ; b
 	$XDG_CONFIG_HOME/bspwm/bspwmrc
 
 # close/kill node

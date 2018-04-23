@@ -22,22 +22,8 @@ alias  la='ls -A'
 alias lal='ls -lA'
 alias  lA='ls -a'
 
-alias  du='du --human-readable'
-alias dus='du -s'
-alias cpr='cp -r'
-
 alias nmutt='neomutt'
-
-alias feh='feh -.'
-alias scanlnet='nmap -sP 192.168.2.1/24'
 
 alias rs='rsync --recursive --perms --owner --group --human-readable --backup --backup-dir=/tmp/rsync.bak'
 
-alias yl='youtube-dl --output "%(title)s.%(ext)s" --ignore-errors'
-alias ylUrl2mp3='yl --extract-audio --audio-format mp3 --audio-quality 0'
-alias ylList2mp3='ylUrl2mp3 -a'
-
-alias yv='youtube-viewer --player=mpv'
-
-alias getWindowInfo='xprop | grep "WM_CLASS\|WM_NAME\|WM_WINDOW_ROLE\|_NET_WM_WINDOW_TYPE"'
 

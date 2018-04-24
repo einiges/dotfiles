@@ -1,6 +1,9 @@
 
 # -- Monitor Setup --
-xrandr --output $MONITOR0 --auto --primary --output $MONITOR1 --auto --left-of $MONITOR0
+primonitor='DVI-D-1'
+secmonitor='HDMI-A-0'
+xrandr --output $primonitor --auto --primary \
+       --output $secmonitor --auto --left-of $primonitor
 
 
 # -- Keyboard Layout --
@@ -45,8 +48,8 @@ xautolock -time 8 -corners '--00' -cornersize 20 -detectsleep -locker "xsssmart 
 
 # -- Start Environment --
 sxhkd -m 1 $XDG_CONFIG_HOME/bspwm/sxhkdrc &
-polybar -q bspwm-desktop-top &
 compton --config "$XDG_CONFIG_HOME/bspwm/compton.conf" &
+monitor=$primonitor polybar -q bspwm-desktop &
 exec bspwm
 
 

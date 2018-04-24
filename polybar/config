@@ -1,6 +1,5 @@
-[bar/bspwm-desktop-top]
-monitor = ${env:MONITOR0}
-monitor-fallback = ${env:MONITOR1}
+[bar/bspwm-desktop]
+monitor = ${env:monitor}
 
 locale = de_DE.UTF-8
 fixed-center = false

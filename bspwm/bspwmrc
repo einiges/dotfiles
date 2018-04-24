@@ -35,14 +35,14 @@ bspc config ignore_ewmh_focus true
 bspc rule -r '*:*'
 bspc rule -a 'Pinentry'  state=floating
 bspc rule -a 'discord'         desktop=8
-bspc rule -a '*:mutt'          desktop=9
-bspc rule -a '*:neomutt'       desktop=9
-bspc rule -a '*:ncmpcpp'       desktop=0
-bspc rule -a '*:calcurse'      desktop=0
-bspc rule -a '*:newsboat'      desktop=0
+bspc rule -a 'mutt'          desktop=9
+bspc rule -a 'neomutt'       desktop=9
+bspc rule -a 'ncmpcpp'       desktop=0
+bspc rule -a 'calcurse'      desktop=0
+bspc rule -a 'newsboat'      desktop=0
 bspc rule -a 'Zathura'         state=tiled
 bspc rule -a 'Pavucontrol'     state=floating
-bspc rule -a '*:scratchpad'    state=floating
+bspc rule -a 'scratchpad'    state=floating
 
 bspc config external_rules_command "$XDG_CONFIG_HOME/bspwm/external_rules"
 

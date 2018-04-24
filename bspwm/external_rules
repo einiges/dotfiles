@@ -1,0 +1,10 @@
+#!/bin/bash
+
+case $2 in
+	Soffice | libreoffice)
+		case $(xprop -id $1 _NET_WM_WINDOW_TYPE) in
+			*_NET_WM_WINDOW_TYPE_NORMAL* ) echo "state=tiled" ;;
+		esac
+		;;
+esac
+

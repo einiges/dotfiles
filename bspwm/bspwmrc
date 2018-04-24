@@ -40,11 +40,9 @@ bspc rule -a '*:neomutt'       desktop=9
 bspc rule -a '*:ncmpcpp'       desktop=0
 bspc rule -a '*:calcurse'      desktop=0
 bspc rule -a '*:newsboat'      desktop=0
-# Libreoffice 5.x starts with Soffice and changes it after launch... WTF?
-bspc rule -a 'Soffice'         state=tiled
-bspc rule -a '*:libreoffice'   state=tiled
 bspc rule -a 'Zathura'         state=tiled
 bspc rule -a 'Pavucontrol'     state=floating
 bspc rule -a '*:scratchpad'    state=floating
 
+bspc config external_rules_command "$XDG_CONFIG_HOME/bspwm/external_rules"
 

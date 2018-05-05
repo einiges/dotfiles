@@ -6,7 +6,6 @@ export EDITOR=nvim
 export PAGER=less
 export TERMINAL=st
 export TERMCMD=$TERMINAL # ranger
-export LOCKER='i3lock -nefc 333333'
 
 #export http_proxy="localhost:8118"
 

@@ -68,11 +68,11 @@ super + {_,shift} + b
 
 # Increase window size
 super + ctrl +  {n,r,t,d}
-	bspc node -z {left -25 0,bottom 0 17,top 0 -17,right 25 0}
+	bspc node -z {left -50 0,bottom 0 35,top 0 -35,right 35 0}
 
 # Decrease window size
 super + alt + {n,r,t,d}
-	bspc node -z {left 25 0,bottom 0 -17,top 0 17,right -25 0}
+	bspc node -z {left 50 0,bottom 0 -25,top 0 35,right -35 0}
 
 
 # -- preselect --
@@ -83,7 +83,7 @@ super + mod5 + {n,r,t,d}
 
 # move to preselcted area
 super + mod5 + space
-	bspc query -N -n focused.automatic && bspc node -n last.!automatic
+	bspc node -n last.!automatic
 
 
 # -- monitors --
@@ -94,7 +94,7 @@ super + {_,shift} + g
 
 # swap current desktop with focused desktop of next monitor
 super + mod5 + g
-	bspc desktop -s next:focused
+	bspc desktop -s next.focused
 
 
 

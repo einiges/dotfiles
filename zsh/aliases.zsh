@@ -5,7 +5,7 @@ alias -g G='| grep --color'
 alias -g W='| wc'
 
 alias ,='popd'
-alias .,='cd ~-'
+alias .,='oldpwd'
 
 # -- shorties --
 

@@ -35,8 +35,8 @@ export XDG_DATA_DIRS="/usr/local/share/:/usr/share/"
 
 # dircolors
 DIRCOLORS="$XDG_CONFIG_HOME"/dircolors
-DIRCOLORS_STATIC="$XDG_DATA_HOME"/zsh/dircolors.sh
-source $DIRCOLORS_STATIC
+DIRCOLORS_GEN="$XDG_CACHE_HOME"/zsh/dircolors.sh
+source $DIRCOLORS_GEN
 
 # X11
 export    XINITRC="$XDG_CONFIG_HOME"/X11/xinitrc

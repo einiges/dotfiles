@@ -1,0 +1,10 @@
+#!/usr/bin/env zsh
+
+# Create dircolors file from $DIRCOLORS in $DIRCOLORS_GEN
+
+if [[ -v DIRCOLORS && -v DIRCOLORS_GEN ]]; then
+	dircolors "$DIRCOLORS" >! "$DIRCOLORS_GEN"
+else
+	printf 'At least one of DIRCOLORS and DIRCOLORS_STATIC is not defined\n' >&2
+	return 1
+fi

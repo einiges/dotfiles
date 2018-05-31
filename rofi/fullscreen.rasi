@@ -2,7 +2,7 @@
 	font: "Noto 18";
 
 	pad-below: 0 0 0.7em 0;
-	indent: 0 0 0 26px;
+	indent: 0 0 0 34px;
 
 	transparent: rgba(0,0,0,0);
 
@@ -43,7 +43,6 @@ inputbar {
 textbox {
 	text-color: @textbox-fc;
 	padding: @pad-below;
-	margin: @indent;
 }
 
 listview {

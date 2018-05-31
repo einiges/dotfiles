@@ -3,7 +3,7 @@ configuration {
 	theme: "fullscreen" ;
 	terminal: "terminal";
 	auto-select: false;
-	matching: "fuzzy";
+	matching: "normal";
 	tokenize: true;
 	monitor: "-1";
 	scroll-method: 1;

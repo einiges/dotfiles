@@ -7,20 +7,23 @@ if [ $(bspc query -D | wc -l) -eq $(bspc query -M | wc -l) ]; then
 	bspc monitor $secmonitor -d 2
 fi
 
-bspc config normal_border_color   '#ffffff'
-bspc config active_border_color   '#3333cc'
-bspc config focused_border_color  '#ff0000'
-bspc config presel_feedback_color '#E1505A'
+bspc config focused_border_color  '#073642'
+bspc config active_border_color   '#AAB7B7'
+bspc config normal_border_color   '#FDF6E3'
+bspc config presel_feedback_color '#93A1A1'
 
-bspc config border_width            5
-bspc config window_gap              7
-for side in top right bottom left; do
-	bspc config ${side}_padding -7
-done
+bspc config border_width 1
+bspc config window_gap 9
+bspc config top_padding -6
+bspc config left_padding -6
+bspc config bottom_padding 3
+bspc config right_padding 3
 
 bspc config split_ratio             0.5
-bspc config borderless_monocle      true
+bspc config single_monocle          false
+bspc config borderless_monocle      false
 bspc config gapless_monocle         false
+bspc config paddingless_monocle     false
 bspc config initial_polarity        first_child
 bspc config pointer_modifier        mod4
 bspc config focus_follows_pointer   true
@@ -31,6 +34,7 @@ bspc config remove_unplugged_monitors true
 bspc config remove_disabled_monitors true
 bspc config ignore_ewmh_focus true
 
+bspc config external_rules_command "$XDG_CONFIG_HOME/bspwm/external_rules"
 
 bspc rule -r '*:*'
 bspc rule -a 'Pinentry'  state=floating
@@ -44,5 +48,4 @@ bspc rule -a 'Zathura'         state=tiled
 bspc rule -a 'Pavucontrol'     state=floating
 bspc rule -a 'scratchpad'    state=floating
 
-bspc config external_rules_command "$XDG_CONFIG_HOME/bspwm/external_rules"
 

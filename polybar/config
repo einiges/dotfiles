@@ -1,49 +1,59 @@
 [bar/bspwm-desktop]
-monitor = ${env:monitor}
+monitor = ${env:monitor:fallback}
+monitor-fallback = ${env:primonitor}
 
 locale = de_DE.UTF-8
-fixed-center = false
+fixed-center = true
 bottom = false
-
-width = 100%
-height = 26
-offset-x = 0
-offset-y = 0
-
-background = #101010
-foreground = ${vars.bright-foreground}
-
-line-size = 2
-line-color = ${vars.highlight-color}
-
-separator = " "
-
-font-0 = NotoSans Nerd Font:pixelsize=9;3
-font-1 = IPAPGothic:pixelsize=9;2
-font-2 = NotoMono Nerd Font:pixelsize=9;3
-
-modules-left = powermenu bspwm
-modules-center = xwindow
-modules-right = mpd mpd-control cpu memory pkg microphone volume date time
-
 wm-restack = bspwm
-
 enable-ipc = true
 
 
+width = 100%
+height = 28
+offset-x = 0
+offset-y = 3
+
+background = #FDF6E3
+foreground = ${vars.module-foreground}
+
+line-size = 1
+line-color = ${vars.highlight-color}
+
+separator = " "
+padding = 4
+margin = 1
+
+border-bottom-size = 0
+border-top-size = 0
+border-bottom-color = #00FDF6E3
+border-top-color = #00FDF6E3
+
+font-0 = NotoSans Nerd Font:pixelsize=9;2
+font-1 = IPAPGothic:pixelsize=9;2
+font-2 = NotoMono Nerd Font:pixelsize=9;2
+
+modules-left = powermenu xwindow
+modules-center = bspwm
+modules-right = mpd-control mail cpu memory pkg microphone volume date time
+
+
+
+; Polybar base default
+[settings]
+format-background = ${vars.module-background}
+format-foreground = ${vars.module-foreground}
+
+
 [vars]
-bright-background = #333333
-dark-background = #1c1c1c
-bright-foreground = #ffffff
-dark-foreground = #505050
+module-background = #EEE8D5
+module-foreground = #657B83
+
+bar-background = #FDF6E3
 
 highlight-color = #76b9ed
-eye-catch-color = #a40fb0
-warning-color = #ff5400
-urgent-line-color = #ff7200
-urgent-background = #995219
 
-icon-color = #e5dc9d
+icon-color = ${vars.module-foreground}
 icon-padding-right = 3
 
 
@@ -61,42 +71,41 @@ type = custom/menu
 label-open = 
 label-open-padding = ${vars.module-padding}
 label-open-foreground = #1793d1
-label-open-background = ${vars.dark-background}
 
 label-close = 
 label-close-padding = ${vars.module-padding}
 label-close-foreground = #f00
-label-close-background = ${vars.bright-background}
+label-close-background = ${vars.module-background}
 label-close-margin-right = ${vars.margin}
 
 menu-0-0 = 
 menu-0-0-exec = xautolock -locknow
 menu-0-0-padding = ${vars.module-padding}
-menu-0-0-background = ${vars.bright-background}
+menu-0-0-background = ${vars.module-background}
 menu-0-0-margin-right = ${vars.margin}
 
 menu-0-1 = 
 menu-0-1-exec = bspc quit
 menu-0-1-padding = ${vars.module-padding}
-menu-0-1-background = ${vars.bright-background}
+menu-0-1-background = ${vars.module-background}
 menu-0-1-margin-right = ${vars.margin}
 
 menu-0-2 = 
 menu-0-2-exec = halt
 menu-0-2-padding = ${vars.module-padding}
-menu-0-2-background = ${vars.bright-background}
+menu-0-2-background = ${vars.module-background}
 menu-0-2-margin-right = ${vars.margin}
 
 menu-0-3 = 
 menu-0-3-exec = reboot
 menu-0-3-padding = ${vars.module-padding}
-menu-0-3-background = ${vars.bright-background}
+menu-0-3-background = ${vars.module-background}
 menu-0-3-margin-right = ${vars.margin}
 
 menu-0-4 = 
 menu-0-4-exec = poweroff
+menu-0-4-background = ${vars.module-background}
 menu-0-4-padding = ${vars.module-padding}
-menu-0-4-background = ${vars.bright-background}
 
 
 
@@ -104,7 +113,7 @@ menu-0-4-background = ${vars.bright-background}
 type = internal/bspwm
 
 pin-workspaces = false
-enable-click = false
+enable-click = true
 enable-scroll = false
 
 ws-icon-0 = 1;¹  
@@ -119,29 +128,33 @@ ws-icon-8 = 9;⁹  
 ws-icon-9 = 10;⁰  
 
 label-focused = %icon%
-label-focused-background = ${vars.bright-background}
-label-focused-overline = ${vars.highlight-color}
+label-focused-background = #DFD9C6
+label-focused-foreground = #002B36
 label-focused-padding = ${vars.workspace-padding}
 label-focused-margin-right = ${vars.margin}
 
+; hidden not empty
 label-occupied = %icon%
-label-occupied-background = ${vars.dark-background}
+label-occupied-background = ${vars.module-background}
 label-occupied-padding = ${vars.workspace-padding}
 label-occupied-margin-right = ${vars.margin}
 
 label-urgent = %icon%
-label-urgent-background = ${vars.urgent-background}
-label-urgent-overline= ${vars.urgent-line-color}
+label-urgent-foreground = #CB4B16
+label-urgent-background = ${vars.module-background}
 label-urgent-padding = ${vars.workspace-padding}
 label-urgent-margin-right = ${vars.margin}
 
 label-empty = %icon%
-label-empty-foreground = ${vars.dark-foreground}
-label-empty-background = ${vars.dark-background}
+label-empty-foreground = #A1AFAF
+label-empty-background = #F4EEDB
 label-empty-padding = ${vars.workspace-padding}
 label-empty-margin-right = ${vars.margin}
 
-label-dimmed-focused-background = ${vars.dark-background}
+; active not focused
+label-dimmed-focused-background = ${vars.module-background}
+label-dimmed-focused-foreground = #002B36
+label-dimmed-focused-margin-right = ${vars.margin}
 
 format = <label-state>
 
@@ -153,11 +166,6 @@ format = <label-state>
 type = internal/xwindow
 
 format-padding = ${vars.module-padding}
-format-background = ${vars.dark-background}
-format-overline = ${vars.bright-background}
-format-prefix = 
-format-prefix-padding-right = ${vars.icon-padding-right}
-format-prefix-foreground = ${vars.icon-color}
 
 label = %title:0:60:…%
 format = <label>
@@ -169,13 +177,11 @@ format = <label>
 [module/time]
 type = internal/date
 
-interval = 1
+interval = 5
 
 time = %H %M
 time-alt = %H %M %S
 
-format-background = ${vars.bright-background}
-format-overline = ${vars.highlight-color}
 format-padding = ${vars.module-padding}
 
 label-font = ${vars.font-mono}
@@ -193,30 +199,11 @@ interval = 60
 date = %a %e
 date-alt = %a %e %m %Y
 
-format-background = ${vars.bright-background}
-format-overline = ${vars.highlight-color}
 format-padding = ${vars.module-padding}
-format-prefix = 
-format-prefix-padding-right = ${vars.icon-padding-right}
-format-prefix-foreground = ${vars.icon-color}
 
 label = %date%
 format = <label>
 
-
-
-
-[module/keyboard]
-type = internal/xkeyboard
-
-format-padding = ${vars.module-padding}
-format-background = ${vars.bright-background}
-format-prefix = 
-format-prefix-padding-right = ${vars.icon-padding-right}
-format-prefix-foreground = ${vars.icon-color}
-
-label-layout = %layout%
-format = <label-layout>
 
 
 
@@ -225,12 +212,9 @@ type = internal/pulseaudio
 
 ; Muted
 
-format-muted-background = ${vars.bright-background}
-format-muted-overline = ${vars.warning-color}
 format-muted-padding = ${vars.module-padding}
-format-muted-prefix = 
+format-muted-prefix = 婢
 format-muted-prefix-padding-right = ${vars.icon-padding-right}
-format-muted-prefix-foreground = ${vars.icon-color}
 
 label-muted-font = ${vars.font-mono}
 
@@ -239,9 +223,8 @@ format-muted = <label-muted>
 
 ; Volume / Unmuted
 
-format-volume-background = ${vars.bright-background}
 format-volume-padding = ${vars.module-padding}
-format-volume-prefix = 
+format-volume-prefix = 墳
 format-volume-prefix-padding-right = ${vars.icon-padding-right}
 format-volume-prefix-foreground = ${vars.icon-color}
 
@@ -259,7 +242,6 @@ hook-0 = amixer -D pulse sset Capture toggle | grep -q off && echo "" || echo
 hook-1 = amixer -D pulse sget Capture | grep -q off && echo "" || echo ""
 initial = 2
 
-format-background = ${vars.bright-background}
 format-foreground = ${vars.icon-color}
 format-padding = ${vars.module-padding}
 
@@ -271,11 +253,10 @@ click-left = polybar-msg -p %pid% hook microphone 1
 [module/pkg]
 type = custom/script
 
-interval = 1200
+interval = 600
 
-format-background = ${vars.bright-background}
 format-padding = ${vars.module-padding}
-format-prefix = 
+format-prefix = 
 format-prefix-padding-right = ${vars.icon-padding-right}
 format-prefix-foreground = ${vars.icon-color}
 
@@ -285,24 +266,23 @@ label = %output:3%
 format = <label>
 
 exec-if = ping -q -w 1 -c 1 $(ip r | grep default | cut -d ' ' -f 3) > /dev/null
-exec = mol -x 2 $(( $(checkupdates | wc -l) + $(cower -u | wc -l) ))
+exec = { checkupdates & cower -u; } | wc -l | mol -x 2
 
 
 
 [module/memory]
 type = internal/memory
 
-interval = 3
+interval = 7
 
 format-padding = ${vars.module-padding}
-format-background = ${vars.bright-background}
 format-prefix = 
 format-prefix-padding-right = ${vars.icon-padding-right}
 format-prefix-foreground = ${vars.icon-color}
 
 label-font = ${vars.font-mono}
 
-label = %percentage_used:3%
+label = %percentage_used:2%
 format = <label>
 
 
@@ -313,14 +293,13 @@ type = internal/cpu
 interval = 1
 
 format-padding = ${vars.module-padding}
-format-background = ${vars.bright-background}
 format-prefix = ﬙
 format-prefix-padding-right = ${vars.icon-padding-right}
 format-prefix-foreground = ${vars.icon-color}
 
 label-font = ${vars.font-mono}
 
-label = %percentage:3%
+label = %percentage:2%
 format = <label>
 
 
@@ -328,28 +307,22 @@ format = <label>
 [module/mpd]
 type = internal/mpd
 
-host = ::1
-port = 6600
-password =
-
-; Online
-
 format-online-padding = ${vars.module-padding}
-format-online-background = ${vars.bright-background}
 format-online-prefix = 
 format-online-prefix-padding-right = ${vars.icon-padding-right}
 format-online-prefix-foreground = ${vars.icon-color}
 
-; Playing
-
 format-playing-padding = ${vars.module-padding}
-format-playing-background = ${vars.bright-background}
 format-playing-prefix = 
 format-playing-prefix-padding-right = ${vars.icon-padding-right}
-format-playing-prefix-foreground = ${vars.icon-color}
+format-playing-prefix-foreground = ${vars.highlight-color}
+
+format-paused-padding = ${vars.module-padding}
+format-paused-prefix = 
+format-paused-prefix-padding-right = ${vars.icon-padding-right}
+format-paused-prefix-foreground = ${vars.icon-color}
 
 format-offline =
-format-paused =
 format-stopped =
 
 label-song = %title:0:30:…%
@@ -360,51 +333,35 @@ format-online = <label-song>
 [module/mpd-control]
 type = internal/mpd
 
-; Online
 format-online-padding = ${vars.module-padding}
-format-online-background = ${vars.bright-background}
 
-; Paused
-format-paused-padding = ${vars.module-padding}
-format-paused-background = ${vars.bright-background}
-
-; Playing
-format-playing-padding = ${vars.module-padding}
-format-playing-background = ${vars.bright-background}
-
-; Stopped
-format-stopped-padding = ${vars.module-padding}
-format-stopped-background = ${vars.bright-background}
-
-; Offline
-format-offline-padding = ${vars.module-padding}
-format-offline-background = ${vars.bright-background}
-
-
-
-; Icon
-icon-pause = 
-icon-pause-padding-right = 3
-icon-pause-foreground = ${vars.highlight-color}
-
-icon-play = 
-icon-play-padding-right = 3
-
+icon-play = 
+icon-pause = 
 icon-random = 
-icon-random-padding-right = 3
-
 icon-repeat = 
-icon-repeat-padding-right = 3
-
 icon-repeatone = 
-icon-repeatone-padding-right = 3
-
-icon-consume = 
+icon-consume = 
 
 toggle-on-foreground = ${vars.highlight-color}
+icon-pause-foreground = ${self.toggle-on-foreground}
 
-format-online = <toggle> <icon-random> <icon-repeat> <icon-repeatone> <icon-consume>
+format-online = <toggle>   <icon-random>   <icon-repeat>   <icon-repeatone>    <icon-consume>
 
+
+
+[module/mail]
+type = custom/script
+
+interval = 180
+
+exec = notmuch search tag:unread | wc -l | mol -x 2
+
+label-font = ${vars.font-mono}
+
+format-padding = ${vars.module-padding}
+format-prefix = 
+format-prefix-padding-right = ${vars.icon-padding-right}
+format-prefix-foreground = ${vars.icon-color}
 
 
 ; vim:ft=dosini

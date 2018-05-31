@@ -33,7 +33,7 @@ xset dpms 0 800 800
 
 # -- Smart screenlock --
 LOCKER='i3lock -nefc 333333'
-xautolock -time 8 -corners '--00' -cornersize 20 -detectsleep -locker "xsssmart -r $LOCKER" -nowlocker "$LOCKER" &
+xautolock -time 8 -corners '--00' -cornersize 20 -detectsleep -locker "xsssmart -rd $LOCKER" -nowlocker "$LOCKER" &
 
 
 # -- Launch Applications --

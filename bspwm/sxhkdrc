@@ -31,13 +31,13 @@ super + ctrl + f
 # focus desktop when available on current desktop
 # otherwise swap
 super + {1-9,0}
-	d='{1-9,0}'; \
-	bspc query -T -m | jq -e --arg desk $d '.desktops[] | select(.name | contains($desk))' > /dev/null && \
+	d='{1-9,10}'; \
+	bspc query -T -m | jq -e --arg desk $d '.desktops[] | select(.name == $desk)' > /dev/null && \
 	bspc desktop -f $d || bspc desktop -s $d
 
 # send node to desktops
 super + shift + {1-9,0}
-	bspc node -d '{1-9,0}'
+	bspc node -d '{1-9,10}'
 
 # focus node in given direction
 super + {n,r,t,d}

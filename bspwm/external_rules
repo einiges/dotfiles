@@ -10,5 +10,10 @@ case $class in
 			*_NET_WM_WINDOW_TYPE_NORMAL* ) echo "state=tiled" ;;
 		esac
 		;;
+	Java )
+		case $(xprop -id $wid _NET_WM_WINDOW_TYPE) in
+			*_NET_WM_WINDOW_TYPE_SPLASH* ) echo "state=floating" ;;
+		esac
+		;;
 esac
 

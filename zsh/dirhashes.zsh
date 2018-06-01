@@ -9,6 +9,6 @@ hash -d screenshots=~/Pictures/Screenshots
 
 hash -d nvim="$XDG_CONFIG_HOME"/nvim
 
-hash -d pub=~/prjects/public
+hash -d pub=~/projects/public
 hash -d pri=~/projects/private
 hash -d sil=~/projects/silly

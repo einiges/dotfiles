@@ -27,6 +27,11 @@ vicursor::cursor_on_insert()
 	printf '%b' $vicursor_insert_cursor
 }
 
+vicursor::cursor_on_replace()
+{
+	printf '%b' $vicursor_replace_cursor
+}
+
 vicursor::keymap()
 {
 	case $KEYMAP in
@@ -67,6 +72,7 @@ vicursor::setup()
 	vicursor::sequence_to_var "vicursor_insert_cursor"  5
 	vicursor::sequence_to_var "vicursor_command_cursor" 1
 	vicursor::sequence_to_var "vicursor_execute_cursor" 2
+	vicursor::sequence_to_var "vicursor_replace_cursor" 3
 
 	unset sequencetype
 }
@@ -86,6 +92,23 @@ vicursor::sequence_to_var() {
 
 	typeset -g $varname=$sequence
 }
+
+# Because replace mode is not treated in $KEYMAP
+vicursor::vi-replace()
+{
+	zle vi-replace
+	vicursor::cursor_on_replace
+}
+zle -N vicursor::vi-replace
+
+vicursor::vi-replace-chars()
+{
+	vicursor::cursor_on_replace
+	zle vi-replace-chars
+	vicursor::cursor_on_command
+}
+zle -N vicursor::vi-replace-chars
+
 
 vicursor::stop()
 {
@@ -111,4 +134,6 @@ vicursor::setup
 
 vicursor::start
 
+bindkey -M vicmd 'R' vicursor::vi-replace
+bindkey -M vicmd 'r' vicursor::vi-replace-chars
 

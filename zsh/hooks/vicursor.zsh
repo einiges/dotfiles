@@ -107,7 +107,7 @@ autoload -Uz add-zsh-hook
 
 vicursor::setup
 (( $? )) &&
-	return 1
+	return 0
 
 vicursor::start
 

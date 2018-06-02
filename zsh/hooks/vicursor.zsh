@@ -49,7 +49,10 @@ vicursor::setup()
 
 	typeset -g sequencetype
 
-	if [[ "$baseterm" =~ "st.*"
+	if [[ "$baseterm" =~ "Konsole" || -v KONSOLE_DBUS_SESSION ]]
+	then
+		return 1
+	elif [[ "$baseterm" =~ "st.*"
 	   || "$baseterm" =~ 'rxvt-unicode.*'
 	   || "$baseterm" =~ 'xterm.*'
 	   || ${TERM_PROGRAM:-$baseterm} =~ 'iTerm.*' || -v ITERM_SESSION_ID

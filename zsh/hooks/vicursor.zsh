@@ -70,9 +70,9 @@ vicursor::setup()
 	fi
 
 	vicursor::sequence_to_var "vicursor_insert_cursor"  5
-	vicursor::sequence_to_var "vicursor_command_cursor" 1
-	vicursor::sequence_to_var "vicursor_execute_cursor" 2
-	vicursor::sequence_to_var "vicursor_replace_cursor" 3
+	vicursor::sequence_to_var "vicursor_command_cursor" 2
+	vicursor::sequence_to_var "vicursor_execute_cursor" 1
+	vicursor::sequence_to_var "vicursor_replace_cursor" 4
 
 	unset sequencetype
 }

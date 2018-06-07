@@ -5,6 +5,6 @@
 if [[ -v DIRCOLORS && -v DIRCOLORS_GEN ]]; then
 	dircolors "$DIRCOLORS" >! "$DIRCOLORS_GEN"
 else
-	printf 'At least one of DIRCOLORS and DIRCOLORS_STATIC is not defined\n' >&2
+	printf 'At least one of DIRCOLORS and DIRCOLORS_GEN is not defined\n' >&2
 	return 1
 fi

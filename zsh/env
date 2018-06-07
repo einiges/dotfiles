@@ -34,7 +34,7 @@ export XDG_DATA_DIRS="/usr/local/share/:/usr/share/"
 [[ -v ZDOTDIR ]] || export ZDOTDIR="$XDG_CONFIG_HOME"/zsh
 
 # dircolors
-DIRCOLORS="$XDG_CONFIG_HOME"/dircolors
+DIRCOLORS="$XDG_CONFIG_HOME"/dircolors/dircolors
 DIRCOLORS_GEN="$XDG_CACHE_HOME"/zsh/dircolors.sh
 source $DIRCOLORS_GEN
 

@@ -12,6 +12,22 @@
 # requires following line in screenrc!:
 #    requires "setenv VICURSOR_TERM $TERM"
 
+# From: vt100.net
+# ---------------------------
+# DECSCUSR - Set Cursor Style
+# CSI    Ps    SP   q
+# 9/11   3/n   2/0  7/1
+# --------------------------------
+# Ps            | Cursor Style
+# --------------+-----------------
+# 0, 1 or none  | Blink  Block
+# 2             | Steady Block
+# 3             | Blink  Underline
+# 4             | Steady Underline
+# 5             | Blink  Pipe
+# 6             | Steady Pipe
+# --------------------------------
+
 vicursor::cursor_on_execute()
 {
 	printf '%b' $vicursor_execute_cursor

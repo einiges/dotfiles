@@ -12,6 +12,7 @@ alias .,='oldpwd'
 alias l=${PAGER:-less}
 alias n='nvim'
 alias o='xdg-open'
+alias p=print
 alias g='git'
 alias t='tmux'
 alias ta='tmux attach -t'

@@ -27,7 +27,6 @@ if [[ ! -s "$ZGEN_INIT" ]]; then
 	zgen oh-my-zsh "plugins/extract"
 
 	zgen load "mafredri/zsh-async"
-	zgen load "$HOME/projects/public/pure"
 	zgen load "$HOME/projects/public/zsh-bdi"
 
 	zgen save

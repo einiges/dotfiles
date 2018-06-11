@@ -12,11 +12,6 @@
 # requires following line in screenrc!:
 #    requires "setenv VICURSOR_TERM $TERM"
 
-# From: vt100.net
-# ---------------------------
-# DECSCUSR - Set Cursor Style
-# CSI    Ps    SP   q
-# 9/11   3/n   2/0  7/1
 # --------------------------------
 # Ps            | Cursor Style
 # --------------+-----------------
@@ -110,20 +105,22 @@ vicursor::sequence_to_var() {
 }
 
 # Because replace mode is not treated in $KEYMAP
-vicursor::vi-replace()
+vi-replace()
 {
-	zle vi-replace
+	zle builtin-vi-replace
 	vicursor::cursor_on_replace
 }
-zle -N vicursor::vi-replace
+zle -A vi-replace builtin-vi-replace
+zle -N vi-replace
 
-vicursor::vi-replace-chars()
+vi-replace-chars()
 {
 	vicursor::cursor_on_replace
-	zle vi-replace-chars
+	zle builtin-vi-replace-chars
 	vicursor::cursor_on_command
 }
-zle -N vicursor::vi-replace-chars
+zle -A vi-replace-chars builtin-vi-replace-chars
+zle -N vi-replace-chars
 
 
 vicursor::stop()
@@ -149,7 +146,4 @@ vicursor::setup
 	return 0
 
 vicursor::start
-
-bindkey -M vicmd 'R' vicursor::vi-replace
-bindkey -M vicmd 'r' vicursor::vi-replace-chars
 

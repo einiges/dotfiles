@@ -93,7 +93,7 @@ super + {_,shift} + g
 	bspc {monitor -f,node -m} next
 
 # swap current desktop with focused desktop of next monitor
-super + mod5 + g
+super + dead_circumflex
 	bspc desktop -s next.focused
 
 

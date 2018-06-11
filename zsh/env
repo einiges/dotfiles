@@ -11,17 +11,6 @@ export TERMCMD=$TERMINAL # ranger
 
 export TIMEFMT=$'real\t%E\nuser\t%U\nsys\t%S'
 
-#export XKB_DEFAULT_RULES=
-#export XKB_DEFAULT_MODEL='pc105'
-#export XKB_DEFAULT_LAYOUT='de'
-#export XKB_DEFAULT_VARIANT='neo'
-#export XKB_DEFAULT_OPTIONS='altwin:swap_lalt_lwin'
-#lv3:caps_switch'
-#lv5:rwin_switch_lock'
-#shift:both_capslock_cancel'
-
-#lv5:lsgt_switch_lock'
-
 # XDG
 [[ -v XDG_CONFIG_HOME ]] || export XDG_CONFIG_HOME="$HOME/.config"
 [[ -v XDG_CACHE_HOME  ]] || export  XDG_CACHE_HOME="$HOME/.cache"
@@ -53,7 +42,7 @@ export HISTFILE="$XDG_DATA_HOME/${SHELL##*/}"/history
 
 # pass
 export PASSWORD_STORE_DIR="$XDG_DATA_HOME"/password-store
-export PASSWORD_STORE_CLIP_TIME=7
+export PASSWORD_STORE_CLIP_TIME=3
 
 # less
 export LESS='-irc~'
@@ -86,6 +75,9 @@ export GIMP2_DIRECTORY="$XDG_CONFIG_HOME"/gimp
 
 # KDE
 export KDEHOME="$XDG_CONFIG_HOME"/kde
+
+# weechat
+export WEECHAT_HOME="$XDG_CONFIG_HOME"/weechat
 
 # readline
 #export INPUTRC="$XDG_CONFIG_HOME"/readline/inputrc

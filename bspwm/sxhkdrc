@@ -21,9 +21,9 @@ super + f
 
 # -- state/flags --
 
-# Toggle node between floating and tiled
-super + ctrl + f
-	bspc query -N -n focused.floating && bspc node -t tiled || bspc node -t floating
+# Toggle states
+super + {ctrl,shift,mod5} + f
+	bspc node -t \~{floating,fullscreen,tiled}
 
 
 # -- focus/swap

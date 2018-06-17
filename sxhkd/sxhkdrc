@@ -46,9 +46,7 @@ XF86Audio{Play,Stop,Next,Prev}
 XF86AudioMute
 	amixer -qD pulse set Master toggle
 
-XF86Audio{Raise,Lower}Volume
-	amixer -qD pulse set Master 7%{+,-}
+{_,control} + XF86Audio{Raise,Lower}Volume
+	amixer -qD pulse set Master {3,7}%{+,-}
 
-control + XF86Audio{Raise,Lower}Volume
-	amixer -qD pulse set Master 3%{+,-}
 

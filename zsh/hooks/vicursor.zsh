@@ -68,13 +68,12 @@ vicursor::setup()
 	if [[ "$baseterm" =~ "Konsole" || -v KONSOLE_DBUS_SESSION ]]
 	then
 		return 1
-	elif [[ "$baseterm" =~ "st.*"
-	   || "$baseterm" =~ 'rxvt-unicode.*'
-	   || "$baseterm" =~ 'xterm.*'
-	   || ${TERM_PROGRAM:-$baseterm} =~ 'iTerm.*' || -v ITERM_SESSION_ID
-	   || $VTE_VERSION -ge 3900
-	   || ${XTERM_VERSION//[^0-9]/} -ge 252
-	   ]]
+	elif
+	  [[ "${TERM_PROGRAM:-$baseterm}" =~ "(st|rxvt-unicode|xterm|iTerm).*"
+	  || -v ITERM_SESSION_ID
+	  || $VTE_VERSION -ge 3900
+	  || ${XTERM_VERSION//[^0-9]/} -ge 252
+	  ]]
 	then
 	else
 		return 1

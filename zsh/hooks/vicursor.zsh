@@ -80,17 +80,17 @@ vicursor::setup()
 		return 1
 	fi
 
-	vicursor::sequence_to_var "vicursor_insert_cursor"  5
-	vicursor::sequence_to_var "vicursor_command_cursor" 2
-	vicursor::sequence_to_var "vicursor_execute_cursor" 1
-	vicursor::sequence_to_var "vicursor_replace_cursor" 4
+	vicursor::sequence_to_var 5 "vicursor_insert_cursor"
+	vicursor::sequence_to_var 2 "vicursor_command_cursor"
+	vicursor::sequence_to_var 1 "vicursor_execute_cursor"
+	vicursor::sequence_to_var 4 "vicursor_replace_cursor"
 
 	unset sequencetype
 }
 
 vicursor::sequence_to_var() {
-	local varname=$1
-	local cursorshape=$2
+	local cursorshape=$1
+	local varname=$2
 	local sequence
 
 	sequence="\e[${cursorshape} q"

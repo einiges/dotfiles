@@ -1,0 +1,302 @@
+#!/usr/bin/env zsh
+
+trap 'trap - TERM;kill 0' INT TERM QUIT EXIT
+
+# -- Settings --
+panel_name='panel_bspwm_desktop'
+
+# - monitor -
+# geometry:= 1:x, 2:y, 3: width, 4:height
+geometry=( $(bspc query --monitor "${1:-primary}" -T | jq '.rectangle[]') )
+height=31
+
+
+# - font -
+font='NotoSans Nerd Font:size=9'
+
+# - colors -
+bar_bg='#FDF6E3'
+bar_fg='#657B83'
+module_bg='#EEE8D5'
+module_fg='#657B83'
+highlight_fg='#76B9ED'
+
+# ws
+ws_focused_bg="#DFD9C6"
+ws_focused_fg="#002B36"
+ws_active_bg="#EEE8D5"
+ws_active_fg="#002B36"
+ws_free_bg="#F4EEDB"
+ws_free_fg="#A1AFAF"
+ws_occupied_bg="#EEE8D5"
+ws_occupied_fg="#6B8DA1"
+ws_urgent_bg=$ws_occupied_bg
+ws_urgent_fg="#CB4B16"
+ws_urgent_focused_bg=$ws_focused_bg
+ws_urgent_focused_fg=$ws_focused_fg
+ws_urgent_active_bg=$ws_active_bg
+ws_urgent_active_fg=$ws_urgent_fg
+
+# - spacing -
+module_space='%{O3}'
+module_padding='%{O13}'
+
+# - shorties -
+module_left="%{B${module_bg}}%{F${module_fg}}${module_padding}"
+module_right="${module_padding}%{B-}%{F-}"
+
+
+# -- Icons --
+typeset -A icons
+icons[code]=''
+icons[cubes]=''
+icons[globe]=''
+icons[mail]=''
+icons[memory]=''
+icons[cpu]='﬙'
+icons[power]=''
+icons[terminal]=''
+icons[playbackhigh]='墳'
+icons[playbackmedium]='奔'
+icons[playbacklow]='奄'
+icons[playbackmute]='婢'
+icons[capture]=''
+icons[capturemute]=''
+
+typeset -a desktop_icons
+desktop_icons[1]='¹  '
+desktop_icons[2]='²  '
+desktop_icons[3]='³  '
+desktop_icons[4]='⁴  '
+desktop_icons[5]='⁵  '
+desktop_icons[8]='⁸  '
+desktop_icons[9]='⁹  '
+desktop_icons[10]='⁰  '
+
+
+# -- Pretty printer --
+
+
+# $( ppTitle title )
+ppTitle() {
+	print "${module_left}$1${module_right}"
+}
+
+
+# $( ppClock )
+ppClock() {
+	local cmd="$(date '+%_H %M')"
+	print "${module_left}${cmd}${module_right}"
+}
+
+
+# $( ppDay )
+ppDay() {
+	local cmd="$(date '+%a %_d')"
+	print "${module_left}${cmd}${module_right}"
+}
+
+
+# $( ppMail )
+ppMail() {
+	local cmd="$(notmuch count tag:unread)"
+	print "${module_left}${icons[mail]}%{O5}${cmd}${module_right}"
+}
+
+
+# $( ppPkg )
+ppPkg() {
+	local cmd="$( { checkupdates & cower -u } | wc -l | mol -x 2 )"
+	print "${module_left}${icons[cubes]}%{O5}${cmd}${module_right}"
+}
+
+
+# $( ppPlayback )
+ppPlayback() {
+	local playback_level=$(amixer -M get Master | tail -1 | sed 's/.*\[\([0-9]*\)\%\].*/\1/')
+
+	if $(amixer get Master | grep -q off); then
+		playback_state_icon=${icons[playbackmute]}
+	elif [[ $playback_level -ge 65 ]]; then
+		playback_state_icon=${icons[playbackhigh]}
+	elif [[ $playback_level -ge 20 ]]; then
+		playback_state_icon=${icons[playbackmedium]}
+	else
+		playback_state_icon=${icons[playbacklow]}
+	fi
+
+	print "${module_left}${playback_state_icon}%{O5}${playback_level}${module_right}"
+}
+
+
+# $( ppCapture )
+ppCapture() {
+	local capture_level=$(amixer -M get Capture | tail -1 | sed 's/.*\[\([0-9]*\)\%\].*/\1/')
+
+	if $(amixer get Capture | grep -q off); then
+		capture_state_icon=${icons[capturemute]}
+	else
+		capture_state_icon=${icons[capture]}
+	fi
+
+	print "${module_left}${capture_state_icon}%{O5}${capture_level}${module_right}"
+}
+
+
+# $( ppDesktops <bspc wm -g> )
+ppDesktops() {
+	local -a desktops
+	local ws_bg ws_fg name
+	integer focused_monitor
+
+	for item in ${(@s/:/)1}; do
+		name=${item:1}
+		case $item in
+			m* )
+				focused_monitor=0
+				continue
+				;;
+			M* )
+				focused_monitor=1
+				continue
+				;;
+			[FO]* )
+				if (( $focused_monitor )); then
+					ws_bg=$ws_focused_bg
+					ws_fg=$ws_focused_fg
+				else
+					ws_bg=$ws_active_bg
+					ws_fg=$ws_active_fg
+				fi
+				;;
+			U* )
+				if (( $focused_monitor )); then
+					ws_bg=$ws_urgent_focused_bg
+					ws_fg=$ws_urgent_focused_fg
+				else
+					ws_bg=$ws_urgent_active_bg
+					ws_fg=$ws_urgent_active_fg
+				fi
+				;;
+			f* ) # free|empty unfocused
+				ws_bg=$ws_free_bg
+				ws_fg=$ws_free_fg
+				;;
+			o* ) # occupied unfocused
+				ws_bg=$ws_occupied_bg
+				ws_fg=$ws_occupied_fg
+				;;
+			u* ) # urgent unfocused
+				ws_bg=$ws_urgent_bg
+				ws_fg=$ws_urgent_fg
+				;;
+			* )
+				continue
+		esac
+
+		desktops[${name}]="%{B${ws_bg}}%{F${ws_fg}}${module_padding}${desktop_icons[$name]}${module_padding}%{B-}%{F-}"
+	done
+
+	# join and strip empty elements
+	print "${(@j.%\{O3\}.)desktops:#}"
+}
+
+
+
+{
+# -- Event generator --
+
+	stdbuf -oL alsactl monitor pulse &
+
+	xtitle -sf "T$(ppTitle %s)\n" &
+
+	while :; do
+		print "C$(ppClock)"
+		# 1 second past each minute change
+		sleep $(( $(date '+61-%S') ))
+	done &
+
+	while :; do
+		print "D$(ppDay)"
+		# 86400s = 24 * 60 * 60s   # Seconds in a day
+		#  3600s = 60 * 60s        # Seconds in an hour
+		# 1 minute past midnight
+		sleep $(( $(date '+86460-(%H*3600+%M*60+%S)') ))
+	done &
+
+	while :; do
+		print "P$(ppPkg)"
+		sleep 3600
+	done &
+
+	while :; do
+		print "M$(ppMail)"
+		sleep 600
+	done &
+
+	bspc subscribe report &
+
+} 2> /dev/null | {
+
+# -- Initializer --
+
+	capture="$(ppCapture)"
+	playback="$(ppPlayback)"
+
+	# -- Event handler --
+
+	while read -r cmd; do
+
+		# Event origin
+		case "$cmd" in
+			W* ) # bspwm workspaces
+				desktops=$(ppDesktops ${cmd:1})
+				;;
+
+			T* ) # title
+				title="${cmd:1}"
+				;;
+
+			D* ) # day
+				day="${cmd:1}"
+				;;
+
+			C* ) # clock
+				clock="${cmd:1}"
+				;;
+
+			\#*Master\ Playback* )
+				playback="$(ppPlayback)"
+				;;
+
+			\#*Capture* )
+				capture="$(ppCapture)"
+				;;
+
+			P* ) # Pkg
+				pkg="${cmd:1}"
+				;;
+
+			M* ) # Mail
+				mail="${cmd:1}"
+				;;
+
+			* )
+				continue
+				;;
+
+		esac
+
+		cat <<- EOB
+			%{l}%{O3}%{+o}${title}\
+			%{c}${desktops}\
+			%{r}${mail}${module_space}${pkg}${module_space}${playback}${module_space}${capture}${module_space}${day}${module_space}${clock}%{-o}%{O3}
+		EOB
+	done
+
+} | lemonbar -g "${geometry[3]}x${height}+${geometry[1]}+${geometry[2]}" -B "${bar_bg}" -F "${bar_fg}" -U "${bar_bg}" -u 3 -o 2 -f "${font}" -n "$panel_name" &
+
+xdo above -t "$(xdo id -N Bspwm -n root | sort | head -n 1)" "$(xdo id -m -a "$panel_name")"
+
+wait
+

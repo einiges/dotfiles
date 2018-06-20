@@ -32,8 +32,7 @@ super + {ctrl,shift,mod5} + f
 # otherwise swap
 super + {1-9,0}
 	d='{1-9,10}'; \
-	bspc query -T -m | jq -e --arg desk $d '.desktops[] | select(.name == $desk)' > /dev/null && \
-	bspc desktop -f $d || bspc desktop -s $d
+	bspc query -D $d.local && bspc desktop -f $d || bspc desktop -s $d
 
 # send node to desktops
 super + shift + {1-9,0}

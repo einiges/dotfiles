@@ -38,7 +38,7 @@ ws_urgent_active_bg=$ws_active_bg
 ws_urgent_active_fg=$ws_urgent_fg
 
 # - spacing -
-module_space='%{O3}'
+___='%{O3}' # space between modules
 module_padding='%{O13}'
 
 # - shorties -
@@ -83,15 +83,15 @@ ppTitle() {
 
 # $( ppClock )
 ppClock() {
-	local cmd="$(date '+%_H %M')"
-	print "${module_left}${cmd}${module_right}"
+	local cmd="%D{%_H %M}"
+	print "${module_left}${(%)cmd}${module_right}"
 }
 
 
 # $( ppDay )
 ppDay() {
-	local cmd="$(date '+%a %_d')"
-	print "${module_left}${cmd}${module_right}"
+	local cmd="%D{%a %-d}"
+	print "${module_left}${(%)cmd}${module_right}"
 }
 
 
@@ -111,9 +111,10 @@ ppPkg() {
 
 # $( ppPlayback )
 ppPlayback() {
-	local playback_level=$(amixer -M get Master | tail -1 | sed 's/.*\[\([0-9]*\)\%\].*/\1/')
+	local cmd=( $(amixer -M get Master) )
+	local playback_level=${cmd[-2][2,-3]}
 
-	if $(amixer get Master | grep -q off); then
+	if [[ ${cmd[-1]} == '[off]' ]]; then
 		playback_state_icon=${icons[playbackmute]}
 	elif [[ $playback_level -ge 65 ]]; then
 		playback_state_icon=${icons[playbackhigh]}
@@ -129,9 +130,10 @@ ppPlayback() {
 
 # $( ppCapture )
 ppCapture() {
-	local capture_level=$(amixer -M get Capture | tail -1 | sed 's/.*\[\([0-9]*\)\%\].*/\1/')
+	local cmd=( $(amixer -M get Capture) )
+	local capture_level=${cmd[-2][2,-3]}
 
-	if $(amixer get Capture | grep -q off); then
+	if [[ ${cmd[-1]} == '[off]' ]]; then
 		capture_state_icon=${icons[capturemute]}
 	else
 		capture_state_icon=${icons[capture]}
@@ -196,7 +198,7 @@ ppDesktops() {
 	done
 
 	# join and strip empty elements
-	print "${(@j.%\{O3\}.)desktops:#}"
+	print "${(@pj.$___.)desktops:#}"
 }
 
 
@@ -216,7 +218,7 @@ ppDesktops() {
 	while :; do
 		print "C$(ppClock)"
 		# 1 second past each minute change
-		sleep $(( $(date '+61-%S') ))
+		sleep $(( ${(%):-"61-%D{%-S}"} ))
 	done &
 
 	while :; do
@@ -224,7 +226,7 @@ ppDesktops() {
 		# 86400s = 24 * 60 * 60s   # Seconds in a day
 		#  3600s = 60 * 60s        # Seconds in an hour
 		# 1 minute past midnight
-		sleep $(( $(date '+86460-(%H*3600+%M*60+%S)') ))
+		sleep $(( ${(%):-"%D{86460-(%-H*3600+%-M*60+%-S)}"} ))
 	done &
 
 	while :; do
@@ -292,11 +294,7 @@ ppDesktops() {
 
 		esac
 
-		cat <<- EOB
-			%{l}%{O3}%{+o}${title}\
-			%{c}${desktops}\
-			%{r}${mail}${module_space}${pkg}${module_space}${playback}${module_space}${capture}${module_space}${day}${module_space}${clock}%{-o}%{O3}
-		EOB
+		print "%{l}%{O3}%{+o}${title}%{c}${desktops}%{r}${mail}${___}${pkg}${___}${playback}${___}${capture}${___}${day}${___}${clock}%{-o}%{O3}"
 	done
 
 } | lemonbar -g "${geometry[3]}x${height}+${geometry[1]}+${geometry[2]}" -B "${bar_bg}" -F "${bar_fg}" -U "${bar_bg}" -u 3 -o 2 -f "${font}" -n "$panel_name" &

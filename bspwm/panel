@@ -52,8 +52,6 @@ icons[code]=''
 icons[cubes]=''
 icons[globe]=''
 icons[mail]=''
-icons[memory]=''
-icons[cpu]='﬙'
 icons[power]=''
 icons[terminal]=''
 icons[playbackhigh]='墳'
@@ -206,7 +204,12 @@ ppDesktops() {
 {
 # -- Event generator --
 
-	stdbuf -oL alsactl monitor pulse &
+	stdbuf -oL alsactl monitor pulse | while read line; do
+		case ${line} in
+			\#*Master\ Playback* ) print "p$(ppPlayback)" ;;
+			\#*Capture* ) print "c$(ppCapture)" ;;
+		esac
+	done &
 
 	xtitle -sf "T$(ppTitle %s)\n" &
 
@@ -234,7 +237,9 @@ ppDesktops() {
 		sleep 600
 	done &
 
-	bspc subscribe report &
+	bspc subscribe report | while read -r line; do
+		print "W$(ppDesktops ${line:1})"
+	done &
 
 } 2> /dev/null | {
 
@@ -250,7 +255,7 @@ ppDesktops() {
 		# Event origin
 		case "$cmd" in
 			W* ) # bspwm workspaces
-				desktops=$(ppDesktops ${cmd:1})
+				desktops="${cmd:1}"
 				;;
 
 			T* ) # title
@@ -265,12 +270,12 @@ ppDesktops() {
 				clock="${cmd:1}"
 				;;
 
-			\#*Master\ Playback* )
-				playback="$(ppPlayback)"
+			p* )
+				playback="${cmd:1}"
 				;;
 
-			\#*Capture* )
-				capture="$(ppCapture)"
+			c* )
+				capture="${cmd:1}"
 				;;
 
 			P* ) # Pkg

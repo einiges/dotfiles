@@ -147,7 +147,7 @@ ppDesktops() {
 	local ws_bg ws_fg name
 	integer focused_monitor
 
-	for item in ${(@s/:/)1}; do
+	for item in ${(s.:.)1}; do
 		name=${item:1}
 		case $item in
 			m* )
@@ -301,7 +301,8 @@ ppDesktops() {
 
 } | lemonbar -g "${geometry[3]}x${height}+${geometry[1]}+${geometry[2]}" -B "${bar_bg}" -F "${bar_fg}" -U "${bar_bg}" -u 3 -o 2 -f "${font}" -n "$panel_name" &
 
-xdo above -t "$(xdo id -N Bspwm -n root | sort | head -n 1)" "$(xdo id -m -a "$panel_name")"
+target="$(xdo id -N Bspwm -n root)"
+xdo above -t "${${(@o)target}[1]}" "$(xdo id -m -a "$panel_name")"
 
 wait
 

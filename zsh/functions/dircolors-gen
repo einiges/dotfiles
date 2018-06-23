@@ -3,7 +3,7 @@
 # Create dircolors file from $DIRCOLORS in $DIRCOLORS_GEN
 
 if [[ -v DIRCOLORS_GEN ]]; then
-	dircolors $DIRCOLORS:q >! "$DIRCOLORS_GEN"
+	dircolors ${(q)1:-$DIRCOLORS} >! "$DIRCOLORS_GEN"
 else
 	print 'Target file $DIRCOLORS_GEN is not defined\nSource can be defined with $DIRCOLORS.' >&2
 	return 1

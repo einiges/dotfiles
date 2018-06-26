@@ -54,12 +54,10 @@ icons[globe]=''
 icons[mail]=''
 icons[power]=''
 icons[terminal]=''
-icons[playbackhigh]='墳'
-icons[playbackmedium]='奔'
-icons[playbacklow]='奄'
+icons[playback]='墳'
 icons[playbackmute]='婢'
-icons[capture]=''
-icons[capturemute]=''
+icons[capture]=''
+icons[capturemute]=''
 
 typeset -a desktop_icons
 desktop_icons[1]='¹  '
@@ -104,7 +102,7 @@ ppMail() {
 
 # $( ppPkg )
 ppPkg() {
-	local cmd="$( { checkupdates & cower -u } | wc -l | mol -x 2 )"
+	IFS=$'\n' local cmd=${#$(checkupdates & cower -u)}
 	print "${module_left}${icons[cubes]}%{O5}${cmd}${module_right}"
 }
 
@@ -116,12 +114,8 @@ ppPlayback() {
 
 	if [[ ${cmd[-1]} == '[off]' ]]; then
 		playback_state_icon=${icons[playbackmute]}
-	elif [[ $playback_level -ge 65 ]]; then
-		playback_state_icon=${icons[playbackhigh]}
-	elif [[ $playback_level -ge 20 ]]; then
-		playback_state_icon=${icons[playbackmedium]}
 	else
-		playback_state_icon=${icons[playbacklow]}
+		playback_state_icon=${icons[playback]}
 	fi
 
 	print "${module_left}${playback_state_icon}%{O5}${playback_level}${module_right}"
@@ -150,7 +144,7 @@ ppDesktops() {
 	integer focused_monitor
 
 	for item in ${(s.:.)1}; do
-		name=${item:1}
+		name=${item[2,-1]}
 		case $item in
 			m* )
 				focused_monitor=0
@@ -257,35 +251,35 @@ ppDesktops() {
 		# Event origin
 		case "$cmd" in
 			W* ) # bspwm workspaces
-				desktops="${cmd:1}"
+				desktops="${cmd[2,-1]}"
 				;;
 
 			T* ) # title
-				title="${cmd:1}"
+				title="${cmd[2,-1]}"
 				;;
 
 			D* ) # day
-				day="${cmd:1}"
+				day="${cmd[2,-1]}"
 				;;
 
 			C* ) # clock
-				clock="${cmd:1}"
+				clock="${cmd[2,-1]}"
 				;;
 
 			p* )
-				playback="${cmd:1}"
+				playback="${cmd[2,-1]}"
 				;;
 
 			c* )
-				capture="${cmd:1}"
+				capture="${cmd[2,-1]}"
 				;;
 
 			P* ) # Pkg
-				pkg="${cmd:1}"
+				pkg="${cmd[2,-1]}"
 				;;
 
 			M* ) # Mail
-				mail="${cmd:1}"
+				mail="${cmd[2,-1]}"
 				;;
 
 			* )

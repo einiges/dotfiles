@@ -20,7 +20,6 @@ if [[ ! -s "$ZGEN_INIT" ]]; then
 	zgen load "zsh-users/zsh-history-substring-search"
 	zgen load "zsh-users/zsh-autosuggestions"
 	zgen load "zdharma/fast-syntax-highlighting"
-	zgen load "arzzen/calc.plugin.zsh"
 	zgen load "rupa/z"
 
 	zgen oh-my-zsh "plugins/fancy-ctrl-z"

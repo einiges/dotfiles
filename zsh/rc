@@ -50,7 +50,7 @@ setopt   glob_star_short
 
 autoload -Uz ${ZDOTDIR}/functions/*
 
-for f in $ZDOTDIR/{zshrc.d/*,hooks/*}.zsh; do
+for f in $ZDOTDIR/{zshrc.d/*,modules/*}.zsh; do
 	source "$f"
 done
 

@@ -10,7 +10,7 @@
 #
 # screen: (tested with 4.06.02)
 # requires following line in screenrc!:
-#    requires "setenv VICURSOR_TERM $TERM"
+#    setenv VICURSOR_TERM $TERM
 
 # --------------------------------
 # Ps            | Cursor Style
@@ -63,8 +63,6 @@ vicursor::setup()
 		baseterm=${$(tmux show-environment -g TERM)#*=}
 	fi
 
-	typeset -g sequencetype
-
 	if [[ "$baseterm" =~ "Konsole" || -v KONSOLE_DBUS_SESSION ]]
 	then
 		return 1
@@ -83,8 +81,6 @@ vicursor::setup()
 	vicursor::sequence_to_var 2 "vicursor_command_cursor"
 	vicursor::sequence_to_var 1 "vicursor_execute_cursor"
 	vicursor::sequence_to_var 4 "vicursor_replace_cursor"
-
-	unset sequencetype
 }
 
 vicursor::sequence_to_var() {

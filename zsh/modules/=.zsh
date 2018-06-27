@@ -1,5 +1,5 @@
 #!/usr/bin/env zsh
 
 autoload -U zcalc
-noglob zcalc -e "$*"
+aliases[=]='noglob zcalc -e'
 

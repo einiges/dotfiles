@@ -27,13 +27,17 @@ test -f /etc/X11/xinit/xinitrc.d/50-systemd-user.sh && . $_
 xsetroot -cursor_name left_ptr
 
 
-# -- Disable DPMS --
-xset dpms 0 800 800
+# -- Disable screen saver & DPMS --
+xset s 0 0
+xset dpms 0 0 0
 
 
 # -- Smart screenlock --
 LOCKER='i3lock -nefc 333333'
-xautolock -time 8 -corners '--00' -cornersize 20 -detectsleep -locker "xsssmart -rd $LOCKER" -nowlocker "$LOCKER" &
+xautolock -time 7 -notify 15 -corners '--00' -cornersize 20 -detectsleep \
+	-notifier  "xsssmart notify-send 'xautolock' 'locking in 15s'" \
+	-locker    "xsssmart -d  -p 420 $LOCKER" \
+	-nowlocker "xsssmart -dn -p 420 $LOCKER" &
 
 
 # -- Launch Applications --

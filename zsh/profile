@@ -3,6 +3,5 @@
 (( $+commands[ruby] )) &&
 	PATH="${PATH}:$(ruby -e 'print Gem.user_dir')/bin"
 
-[[ -d "${HOME}/.local/bin" ]] &&
-	PATH="${HOME}/.local/bin:${PATH}"
+PATH="${HOME}/.local/bin:${PATH}"
 

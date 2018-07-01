@@ -31,7 +31,7 @@ if [[ ! -s "$ZGEN_INIT" ]]; then
 	zgen save
 fi
 
-for f in ${ZDOTDIR}/plugin-hook-source/*.pre.zsh; do
+for f in ${ZDOTDIR}/plugin-config/*.pre.zsh; do
 	source $f
 done
 
@@ -39,7 +39,7 @@ done
 . ${ZGEN_INIT}
 
 
-for f in ${ZDOTDIR}/plugin-hook-source/*.post.zsh; do
+for f in ${ZDOTDIR}/plugin-config/*.post.zsh; do
 	source $f
 done
 

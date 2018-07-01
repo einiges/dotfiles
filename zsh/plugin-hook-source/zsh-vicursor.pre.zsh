@@ -1,1 +1,0 @@
-KEYTIMEOUT=8

@@ -135,12 +135,12 @@ vicursor::start()
 	add-zsh-hook        preexec       vicursor::cursor_on_execute
 }
 
-autoload -Uz add-zle-hook-widget
-autoload -Uz add-zsh-hook
-
 vicursor::setup
 (( $? )) &&
 	return 0
+
+autoload -Uz add-zle-hook-widget
+autoload -Uz add-zsh-hook
 
 vicursor::start
 

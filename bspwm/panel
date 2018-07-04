@@ -1,14 +1,25 @@
 #!/usr/bin/env zsh
 
-trap 'trap - TERM;kill 0' INT TERM QUIT EXIT
+trap 'kill 0' EXIT
+trap 'exit' INT TERM QUIT
 
 # -- Settings --
-panel_name='panel_bspwm_desktop'
+[[ -v PANEL_NAME ]] || PANEL_NAME="panel-${DESKTOP}"
+#[[ -v PANEL_EG_FIFO ]] || PANEL_EG_FIFO="${PANEL_NAME}-eg-fifo"
+
+xdo id -a $PANEL_NAME > /dev/null && return 1
+
+#[[ -e $PANEL_FIFO ]] && rm $PANEL_FIFO
+#mkfifo -m 600 $PANEL_FIFO || return 1
 
 # - monitor -
-# geometry:= 1:x, 2:y, 3: width, 4:height
-geometry=( $(bspc query --monitor "${1:-primary}" -T | jq '.rectangle[]') )
-height=31
+for _ in {1..25}; do
+	# geometry:= 1:x, 2:y, 3: width, 4:height
+	geometry=( $(bspc query --monitor "${1:-primary}" -T | jq '.rectangle[]') ) && break || sleep 0.2
+done
+
+(( $#geometry == 0 )) && return 1
+height=34
 
 
 # - font -
@@ -207,11 +218,11 @@ ppDesktops() {
 		esac
 	done &
 
-	xtitle -sf "T$(ppTitle %s)\n" &
+	xtitle -t 60 -sf "T$(ppTitle %s)\n" &
 
 	while :; do
 		print "C$(ppClock)"
-		# 1 second past each minute change
+		# 1 second past each minute
 		sleep $(( ${(%):-"61-%D{%-S}"} ))
 	done &
 
@@ -233,6 +244,8 @@ ppDesktops() {
 		sleep 600
 	done &
 
+	#read _ < $PANEL_EG_FIFO && print 'Q'
+
 	bspc subscribe report | while read -r line; do
 		print "W$(ppDesktops ${line:1})"
 	done &
@@ -250,51 +263,27 @@ ppDesktops() {
 
 		# Event origin
 		case "$cmd" in
-			W* ) # bspwm workspaces
-				desktops="${cmd[2,-1]}"
-				;;
-
-			T* ) # title
-				title="${cmd[2,-1]}"
-				;;
-
-			D* ) # day
-				day="${cmd[2,-1]}"
-				;;
-
-			C* ) # clock
-				clock="${cmd[2,-1]}"
-				;;
-
-			p* )
-				playback="${cmd[2,-1]}"
-				;;
-
-			c* )
-				capture="${cmd[2,-1]}"
-				;;
-
-			P* ) # Pkg
-				pkg="${cmd[2,-1]}"
-				;;
-
-			M* ) # Mail
-				mail="${cmd[2,-1]}"
-				;;
-
-			* )
-				continue
-				;;
-
+			W* ) updater='desktops' ;;
+			T* ) updater='title' ;;
+			D* ) updater='day' ;;
+			C* ) updater='clock' ;;
+			p* ) updater='playback' ;;
+			c* ) updater='capture' ;;
+			P* ) updater='pkg' ;;
+			M* ) updater='mail' ;;
+			Q ) break ;;
+			* ) continue ;;
 		esac
 
-		print "%{l}%{O3}%{+o}${title}%{c}${desktops}%{r}${mail}${___}${pkg}${___}${playback}${___}${capture}${___}${day}${___}${clock}%{-o}%{O3}"
+		local "$updater"="${cmd[2,-1]}"
+
+		print "%{l}%{O3}%{+o}%{+u}${title}%{c}${desktops}%{r}${mail}${___}${pkg}${___}${playback}${___}${capture}${___}${day}${___}${clock}%{-o}%{-u}%{O3}"
 	done
 
-} | lemonbar -g "${geometry[3]}x${height}+${geometry[1]}+${geometry[2]}" -B "${bar_bg}" -F "${bar_fg}" -U "${bar_bg}" -u 3 -o 2 -f "${font}" -n "$panel_name" &
+} | lemonbar -g "${geometry[3]}x${height}+${geometry[1]}+${geometry[2]}" -B "${bar_bg}" -F "${bar_fg}" -U "${bar_bg}" -u 3 -f "${font}" -n "$PANEL_NAME" &
 
 target="$(xdo id -N Bspwm -n root)"
-xdo above -t "${${(@o)target}[1]}" "$(xdo id -m -a "$panel_name")"
+xdo above -t "${${(@o)target}[1]}" "$(xdo id -m -a "$PANEL_NAME")"
 
 wait
 

@@ -1,8 +1,5 @@
 #!/bin/zsh
 
-#autoload -Uz compinit && compinit -d $XDG_CACHE_HOME/zsh/zcompdump
-#autoload -Uz colors && colors
-
 zmodload -F zsh/stat b:zstat
 
 setopt   autocd
@@ -13,7 +10,6 @@ setopt   pushd_to_home
 setopt   pushd_minus
 unsetopt pushd_ignore_dups
 
-setopt   auto_name_dirs
 setopt   auto_param_keys
 setopt   auto_param_slash
 setopt   auto_resume
@@ -50,8 +46,6 @@ setopt   glob_star_short
 
 autoload -Uz ${ZDOTDIR}/functions/*
 
-for f in $ZDOTDIR/{zshrc.d/*,modules/*}.zsh; do
+for f in $ZDOTDIR/{zshrc.d/*,modules/*}.zsh
 	source "$f"
-done
-
 

@@ -115,7 +115,7 @@ ppMail() {
 
 # $( ppPkg )
 ppPkg() {
-	IFS=$'\n' local cmd=${#$(checkupdates & cower -u)}
+	local cmd=$({checkupdates && cower -u } | wc -l)
 	print "${module_left}${icons[cubes]}%{O5}${cmd}${module_right}"
 }
 

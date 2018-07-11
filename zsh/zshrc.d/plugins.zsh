@@ -31,13 +31,15 @@ if [[ ! -s "$ZGEN_INIT" ]]; then
 	zgen save
 fi
 
-for f in ${ZDOTDIR}/plugin-config/*.pre.zsh
+for f in ${ZDOTDIR}/plugin-config/*.pre.zsh; do
 	source $f
+done
 
 # Static load plugins
 . ${ZGEN_INIT}
 
 
-for f in ${ZDOTDIR}/plugin-config/*.post.zsh
+for f in ${ZDOTDIR}/plugin-config/*.post.zsh; do
 	source $f
+done
 

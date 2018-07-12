@@ -10,6 +10,7 @@ alias .,='oldpwd'
 # -- shorties --
 
 alias l=${PAGER:-less}
+alias m='neomutt'
 alias n='nvim'
 alias o='xdg-open'
 alias p=print
@@ -23,7 +24,6 @@ alias  la='ls -A'
 alias lal='ls -lA'
 alias  lA='ls -a'
 
-alias nmutt='neomutt'
 
 alias rs='rsync --recursive --perms --owner --group --human-readable --backup --backup-dir=/tmp/rsync.bak'
 

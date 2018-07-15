@@ -1,19 +1,22 @@
-#!/bin/bash
+#!/usr/bin/env zsh
 
 wid="$1"
 class="$2"
 instance="$3"
 
+out=()
+
 case $class in
 	Soffice | libreoffice)
 		case $(xprop -id $wid _NET_WM_WINDOW_TYPE) in
-			*_NET_WM_WINDOW_TYPE_NORMAL* ) echo "state=tiled" ;;
+			*_NET_WM_WINDOW_TYPE_NORMAL* ) out+='state=tiled' ;;
 		esac
 		;;
 	Java )
 		case $(xprop -id $wid _NET_WM_WINDOW_TYPE) in
-			*_NET_WM_WINDOW_TYPE_SPLASH* ) echo "state=floating" ;;
+			*_NET_WM_WINDOW_TYPE_SPLASH* ) out+='state=floating' ;;
 		esac
 		;;
 esac
 
+(( out )) && print "$out"

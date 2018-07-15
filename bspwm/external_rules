@@ -17,6 +17,9 @@ case $class in
 			*_NET_WM_WINDOW_TYPE_SPLASH* ) out+='state=floating' ;;
 		esac
 		;;
+	Firefox )
+		(( $(bspc query -N -d | wc -l) >= 1 )) && out+='focus=off'
+		;;
 esac
 
 (( ${#out} )) && print $out

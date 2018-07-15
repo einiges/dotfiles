@@ -15,12 +15,12 @@ feh --no-fehbg --bg-fill --no-xinerama $HOME/Pictures/Wallpapers/current
 
 
 # -- Misc X --
-test -f $XDG_CONFIG_HOME/X11/xresources && xrdb -merge $_
-test -f $XDG_CONFIG_HOME/X11/xmodmap    && xmodmap    $_
+xrdb -merge $XDG_CONFIG_HOME/X11/xresources
+xmodmap $XDG_CONFIG_HOME/X11/xmodmap
 
 
 # -- systemd: set DISPLAY and XAUTHORITY --
-test -f /etc/X11/xinit/xinitrc.d/50-systemd-user.sh && . $_
+. /etc/X11/xinit/xinitrc.d/50-systemd-user.sh
 
 
 # -- Mouse Cursor --

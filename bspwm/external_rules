@@ -19,4 +19,4 @@ case $class in
 		;;
 esac
 
-(( out )) && print "$out"
+(( ${#out} )) && print $out

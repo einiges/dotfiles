@@ -23,8 +23,6 @@
 # 6             | Steady Pipe
 # --------------------------------
 
-KEYTIMEOUT=10
-
 vicursor::cursor_on_execute()
 {
 	printf '%b' $vicursor_execute_cursor

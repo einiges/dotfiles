@@ -1,9 +1,5 @@
 #!/bin/zsh
 
-#autoload -Uz select-word-style
-#select-word-style bash
-WORDCHARS="?_-.~;!#$%^"
-
 autoload backward-kill-word-match
 zle -N backward-kill-word-match
 

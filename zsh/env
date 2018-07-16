@@ -23,6 +23,7 @@ export XDG_DATA_DIRS="/usr/local/share/:/usr/share/"
 [[ -v ZDOTDIR ]] || export ZDOTDIR="$XDG_CONFIG_HOME"/zsh
 
 KEYTIMEOUT=10
+WORDCHARS="?_-.~;!#$%^"
 
 
 # dircolors

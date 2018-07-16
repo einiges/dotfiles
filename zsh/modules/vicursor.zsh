@@ -25,22 +25,22 @@
 
 vicursor::cursor_on_execute()
 {
-	printf '%b' $vicursor_execute_cursor
+	print -n $vicursor_execute_cursor
 }
 
 vicursor::cursor_on_command()
 {
-	printf '%b' $vicursor_command_cursor
+	print -n $vicursor_command_cursor
 }
 
 vicursor::cursor_on_insert()
 {
-	printf '%b' $vicursor_insert_cursor
+	print -n $vicursor_insert_cursor
 }
 
 vicursor::cursor_on_replace()
 {
-	printf '%b' $vicursor_replace_cursor
+	print -n $vicursor_replace_cursor
 }
 
 vicursor::keymap()

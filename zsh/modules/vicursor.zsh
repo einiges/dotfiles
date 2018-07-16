@@ -102,22 +102,18 @@ vicursor::sequence_to_var() {
 }
 
 # Because replace mode is not treated in $KEYMAP
-vi-replace()
+vicursor::replace_widget()
 {
-	zle builtin-vi-replace
+	zle .vi-replace
 	vicursor::cursor_on_replace
 }
-zle -A vi-replace builtin-vi-replace
-zle -N vi-replace
 
-vi-replace-chars()
+vicursor::replace_chars_widget()
 {
 	vicursor::cursor_on_replace
-	zle builtin-vi-replace-chars
+	zle .vi-replace-chars
 	vicursor::cursor_on_command
 }
-zle -A vi-replace-chars builtin-vi-replace-chars
-zle -N vi-replace-chars
 
 
 vicursor::stop()
@@ -126,6 +122,9 @@ vicursor::stop()
 	add-zsh-hook        -d precmd        vicursor::cursor_on_insert
 	add-zsh-hook        -d preexec       vicursor::cursor_on_execute
 	vicursor::cursor_on_execute
+
+	zle -A .vi-replace vi-replace
+	zle -A .vi-replace-chars vi-replace-chars
 }
 
 vicursor::start()
@@ -133,6 +132,9 @@ vicursor::start()
 	add-zle-hook-widget keymap-select vicursor::keymap
 	add-zsh-hook        precmd        vicursor::cursor_on_insert
 	add-zsh-hook        preexec       vicursor::cursor_on_execute
+
+	zle -N vi-replace vicursor::replace_widget
+	zle -N vi-replace-chars vicursor::replace_chars_widget
 }
 
 vicursor::setup || return 0

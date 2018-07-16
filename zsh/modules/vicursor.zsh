@@ -85,7 +85,8 @@ vicursor::setup()
 	vicursor::sequence_to_var 4 "vicursor_replace_cursor"
 }
 
-vicursor::sequence_to_var() {
+vicursor::sequence_to_var()
+{
 	local cursorshape=$1
 	local varname=$2
 	local sequence

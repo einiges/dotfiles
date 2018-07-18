@@ -14,7 +14,7 @@ bspc config presel_feedback_color       '#93A1A1'
 
 bspc config border_width                1
 bspc config window_gap                  9
-bspc config top_padding                -3
+bspc config top_padding                -6
 bspc config left_padding               -6
 bspc config bottom_padding              3
 bspc config right_padding               3
@@ -47,4 +47,6 @@ bspc rule -a 'newsboat'                 desktop=10
 bspc rule -a 'Zathura'                  state=tiled
 bspc rule -a 'Pavucontrol'              state=floating
 bspc rule -a 'scratchpad'               state=floating
+
+$XDG_CONFIG_HOME/bspwm/panel
 

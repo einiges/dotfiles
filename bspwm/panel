@@ -4,28 +4,31 @@ trap 'kill 0' EXIT
 trap 'exit' INT TERM QUIT
 
 # -- Setup --
-[[ -v PANEL_NAME ]] || PANEL_NAME="panel-$1"
+monitor=${1:-primary}
+[[ -v PANEL_NAME ]] || PANEL_NAME="panel_${DISPLAY[2,-1]}_${monitor}"
 
 xdo id -a $PANEL_NAME > /dev/null && return 1
 
 # -- Settings --
 
-# - monitor -
-# Wait until bspwm is started and resolution can be obtained. Shouldn't take longer than 5s.
-for _ in {1..25}; do
-	# geometry:= 1:x, 2:y, 3: width, 4:height
-	geometry=( $(bspc query --monitor "${1:-primary}" -T | jq '.rectangle[]') ) && break || sleep 0.2
-done
+# - Geometry -
+# geometry:= 1:x, 2:y, 3: width, 4:height
+geometry_keys=( x y width height)
+geometry_values=( $(bspc query --monitor $monitor -T | jq '.rectangle[]') )
 
-(( $#geometry == 0 )) && return 1
-(( geometry[1] += 3 ))
-(( geometry[2] += 3 ))
-(( geometry[3] -= 6 ))
-height=28
+typeset -A geometry=( ${geometry_keys:^geometry_values} )
+
+bar_border_width=3
+bar_left_padding=3
+bar_right_padding=3
+(( geometry[x] += bar_left_padding ))
+(( geometry[width] -= (bar_left_padding + bar_right_padding) ))
+(( geometry[height] = 28 + bar_border_width ))
 
 
 # - font -
 font='NotoSans Nerd Font:size=9'
+font_offset=1
 
 # - colors -
 bar_bg='#FDF6E3'
@@ -276,10 +279,10 @@ ppDesktops() {
 
 		local "$updater"="${cmd[2,-1]}"
 
-		print "%{l}${title}%{c}${desktops}%{r}${mail}${___}${pkg}${___}${playback}${___}${capture}${___}${day}${___}${clock}"
+		print "%{l}%{+o}${title}%{c}${desktops}%{r}${mail}${___}${pkg}${___}${playback}${___}${capture}${___}${day}${___}${clock}%{-o}"
 	done
 
-} | lemonbar -g "${geometry[3]}x${height}+${geometry[1]}+${geometry[2]}" -B "${bar_bg}" -F "${bar_fg}" -U "${bar_bg}" -u 3 -f "${font}" -n "$PANEL_NAME" &
+} | lemonbar -g "${geometry[width]}x${geometry[height]}+${geometry[x]}+${geometry[y]}" -B "${bar_bg}" -F "${bar_fg}" -U "${bar_bg}" -u "${bar_border_width}" -o "${font_offset}" -f "${font}" -n "$PANEL_NAME" &
 
 target="$(xdo id -N Bspwm -n root)"
 xdo above -t "${${(@o)target}[1]}" "$(xdo id -m -a "$PANEL_NAME")"

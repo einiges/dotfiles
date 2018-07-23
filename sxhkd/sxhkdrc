@@ -31,8 +31,8 @@ super + ctrl + l
 	xautolock -toggle
 
 # - screenshots
-@{_,shift} + Print
-	scrot {_,-s} -e 'mv $f ~/Pictures/Screenshots'
+{_,shift} + @Print
+	scrot {_,-s} "$HOME/Pictures/Screenshots/%Y-%m-%d_%H:%M:%S.png"
 
 
 

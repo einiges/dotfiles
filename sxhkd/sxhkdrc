@@ -6,8 +6,8 @@ super + Escape ; s
 super + Escape ; p
 	polybar-msg cmd restart
 
-@super + ctrl + v
-	xdotool type --delay 0 --clearmodifiers "$(xclip -o)"
+super + @v
+	sspaste 'primary' 'ctrl+v'
 
 
 # -- application launching --

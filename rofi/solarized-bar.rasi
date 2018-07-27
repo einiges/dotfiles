@@ -1,0 +1,69 @@
+
+/*
+  One lined bar with solarized light colors
+ */
+
+* {
+	font: "Noto 9";
+
+	bar-bg: #FDF6E3;
+
+	fg: #657B83;
+	normal-bg: #EEE8D5;
+	selected-bg: #DFD9C6;
+
+	background-color: @bar-bg;
+	text-color: #93A1A1;
+	highlight: None;
+}
+
+window {
+	location: north;
+	anchor: north;
+  y-offset: 34px;
+	width: 100%;
+  padding: 0 0 0 3px;
+	orientation: vertical;
+	height: 28px;
+	children: [ mainbox ];
+}
+
+mainbox {
+	orientation: horizontal;
+	children: [ textbox-prompt-colon, entry, listview ];
+}
+
+textbox-prompt-colon {
+  expand: false;
+  str: "";
+  padding: 0 10px;
+  background-color: @normal-bg;
+}
+
+entry {
+  vertical-align: 0.5;
+	padding: 0 1em;
+	expand: false;
+	background-color: @normal-bg;
+	text-color: @fg;
+	width: 10em;
+}
+
+listview {
+	layout: horizontal;
+	lines: 50;
+}
+
+element {
+	text-color: @fg;
+	background-color: @normal-bg;
+  padding: 7px 1em 6px 1em;
+}
+
+element selected {
+	text-color: @fg;
+	background-color: @selected-bg;
+}
+
+
+// vim: ft=scss

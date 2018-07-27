@@ -1,6 +1,6 @@
 configuration {
 	modi: "drun,run,window";
-	theme: "fullscreen" ;
+	theme: "solarized-bar" ;
 	terminal: "terminal";
 	auto-select: false;
 	matching: "normal";

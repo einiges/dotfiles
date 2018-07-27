@@ -19,7 +19,7 @@
 }
 
 window {
-	background-color: #212128EA;
+	background-color: #FDF6E3F9;
 	location: center;
 	anchor: center;
 	transparency: "real";

@@ -1,6 +1,6 @@
 
 /*
-  One lined bar with solarized light colors
+	One lined bar with solarized light colors
  */
 
 * {
@@ -34,15 +34,15 @@ mainbox {
 }
 
 textbox-prompt-colon {
-  expand: false;
-  str: "";
-  padding: 0 10px;
+	expand: false;
+	str: "";
+	padding: 0 10px;
 	margin: 0px 0px 2px 0px;
-  background-color: @normal-bg;
+	background-color: @normal-bg;
 }
 
 entry {
-  vertical-align: 0.5;
+	vertical-align: 0.5;
 	padding: 0 1em;
 	margin: 0px 0px 2px 0px;
 	expand: false;
@@ -59,7 +59,7 @@ listview {
 element {
 	text-color: @fg;
 	background-color: @normal-bg;
-  padding: 7px 1em 6px 1em;
+	padding: 7px 1em 6px 1em;
 }
 
 element selected {

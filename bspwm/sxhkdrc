@@ -32,19 +32,20 @@ super + {ctrl,shift,mod5} + f
 # otherwise swap
 super + {1-9,0}
 	d='{1-9,10}'; \
-	bspc query -D $d.local && bspc desktop -f $d || bspc desktop -s $d
+	bspc query -D "$d.local" && bspc desktop -f "$d" || bspc desktop -s "$d"
 
 # send node to desktops
 super + shift + {1-9,0}
 	bspc node -d '{1-9,10}'
 
-# focus node in given direction
+# focus node across monitors in given direction
 super + {n,r,t,d}
-	bspc node -f {west,south,north,east}
+	d='{west,south,north,east}'; \
+	bspc node -f "$d" || bspc monitor -f "$d"
 
-# swap node in given direction and follow across monitors
+# swap node in given direction
 super + shift + {n,r,t,d}
-	bspc node -s {west,south,north,east} --follow
+	bspc node -s {west,south,north,east}.local --follow
 
 # focus/swap with biggest node at current monitor
 super + {_,shift} + space
@@ -87,7 +88,7 @@ super + mod5 + space
 
 # -- monitors --
 
-# focus next monitor
+# {focus,send note to} next monitor
 super + {_,shift} + g
 	bspc {monitor -f,node -m} next
 

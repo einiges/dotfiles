@@ -21,7 +21,7 @@ transparency = 20
 #dmenu = "/usr/bin/dmenu -p dunst: -nb #FFFFFF -nf #000000 -sb $94DBFF -sf "000000"
 #browser = /usr/bin/firefox
 max_icon_size = 32
-icon_folders = /usr/share/icons/hicolor/scalable/apps/:/usr/share/icons/hicolor/48x48/apps/:/usr/share/icons/hicolor/16x16/apps/:/home/june/.local/share/icons/hicolor/48x48/
+icon_path = /usr/share/icons/hicolor/scalable/apps/:/usr/share/icons/hicolor/48x48/apps/:/usr/share/icons/hicolor/16x16/apps/:/home/june/.local/share/icons/hicolor/48x48/
 
 [shortcuts]
 close =

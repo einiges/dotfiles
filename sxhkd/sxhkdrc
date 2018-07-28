@@ -35,6 +35,10 @@ super + ctrl + l
 	scrot {_,-s} "$HOME/Pictures/Screenshots/%Y-%m-%d_%H:%M:%S.png"
 
 
+# - Quick launch -
+super + e ; super + {e,f}
+	{pcmanfm,firefox}
+
 
 # -- media keys --
 

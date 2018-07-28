@@ -116,13 +116,6 @@ ppMail() {
 }
 
 
-# $( ppPkg )
-ppPkg() {
-	local cmd=$({checkupdates && cower -u } | wc -l)
-	print "${module_left}${icons[cubes]}%{O5}${cmd}${module_right}"
-}
-
-
 # $( ppPlayback )
 ppPlayback() {
 	local cmd=( $(amixer -M get Master) )
@@ -240,11 +233,6 @@ ppDesktops() {
 	done &
 
 	while :; do
-		print "P$(ppPkg)"
-		sleep 3600
-	done &
-
-	while :; do
 		print "M$(ppMail)"
 		sleep 600
 	done &
@@ -272,14 +260,13 @@ ppDesktops() {
 			C* ) updater='clock' ;;
 			p* ) updater='playback' ;;
 			c* ) updater='capture' ;;
-			P* ) updater='pkg' ;;
 			M* ) updater='mail' ;;
 			* ) continue ;;
 		esac
 
 		local "$updater"="${cmd[2,-1]}"
 
-		print "%{l}%{+o}${title}%{c}${desktops}%{r}${mail}${___}${pkg}${___}${playback}${___}${capture}${___}${day}${___}${clock}%{-o}"
+		print "%{l}%{+o}${title}%{c}${desktops}%{r}${mail}${___}${playback}${___}${capture}${___}${day}${___}${clock}%{-o}"
 	done
 
 } | lemonbar -g "${geometry[width]}x${geometry[height]}+${geometry[x]}+${geometry[y]}" -B "${bar_bg}" -F "${bar_fg}" -U "${bar_bg}" -u "${bar_border_width}" -o "${font_offset}" -f "${font}" -n "$PANEL_NAME" &

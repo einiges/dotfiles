@@ -124,6 +124,9 @@ prompt_pure_preprompt_render() {
 	# Execution time.
 	[[ -n $prompt_pure_cmd_exec_time ]] && preprompt_parts+=('%K{black} %F{yellow}${prompt_pure_cmd_exec_time}%f %k')
 
+	# if a virtualenv is activated, display it in grey
+	preprompt_parts+=('%(12V.%K{black}%F{9} %12v %f%k .)')
+
 	local cleaned_ps1=$PROMPT
 	local -H MATCH MBEGIN MEND
 	if [[ $PROMPT = *$prompt_newline* ]]; then
@@ -536,11 +539,8 @@ prompt_pure_setup() {
 
 	prompt_pure_state_setup
 
-	# if a virtualenv is activated, display it in grey
-	PROMPT='%(12V.%K{black} %F{10}%12v%f %k .)'
-
 	# prompt turns red if the previous command didn't exit with 0
-	PROMPT+='%K{black}%(?.%F{14}.%F{9}) ${PURE_PROMPT_SYMBOL:-◆} %f%k '
+	PROMPT='%K{black}%(?.%F{14}.%F{9}) ${PURE_PROMPT_SYMBOL:-◆} %f%k '
 
 	PROMPT2='%K{black}%F{10} %_ %f%k '
 	PROMPT3='%K{black}%F{10} ?# %f%k '

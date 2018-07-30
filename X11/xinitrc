@@ -1,44 +1,13 @@
 
-# -- Monitor Setup --
-export primonitor='DVI-D-1'
-export secmonitor='HDMI-A-0'
-xrandr --output $primonitor --auto --primary \
-       --output $secmonitor --auto --left-of $primonitor
+if [ -d /etc/X11/xinit/xinitrc.d ]; then
+	for f in /etc/X11/xinit/xinitrc.d/?* ; do
+		[ -x "$f" ] && . $f
+	done
+fi
 
-
-# -- Keyboard Layout --
-setxkbmap -layout de -variant neo -option altwin:swap_lalt_lwin
-
-
-# -- Background --
-feh --no-fehbg --bg-fill --no-xinerama $HOME/Pictures/Wallpapers/current
-
-
-# -- Misc X --
-xrdb -merge $XDG_CONFIG_HOME/X11/xresources
-xmodmap $XDG_CONFIG_HOME/X11/xmodmap
-
-
-# -- systemd: set DISPLAY and XAUTHORITY --
-. /etc/X11/xinit/xinitrc.d/50-systemd-user.sh
-
-
-# -- Mouse Cursor --
-xsetroot -cursor_name left_ptr
-
-
-# -- Disable screen saver & DPMS --
-xset s 0 0
-xset dpms 0 0 0
-
-
-# -- Smart screenlock --
-LOCKER='i3lock -nefc 333333'
-xautolock -time 7 -notify 15 -corners '--00' -cornersize 20 -detectsleep \
-	-notifier  "xsssmart notify-send 'xautolock' 'locking in 15s'" \
-	-locker    "xsssmart -d  -p 420 $LOCKER" \
-	-nowlocker "xsssmart -dn -p 420 $LOCKER" &
-
+for f in  $XDG_CONFIG_HOME/X11/xinitrc.d/?*; do
+	. $f
+done
 
 # -- Launch Applications --
 {
@@ -51,11 +20,6 @@ xautolock -time 7 -notify 15 -corners '--00' -cornersize 20 -detectsleep \
 } &
 
 
-# -- Start Environment --
-sxhkd -m 1 $XDG_CONFIG_HOME/bspwm/sxhkdrc &
-compton --config "$XDG_CONFIG_HOME/bspwm/compton.conf" &
-#$XDG_CONFIG_HOME/bspwm/panel &
-exec bspwm
-
+exec wm
 
 # vim:ft=sh

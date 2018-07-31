@@ -49,5 +49,5 @@ bspc rule -a 'Pavucontrol'              state=floating
 bspc rule -a 'Lxappearance'             state=floating rectangle=950x600+0+0 center=on
 bspc rule -a 'scratchpad'               state=floating
 
-$XDG_CONFIG_HOME/bspwm/panel
+bspwm-panel
 

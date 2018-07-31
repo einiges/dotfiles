@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+shopt -s nullglob globstar
+
+prefix=${PASSWORD_STORE_DIR-~/.password-store}
+password_files=( "$prefix"/**/*.gpg )
+password_files=( "${password_files[@]#"$prefix"/}" )
+password_files=( "${password_files[@]%.gpg}" )
+
+dest=$(printf '%s\n' "${password_files[@]}" | rofi -dmenu "$@")
+
+[[ -n "${dest}" ]] || exit
+
+pass show -c "$dest" >/dev/null 2>&1 &&
+	printf "%s\n" "$dest"

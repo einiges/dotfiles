@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=calcurse
+GenericName=text-based organizer
+TryExec=calcurse
+Exec=calcurse
+Terminal=true
+Icon=calcurse
+StartupNotify=false
+Categories=Organizer;Calendar;

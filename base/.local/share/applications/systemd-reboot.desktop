@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=reboot
+Exec=systemctl reboot
+Terminal=false
+Icon=reboot
+StartupNotify=false
+Categories=Power;

@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=newsboat
+GenericName=Feed reader
+TryExec=newsboat
+Exec=newsboat
+Terminal=true
+StartupNotify=false
+Categories=RSS;Atom;Reader;

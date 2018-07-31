@@ -1,0 +1,13 @@
+#!/bin/bash
+
+case $PINENTRY_USER_DATA in
+	curses ) PINENTRY=/usr/bin/pinentry-curses ;;
+	emacs  ) PINENTRY=/usr/bin/pinentry-emacs ;;
+	gnome  ) PINENTRY=/usr/bin/pinentry-gnome3 ;;
+	gtk    ) PINENTRY=/usr/bin/pinentry-gtk-2 ;;
+	qt     ) PINENTRY=/usr/bin/pinentry-qt ;;
+	tty    ) PINENTRY=/usr/bin/pinentry-tty ;;
+	*      ) PINENTRY=/usr/bin/pinentry-curses ;;
+esac
+
+exec "$PINENTRY" "$@"

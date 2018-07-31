@@ -1,0 +1,110 @@
+#!/usr/bin/env zsh
+
+# Requirements:
+# zsh - http://zsh.sourceforge.net/
+# lsw - https://tools.suckless.org/x/lsw
+# xset - https://xorg.freedesktop.org/wiki/
+# xprop - https://xorg.freedesktop.org/wiki/
+
+# Windows that have WM_CLASS set to one of ${XSSSMART_APPS}
+# will trigger a delay. Case insensitive.
+typeset -ga XSSSMART_APPS
+
+function usage {
+	cat <<-EOF >&2
+		usage: ${${(%):-%x}:t} [-acdfnsh] [-p s] [--] [command [arguments...]]
+
+		By default <command> will *not* be executed, if
+		  an app is in fullscreenmode,
+		  an app is running that is present in \$XSSSMART_APPS,
+		  or audio is playing.
+
+		Options
+		 -a      Ignore playing audio
+		 -c      Ignore running apps in \$XSSSMART_APPS
+		         XSSSMART_APPS has to be an array.
+		         (_WM_CLASS contains one of \$XSSSMART_APPS)
+		 -d      Pause dunst notifications while screen is locked
+		 -f      Ignore if windows are in fullscreen mode
+		         (_NET_WM_STATE contains _NET_WM_STATE_FULLSCREEN)
+		 -n      lock now, do not check anything before locking.
+		 -p s    force dpms off after <s>. See sleep(1) for valid NUMBER.
+		         Time starts after executing <command>
+		 -s      Reset X screensaver when not delayed
+		 -h      Print this help
+	EOF
+}
+
+# if audio is playing
+function audio_playing {
+	grep -q "state: RUNNING" /proc/asound/card*/pcm*/sub*/status
+}
+
+# if a window is fullscreen
+function app_fullscreen {
+	lsw | while read id _; do
+		xprop -id "${id}" _NET_WM_STATE | grep -qi "_NET_WM_STATE_FULLSCREEN" &&
+			return
+	done
+
+	return 1
+}
+
+# if an app is running
+function app_running {
+	(( $#XSSSMART_APPS <= 0 )) &&
+		return 1
+
+	lsw | while read id _; do
+		xprop -id "${id}" WM_CLASS | grep -qi "${(j:\|:)XSSSMART_APPS}" &&
+			return
+	done
+
+	return 1
+}
+
+function execute {
+	if [[ -v opts[-p] ]]; then
+		sleep $(( opts[-p] ))
+		xset dpms force off
+	fi &
+	sleep_pid=$!
+
+	"$cmd[@]"
+
+	if [[ -v sleep_pid ]]; then
+		kill $sleep_pid
+	fi
+}
+
+function dunst_execute {
+	notify-send 'DUNST_COMMAND_PAUSE'
+	execute
+	notify-send 'DUNST_COMMAND_RESUME'
+}
+
+zparseopts -D -A opts a c d f n p: s h
+
+if [[ -v opts[-h] ]]; then
+	usage
+	return
+fi
+
+typeset -ga cmd=( "$@" )
+
+if [[ ! -v opts[-n] ]] && (
+   ( [[ ! -v opts[-a] ]] && audio_playing ) ||
+   ( [[ ! -v opts[-f] ]] && app_fullscreen ) ||
+   ( [[ ! -v opts[-c] ]] && app_running ) )
+then
+	if [[ -v opts[-s] ]]; then
+		xset s reset
+	fi
+else
+	if [[ -v opts[-d] ]]; then
+		dunst_execute
+	else
+		execute
+	fi
+fi
+

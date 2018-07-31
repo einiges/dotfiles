@@ -1,0 +1,25 @@
+#!/usr/bin/env sh
+
+# sspaste: simple selection paste
+
+# sspaste [selection [keystroke]]
+# - for selection see '-selection' in xclip
+# - for keystroke see 'key' in xdotool
+
+# How does it work?
+# - save clipboard in variable
+# - copy selection into clipboard
+# - send keybinding to paste clipboard
+# - restore initial condition
+
+sel=${1:-primary}
+key=${2:-ctrl+v}
+
+clipboard="$(xclip -o -selection 'clipboard')"
+xclip -o -selection "$sel" | xclip -i -selection 'clipboard'
+
+xdotool key --clearmodifiers "$key"
+
+xclip -o -selection 'clipboard' | xclip -i -selection "$sel"
+xclip -i -selection 'clipboard' <<< "$clipboard"
+

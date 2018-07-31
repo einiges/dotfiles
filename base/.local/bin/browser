@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+command -v "$BROWSER" >/dev/null 2>&1 &&
+	exec $BROWSER "$@"
+

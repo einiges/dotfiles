@@ -1,0 +1,6 @@
+#!/usr/bin/env zsh
+
+sxhkd -m 1 $XDG_CONFIG_HOME/bspwm/sxhkdrc &
+compton --config "$XDG_CONFIG_HOME/bspwm/compton.conf" &
+#$XDG_CONFIG_HOME/bspwm/panel &
+exec bspwm

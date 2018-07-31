@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=poweroff
+Exec=systemctl poweroff
+Terminal=false
+Icon=poweroff
+StartupNotify=false
+Categories=Power;

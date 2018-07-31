@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=NeoMutt
+GenericName=Mail User Agent
+TryExec=neomutt
+Exec=neomutt %f
+Terminal=true
+Icon=neomutt
+StartupNotify=true
+Categories=Utility;MailClient;

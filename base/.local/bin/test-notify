@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+case "${1:-all}" in
+	l|low|a|all)      notify-send -t 10000 -u low      "Title LOW"      "message" ;;&
+	n|normal|a|all)   notify-send -t 10000 -u normal   "Title NORMAL"   "message" ;;&
+	c|critical|a|all) notify-send -t 10000 -u critical "Title CRITICAL" "message" ;;&
+esac
+

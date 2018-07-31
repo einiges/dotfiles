@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=ncmpcpp
+GenericName=Ncurses MPD client
+TryExec=ncmpcpp
+Exec=ncmpcpp -q
+Terminal=true
+Icon=ncmpcpp
+StartupNotify=false
+Categories=Music;

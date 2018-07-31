@@ -1,4 +1,4 @@
-#!/usr/bin/env zsh
+#!/usr/bin/env sh
 
 wid="$1"
 class="$2"
@@ -9,17 +9,17 @@ out=()
 case $class in
 	Soffice | libreoffice)
 		case $(xprop -id $wid _NET_WM_WINDOW_TYPE) in
-			*_NET_WM_WINDOW_TYPE_NORMAL* ) out+='state=tiled' ;;
+			*_NET_WM_WINDOW_TYPE_NORMAL* ) out+=('state=tiled') ;;
 		esac
 		;;
 	Java )
 		case $(xprop -id $wid _NET_WM_WINDOW_TYPE) in
-			*_NET_WM_WINDOW_TYPE_SPLASH* ) out+='state=floating' ;;
+			*_NET_WM_WINDOW_TYPE_SPLASH* ) out+=('state=floating') ;;
 		esac
 		;;
 	Firefox )
-		(( $(bspc query -N -d | wc -l) >= 1 )) && out+='focus=off'
+		(( $(bspc query -N -d | wc -l) >= 1 )) && out+=('focus=off')
 		;;
 esac
 
-(( ${#out} )) && print $out
+(( ${#out} )) && print "${out[*]}"

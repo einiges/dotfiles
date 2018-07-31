@@ -123,7 +123,7 @@ super + {_,shift} + b
 # -- Resize --
 
 # Increase window size
-super + ctrl +  {n,r,t,d}
+super + ctrl + {n,r,t,d}
 	bspc node -z {left -50 0,bottom 0 35,top 0 -35,right 35 0}
 
 # Decrease window size

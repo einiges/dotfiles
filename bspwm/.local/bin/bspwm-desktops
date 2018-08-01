@@ -1,0 +1,23 @@
+#!/usr/bin/env sh
+
+# This setup is only useful if each desktop is focusable on any monitor
+
+# Secondary (non primary) monitors get the second to ${#secondary+1}th desktop
+# Primary monitor gets the first desktop and all remaining
+
+# desktops=( p s1 s2 ... sn p p p p)
+
+# On a proper setup '#desktops >= #monitors' equals true.
+
+
+desktops=( 1 2 3 4 5 8 9 10 )
+
+primary="$(bspc query -M -m primary)"
+secondary=( "$(bspc query -M | sed "/$primary/d")" )
+
+for mi in "${!secondary[@]}"; do
+	bspc monitor "${secondary[$mi]}" -d "${desktops[$mi+1]}"
+done
+
+bspc monitor "${primary}" -d "${desktops[0]}" "${desktops[@]:${#secondary[@]}+1}"
+

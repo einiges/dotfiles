@@ -64,7 +64,7 @@ super + shift + Escape
 
 # reload config
 super + Escape ; b
-	$XDG_CONFIG_HOME/bspwm/bspwmrc
+	bspwm-update
 
 # close/kill node
 super + {_,shift} + adiaeresis

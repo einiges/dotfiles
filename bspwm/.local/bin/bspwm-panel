@@ -3,11 +3,24 @@
 trap 'kill 0' EXIT
 trap 'exit' INT TERM QUIT
 
-# -- Setup --
-monitor=${1:-primary}
-[[ -v PANEL_NAME ]] || PANEL_NAME="panel_${DISPLAY[2,-1]}_${monitor}"
 
-xdo id -a $PANEL_NAME > /dev/null && return 1
+
+# -- Setup --
+
+monitor=${1:-primary}
+
+[[ -v PANEL_NAME ]] || PANEL_NAME="bspwm-panel-${DISPLAY[2,-1]}"
+
+# Kill existing panels
+xdo kill -a $PANEL_NAME > /dev/null 2>&1
+
+# - Create new filedescriptor -
+[[ -v PANEL_FIFO ]] || PANEL_FIFO="${XDG_RUNTIME_DIR}/${PANEL_NAME}"
+[[ -p $PANEL_FIFO ]] && rm "$PANEL_FIFO"
+mkfifo -m 600 "$PANEL_FIFO"
+exec 5<>"$PANEL_FIFO"
+
+
 
 # -- Settings --
 
@@ -46,20 +59,24 @@ ws_free_bg="#F4EEDB"
 ws_free_fg="#A1AFAF"
 ws_occupied_bg="#EEE8D5"
 ws_occupied_fg="#6B8DA1"
-ws_urgent_bg=$ws_occupied_bg
+ws_urgent_bg="$ws_occupied_bg"
 ws_urgent_fg="#CB4B16"
-ws_urgent_focused_bg=$ws_focused_bg
-ws_urgent_focused_fg=$ws_focused_fg
-ws_urgent_active_bg=$ws_active_bg
-ws_urgent_active_fg=$ws_urgent_fg
+ws_urgent_focused_bg="$ws_focused_bg"
+ws_urgent_focused_fg="$ws_focused_fg"
+ws_urgent_active_bg="$ws_active_bg"
+ws_urgent_active_fg="$ws_urgent_fg"
 
 # - spacing -
-___='%{O3}' # space between modules
+___='%{O3}' # space between ms
 module_padding='%{O13}'
 
 # - shorties -
 module_left="%{B${module_bg}}%{F${module_fg}}${module_padding}"
 module_right="${module_padding}%{B-}%{F-}"
+
+
+# -- Modules --
+typeset -A mods
 
 
 # -- Icons --
@@ -97,22 +114,22 @@ ppTitle() {
 
 # $( ppClock )
 ppClock() {
-	local cmd="%D{%_H %M}"
-	print "${module_left}${(%)cmd}${module_right}"
+	local cmd="%D{%_H %-M}"
+	REPLY="${module_left}${(%)cmd}${module_right}"
 }
 
 
 # $( ppDay )
 ppDay() {
 	local cmd="%D{%a %-d}"
-	print "${module_left}${(%)cmd}${module_right}"
+	REPLY="${module_left}${(%)cmd}${module_right}"
 }
 
 
 # $( ppMail )
 ppMail() {
 	local cmd="$(notmuch count tag:unread)"
-	print "${module_left}${icons[mail]}%{O5}${cmd}${module_right}"
+	REPLY="${module_left}${icons[mail]}%{O5}${cmd}${module_right}"
 }
 
 
@@ -127,7 +144,7 @@ ppPlayback() {
 		playback_state_icon=${icons[playback]}
 	fi
 
-	print "${module_left}${playback_state_icon}%{O5}${playback_level}${module_right}"
+	REPLY="${module_left}${playback_state_icon}%{O5}${playback_level}${module_right}"
 }
 
 
@@ -142,7 +159,7 @@ ppCapture() {
 		capture_state_icon=${icons[capture]}
 	fi
 
-	print "${module_left}${capture_state_icon}%{O5}${capture_level}${module_right}"
+	REPLY="${module_left}${capture_state_icon}%{O5}${capture_level}${module_right}"
 }
 
 
@@ -201,78 +218,82 @@ ppDesktops() {
 	done
 
 	# join and strip empty elements
-	print "${(@pj.$___.)desktops:#}"
+	REPLY="${(@pj.$___.)desktops:#}"
 }
 
 
 
-{
+
 # -- Event generator --
 
-	stdbuf -oL alsactl monitor pulse | while read line; do
-		case ${line} in
-			\#*Master\ Playback* ) print "p$(ppPlayback)" ;;
-			\#*Capture* ) print "c$(ppCapture)" ;;
-		esac
-	done &
+{ print init; stdbuf -oL alsactl monitor pulse } | while read line; do
+	case ${line} in
+		\#*Master\ Playback*|init ) ppPlayback; print "p$REPLY" ;&
+		\#*Capture*|init )          ppCapture;  print "c$REPLY" ;&
+	esac
+done >&5 &
 
-	xtitle -t 60 -sf "T$(ppTitle %s)\n" &
+xtitle -t 60 -sf "T$(ppTitle %s)\n" >&5 &
 
-	while :; do
-		print "C$(ppClock)"
-		# 1 second past each minute
-		sleep $(( ${(%):-"61-%D{%-S}"} ))
-	done &
+while :; do
+	ppClock
+	print "C$REPLY"
+	# 1 second past each minute
+	sleep $(( ${(%):-"61-%D{%-S}"} ))
+done >&5 &
 
-	while :; do
-		print "D$(ppDay)"
-		# 86400s = 24 * 60 * 60s   # Seconds in a day
-		#  3600s = 60 * 60s        # Seconds in an hour
-		# 1 minute past midnight
-		sleep $(( ${(%):-"%D{86460-(%-H*3600+%-M*60+%-S)}"} ))
-	done &
+while :; do
+	ppDay
+	print "D$REPLY"
+	# 86400s = 24 * 60 * 60s   # Seconds in a day
+	#  3600s = 60 * 60s        # Seconds in an hour
+	# 1 minute past midnight
+	sleep $(( ${(%):-"%D{86460-(%-H*3600+%-M*60+%-S)}"} ))
+done >&5 &
 
-	while :; do
-		print "M$(ppMail)"
-		sleep 600
-	done &
+while :; do
+	ppMail
+	print "M$REPLY"
+	sleep 600
+done >&5 &
 
-	bspc subscribe report | while read -r line; do
-		print "W$(ppDesktops ${line:1})"
-	done &
+bspc subscribe report | while read -r line; do
+	ppDesktops "${line:1}"
+	print "W$REPLY"
+done >&5 &
 
-} 2> /dev/null | {
 
-# -- Initializer --
+# -- Event handler --
 
-	capture="$(ppCapture)"
-	playback="$(ppPlayback)"
+while read -r cmd <&5; do
 
-	# -- Event handler --
+	case "$cmd" in
+		W* ) m='desktops' ;;
+		T* ) m='title' ;;
+		D* ) m='day' ;;
+		C* ) m='clock' ;;
+		p* ) m='playback' ;;
+		c* ) m='capture' ;;
+		M* ) m='mail' ;;
+		*  ) continue ;;
+	esac
 
-	while read -r cmd; do
+	mods[$m]="${cmd[2,-1]}"
 
-		# Event origin
-		case "$cmd" in
-			W* ) updater='desktops' ;;
-			T* ) updater='title' ;;
-			D* ) updater='day' ;;
-			C* ) updater='clock' ;;
-			p* ) updater='playback' ;;
-			c* ) updater='capture' ;;
-			M* ) updater='mail' ;;
-			* ) continue ;;
-		esac
+	print "%{l}%{+o}${mods[title]}" \
+		    "%{c}${mods[desktops]}" \
+				"%{r}${mods[mail]}${___}${mods[playback]}${___}${mods[capture]}${___}${mods[day]}${___}${mods[clock]}%{-o}"
 
-		local "$updater"="${cmd[2,-1]}"
-
-		print "%{l}%{+o}${title}%{c}${desktops}%{r}${mail}${___}${playback}${___}${capture}${___}${day}${___}${clock}%{-o}"
-	done
-
-} | lemonbar -g "${geometry[width]}x${geometry[height]}+${geometry[x]}+${geometry[y]}" -B "${bar_bg}" -F "${bar_fg}" -U "${bar_bg}" -u "${bar_border_width}" -o "${font_offset}" -f "${font}" -n "$PANEL_NAME" &
+done | lemonbar \
+       -g "${geometry[width]}x${geometry[height]}+${geometry[x]}+${geometry[y]}" \
+       -B "${bar_bg}" \
+       -F "${bar_fg}" \
+       -U "${bar_bg}" \
+       -u "${bar_border_width}" \
+       -o "${font_offset}" -f "${font}" \
+       -n "$PANEL_NAME" 2>/dev/null &
 
 target="$(xdo id -N Bspwm -n root)"
 xdo above -t "${${(@o)target}[1]}" "$(xdo id -m -a "$PANEL_NAME")"
 
-wait
-
+wait $!

@@ -236,16 +236,16 @@ STICKY_OTHER_WRITABLE 48;5;0;38;5;4;1 # Directory that is sticky and other-writa
 .typelib              38;5;6
 .nc                   38;5;6 # NetCDF database
 
-.swp                  38;5;0   # -- tempfiles --
-.swo                  38;5;0
-.tmp                  38;5;0
-.sassc                38;5;0
-.pid                  38;5;0   # state files
-.state                38;5;0
-*lockfile             38;5;0
+.swp                  38;5;10   # -- tempfiles --
+.swo                  38;5;10
+.tmp                  38;5;10
+.sassc                38;5;10
+.pid                  38;5;10   # state files
+.state                38;5;10
+*lockfile             38;5;10
 
-.orig                 38;5;0   # undo files
-.bak                  38;5;0   # backups
+.orig                 38;5;10   # undo files
+.bak                  38;5;10   # backups
 
 .err                  38;5;1;1 # error logs
 .error                38;5;1;1

@@ -1,2 +1,2 @@
 # Background
-feh --no-fehbg --bg-fill --no-xinerama $HOME/Pictures/Wallpapers/current
+test -f "$HOME/Pictures/Wallpapers/current" && feh --no-fehbg --bg-fill --no-xinerama "$_"

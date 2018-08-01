@@ -1,0 +1,19 @@
+#!/usr/bin/env sh
+
+(( $# < 2 || $# > 3 )) && {
+
+	cat << EOF
+	usage: $(basename $0) color output-file [size]
+
+	  color        #RGB
+	  output-file: name of the image. Existing files will get overwritten. Extension is mandatory.
+	  size:        WIDTHxHEIGHT (default: 1920x1080)
+EOF
+	exit 1
+}
+
+size=${3:-1920x1080}
+color=${1}
+ofile=${2}
+
+convert -size "$size" "xc:$color" "$ofile"

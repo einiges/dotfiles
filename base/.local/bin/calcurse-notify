@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+# format of time_until hh:mm
+# $( to_minutes time_until )
+to_minutes() {
+	local hours
+	local minutes
+	IFS=":" read hours minutes <<< "$1"
+	echo $((hours * 60 + minutes))
+}
+
+cmd=$(calcurse --next | sed '1d')
+time_until=$(echo $cmd | sed -E 's/\s*\[(.*)\]\s+(.*)/\1/')
+subject=$(echo $cmd | sed -E 's/\s*\[(.*)\]\s+(.*)/\2/')
+total_minutes=$(to_minutes $time_until)
+
+notify-send 'Upcoming Appointment' "${total_minutes}m: ${subject}"
+

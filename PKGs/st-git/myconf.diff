@@ -1,0 +1,33 @@
+diff --git a/config.def.h b/config.def.h
+index 82b1b09..d7239e0 100644
+--- a/config.def.h
++++ b/config.def.h
+@@ -5,8 +5,8 @@
+  *
+  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
+  */
+-static char *font = "Liberation Mono:pixelsize=12:antialias=true:autohint=true";
+-static int borderpx = 2;
++static char *font = "Source Code Pro:pixelsize=13:antialias=true:autohint=true";
++static int borderpx = 0;
+ 
+ /*
+  * What program is execed by st depends of these precedence rules:
+@@ -16,7 +16,7 @@ static int borderpx = 2;
+  * 4: value of shell in /etc/passwd
+  * 5: value of shell in config.h
+  */
+-static char *shell = "/bin/sh";
++static char *shell = "/bin/zsh";
+ char *utmp = NULL;
+ char *stty_args = "stty raw pass8 nl -echo -iexten -cstopb 38400";
+ 
+@@ -215,7 +215,7 @@ static KeySym mappedkeys[] = { -1 };
+  * State bits to ignore when matching key or button events.  By default,
+  * numlock (Mod2Mask) and keyboard layout (XK_SWITCH_MOD) are ignored.
+  */
+-static uint ignoremod = Mod2Mask|XK_SWITCH_MOD;
++static uint ignoremod = Mod2Mask|Mod3Mask|Mod5Mask|XK_SWITCH_MOD;
+ 
+ /*
+  * Override mouse-select while mask is active (when MODE_MOUSE is set).

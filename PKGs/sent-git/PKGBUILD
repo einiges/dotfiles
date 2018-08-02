@@ -1,0 +1,53 @@
+_pkgname=sent
+pkgname="${_pkgname}-git"
+pkgver=1.3.g72d33d4
+pkgrel=1
+pkgdesc='Simple plaintext presentation tool'
+arch=('i686' 'x86_64')
+url='http://st.suckless.org/'
+license=('MIT')
+depends=('fontconfig' 'libxft')
+makedepends=('git')
+provides=("${_pkgname}")
+conflicts=("${_pkgname}")
+
+
+_patches=(
+	'solarized.diff'
+)
+
+
+source=(
+	'git+http://git.suckless.org/sent'
+	${_patches[@]}
+)
+
+sha1sums=(
+	'SKIP'
+	'SKIP'
+)
+
+pkgver() {
+	cd "${_pkgname}"
+	git describe --tags | sed 's/-/./g'
+}
+
+prepare() {
+	cd "${_pkgname}"
+	for patch in ${_patches[@]}; do
+		patch < "${srcdir}/$(basename $patch)"
+	done
+}
+
+build() {
+	cd "${_pkgname}"
+	make X11INC=/usr/include/X11 X11LIB=/usr/lib/X11
+}
+
+package() {
+	cd "${_pkgname}"
+	make PREFIX=/usr DESTDIR="${pkgdir}" install
+	install -Dm644 LICENSE "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
+	install -Dm644 README.md "${pkgdir}/usr/share/doc/${pkgname}/README.md"
+}
+

@@ -1,0 +1,57 @@
+_pkgname=st
+pkgname="${_pkgname}-git"
+pkgver=0.8.1.13.g4f4bccd
+pkgrel=1
+pkgdesc='simple terminal'
+arch=('i686' 'x86_64')
+url='https://st.suckless.org'
+license=('MIT')
+options=('zipman')
+depends=('libxft')
+makedepends=('ncurses' 'libxext' 'git')
+epoch=1
+
+_patches=('myconf.diff'
+          'solarized.diff'
+          'st-no_bold_colors-20170519-e2ee5ee.diff'
+          'fix-input.diff'
+)
+
+source=('git+http://git.suckless.org/st'
+        ${_patches[@]})
+
+sha1sums=('SKIP'
+          'SKIP'
+          'SKIP'
+          'SKIP'
+          'SKIP'
+)
+
+provides=("${_pkgname}")
+conflicts=("${_pkgname}")
+
+pkgver() {
+	cd "${_pkgname}"
+	git describe --tags | sed 's/-/./g'
+}
+
+prepare() {
+	cd "${_pkgname}"
+	for patch in ${_patches[@]}; do
+		patch < "${srcdir}/$(basename $patch)"
+	done
+	sed '/@tic/d' -i Makefile
+}
+
+build() {
+	cd "${_pkgname}"
+	make X11INC=/usr/include/X11 X11LIB=/usr/lib/X11
+}
+
+package() {
+	cd "${_pkgname}"
+	make PREFIX=/usr DESTDIR="${pkgdir}" install
+	install -Dm644 LICENSE "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
+	install -Dm644 README "${pkgdir}/usr/share/doc/${pkgname}/README"
+}
+

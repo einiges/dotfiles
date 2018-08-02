@@ -1,0 +1,112 @@
+diff --git a/config.def.h b/config.def.h
+index 58e728e..46bcbba 100644
+--- a/config.def.h
++++ b/config.def.h
+@@ -9,16 +9,16 @@ enum {
+ /* bar font:
+  * (see fonts-conf(5) subsection "FONT NAMES" for valid values)
+  */
+-static const char * const BAR_FONT = "monospace:size=8";
++static const char * const BAR_FONT = "panels:size=11";
+ 
+ /* colors:
+  * (see X(7) section "COLOR NAMES" for valid values)
+  */
+-static const char * const WIN_BG_COLOR = "#555555";
+-static const char * const WIN_FS_COLOR = "#000000";
+-static const char * const SEL_COLOR    = "#EEEEEE";
+-static const char * const BAR_BG_COLOR = "#222222";
+-static const char * const BAR_FG_COLOR = "#EEEEEE";
++static const char * const WIN_BG_COLOR = "#FDF6E3";
++static const char * const WIN_FS_COLOR = "#FDF6E3";
++static const char * const SEL_COLOR    = "#EEE8D5";
++static const char * const BAR_BG_COLOR = "#FDF6E3";
++static const char * const BAR_FG_COLOR = "#073642";
+ 
+ #endif
+ #ifdef _IMAGE_CONFIG
+@@ -57,10 +57,10 @@ static const bool ALPHA_LAYER = false;
+ #ifdef _THUMBS_CONFIG
+ 
+ /* thumbnail sizes in pixels (width == height): */
+-static const int thumb_sizes[] = { 32, 64, 96, 128, 160 };
++static const int thumb_sizes[] = { 32, 64, 96, 128, 160, 200, 235, 280, 330, 390, 450};
+ 
+ /* thumbnail size at startup, index into thumb_sizes[]: */
+-static const int THUMB_SIZE = 3;
++static const int THUMB_SIZE = 6;
+ 
+ #endif
+ #ifdef _MAPPINGS_CONFIG
+@@ -77,13 +77,13 @@ static const keymap_t keys[] = {
+ 	{ 0,            XK_G,             g_n_or_last,          None },
+ 	{ 0,            XK_r,             g_reload_image,       None },
+ 	{ 0,            XK_D,             g_remove_image,       None },
+-	{ ControlMask,  XK_h,             g_scroll_screen,      DIR_LEFT },
++	{ ControlMask,  XK_n,             g_scroll_screen,      DIR_LEFT },
+ 	{ ControlMask,  XK_Left,          g_scroll_screen,      DIR_LEFT },
+-	{ ControlMask,  XK_j,             g_scroll_screen,      DIR_DOWN },
++	{ ControlMask,  XK_r,             g_scroll_screen,      DIR_DOWN },
+ 	{ ControlMask,  XK_Down,          g_scroll_screen,      DIR_DOWN },
+-	{ ControlMask,  XK_k,             g_scroll_screen,      DIR_UP },
++	{ ControlMask,  XK_t,             g_scroll_screen,      DIR_UP },
+ 	{ ControlMask,  XK_Up,            g_scroll_screen,      DIR_UP },
+-	{ ControlMask,  XK_l,             g_scroll_screen,      DIR_RIGHT },
++	{ ControlMask,  XK_d,             g_scroll_screen,      DIR_RIGHT },
+ 	{ ControlMask,  XK_Right,         g_scroll_screen,      DIR_RIGHT },
+ 	{ 0,            XK_plus,          g_zoom,               +1 },
+ 	{ 0,            XK_KP_Add,        g_zoom,               +1 },
+@@ -94,45 +94,37 @@ static const keymap_t keys[] = {
+ 	{ ControlMask,  XK_m,             g_reverse_marks,      None },
+ 	{ ControlMask,  XK_u,             g_unmark_all,         None },
+ 	{ 0,            XK_N,             g_navigate_marked,    +1 },
+-	{ 0,            XK_P,             g_navigate_marked,    -1 },
++	{ 0,            XK_R,             g_navigate_marked,    -1 },
+ 	{ 0,            XK_braceleft,     g_change_gamma,       -1 },
+ 	{ 0,            XK_braceright,    g_change_gamma,       +1 },
+ 	{ ControlMask,  XK_g,             g_change_gamma,        0 },
+ 
+-	{ 0,            XK_h,             t_move_sel,           DIR_LEFT },
++	{ 0,            XK_n,             t_move_sel,           DIR_LEFT },
+ 	{ 0,            XK_Left,          t_move_sel,           DIR_LEFT },
+-	{ 0,            XK_j,             t_move_sel,           DIR_DOWN },
++	{ 0,            XK_r,             t_move_sel,           DIR_DOWN },
+ 	{ 0,            XK_Down,          t_move_sel,           DIR_DOWN },
+-	{ 0,            XK_k,             t_move_sel,           DIR_UP },
++	{ 0,            XK_t,             t_move_sel,           DIR_UP },
+ 	{ 0,            XK_Up,            t_move_sel,           DIR_UP },
+-	{ 0,            XK_l,             t_move_sel,           DIR_RIGHT },
++	{ 0,            XK_d,             t_move_sel,           DIR_RIGHT },
+ 	{ 0,            XK_Right,         t_move_sel,           DIR_RIGHT },
+ 	{ 0,            XK_R,             t_reload_all,         None },
+ 
+ 	{ 0,            XK_n,             i_navigate,           +1 },
+ 	{ 0,            XK_n,             i_scroll_to_edge,     DIR_LEFT | DIR_UP },
+ 	{ 0,            XK_space,         i_navigate,           +1 },
+-	{ 0,            XK_p,             i_navigate,           -1 },
+-	{ 0,            XK_p,             i_scroll_to_edge,     DIR_LEFT | DIR_UP },
++	{ 0,            XK_r,             i_navigate,           -1 },
++	{ 0,            XK_r,             i_scroll_to_edge,     DIR_LEFT | DIR_UP },
+ 	{ 0,            XK_BackSpace,     i_navigate,           -1 },
+ 	{ 0,            XK_bracketright,  i_navigate,           +10 },
+ 	{ 0,            XK_bracketleft,   i_navigate,           -10 },
+ 	{ ControlMask,  XK_6,             i_alternate,          None },
+ 	{ ControlMask,  XK_n,             i_navigate_frame,     +1 },
+-	{ ControlMask,  XK_p,             i_navigate_frame,     -1 },
++	{ ControlMask,  XK_r,             i_navigate_frame,     -1 },
+ 	{ ControlMask,  XK_space,         i_toggle_animation,   None },
+-	{ 0,            XK_h,             i_scroll,             DIR_LEFT },
+ 	{ 0,            XK_Left,          i_scroll,             DIR_LEFT },
+-	{ 0,            XK_j,             i_scroll,             DIR_DOWN },
+ 	{ 0,            XK_Down,          i_scroll,             DIR_DOWN },
+-	{ 0,            XK_k,             i_scroll,             DIR_UP },
+ 	{ 0,            XK_Up,            i_scroll,             DIR_UP },
+-	{ 0,            XK_l,             i_scroll,             DIR_RIGHT },
+ 	{ 0,            XK_Right,         i_scroll,             DIR_RIGHT },
+-	{ 0,            XK_H,             i_scroll_to_edge,     DIR_LEFT },
+-	{ 0,            XK_J,             i_scroll_to_edge,     DIR_DOWN },
+-	{ 0,            XK_K,             i_scroll_to_edge,     DIR_UP },
+-	{ 0,            XK_L,             i_scroll_to_edge,     DIR_RIGHT },
+ 	{ 0,            XK_equal,         i_set_zoom,           100 },
+ 	{ 0,            XK_w,             i_fit_to_win,         SCALE_DOWN },
+ 	{ 0,            XK_W,             i_fit_to_win,         SCALE_FIT },

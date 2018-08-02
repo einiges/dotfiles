@@ -3,7 +3,7 @@
 
 
                                  # --- core ---
-BLK                   38;5;68    # Block device drive
+BLK                   38;5;13    # Block device drive
 CAPABILITY            38;5;17    # File with capability
 CHR                   38;5;2;1;3 # Character device driver
 DIR                   38;5;4;1   # Directory
@@ -23,18 +23,18 @@ STICKY                48;5;0;1;38;5;4 # Directory with the sticky bit set (+t) a
 STICKY_OTHER_WRITABLE 48;5;0;38;5;4;1 # Directory that is sticky and other-writable (+t,o+w)
 
 
-*README               38;5;3;1 # documents
-*LICENSE              38;5;3;1
-*COPYING              38;5;3;1
-*INSTALL              38;5;3;1
-*COPYRIGHT            38;5;3;1
-*AUTHORS              38;5;3;1
-*HISTORY              38;5;3;1
-*CONTRIBUTORS         38;5;3;1
-*PATENTS              38;5;3;1
-*VERSION              38;5;3;1
-*NOTICE               38;5;3;1
-*CHANGES              38;5;3;1
+*README               1 # documents
+*LICENSE              1
+*COPYING              1
+*INSTALL              1
+*COPYRIGHT            1
+*AUTHORS              1
+*HISTORY              1
+*CONTRIBUTORS         1
+*PATENTS              1
+*VERSION              1
+*NOTICE               1
+*CHANGES              1
 .log                  38;5;10
 
 .txt                  38;5;12 # plain-text
@@ -71,16 +71,17 @@ STICKY_OTHER_WRITABLE 48;5;0;38;5;4;1 # Directory that is sticky and other-writa
 .moon                 38;5;4 # Moonscript
 .c                    38;5;4 # C
 .C                    38;5;4
-.h                    38;5;4
-.H                    38;5;4
+.h                    38;5;4;3
+.H                    38;5;4;3
 .tcc                  38;5;4
 .c++                  38;5;4 # C++
 .cpp                  38;5;4
 .cxx                  38;5;4
-.h++                  38;5;4
-.hpp                  38;5;4
-.hxx                  38;5;4
+.h++                  38;5;4;3
+.hpp                  38;5;4;3
+.hxx                  38;5;4;3
 .ii                   38;5;4
+.o                    3
 .M                    38;5;4 # ObjC Method file
 .m                    38;5;4
 .cc                   38;5;4 # C#
@@ -111,9 +112,8 @@ STICKY_OTHER_WRITABLE 48;5;0;38;5;4;1 # Directory that is sticky and other-writa
 .jsp                  38;5;6
 .php                  38;5;6 # php
 
-*Makefile             38;5;12;1 # -- Build --
-*MANIFEST             38;5;12
-*pm_to_blib           38;5;12
+*Makefile             1;3 # -- Build --
+.mk                   1;3
 
 .patch                48;5;5;38;5;8;1 # patch files
 .diff                 48;5;5;38;5;8;1

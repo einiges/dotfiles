@@ -3,11 +3,10 @@
 alias -g L="| ${PAGER:-less}"
 alias -g G='| grep --color'
 alias -g W='| wc'
-alias -g …='2> /dev/null'
-alias -g ……='> /dev/null 2>&1'
+alias -g EE='2> /dev/null'
+alias -g AA='> /dev/null 2>&1'
 
 alias ,='popd'
-alias .,='oldpwd'
 
 # -- shorties --
 

@@ -1,5 +1,5 @@
 
-set font "monospace 11"
+set font "panels 11"
 set guioptions ""
 set page-padding 5
 set show-recent 1

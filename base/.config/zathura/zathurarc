@@ -48,3 +48,10 @@ set statusbar-fg "#073642"
 
 #set tabbar-bg "#EEE8D5"
 #set tabbar-fg "#268BD2"
+
+
+# -- Mappings --
+
+map b toggle_statusbar
+
+

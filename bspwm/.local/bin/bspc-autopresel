@@ -51,5 +51,5 @@ esac
 
 (( mirror_presel )) \
 && bspc query -N -n 'focused.!automatic' > /dev/null \
-&& bspc-presel-mirror "$pdir" \
+&& bspc-presel-mirrored "$pdir" \
 || bspc node -p "$pdir"

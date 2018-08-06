@@ -1,66 +1,55 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 # usage:
-#         bspc-autopresel [dir [invert [bspc-node-OPTION [...] ]]]
+#         bspc-autopresel dir
 
-# $1:     Direction combination of two of the first letter of (n)orth, (e)ast, (s)outh, (w)est, or (c)ancel
-#         Valid arguments:  wn, ne, sw, se, c
-#                       nw, en, ws, es, cancel
+# dir:    Direction combination of two of the first letter of:
+#         (n)orth, (e)ast, (s)outh, (w)est, or (c)ancel
+#         - Valid arguments:  wn, ne, sw, se, c
+#                             nw, en, ws, es, cancel
+#         When uppercase letters are used (e.g. NW), the direction gets mirrored,
+#         if the node is already preselected.
+#         - NW -> se
 
-# $2:     Split on the shorte side instead of the long
-#         Valid arguments: 0 := [off] (default)
-#                      * := [on]
-
-# $3 ...: Will get passed to $(bspc node)
-#         Example: -o 0.3
+#
+#                 +--------+                        +--------+
+#                 |   n?   |                        |   nw   |
+# +------------+  |        |        +------------+  |        |
+# |     ?n     |  | w?  e? |   =>   |     wn     |  | wn  WN |
+# | ?w      ?e |  |        |        | nw      NW |  |        |
+# |     ?s     |  |   s?   |        |     WN     |  |   NW   |
+# +------------+  +--------+        +------------+  +--------+
 
 
 odir="${1:-sw}"
 
-# Check or Correct
 case "${odir}" in
-	sw|ne|se|nw ) ;;
-	ws          ) odir='sw' ;;
-	wn          ) odir='nw' ;;
-	en          ) odir='ne' ;;
-	es          ) odir='se' ;;
-	c|cancel    ) bspc node -p 'cancel'
-	              exit 0
-	              ;;
-	*           ) exit 1 ;;
+	[sn][we]|[we][sn] )
+		;;
+	[SN][WE]|[WE][SN] )
+		mirror_presel=1
+		odir="${odir,,}"
+		;;
+	c|cancel )
+		bspc node -p cancel
+		exit 0
+		;;
+	* )
+		exit 1
+		;;
 esac
 
-pdir_by_orientation() {
-	case "$1$2" in
-		0sw|0se ) pdir='~south' ;;
-		0ne|0nw ) pdir='~north' ;;
-		1sw|1nw ) pdir='~west' ;;
-		1ne|1se ) pdir='~east' ;;
-	esac
-}
 
-invert_odir() {
-	case "$odir" in
-		sw ) odir='ne' ;;
-		se ) odir='nw' ;;
-		ne ) odir='sw' ;;
-		nw ) odir='se' ;;
-	esac
-}
+read w h <<< $(wattr wh $(bspc query -N -n))
 
-case $2 in
-	1 ) rotate=1 ;;
-	* ) rotate=0 ;;
+case "$(( w > h ))${odir}" in
+	0n?|1?n ) pdir=~north ;;
+	0e?|1?e ) pdir=~east ;;
+	0s?|1?s ) pdir=~south ;;
+	0w?|1?w ) pdir=~west ;;
 esac
 
-wid="$(bspc query -N -n)"
-
-wattr wh $wid | {
-	read w h
-
-	bspc query -N -n '.!automatic' > /dev/null  && invert_odir
-	pdir_by_orientation "$(( (w > h) ^ rotate ))" "$odir"
-
-	bspc node -p "$pdir" "${@:3}"
-}
-
+(( mirror_presel )) \
+&& bspc query -N -n 'focused.!automatic' > /dev/null \
+&& bspc-presel-mirror "$pdir" \
+|| bspc node -p "$pdir"

@@ -1,0 +1,14 @@
+#!/usr/bin/env sh
+
+[ $# -lt 1 ] && exit 1
+
+case ${1} in
+	*north ) d=south ;;
+	*east  ) d=west  ;;
+	*south ) d=north ;;
+	*west  ) d=east  ;;
+esac
+
+[ ${1:0:1} = '~' ] && d="~${d}"
+
+bspc node -p "$d"

@@ -15,7 +15,7 @@ ncmpcpp_directory = ~/.config/ncmpcpp
 
 alternative_header_first_line_format = $(blue){%t}|{%f}$(end)
 
-alternative_header_second_line_format = $(green){%a}|{%A}$(end){ ■ $(green)%b$(end)}{ ■ $(green)%y$(end)}
+alternative_header_second_line_format = $(green){%a}|{%A}$(end){ $(11)■$(end) $(green)%b$(end)}{ $(11)■$(end) $(green)%y$(end)}
 
 song_library_format = " {%n │ }%t"
 

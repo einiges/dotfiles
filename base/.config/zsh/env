@@ -7,7 +7,7 @@ export PAGER=less
 export TERMINAL=st
 export TERMCMD=$TERMINAL # ranger
 
-export TIMEFMT=$'real\t%E\nuser\t%U\nsys\t%S'
+export TIMEFMT=$'%E real     %U user     %S sys'
 
 # XDG
 [[ -v XDG_CONFIG_HOME ]] || export XDG_CONFIG_HOME="$HOME/.config"

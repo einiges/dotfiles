@@ -17,9 +17,9 @@ alternative_header_first_line_format = $(blue){%t}|{%f}$(end)
 
 alternative_header_second_line_format = $(green){%a}|{%A}$(end){ $(11)■$(end) $(green)%b$(end)}{ $(11)■$(end) $(green)%y$(end)}
 
-song_library_format = " {%n │ }%t"
+song_library_format = %t $R $(yellow)%n$(end)
 
-song_list_format = "   $(4)%l$(end) $(5){%t}|{%f}$(end) $(11)■$(end) $(3){%a}|{%A}$(end) $R $(14)%b$(end) $(4)%n$(end)   "
+song_list_format = " $(yellow)%l$(end) $(blue){%t}|{%f}$(end) $(11)■$(end) $(green){%a}|{%A}$(end) $R $(14)%b$(end) $(yellow)%n$(end) "
 
 song_columns_list_format = (3f)[]{: } (6f)[4]{lr} (3f)[]{: } (40)[5]{t|f:Title} (3f)[]{: } (15)[3]{a|A:Artist} (3f)[]{: } (15)[14]{b} (3f)[]{: }  (4f)[4]{nr} (3f)[]{: }
 

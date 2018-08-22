@@ -90,6 +90,26 @@ prompt_pure_preexec() {
 	export VIRTUAL_ENV_DISABLE_PROMPT=${VIRTUAL_ENV_DISABLE_PROMPT:-12}
 }
 
+prompt_pure_dir_colorizer() {
+	local d="${(%):-%~}"
+
+	case "$d" in
+		[/~] )
+			bn="$d"
+			;;
+		* )
+			# $d:h at /, ~, and ~something results in ./{/,~,~something}
+			dn=${d[1,(I)/]}
+			bn=${d:t}
+			;;
+	esac
+
+	dn="%F{default}${dn:gs/\//%F\{9\}\/%F\{default\}/}%f"
+	bn="%F{blue}${bn}%f"
+
+	print "${dn}${bn}"
+}
+
 prompt_pure_preprompt_render() {
 	setopt localoptions noshwordsplit
 
@@ -107,7 +127,8 @@ prompt_pure_preprompt_render() {
 	[[ -v prompt_pure_state[root] ]] && preprompt_parts+=('${prompt_pure_state[root]}')
 
 	# Set the path.
-	preprompt_parts+=('%K{black} %F{white}%~%f %k')
+	#preprompt_parts+=('%K{black} %F{white}%~%f %k')
+	preprompt_parts+=( '%K{black} $(prompt_pure_dir_colorizer) %k')
 
 	# Add git branch and dirty status info.
 	typeset -gA prompt_pure_vcs_info
@@ -500,7 +521,7 @@ prompt_pure_state_setup() {
 	# show username@host if logged in through SSH
 	if [[ -n $ssh_connection ]]; then
 		prompt_pure_state+=(username '%K{black} %F{14}%n %k %K{black} %m%f%b %k')
-		prompt_pure_state+=(remote '%K{black} %F{blue}■%f %k')
+		prompt_pure_state+=(remote '%K{black} %F{blue}@%f %k')
 	fi
 
 	# tmux indicator
@@ -540,7 +561,7 @@ prompt_pure_setup() {
 	prompt_pure_state_setup
 
 	# prompt turns red if the previous command didn't exit with 0
-	PROMPT='%K{black}%(?.%F{14}.%F{9}) ${PURE_PROMPT_SYMBOL:-◆} %f%k '
+	PROMPT='%(?.%F{14}.%F{9}) ${PURE_PROMPT_SYMBOL:-◆} %f '
 
 	PROMPT2='%K{black}%F{10} %_ %f%k '
 	PROMPT3='%K{black}%F{10} ?# %f%k '

@@ -7,6 +7,8 @@ case ${1} in
 	*east  ) d=west  ;;
 	*south ) d=north ;;
 	*west  ) d=east  ;;
+	cancel ) d=cancel ;;
+	* ) exit 1 ;;
 esac
 
 [ ${1:0:1} = '~' ] && d="~${d}"

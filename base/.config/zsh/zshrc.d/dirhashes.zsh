@@ -6,6 +6,7 @@ hash -d music=~/Audio/Music
 hash -d radio=~/Audio/RadioPlay
 hash -d wall=~/Pictures/Wallpapers
 hash -d screenshots=~/Pictures/Screenshots
+hash -d media=/run/media/$USER
 
 hash -d nvim="$XDG_CONFIG_HOME"/nvim
 

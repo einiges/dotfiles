@@ -8,6 +8,7 @@ fi
 for f in  $XDG_CONFIG_HOME/X11/xinitrc.d/?*; do
 	. $f
 done
+unset $f
 
 # -- Launch Applications --
 {

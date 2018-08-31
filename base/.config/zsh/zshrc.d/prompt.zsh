@@ -142,8 +142,13 @@ prompt_pure_preprompt_render() {
 
 	# Username and machine, if applicable.
 	[[ -n $prompt_pure_state[username] ]] && preprompt_parts+=('${prompt_pure_state[username]}')
-	# Execution time.
-	[[ -n $prompt_pure_cmd_exec_time ]] && preprompt_parts+=('%K{black} %F{yellow}${prompt_pure_cmd_exec_time}%f %k')
+
+	[[ -n $prompt_pure_cmd_exec_time ]] && preprompt_parts+=(
+		# Execution time.
+		'%K{black} %F{yellow}${prompt_pure_cmd_exec_time}%f %k'
+		# Timestamp on error
+		'%(?..%K{black} %F{9}${(%):-"%D{%H:%M:%S}"} %f%k)'
+	)
 
 	# if a virtualenv is activated, display it in grey
 	preprompt_parts+=('%(12V.%K{black}%F{9} %12v %f%k .)')

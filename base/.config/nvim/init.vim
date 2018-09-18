@@ -1,59 +1,128 @@
 
-set runtimepath+=$XDG_CACHE_HOME/nvim/dein/repos/github.com/Shougo/dein.vim
+" -- Vim Basic --
 
-if dein#load_state(expand('<sfile>'))
+set autoindent
+set completeopt=menuone,noinsert,noselect
+set cursorline
+set foldmethod=indent
+set foldlevel=1
+set foldcolumn=0
+set foldnestmax=1
+set formatoptions=cjlnqrt
+set hidden
+set history=100
+set ignorecase
+set incsearch
+set laststatus=2
+set list
+set listchars=tab:█\ ,extends:…,
+set mouse=a
+set noshowmode
+set number
+set pastetoggle=<F10>
+set relativenumber
+set ruler
+set scrolloff=5
+set sidescroll=8
+set shiftwidth=2
+set showmatch
+set showfulltag
+set signcolumn=yes
+set smartcase
+set smartindent
+set softtabstop=2
+set splitbelow
+set splitright
+set tabstop=2
+set termguicolors
+set timeout
+set timeoutlen=300
+set title
+set ttimeout
+set ttimeoutlen=15
+set updatetime=250
+set wildmenu
+set wildmode=longest,list:full
+set wildignore+=*.jpg,*.jpeg,*.bmp,*.gif,*.png
+set wildignore+=*.o,*.obj,*.exe,*.dll,*.so,*.out,*.class,*.hi
+set wildignore+=*.swp,*.swo,*.swn
+set wildignore+=*/.git,*/.hg,*/.svn
+set wildignore+=tags,*.tags
 
-	call dein#begin(expand($XDG_CACHE_HOME.'/nvim/dein'))
+set nofoldenable
+set nostartofline
+
+
+
+
+
+
+
+let g:buftabline_plug_max = 0
+
+let s:dein_cache = $XDG_CACHE_HOME . '/nvim/dein'
+let s:dein_repo = s:dein_cache . '/repos/github.com/Shougo/dein.vim'
+
+if !isdirectory(s:dein_cache)
+	call mkdir(s:dein_repo, 'p')
+	execute '!git clone https://github.com/Shougo/dein.vim' s:dein_repo
+endif
+
+exe 'set runtimepath+=' . s:dein_repo
+
+if dein#load_state(s:dein_cache, expand('<sfile>'))
+
+	call dein#begin(s:dein_cache)
 	call dein#add('Shougo/dein.vim')
 
-	"Colorschemes
-	call dein#add('altercation/vim-colors-solarized')
-	call dein#add('romainl/flattened')
+	" Colorschemes
+	call dein#add('ntpeters/vim-better-whitespace')
 
 
 	" Navigation
 	call dein#add('christoomey/vim-tmux-navigator')
-	call dein#add('Shougo/denite.nvim')
-
-
-	" Interface
-	call dein#add('vim-airline/vim-airline')
-	call dein#add('vim-airline/vim-airline-themes')
-	call dein#add('airblade/vim-gitgutter')
-
-
-	" Deoplete
-	"call dein#add('Shougo/neco-vim',          { 'on_ft': ['vim'] })
-	"call dein#add('tweekmonster/deoplete-clang2', { 'on_ft': ['c', 'cpp'] })
-	"call dein#add('artur-shaik/vim-javacomplete2', { 'on_ft': ['java'] })
-
-
-	"call dein#add('Quramy/tsuquyomi', {'lazy': 1 })
-
+	call dein#add('Shougo/denite.nvim', {'lazy': 1, 'on_cmd': 'Denite'})
 
 	" Helper
 	call dein#add('tpope/vim-fugitive')
-	call dein#add('w0rp/ale')
-	call dein#add('Shougo/deoplete.nvim')
-	"call dein#add('Shougo/vimproc.vim', { 'build' : 'make' })
 	call dein#add('Shougo/neoinclude.vim')
+	call dein#add('scrooloose/nerdcommenter')
+	call dein#add('ludovicchabant/vim-gutentags')
 
+	" Interface
+	call dein#add('itchyny/lightline.vim')
+	call dein#add('ap/vim-buftabline')
+	call dein#add('airblade/vim-gitgutter')
+	call dein#add('kshenoy/vim-signature')
+
+	" Deoplete
+	call dein#add('Shougo/deoplete.nvim')
+	call dein#add('Shougo/neco-vim', { 'on_ft': ['vim'] })
+	call dein#add('zchee/deoplete-clang', { 'on_ft': ['c', 'cpp'] })
+	call dein#add('zchee/deoplete-zsh', { 'on_ft': ['sh', 'zsh'] })
+	call dein#add('Shougo/deoplete-clangx', { 'on_ft': ['c', 'cpp'] })
+	call dein#add('artur-shaik/vim-javacomplete2', { 'on_ft': ['java'] })
+
+	" Support
+	call dein#add('Shougo/context_filetype.vim')
+	call dein#add('Shougo/echodoc.vim')
+
+	" Linter
+	call dein#add('w0rp/ale')
 
 	" Formatter
-	"call dein#add('rhysd/vim-clang-format', { 'on_ft': ['c', 'cpp', 'java', 'js', 'ts'] })
-	"call dein#add('kana/vim-operator-user')
+	call dein#add('rhysd/vim-clang-format', { 'on_ft': ['c', 'cpp', 'java', 'js', 'ts'] })
+	call dein#add('kana/vim-operator-user')
 	call dein#add('Chiel92/vim-autoformat')
 
-
-
 	" Snippets
-	call dein#add('SirVer/ultisnips')
-	call dein#add('honza/vim-snippets')
+	call dein#add('Shougo/neosnippet.vim')
+	call dein#add('Shougo/neosnippet-snippets')
 
 	" Syntax
-	call dein#add('justinmk/vim-syntax-extra')              " C / C++
+	call dein#add('justinmk/vim-syntax-extra') " C / C++
 	call dein#add('kovetskiy/sxhkd-vim')
-	call dein#add('ap/vim-css-color', { 'if': '0' })
+	call dein#add('ap/vim-css-color')
 
 
 	call dein#end()
@@ -64,6 +133,10 @@ endif
 " -- Plugin Settings --
 
 filetype plugin indent on
+
+" -- Colors --
+syntax enable
+colorscheme solarized_light
 
 
 " vim-tmux-navigator
@@ -88,141 +161,102 @@ let g:deoplete#enable_smart_case = 1
 let g:deoplete#enable_completed_snippet = 1
 let g:deoplete#max_menu_width = 100
 
+" echodoc
+call echodoc#enable()
 
-" vim-airline
-let g:airline_powerline_fonts = 1
-let g:airline_section_c = '%F'
-let g:airline#extensions#whitespace#enabled = 0
-let g:airline#extensions#ale#enabled = 1
-let g:airline#extensions#tabline#enabled=1
-let g:airline_left_sep = ''
-let g:airline_left_alt_sep = '│'
-let g:airline_right_sep = ''
-let g:airline_right_alt_sep = '│'
+" Lightline
+let g:lightline = {
+			\ 'colorscheme': 'solarized',
+			\ }
+
+" Buftabline
+let g:buftabline_show = 1
+let g:buftabline_indicators = 1
 
 
-" ultisnips
-let g:UltiSnipsExpandTrigger = "<tab>"
-let g:UltiSnipsJumpForwardTrigger = "<tab>"
-let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+" Neosnippet
+imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+			\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+			\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
 
 
 " ale
-let g:ale_sign_error = '∃'
+let g:ale_sign_error = 'ε'
 let g:ale_sign_warning = 'ω'
-let g:ale_linters = { 'c': ['gcc']}
+"let g:ale_linters = { 'c': ['gcc']}
 let g:ale_lint_delay = 1000
 let g:ale_lint_on_text_changed = 'never'
-nmap <leader>n <Plug>(ale_next_wrap)
-nmap <leader>r <Plug>(ale_previous_wrap)
+nmap <leader>en <Plug>(ale_next_wrap)
+nmap <leader>er <Plug>(ale_previous_wrap)
+nnoremap <leader>l :ALELint<Cr>
+let g:ale_change_sign_column_color = 0
+let g:ale_set_highlights = 0
 
 
-
-" -- Colors --
-if $TERM =~ '\(st\|tmux\)-256color'
-	colorscheme flattened_light
-	set termguicolors
-else
-	colorscheme solarized
-	set background=light
-endif
+" gitgutter
+let g:gitgutter_map_keys = 0
+let g:gitgutter_sign_added              = '┃'
+let g:gitgutter_sign_modified           = '┃'
+let g:gitgutter_sign_removed            = '━'
+let g:gitgutter_sign_modified_removed   = '╋'
+let g:gitgutter_sign_removed_first_line = '▔'
 
 
+" vim-better-whitespace
+let g:better_whitespace_filetypes_blacklist = [ 'help', 'tex', 'mail' ]
+let g:better_whitespace_enabled = 1
+let g:better_whitespace_operator = ''
 
-" -- Vim Basics --
 
-syntax enable
-"set foldmethod=indent
-"set foldlevel=0
-"set foldnestmax=1
-"set nofoldenable
-set cursorline
-"set cursorcolumn
-"set lazyredraw
-set number
-set relativenumber
-set timeoutlen=300
-set autoindent
-set smartindent
-set tabstop=2
-set softtabstop=2
-set shiftwidth=2
-"set expandtab
-"set smarttab
-"set shiftround
-set ruler
-set showmatch
-set hidden
-set history=100
-set scrolloff=5
-set sidescroll=8
-set nostartofline
-set splitbelow
-set splitright
+" NERDCommenter
+let g:NERDDefaultAlign = 'left'
+let g:NERDTrimTrailingWhitespace = 1
 
-set ignorecase
-set smartcase
-set incsearch
-"set nohlsearch
-set pastetoggle=<F10>
-
-",eol:¬
-set listchars=tab:│\ ,precedes:◀,extends:▶,trail:█
-set list
-
-set title
-set laststatus=2
-set mouse=n
-
-set wildmode=longest,list,full
-set wildmenu
-set completeopt+=noselect
-set completeopt-=preview
-set wildignore+=*/.git/*,*/.hg/*,*/.svn/*
-set wildignore+=tags,*.tags
-set wildignore+=*.o,*.obj,*.hi,*.exe,*.dll,*.manifest,*.so,*.out,*.class,*.jpg,*jpeg,*.bmp,*.gif,*.png
-set wildignore+=*.swp,*.swo,*.swn
 
 
 let g:tex_flavor = 'tex' " disable plaintex
 
 
-" -- Color Adjustments --
-
-hi SpecialKey  cterm=NONE  ctermfg=12  gui=NONE  guifg=#C7D4D9  guibg=NONE
-hi NonText     cterm=NONE  ctermfg=12  gui=NONE  guifg=#C7D4D9  guibg=NONE
-
-
-
 " -- Commands --
 
-command W w !sudo tee > /dev/null %
+command W :execute ':silent w !sudo tee % > /dev/null' | :edit!
 
 
 " -- Mapping --
 
 map <Space> <leader>
-map <localleader> <S-Space>
+map <S-Space> <localleader>
 
-nnoremap <leader>l :ALELint<Cr>
+inoremap <C-D> <Esc>
+inoremap <C-D><C-D> <Esc>:
 
+nnoremap ß <C-]>
+nnoremap ẞ <C-T>
 
 noremap Y y$
 nnoremap <C-J> i<CR><Esc>k$
 
 nnoremap q <Nop>
 
-nnoremap <silent> <Backspace> X
-nnoremap <silent> <Down> gj
-nnoremap <silent> <Up> gk
-nnoremap <silent> <HOME> ^
-nnoremap <silent> <END> $
+
+nnoremap X "_X
+nnoremap <Backspace> "_X
+nnoremap x "_x
+nnoremap <Delete> "_x
+
+nnoremap <Down> gj
+nnoremap <Up> gk
+noremap <Home> ^
+inoremap <Home> <C-o>^
+noremap <End> $
 
 nnoremap <silent> <C-l> :nohl<CR><C-l>
 
-nnoremap <silent> <S-Left> <C-w><
-nnoremap <silent> <S-Down> <C-w>-
-nnoremap <silent> <S-Up>   <C-w>+
-nnoremap <silent> <S-Right> <C-w>>
+nnoremap <S-Left>  <C-w><
+nnoremap <S-Down>  <C-w>-
+nnoremap <S-Up>    <C-w>+
+nnoremap <S-Right> <C-w>>
 
-
+xnoremap > >gv
+xnoremap < <gv

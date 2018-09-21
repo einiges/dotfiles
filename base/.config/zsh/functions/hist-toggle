@@ -1,0 +1,9 @@
+[[ -v HISTFILE ]] && {
+	export HISTFILE_TOGGLE="$HISTFILE"
+	unset HISTFILE
+} || {
+	export HISTFILE="$HISTFILE_TOGGLE"
+	unset HISTFILE_TOGGLE
+}
+
+# vim:ft=zsh

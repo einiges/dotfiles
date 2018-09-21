@@ -1,5 +1,3 @@
-#!/usr/bin/env zsh
-
 # Create dircolors file from $DIRCOLORS in $DIRCOLORS_GEN
 
 if [[ -v DIRCOLORS_GEN ]]; then
@@ -8,3 +6,5 @@ else
 	print 'Target file $DIRCOLORS_GEN is not defined\nSource can be defined with $DIRCOLORS.' >&2
 	return 1
 fi
+
+# vim:ft=zsh

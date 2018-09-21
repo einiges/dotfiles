@@ -1,0 +1,8 @@
+# cp1 source dest [...]
+
+# dest := "dest1 dest2 ... destN"
+
+(( $# >= 2 )) &&
+	cp -ri -- "$1" "${*[2,-1]}"
+
+# vim:ft=zsh

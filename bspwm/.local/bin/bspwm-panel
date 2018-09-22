@@ -4,7 +4,6 @@ trap 'kill 0' EXIT
 trap 'exit' INT TERM QUIT
 
 
-
 # -- Setup --
 
 monitor=${1:-primary}
@@ -31,17 +30,19 @@ geometry_values=( $(bspc query --monitor $monitor -T | jq '.rectangle[]') )
 
 typeset -A geometry=( ${geometry_keys:^geometry_values} )
 
-bar_border_width=3
+bar_top_padding=3
+bar_bottom_padding=0
 bar_left_padding=3
 bar_right_padding=3
-(( geometry[x] += bar_left_padding ))
-(( geometry[width] -= (bar_left_padding + bar_right_padding) ))
-(( geometry[height] = 28 + bar_border_width ))
+(( geometry[x]     += bar_left_padding ))
+(( geometry[y]     += bar_top_padding ))
+(( geometry[width] -= bar_left_padding + bar_right_padding ))
+(( geometry[height] = 28 ))
 
 
 # - font -
 font='NotoSans Nerd Font:size=9'
-font_offset=1
+font_offset=0
 
 # - colors -
 bar_bg='#FDF6E3'
@@ -280,20 +281,21 @@ while read -r cmd <&5; do
 
 	mods[$m]="${cmd[2,-1]}"
 
-	print "%{l}%{+o}${mods[title]}" \
-		    "%{c}${mods[desktops]}" \
-				"%{r}${mods[mail]}${___}${mods[playback]}${___}${mods[capture]}${___}${mods[day]}${___}${mods[clock]}%{-o}"
+	print "%{l}${mods[title]}" \
+	      "%{c}${mods[desktops]}" \
+	      "%{r}${mods[mail]}${___}${mods[playback]}${___}${mods[capture]}${___}${mods[day]}${___}${mods[clock]}"
 
-done | lemonbar \
+done | lemonbar -d \
        -g "${geometry[width]}x${geometry[height]}+${geometry[x]}+${geometry[y]}" \
        -B "${bar_bg}" \
        -F "${bar_fg}" \
        -U "${bar_bg}" \
-       -u "${bar_border_width}" \
        -o "${font_offset}" -f "${font}" \
        -n "$PANEL_NAME" 2>/dev/null &
 
 target="$(xdo id -N Bspwm -n root)"
 xdo above -t "${${(@o)target}[1]}" "$(xdo id -m -a "$PANEL_NAME")"
+
+bspc config -m "$monitor" top_padding $(( $(bspc config -m focused top_padding) + geometry[height] + bar_bottom_padding + bar_top_padding ))
 
 wait $!

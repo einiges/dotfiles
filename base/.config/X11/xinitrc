@@ -15,7 +15,7 @@ unset $f
 	sleep 3
 	$BROWSER &
 	$TERMINAL -c ncmpcpp    -e ncmpcpp &
-	$TERMINAL -c neomutt    -e neomutt &
+	$TERMINAL -c mutt       -e mutt &
 	$TERMINAL -c calcurse   -e calcurse &
 	$TERMINAL -c newsboat   -e newsboat &
 } &

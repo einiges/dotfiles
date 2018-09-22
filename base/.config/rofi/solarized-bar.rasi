@@ -20,11 +20,10 @@
 window {
 	location: north;
 	anchor: north;
-	y-offset: 31px;
 	width: 100%;
-	border: 3px 3px 3px 3px;
+	border: 3px 0px 3px 0px;
 	orientation: vertical;
-	height: 36px;
+	height: 35px;
 	children: [ mainbox ];
 }
 
@@ -36,15 +35,15 @@ mainbox {
 textbox-prompt-colon {
 	expand: false;
 	str: "";
-	padding: 0 10px;
-	margin: 0px 0px 2px 0px;
+	padding: 0px 10px;
+	margin: 0px 0px 1px 0px;
 	background-color: @normal-bg;
 }
 
 entry {
 	vertical-align: 0.5;
-	padding: 0 1em;
-	margin: 0px 0px 2px 0px;
+	padding: 0px 1em;
+	margin: 0px 0px 1px 0px;
 	expand: false;
 	background-color: @normal-bg;
 	text-color: @fg;

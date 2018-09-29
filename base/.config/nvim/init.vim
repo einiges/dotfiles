@@ -4,10 +4,10 @@
 set autoindent
 set completeopt=menuone,noinsert,noselect
 set cursorline
+set fillchars=eob:\ ,fold:─,
 set foldmethod=indent
-set foldlevel=1
-set foldcolumn=0
-set foldnestmax=1
+set foldminlines=5
+set foldnestmax=2
 set formatoptions=cjlnqrt
 set hidden
 set history=100
@@ -17,7 +17,6 @@ set laststatus=2
 set list
 set listchars=tab:█\ ,extends:…,
 set mouse=a
-set noshowmode
 set number
 set pastetoggle=<F10>
 set relativenumber
@@ -50,6 +49,7 @@ set wildignore+=*/.git,*/.hg,*/.svn
 set wildignore+=tags,*.tags
 
 set nofoldenable
+set noshowmode
 set nostartofline
 
 

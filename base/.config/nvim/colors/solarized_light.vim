@@ -1,4 +1,5 @@
 
+set background=light
 hi clear
 
 if exists('syntax_on')
@@ -7,9 +8,7 @@ endif
 
 let colors_name = 'solarized_light'
 
-hi Normal                                  ctermfg=12  ctermbg=8   guifg=#657b83  guibg=#fdf6e3  guisp=NONE
-
-set background=light
+hi Normal                                                       ctermfg=12    ctermbg=8     guifg=#657b83  guibg=#fdf6e3  guisp=NONE
 
 hi ALEWarningSign                          cterm=NONE           ctermfg=9     ctermbg=NONE  guifg=#cb4b16  guibg=NONE     guisp=NONE     gui=NONE
 hi ALEErrorSign                            cterm=NONE           ctermfg=9     ctermbg=NONE  guifg=#cb4b16  guibg=NONE     guisp=NONE     gui=NONE
@@ -38,7 +37,7 @@ hi HelpExample                             cterm=NONE           ctermfg=14    ct
 hi Identifier                              cterm=NONE           ctermfg=4     ctermbg=NONE  guifg=#268bd2  guibg=NONE     guisp=NONE     gui=NONE
 hi IncSearch                               cterm=STANDOUT       ctermfg=3     ctermbg=NONE  guifg=#b58900  guibg=NONE     guisp=NONE     gui=STANDOUT
 hi LineNr                                  cterm=NONE           ctermfg=10    ctermbg=NONE  guifg=#93a1a1  guibg=NONE     guisp=NONE     gui=NONE
-hi MatchParen                              cterm=NONE           ctermfg=0     ctermbg=1     guifg=#FDF6E3  guibg=#dc322f  guisp=NONE     gui=NONE
+hi MatchParen                              cterm=NONE           ctermfg=0     ctermbg=1     guifg=#fdf6e3  guibg=#dc322f  guisp=NONE     gui=NONE
 hi ModeMsg                                 cterm=NONE           ctermfg=4     ctermbg=NONE  guifg=#268bd2  guibg=NONE     guisp=NONE     gui=NONE
 hi MoreMsg                                 cterm=NONE           ctermfg=4     ctermbg=NONE  guifg=#268bd2  guibg=NONE     guisp=NONE     gui=NONE
 hi NonText                                 cterm=NONE           ctermfg=10    ctermbg=NONE  guifg=#93a1a1  guibg=NONE     guisp=NONE     gui=NONE

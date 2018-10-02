@@ -204,7 +204,7 @@ let g:gitgutter_sign_removed_first_line = '▔'
 
 
 " vim-better-whitespace
-let g:better_whitespace_filetypes_blacklist = [ 'help', 'tex', 'mail' ]
+let g:better_whitespace_filetypes_blacklist = [ 'help', 'tex' ]
 let g:better_whitespace_enabled = 1
 let g:better_whitespace_operator = ''
 

@@ -1,27 +1,37 @@
 
-field academic   = Titel
-field firstname  = Vorname
-field middlename = Zweitname
-field surname    = Nachname
-field birthday   = Geburtstag, date
+set index_format = "{name:22}     {email:40}     {phone:20|mobile|workphone}"
 
-view KONTAKT  = academic, name, firstname, middlename, surname, email
-view ADRESSE  = address, address2, state, zip, city, country
-view TELEFON  = phone, workphone, fax, mobile
-view ANDERE   = nick, url, notes, birthday
+set address_style    = eu
+set autosave         = true
+set mutt_command     = mutt
+set preserve_fields  = all
+set show_all_emails  = false
+set show_cursor      = false
+set sort_field       = nick
+set use_ascii_only   = false
+set use_colors       = true
+set www_command      = $BROWSER
 
-#set index_format = " {firstname:12} {surname:15} {email:50} {phone} {workphone} {mobile}"
-set index_format = " {name:30} {email:50} {phone} {workphone} {mobile}"
 
-set autosave                     = true
-set mutt_command                 = mutt $xdg_mutt
-set www_command                  = $BROWSER
-set address_style                = eu
-set use_ascii_only               = false
-set sort_field                   = firstname
-set show_cursor                  = false
-set preserve_fields              = all
+set color_header_fg=default
+set color_header_bg=default
+set color_footer_fg=default
+set color_footer_bg=default
+set color_list_even_fg=default
+set color_list_even_bg=default
+set color_list_odd_fg=yellow
+set color_list_odd_bg=default
+set color_list_header_fg=blue
+set color_list_header_bg=default
+set color_list_highlight_fg=default
+set color_list_highlight_bg=black
+set color_tab_border_fg=default
+set color_tab_border_bg=default
+set color_tab_label_fg=blue
+set color_tab_label_bg=default
+set color_field_name_fg=default
+set color_field_name_bg=default
+set color_field_value_fg=green
+set color_field_value_bg=default
 
-set add_email_prevent_duplicates = true
 
-#set use_colors    = true

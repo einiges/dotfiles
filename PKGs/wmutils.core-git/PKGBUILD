@@ -16,20 +16,20 @@ source=("${_pkgname}::git+https://github.com/wmutils/core.git")
 md5sums=('SKIP')
 
 pkgver() {
-  cd "${_pkgname}"
-  git describe --tags | sed 's/-/./g'
+	cd "${_pkgname}"
+	git describe --tags | sed 's/-/./g'
 }
 
 build() {
-  cd "${_pkgname}"
-  make
+	cd "${_pkgname}"
+	make
 }
 
 package() {
 	cd "${_pkgname}"
 	make PREFIX=/usr MANPREFIX=/usr/share/man DESTDIR="${pkgdir}" install
-  install -Dm644 LICENSE ${pkgdir}/usr/share/liceses/${pkgname}/LICENSE
-  install -Dm644 README.md ${pkgdir}/usr/share/doc/${pkgname}/README.md
+	install -Dm644 LICENSE ${pkgdir}/usr/share/liceses/${pkgname}/LICENSE
+	install -Dm644 README.md ${pkgdir}/usr/share/doc/${pkgname}/README.md
 }
 
 

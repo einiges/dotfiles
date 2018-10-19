@@ -1,5 +1,3 @@
-#!/usr/bin/env zsh
-
 # Switch cursor shape, based on current vi mode or when executing a program.
 
 # Should work on all VTE100 compatible Terminals that use the DECSCUSR sequences.
@@ -142,4 +140,3 @@ autoload -Uz add-zle-hook-widget
 autoload -Uz add-zsh-hook
 
 vicursor::start
-

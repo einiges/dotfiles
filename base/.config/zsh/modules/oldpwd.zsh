@@ -1,5 +1,3 @@
-#!/usr/bin/env zsh
-
 # Go to $OLDPWD without putting it in $(dirs) so it does not get flooded.
 
 oldpwd() {

@@ -1,5 +1,3 @@
-#!/bin/zsh
-
 alias -g L="| ${PAGER:-less}"
 alias -g G='| grep --color'
 alias -g W='| wc'

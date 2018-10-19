@@ -1,4 +1,4 @@
-#!/bin/zsh
+# vim: ft=zsh
 
 zmodload -F zsh/stat b:zstat
 

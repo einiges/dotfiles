@@ -1,5 +1,3 @@
-#!/bin/zsh
-
 autoload backward-kill-word-match
 zle -N backward-kill-word-match
 

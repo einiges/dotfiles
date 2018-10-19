@@ -1,4 +1,4 @@
-#!/bin/zsh
+# vim: ft=zsh
 
 if [[ "$TTY" = "/dev/tty1" ]]; then
 	exec startx "$XINITRC"

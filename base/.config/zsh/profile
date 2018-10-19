@@ -1,4 +1,4 @@
-#!/bin/zsh
+# vim: ft=zsh
 
 (( $+commands[ruby] )) &&
 	PATH="${PATH}:$(ruby -e 'print Gem.user_dir')/bin"

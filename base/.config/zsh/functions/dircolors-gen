@@ -1,3 +1,5 @@
+# vim:ft=zsh
+
 # Create dircolors file from $DIRCOLORS in $DIRCOLORS_GEN
 
 if [[ -v DIRCOLORS_GEN ]]; then
@@ -7,4 +9,3 @@ else
 	return 1
 fi
 
-# vim:ft=zsh

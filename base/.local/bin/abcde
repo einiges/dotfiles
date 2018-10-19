@@ -1,3 +1,4 @@
-#!/usr/bin/env sh
+#!/bin/sh
 
 exec /usr/bin/abcde -c "$XDG_CONFIG_HOME/abcde/abcde.conf" "$@"
+

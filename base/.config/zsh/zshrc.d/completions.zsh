@@ -1,5 +1,3 @@
-#!/bin/zsh
-
 #zstyle ':completion:*' list-prompt ''
 #zstyle ':completion:*' select-prompt ''
 #zstyle ':completion:*' group-name ''
@@ -40,5 +38,4 @@ zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9a-z-]#)*=34=3
 zstyle ':completion:*:*:kill:*'           menu yes select
 zstyle ':completion:*:*:kill:*'           force-list always
 zstyle ':completion:*:*:kill:*'           insert-ids single
-
 

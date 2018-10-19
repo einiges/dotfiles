@@ -1,5 +1,3 @@
-#!/bin/zsh
-
 ZGEN_DIR="${XDG_CACHE_HOME}/zsh/zgen"
 ZGEN_INIT="${XDG_CACHE_HOME}/zsh/zgen-plugins-loader.zsh"
 

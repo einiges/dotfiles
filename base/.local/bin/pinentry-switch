@@ -1,6 +1,6 @@
-#!/bin/bash
+#!/bin/sh
 
-case $PINENTRY_USER_DATA in
+case "$PINENTRY_USER_DATA" in
 	curses ) PINENTRY=/usr/bin/pinentry-curses ;;
 	emacs  ) PINENTRY=/usr/bin/pinentry-emacs ;;
 	gnome  ) PINENTRY=/usr/bin/pinentry-gnome3 ;;

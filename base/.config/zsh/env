@@ -1,5 +1,4 @@
-#!/bin/zsh
-
+# vim: ft=zsh
 
 export BROWSER=firefox
 export EDITOR=nvim
@@ -93,5 +92,4 @@ export TEXMFVAR="$XDG_DATA_HOME"/texlive/texmf-var
 #export GEM_HOME=$(ruby -e 'print Gem.user_dir')
 #export GEM_HOME="$XDG_DATA_HOME"/gem
 #export GEM_PATH="$XDG_DATA_HOME"/gem
-
 

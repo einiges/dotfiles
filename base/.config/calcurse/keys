@@ -22,8 +22,8 @@ generic-goto  g G
 generic-other-cmd  o O 
 generic-config-menu  C 
 generic-redraw  ^R 
-generic-add-appt  ^T 
-generic-add-todo  ^A 
+generic-add-appt  ^A 
+generic-add-todo  ^T 
 generic-prev-day  T ^H 
 generic-next-day  t ^L 
 generic-prev-week  W ^K 

@@ -32,9 +32,8 @@ alias  la='ls -A'
 alias lal='ls -lA'
 alias  lA='ls -a'
 
-alias ff='find -type f'
-alias fd='find -type d'
+alias ff='noglob find . -type f -name'
+alias fd='noglob find . -type d -name'
 
-alias rs='rsync --recursive --perms --owner --group --human-readable --backup --backup-dir=/tmp/rsync.bak'
-
+alias rs='rsync --recursive --perms --owner --group --human-readable'
 

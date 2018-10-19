@@ -1,2 +1,2 @@
-setlocal re=1
+setlocal regexpengine=1
 setlocal textwidth=100

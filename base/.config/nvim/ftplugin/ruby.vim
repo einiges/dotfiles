@@ -1,1 +1,1 @@
-setlocal re=1
+setlocal regexpengine=1

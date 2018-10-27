@@ -1,17 +1,41 @@
-include "~/.config/newsboat/colors-solarized-light"
+include "~/.config/newsboat/colors/solarized_light"
 
 prepopulate-query-feeds yes
 
 auto-reload yes
-refresh-on-startup yes
-reload-time 60
 max-items 60
+reload-time 180
+suppress-first-reload no
+
+feed-sort-order unreadarticlecount-asc
 
 notify-program "notify-send"
 notify-format "newsboat '%d new articles (%n unread)'"
 
-datetime-format "%d %m %y, %R"
+datetime-format       "%_d %_m   %_H %_M"
+articlelist-format    "%4i   %t %> %D %T"
+feedlist-format       "%4i   %t %> %T   %U"
+
+articlelist-title-format  "   ┌─── %T ─── Total: %t ─ Unread: %u ───┘"
+dialogs-title-format      "   ┌─── Dialogs ───┘"
+feedlist-title-format     "   ┌─── Feeds ─── Total: %t ─ Unread: %u ───┘"
+filebrowser-title-format  "   ┌─── %?O?Open&Save? ─── %f ───┘"
+help-title-format         "   └─── Help ───┘"
+itemview-title-format     "   └─── %T ─── Total: %t ─ Unread: %u ───┘"
+searchresult-title-format "   ┌─── Search ─── Total: %t ─ Unread: %u ───┘"
+selectfilter-title-format "   ┌─── Select Filter ───┘"
+selecttag-title-format    "   ┌─── Select Tag ───┘"
+urlview-title-format      "   └─── URL ───┘"
+
+
+external-url-viewer "urlscan"
+html-renderer "w3m -dump -T text/html"
+
+browser "rifle -f f %u"
+player mpv
+
+
+# Bindings
 
 bind-key m toggle-show-read-feeds
 
-browser $BROWSER

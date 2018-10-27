@@ -1,4 +1,5 @@
-config.source('themes/solarized_light.py')
+config.source('colors/solarized_light.py')
+config.source('themes/my.py')
 
 c.auto_save.session = True
 
@@ -30,10 +31,11 @@ c.downloads.remove_finished = 2500
 
 c.editor.command = ['terminal', '-e', 'nvim', '+call cursor({line}, {column0})', '{file}']
 
-c.hints.chars = 'uiaedtrnvlfgbp'
+c.hints.chars = 'uiaenrtd'
 c.hints.next_regexes += [r'\bweiter\b', r'\bnächste(r|s)?\\b', r'\bneuer\b', r'\bmehr\b']
 c.hints.prev_regexes += [r'\bzurück\b', r'\bvorher(ig(e|er|es)?)?\\b', r'\bälter\b', r'\bweniger\b']
 
+c.input.partial_timeout = 0
 c.messages.timeout = 5000
 c.prompt.radius = 0
 c.scrolling.bar = 'always'
@@ -46,11 +48,11 @@ c.tabs.title.format = '{audio}{index}{title_sep}{perc}{title}'
 c.tabs.last_close = 'startpage'
 c.tabs.show = 'multiple'
 
-c.url.default_page = 'about:blank'
-c.url.start_pages = 'https://startpage.com'
+c.url.default_page = "about:blank"
+c.url.start_pages = c.url.default_page
 c.url.searchengines = {
-    'DEFAULT': 'https://startpage.com/do/asearch?q={}',
-    'sp':      'https://startpage.com/do/asearch?q={}&cat=pics&nj=0',
+    'DEFAULT': 'https://new.startpage.com/do/asearch?q={}',
+    'sp':      'https://new.startpage.com/do/asearch?q={}&cat=pics&nj=0',
     'a':       'https://www.amazon.de/s/keyword={}',
     'aw':      'https://wiki.archlinux.org/index.php/{}',
     'd':       'https://dict.cc/?s={}',
@@ -64,9 +66,6 @@ c.window.title_format = '{host}{title_sep}{title} - qutebrowser'
 
 config.bind('<Ctrl-T>', 'set-cmd-text -r -s :tab-focus')
 config.bind('T', 'set-cmd-text -s :open -t')
-config.unbind('M')
-config.bind('Mf', 'hint links spawn mpv {hint-url}')
-config.bind('Mm', 'spawn mpv {url}')
 config.bind('(', 'tab-prev')
 config.bind(')', 'tab-next')
 config.bind('<', 'back')
@@ -75,8 +74,8 @@ config.bind('[', 'tab-move -')
 config.bind(']', 'tab-move +')
 config.bind('{{', 'navigate prev')
 config.bind('}}', 'navigate next')
-config.bind('{[', 'navigate prev -t')
-config.bind('}]', 'navigate next -t')
+config.bind('{}', 'navigate prev -t')
+config.bind('}{', 'navigate next -t')
 config.bind('{-', 'navigate decrement')
 config.bind('}+', 'navigate increment')
 
@@ -84,6 +83,9 @@ config.bind('<Escape>', 'clear-keychain ;; search ;; fullscreen --leave ;; clear
 
 config.unbind('gf')
 config.bind('gs', 'view-source')
+
+config.bind(';m', 'hint links spawn mpv {hint-url}')
+config.bind(';M', 'spawn mpv {url}')
 
 config.bind('<Left>', 'scroll left')
 config.bind('<Down>', 'scroll down')

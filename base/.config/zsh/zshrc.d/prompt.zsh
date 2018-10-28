@@ -92,6 +92,7 @@ prompt_pure_preexec() {
 
 prompt_pure_dir_colorizer() {
 	local d="${(%):-%~}"
+	d=${d:gs/%/%%}
 
 	case "$d" in
 		[/~] )
@@ -121,13 +122,10 @@ prompt_pure_preprompt_render() {
 	# Initialize the preprompt array.
 	local -a preprompt_parts
 
-	# tmux indicator
 	[[ -v prompt_pure_state[tmux] ]] && preprompt_parts+=('${prompt_pure_state[tmux]}')
 	[[ -v prompt_pure_state[remote] ]] && preprompt_parts+=('${prompt_pure_state[remote]}')
 	[[ -v prompt_pure_state[root] ]] && preprompt_parts+=('${prompt_pure_state[root]}')
 
-	# Set the path.
-	#preprompt_parts+=('%K{black} %F{white}%~%f %k')
 	preprompt_parts+=( '%K{black} $(prompt_pure_dir_colorizer) %k')
 
 	# Add git branch and dirty status info.
@@ -579,11 +577,11 @@ prompt_pure_setup() {
 	# information.
 	local -A ps4_parts
 	ps4_parts=(
-		depth 	  '%F{yellow}${(l:${(%)prompt_pure_debug_depth[1]}::+:)}%f'
+		depth     '%F{yellow}${(l:${(%)prompt_pure_debug_depth[1]}::+:)}%f'
 		compare   '${${(%)prompt_pure_debug_depth[2]}:#${(%)prompt_pure_debug_depth[3]}}'
 		main      '%F{blue}${${(%)prompt_pure_debug_depth[3]}:t}%f%F{242}:%I%f %F{242}@%f%F{blue}%N%f%F{242}:%i%f'
 		secondary '%F{blue}%N%f%F{242}:%i'
-		prompt 	  '%F{242}>%f '
+		prompt    '%F{242}>%f '
 	)
 	# Combine the parts with conditional logic. First the `:+` operator is
 	# used to replace `compare` either with `main` or an ampty string. Then
@@ -597,3 +595,4 @@ prompt_pure_setup() {
 }
 
 prompt_pure_setup "$@"
+

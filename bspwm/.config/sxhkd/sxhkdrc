@@ -112,11 +112,11 @@ super + {comma,period}
 	bspc node -f {prev,next}.local
 
 # Flip layout
-super + {_,shift} + m
+super + {_,shift} + b
 	bspc node @/ -F {vertical,horizontal}
 
 # Rotate Layout
-super + {_,shift} + b
+super + {_,shift} + m
 	bspc node @/ -R {90,270}
 
 
@@ -149,8 +149,7 @@ super + {_,shift} + g
 	bspc {monitor -f,node -m} next
 
 # swap current desktop with focused desktop of next monitor
-super + dead_circumflex
-	bspc desktop -s next.focused
-
+super + {_,shift} + dead_circumflex
+	bspc desktop -s next.focused {_,--follow}
 
 

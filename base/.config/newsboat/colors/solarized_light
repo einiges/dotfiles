@@ -7,7 +7,10 @@ color listfocus            default        black
 color listfocus_unread     blue           black
 color article              default        default
 
-# highlights
-highlight article "^(Title):.*$"             blue           default
+search-highlight-colors    color8         yellow
+
+highlight article "^(Feed|Title|Author|Link|Date): "  blue    default     bold
+
 highlight article "https?://[^ ]+"           red            default
 highlight article "\\[image\\ [0-9]+\\]"     green          default
+

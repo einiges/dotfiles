@@ -13,6 +13,7 @@ c.completion.timestamp_format = '%d %m %Y'
 c.confirm_quit = ['downloads']
 
 c.content.autoplay = False
+c.content.cookies.accept = 'no-3rdparty'
 c.content.default_encoding = 'utf-8'
 c.content.desktop_capture = False
 c.content.geolocation = False
@@ -47,6 +48,7 @@ c.statusbar.widgets = ['progress', 'keypress', 'url', 'scroll']
 c.tabs.background = True
 c.tabs.title.format = '{audio}{index}{title_sep}{perc}{title}'
 c.tabs.last_close = 'startpage'
+c.tabs.select_on_remove = 'last-used'
 c.tabs.show = 'multiple'
 
 c.url.default_page = "about:blank"

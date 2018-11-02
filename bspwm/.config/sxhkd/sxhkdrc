@@ -3,9 +3,6 @@
 super + Escape ; s
 	pkill --signal SIGUSR1 sxhkd
 
-super + Escape ; p
-	polybar-msg cmd restart
-
 super + @v
 	sspaste 'primary' 'ctrl+v'
 
@@ -34,10 +31,9 @@ super + ctrl + l
 {_,shift} + @Print
 	scrot {_,-s} "$HOME/Pictures/Screenshots/%Y-%m-%d_%H:%M:%S.png"
 
-
 # - Quick launch -
-super + e ; super + {e,f}
-	{pcmanfm,firefox}
+super + e ; super + {e,f,p}
+	{pcmanfm,firefox,pavucontrol}
 
 
 # -- media keys --
@@ -79,29 +75,24 @@ super + f
 
 # Toggle states
 super + {ctrl,shift,mod5} + f
-	bspc node -t \~{floating,fullscreen,tiled}
+	bspc node -t {\~floating,\~fullscreen,tiled}
 
 
 # -- focus/swap
 
 # focus desktop when available on current desktop
 # otherwise swap
-super + {1-9,0}
-	d='{1-9,10}'; \
-	bspc query -D "$d.local" && bspc desktop -f "$d" || bspc desktop -s "$d"
+super + {1-5,8,9,0}
+	d='{1-5,8,9,10}'; \
+	bspc desktop -f "$d.local" || bspc desktop -s "$d"
 
 # send node to desktops
-super + shift + {1-9,0}
-	bspc node -d '{1-9,10}'
+super + shift + {1-5,8,9,0}
+	bspc node -d '{1-5,8,9,10}'
 
-# focus node across monitors in given direction
-super + {n,r,t,d}
-	d='{west,south,north,east}'; \
-	bspc node -f "$d" || bspc monitor -f "$d"
-
-# swap node in given direction
-super + shift + {n,r,t,d}
-	bspc node -s {west,south,north,east}.local --follow
+# {focus,swap} node local
+super + {_,shift} + {n,r,t,d}
+	bspc node -{f,s} {west,south,north,east}.local
 
 # focus/swap with biggest node at current monitor
 super + {_,shift} + space
@@ -124,22 +115,23 @@ super + {_,shift} + m
 
 # Increase window size
 super + ctrl + {n,r,t,d}
-	bspc node -z {left -50 0,bottom 0 35,top 0 -35,right 35 0}
+	bspc node -z {left -50 0,bottom 0  35,top 0 -35,right  50 0}
 
 # Decrease window size
 super + alt + {n,r,t,d}
-	bspc node -z {left 50 0,bottom 0 -25,top 0 35,right -35 0}
+	bspc node -z {left  50 0,bottom 0 -35,top 0  35,right -50 0}
 
 
 # -- preselect --
 
 # preselect the direction
-super + mod5 + {n,r,t,d}
-	bspc node -p \~{west,south,north,east}
+super + mod5 + {n,r}
+	d='~{east,south}'; \
+	bspc query -N -n 'focused.automatic' && bspc node -p "$d" || bspc-presel-mirrored "$d"
 
 # move to preselcted area
 super + mod5 + space
-	bspc node -n last.!automatic
+	bspc node -n any.!automatic
 
 
 # -- monitors --

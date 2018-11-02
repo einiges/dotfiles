@@ -18,7 +18,7 @@ alias ,='popd'
 # -- shorties --
 
 alias l=${PAGER:-less}
-alias m='mutt'
+alias m='man'
 alias n='nvim'
 alias o='rifle'
 alias p='print'

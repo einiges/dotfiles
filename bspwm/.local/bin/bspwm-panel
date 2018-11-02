@@ -229,8 +229,8 @@ ppDesktops() {
 
 { print init; stdbuf -oL alsactl monitor pulse } | while read line; do
 	case ${line} in
-		\#*Master\ Playback*|init ) ppPlayback; print "p$REPLY" ;&
-		\#*Capture*|init )          ppCapture;  print "c$REPLY" ;&
+		*Master\ Playback*|init ) ppPlayback; print "p$REPLY" ;&
+		*Capture*|init )          ppCapture;  print "c$REPLY" ;&
 	esac
 done >&5 &
 
@@ -293,7 +293,7 @@ done | lemonbar -d \
        -o "${font_offset}" -f "${font}" \
        -n "$PANEL_NAME" 2>/dev/null &
 
-target="$(xdo id -N Bspwm -n root)"
+target=( $(xdo id -N Bspwm -n root) )
 xdo above -t "${${(@o)target}[1]}" "$(xdo id -m -a "$PANEL_NAME")"
 
 bspc config -m "$monitor" top_padding $(( $(bspc config -m focused top_padding) + geometry[height] + bar_bottom_padding + bar_top_padding ))

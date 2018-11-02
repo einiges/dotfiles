@@ -23,9 +23,9 @@ song_list_format = " $(yellow)%l$(end) $(blue){%t}|{%f}$(end) $(11)■$(end) $(g
 
 song_columns_list_format = (3f)[]{: } (6f)[4]{lr} (3f)[]{: } (40)[5]{t|f:Title} (3f)[]{: } (15)[3]{a|A:Artist} (3f)[]{: } (15)[14]{b} (3f)[]{: }  (4f)[4]{nr} (3f)[]{: }
 
-song_window_title_format = %t • {%a}|{%A}
+song_window_title_format = %t - {%a}|{%A}
 
-song_status_format = $2%t$1 • $5%a$1
+song_status_format = $(green)%t$(end){ $(11)■$(end) $(green){%a}|{%A}$(end)}
 
 progressbar_look = "   "
 

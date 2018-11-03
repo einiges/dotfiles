@@ -101,7 +101,6 @@ if dein#load_state(s:dein_cache, expand('<sfile>'))
 	call dein#add('zchee/deoplete-clang', { 'on_ft': ['c', 'cpp'] })
 	call dein#add('zchee/deoplete-zsh', { 'on_ft': ['sh', 'zsh'] })
 	call dein#add('Shougo/deoplete-clangx', { 'on_ft': ['c', 'cpp'] })
-	call dein#add('artur-shaik/vim-javacomplete2', { 'on_ft': ['java'] })
 
 	" Support
 	call dein#add('Shougo/context_filetype.vim')
@@ -258,5 +257,11 @@ nnoremap <S-Down>  <C-w>-
 nnoremap <S-Up>    <C-w>+
 nnoremap <S-Right> <C-w>>
 
+" Indent without loosing visuality
 xnoremap > >gv
 xnoremap < <gv
+
+" Search visual
+vnoremap // y/\V<C-r>=escape(@",'/\')<CR><CR>
+vnoremap /? y?\V<C-r>=escape(@",'/\')<CR><CR>
+

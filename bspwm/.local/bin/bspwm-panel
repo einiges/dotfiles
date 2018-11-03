@@ -51,7 +51,7 @@ module_bg='#EEE8D5'
 module_fg='#657B83'
 highlight_fg='#76B9ED'
 
-# ws
+# - workspaces/tags/desktops -
 ws_focused_bg="#DFD9C6"
 ws_focused_fg="#002B36"
 ws_active_bg="#EEE8D5"
@@ -109,7 +109,7 @@ desktop_icons[10]='⁰  '
 
 # $( ppTitle title )
 ppTitle() {
-	print "${module_left}$1${module_right}"
+	REPLY="${module_left}$1${module_right}"
 }
 
 
@@ -129,7 +129,7 @@ ppDay() {
 
 # $( ppMail )
 ppMail() {
-	local cmd="$(notmuch count tag:unread)"
+	local cmd=$(notmuch count tag:unread 'folder:"/^.*/Inbox$/"')
 	REPLY="${module_left}${icons[mail]}%{O5}${cmd}${module_right}"
 }
 
@@ -215,7 +215,7 @@ ppDesktops() {
 				continue
 		esac
 
-		desktops[${name}]="%{B${ws_bg}}%{F${ws_fg}}${module_padding}${desktop_icons[$name]}${module_padding}%{B-}%{F-}"
+		desktops[name]="%{B${ws_bg}}%{F${ws_fg}}${module_padding}${desktop_icons[name]}${module_padding}%{B-}%{F-}"
 	done
 
 	# join and strip empty elements
@@ -234,7 +234,8 @@ ppDesktops() {
 	esac
 done >&5 &
 
-xtitle -t 60 -sf "T$(ppTitle %s)\n" >&5 &
+ppTitle '%s'
+xtitle -t 60 -sf "T${REPLY}\n" >&5 &
 
 while :; do
 	ppClock
@@ -248,8 +249,8 @@ while :; do
 	print "D$REPLY"
 	# 86400s = 24 * 60 * 60s   # Seconds in a day
 	#  3600s = 60 * 60s        # Seconds in an hour
-	# 1 minute past midnight
-	sleep $(( ${(%):-"%D{86460-(%-H*3600+%-M*60+%-S)}"} ))
+	# 5 seconds past midnight
+	sleep $(( ${(%):-"%D{86405-(%-H*3600+%-M*60+%-S)}"} ))
 done >&5 &
 
 while :; do

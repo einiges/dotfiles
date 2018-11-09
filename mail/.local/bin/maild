@@ -1,0 +1,36 @@
+#!/bin/sh
+
+killsleep() {
+	if [ -n "${sleep_pid+set}" ]; then
+		kill "$sleep_pid"
+	fi
+}
+
+# $( sleep_set_pid time )
+sleep_set_pid() {
+	sleep "$1" &
+	sleep_pid="$!"
+	wait
+	unset sleep_pid
+}
+
+
+idle_sleep=${1:-600}
+boot_sleep=${2:-90}
+
+if [ "$boot_sleep" -lt 0 -o "$idle_sleep" -lt 30 ]; then
+	exit 1
+fi
+
+trap "killsleep" USR1
+
+sleep_set_pid "$boot_sleep"
+
+while :; do
+	mbsync -a --quiet
+	notmuch new --quiet
+	notmuch tag -inbox 'folder:"/^.*/(Deleted|Drafts|Sent|Trash)/"'
+	mail-notify
+	sleep_set_pid $idle_sleep
+done
+

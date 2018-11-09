@@ -1,0 +1,22 @@
+#!/bin/sh
+
+# Count mails tagged with 'inbox'
+num_mails=$( notmuch count tag:inbox )
+
+if [ "$num_mails" -le 0 ]; then
+	exit 0
+fi
+
+# Show sender OR summary
+if [ "$num_mails" -eq 1 ]; then
+	from=$( notmuch address --output=address tag:inbox )
+	notify-send "New mail arrived" "From: ${from}"
+else
+	num_unread=$( notmuch count tag:unread )
+	notify-send "New mails arrived" "New: ${num_mails}, Unread: ${num_unread}"
+fi
+
+# remove tag 'inbox' from all mails
+notmuch tag -inbox tag:inbox
+
+

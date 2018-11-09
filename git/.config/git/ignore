@@ -1,15 +1,34 @@
-# backup files
-
+# Backup
 *~
 *.swp
+*.bak
 
 
-# build output
-
-*.o
-*.a
+# Compiled
 *.class
 *.hi
-
+*.o
+*.so
 
 a.out
+
+
+# Tags
+tags
+.tags
+
+
+# Packages
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+
+# Logs
+*.log
+

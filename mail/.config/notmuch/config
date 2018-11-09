@@ -1,0 +1,19 @@
+
+[database]
+path=.mail
+
+[user]
+name=<@NAME12@>
+primary_email=<@MAIL_GMX1@>
+other_email=<@MAIL_GMX2@>;<@MAIL_OUTLOOK@>;<@MAIL_GMAIL@>;
+
+[new]
+ignore=.mbsyncstate;.uidvalidity;
+
+[search]
+exclude_tags=deleted;spam;
+
+[maildir]
+synchronize_flags=true
+
+# vim:ft=dosini

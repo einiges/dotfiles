@@ -1,0 +1,31 @@
+defaults
+protocol smtp
+port 465
+auth on
+tls on
+tls_starttls off
+tls_trust_file /etc/ssl/certs/ca-certificates.crt
+
+
+account outlook
+port 587
+tls_starttls on
+host smtp-mail.outlook.com
+user <@MAIL_OUTLOOK@>
+from <@MAIL_OUTLOOK@>
+passwordeval pass mail/outlook
+
+
+account gmx
+host mail.gmx.net
+user <@MAIL_GMX1@>
+from <@MAIL_GMX1@>
+from <@MAIL_GMX2@>
+passwordeval pass mail/gmx
+
+
+account google
+host smtp.gmail.com
+user <@MAIL_GMAIL@>
+from <@MAIL_GMAIL@>
+passwordeval pass mail/gmail

@@ -1,0 +1,37 @@
+[user]
+	name = <@NAME12@>
+	email = <@MAIL_GMX1@>
+
+[merge]
+	tool = vimdiff
+
+[mergetool]
+	prompt = true
+
+[mergetool "vimdiff"]
+	cmd = nvim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
+
+[diff]
+	tool = vimdiff
+
+[difftool]
+	prompt = false
+
+[alias]
+	a = add
+	af = add -f
+	b = branch
+	c = commit
+	cm = commit -m
+	cam = commit -am
+	co = checkout
+	d = diff
+	l = log
+	l1 = log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(green)(%ar)%C(reset) %C(white)%s%C(reset) %C(yellow)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
+	l2 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(cyan)%aD%C(reset) %C(green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim green)- %an%C(reset)' --all
+	m = merge
+	o = clone
+	p = pull
+	r = remote
+	s = status
+	st = stash

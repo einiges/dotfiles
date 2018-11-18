@@ -29,7 +29,10 @@ unsetopt local_options case_glob
 # sxiv_all [options] -- /path/to/an/image
 opts=( "${@[1,-3]}" )
 target=${@[-1]:A}
-files=( ${^target:h}/*.(jp(|e)g|bmp|png|gif|tiff) )
+files=( ${^target:h}/*.(jp(|e)g|bmp|png|gif|tiff)(.) )
+
+[[ ! $files ]] && return 1
+
 files=( ${(oin)files} )
 
 exec sxiv -n "${files[(I)$target]}" "${opts[@]}" -- "${files[@]}"

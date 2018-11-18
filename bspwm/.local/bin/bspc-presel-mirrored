@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/bin/sh
 
 [ $# -lt 1 ] && exit 1
 
@@ -14,3 +14,4 @@ esac
 [ ${1:0:1} = '~' ] && d="~${d}"
 
 bspc node -p "$d"
+

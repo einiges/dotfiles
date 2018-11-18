@@ -1,20 +1,18 @@
-#!/usr/bin/env sh
+#!/bin/sh
 
 wid="$1"
 class="$2"
 instance="$3"
 
-out=()
-
-case $class in
+case "$class" in
 	Soffice | libreoffice)
-		case $(xprop -id $wid _NET_WM_WINDOW_TYPE) in
-			*_NET_WM_WINDOW_TYPE_NORMAL* ) out+=('state=tiled') ;;
+		case "$(xprop -id "$wid" _NET_WM_WINDOW_TYPE)" in
+			*_NET_WM_WINDOW_TYPE_NORMAL* ) out="$out state=tiled" ;;
 		esac
 		;;
 	Firefox )
-		(( $(bspc query -N -d | wc -l) >= 1 )) && out+=('focus=off')
+		[ "$(bspc query -N -d | wc -l)" -ge 1 ] && out="$out focus=off"
 		;;
 esac
 
-(( ${#out} )) && echo "${out[*]}"
+echo $out

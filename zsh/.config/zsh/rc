@@ -1,7 +1,5 @@
 # vim: ft=zsh
 
-zmodload -F zsh/stat b:zstat
-
 setopt   autocd
 setopt   auto_pushd
 setopt   cdable_vars
@@ -43,7 +41,7 @@ setopt   extended_glob
 unsetopt list_ambiguous
 setopt   glob_star_short
 
-autoload -Uz ${ZDOTDIR}/functions/*
+autoload -Uz ${ZDOTDIR}/functions/*(N)
 
 for f in $ZDOTDIR/{zshrc.d/*,modules/*}.zsh; do
 	source "$f"

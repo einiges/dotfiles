@@ -1,0 +1,36 @@
+# vim:ft=zsh
+
+if (( ARGC == 0 )); then
+	<<- EOF
+		Usage: ${0} SOURCE...
+	EOF
+	return 1
+fi
+
+while (( ARGC > 0 )); do
+	if [[ ! -f "$1" ]]; then
+		echo "invalid file '$1'" >&2
+		shift
+		continue
+	fi
+
+	extract_dir="${1:t:r}"
+	case "$1" in
+		*.tar                   ) tar -xvf "$1"  ;;
+		*.(tar.gz|tgz)          ) tar -zxvf "$1" ;;
+		*.(tar.bz2|tbz2|tbz)    ) tar -jxvf "$1" ;;
+		*.(tar.xz|txz)          ) tar -Jxvf "$1" ;;
+		*.(tar.zma|tlz)         ) tar --lzma -xvf "$1" ;;
+		*.gz                    ) gunzip --keep "$1";;
+		*.bz2                   ) bunzip --keep "$1" ;;
+		*.xz                    ) unxz   --keep "$1" ;;
+		*.lzma                  ) unlzma --keep "$1" ;;
+		*.zip                   ) unzip "$1" -d "$extract_dir" ;;
+		*.7z                    ) 7z a -t7z "$1" ;;
+
+		* ) print "unsupported archive for '$1'" >&2 ;;
+	esac
+
+	shift
+done
+

@@ -1,0 +1,28 @@
+# vim:ft=zsh
+
+if (( ARGC < 2 )); then
+	<<- EOF
+		Usage: ${0} DESTINATION SOURCE...
+	EOF
+	return 1
+fi
+
+local dest=$1
+shift
+
+case "$dest" in
+	*.tar                   ) tar -cvf  "$dest" "$@" ;;
+	*.(tar.gz|tgz)          ) tar -zcvf "$dest" "$@" ;;
+	*.(tar.bz2|tbz2|tbz)    ) tar -jcvf "$dest" "$@" ;;
+	*.(tar.xz|txz)          ) tar -Jcvf "$dest" "$@" ;;
+	*.(tar.zma|tlz)         ) tar  --lzma -cvf "$dest" "$@" ;;
+	*.gz                    ) gzip --keep "$@";;
+	*.bz2                   ) bzip --keep "$@" ;;
+	*.xz                    ) xz   --keep "$@" ;;
+	*.lzma                  ) lzma --keep "$@" ;;
+	*.zip                   ) zip -r "$dest" "$@" ;;
+	*.7z                    ) 7z a -t7z "$dest" "$@" ;;
+
+	* ) print "unsupported archive for $dest" >&2 ;;
+esac
+

@@ -11,4 +11,5 @@ hash -d nvim="$XDG_CONFIG_HOME"/nvim
 hash -d pub=~/Projects/public
 hash -d pri=~/Projects/private
 hash -d sil=~/Projects/silly
+hash -d t=~/Projects/tmp
 

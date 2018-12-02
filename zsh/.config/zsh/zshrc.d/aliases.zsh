@@ -5,10 +5,10 @@ alias -g ∃='2> /dev/null'
 alias -g ∀='> /dev/null 2>&1'
 alias -g Σ="' '"
 
-alias -g DATE='${(%):-"%D{%Y%m%d}"}'
-alias -g HDATE='${(%):-"%D{%Y-%m-%d}"}'
-alias -g TIME='${(%):-"%D{%H%M%S}"}'
-alias -g HTIME='${(%):-"%D{%H:%M:%S}"}'
+alias -g TODAY='${(%):-"%D{%Y%m%d}"}'
+alias -g TODAYH='${(%):-"%D{%Y-%m-%d}"}'
+alias -g NOW='${(%):-"%D{%H%M%S}"}'
+alias -g NOWH='${(%):-"%D{%H:%M:%S}"}'
 
 alias -g ::='$_'
 alias -g :::='$_:h'
@@ -34,6 +34,10 @@ alias  lA='ls -a'
 
 alias ff='noglob find . -type f -name'
 alias fd='noglob find . -type d -name'
+
+alias nan="MANPAGER=\"nvim -n '+set ft=man' -\" man"
+
+alias taghere='touch .tags'
 
 alias rs='rsync --recursive --perms --owner --group --human-readable'
 

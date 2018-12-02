@@ -1,26 +1,27 @@
-#zstyle ':completion:*' list-prompt ''
-#zstyle ':completion:*' select-prompt ''
-#zstyle ':completion:*' group-name ''
 
-zstyle ':completion:*' rehash true
+zstyle ':completion:*' accept-exact '*(N)'
+zstyle ':completion:*' cache-path "$XDG_CACHE_HOME/zsh/zcompcache"
+zstyle ':completion:*' complete-options true
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+zstyle ':completion:*' matcher-list 'm:{[:lower:]}={[upper]}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 zstyle ':completion:*' menu select
+zstyle ':completion:*' rehash true
+zstyle ':completion:*' use-cache on
 zstyle ':completion:*' verbose yes
 
-zstyle ':completion:*' matcher-list 'm:{a-züöäß}={A-ZÜÖÄẞ}'
-zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+zstyle ':completion:*' list-prompt '%SAt %p: Hit TAB for more, or the character to insert%s'
+zstyle ':completion:*' select-prompt '%SScrolling active: current selection at %p%s'
+zstyle ':completion:*' group-name ''
 
 zstyle ':completion:*:default'      list-prompt '%S%M matches%s'
-zstyle ':completion:*:corrections'  format ' %F{green}-- %d (errors: %e) --%f'
-zstyle ':completion:*:descriptions' format ' %F{yellow}-- %d --%f'
+zstyle ':completion:*:corrections'  format '%K{black}%F{cyan} %d %f%k %K{black}%F{red} %e %f%k'
+zstyle ':completion:*:descriptions' format '%K{black}%F{cyan} %d %f%k'
+zstyle ':completion:*:messages'     format '%K{black}%F{cyan} %d %f%k'
+zstyle ':completion:*:warnings'     format '%K{black}%F{red} no matches found %f%k'
 zstyle ':completion:*:matches'      group 'yes'
-zstyle ':completion:*:messages'     format ' %F{purple}-- %d --%f'
-zstyle ':completion:*:warnings'     format ' %F{red}-- no matches found --%f'
 
 zstyle ':completion:*:options' auto-description '%d'
 zstyle ':completion:*:options' description 'yes'
-
-zstyle ':completion::complete:*' use-cache on
-
 
 zstyle ':completion:*'               completer _complete _match _approximate
 zstyle ':completion:*:match:*'       original only
@@ -30,8 +31,6 @@ zstyle ':completion:*:approximate:*' max-errors 2 numeric
 zstyle ':completion:*:*:cd:*' ignored-patterns '(*/)#lost+found' parent pwd
 zstyle ":completion:*:*:$EDITOR:*" ignored-patterns '*.o'
 
-
-# -- kill --
 
 zstyle ':completion:*:*:*:*:processes'    command 'ps -u $USER -o pid,command -w'
 zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9a-z-]#)*=34=31'

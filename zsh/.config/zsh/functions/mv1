@@ -1,9 +1,0 @@
-# vim:ft=zsh
-
-# mv1 source dest [...]
-
-# dest := "dest1 dest2 ... destN"
-
-(( $# >= 2 )) &&
-	mv -i -- "$1" "${*[2,-1]}"
-

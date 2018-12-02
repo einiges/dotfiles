@@ -1,4 +1,10 @@
 #!/bin/sh
+
+# Changes:
+# This version of mutt_bgrun uses `mktemp -d` to create a temporary
+# directory and a `trap` to remove it when the script exits.
+
+
 # @(#) mutt_bgrun $Revision: 1.4 $
 
 #   mutt_bgrun - run an attachment viewer from mutt in the background
@@ -95,9 +101,7 @@ file=$1
 # This is more secure than creating a temporary file in an existing
 # directory.
 
-tmpdir=/tmp/$LOGNAME$$
-umask 077
-mkdir "$tmpdir" || exit 1
+tmpdir="$(mktemp -d)" || exit 1
 tmpfile="$tmpdir/${file##*/}"
 
 # Copy mutt's temporary file to our temporary directory so that we can
@@ -108,7 +112,7 @@ cp "$file" "$tmpfile"
 # Run the viewer in the background and delete the temporary files when done.
 
 (
-    "$viewer" $options "$tmpfile"
-    rm -f "$tmpfile"
-    rmdir "$tmpdir"
+	trap 'rm -f -- "$tmpfile"; rmdir -- "$tmpdir"' EXIT
+	"$viewer" $options "$tmpfile"
 ) &
+

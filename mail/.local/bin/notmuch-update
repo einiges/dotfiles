@@ -1,0 +1,6 @@
+#!/bin/sh
+
+notmuch new --quiet
+notmuch tag -inbox 'folder:"/^.*/(Deleted|Drafts|Sent|Trash|Junk)/"'
+notmuch notify
+

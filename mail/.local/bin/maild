@@ -14,13 +14,27 @@ sleep_set_pid() {
 	unset sleep_pid
 }
 
+is_number() {
+	case $1 in
+		''|*[^0-9]*) return 1 ;;
+		*         ) return 0 ;;
+	esac
+}
 
-idle_sleep=${1:-600}
-boot_sleep=${2:-90}
+if is_number "$1"; then
+	idle_sleep=${1}
+	shift
 
-if [ "$boot_sleep" -lt 0 -o "$idle_sleep" -lt 30 ]; then
-	exit 1
+	if is_number "$1"; then
+		boot_sleep=${1}
+		shift
+	fi
 fi
+
+cmd=( "$@" )
+
+: ${idle_sleep=600}
+: ${boot_sleep=60}
 
 trap "killsleep" USR1
 
@@ -28,9 +42,8 @@ sleep_set_pid "$boot_sleep"
 
 while :; do
 	mbsync -a --quiet
-	notmuch new --quiet
-	notmuch tag -inbox 'folder:"/^.*/(Deleted|Drafts|Sent|Trash)/"'
-	mail-notify
-	sleep_set_pid $idle_sleep
+	"${cmd[@]}"
+	echo a
+	sleep_set_pid "$idle_sleep"
 done
 

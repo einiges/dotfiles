@@ -12,7 +12,7 @@ if [ "$num_mails" -eq 1 ]; then
 	from=$( notmuch address --output=address tag:inbox )
 	notify-send "New mail arrived" "From: ${from}"
 else
-	num_unread=$( notmuch count tag:unread )
+	num_unread=$( notmuch count tag:unread 'folder:"/.*/Inbox$/"')
 	notify-send "New mails arrived" "New: ${num_mails}, Unread: ${num_unread}"
 fi
 

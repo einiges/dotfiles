@@ -86,21 +86,26 @@ super + {1-5,8,9,0}
 	d='{1-5,8,9,10}'; \
 	bspc desktop -f "$d.local" || bspc desktop -s "$d"
 
-# send node to desktops
+# send node to desktops, use preselected area if available
 super + shift + {1-5,8,9,0}
-	bspc node -d '{1-5,8,9,10}'
+	d='{1-5,8,9,10}'; \
+	bspc node -n "@${d}:.\!automatic" || bspc node -d "${d}"
 
-# {focus,swap} node local
-super + {_,shift} + {n,r,t,d}
-	bspc node -{f,s} {west,south,north,east}.local
+# swap node
+super + shift + {n,r,t,d}
+	bspc node -s {west,south,north,east}.local
+
+# focus node in direction
+super + {n,r,t,d}
+	bspc-node-focus-fallback '{wn,sp,np,en}' '.local'
 
 # focus/swap with biggest node at current monitor
 super + {_,shift} + space
 	bspc node -{f,s} biggest.local
 
-# focus prev/next node (to get acces to floating nodes)
+# change focus between floating nodes
 super + {comma,period}
-	bspc node -f {prev,next}.local
+	bspc node -f {prev,next}.floating.local
 
 # Flip layout
 super + {_,shift} + b
@@ -129,16 +134,20 @@ super + mod5 + {n,r}
 	d='~{east,south}'; \
 	bspc query -N -n 'focused.automatic' && bspc node -p "$d" || bspc-presel-mirrored "$d"
 
-# move to preselcted area
+# move to preselcted area with weight: local > active > {other}
 super + mod5 + space
-	bspc node -n any.!automatic
+	bspc node -n 'any.!automatic.local' || bspc node -n 'any.!automatic.active' || bspc node -n 'any.!automatic'
 
 
 # -- monitors --
 
-# {focus,send note to} next monitor
-super + {_,shift} + g
-	bspc {monitor -f,node -m} next
+# focus next monitor
+super + g
+	bspc monitor -f next
+
+# send node to next monitor, use preselect area if available
+super + shift + g
+	bspc node -n 'next.!automatic' || bspc node -m next
 
 # swap current desktop with focused desktop of next monitor
 super + {_,shift} + dead_circumflex

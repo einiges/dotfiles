@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# $( xprop WM_CLASS )
+# WM_CLASS(STRING) = "class", "instance"
+
 wid="$1"
 class="$2"
 instance="$3"

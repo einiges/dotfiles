@@ -138,8 +138,8 @@ ppMail() {
 # $( ppMpd )
 ppMpd() {
 	title=$(mpc current --format '%title%')
-	aartist=$(mpc current --format '%albumartist%')
-	REPLY="${module_left}${icons[music]}%{O5}${aartist}${module_right}${___}${module_left}${title}${module_right}"
+	artist=$(mpc current --format '%albumartist%|%artist%')
+	REPLY="${module_left}${icons[music]}%{O5}${artist}${module_right}${___}${module_left}${title}${module_right}"
 }
 
 

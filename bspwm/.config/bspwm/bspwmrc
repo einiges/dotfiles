@@ -22,9 +22,7 @@ bspc config pointer_modifier            mod4
 bspc config focus_follows_pointer       true
 bspc config pointer_follows_monitor     true
 bspc config click_to_focus              any
-bspc config remove_unplugged_monitors   true
-bspc config remove_disabled_monitors    true
-bspc config ignore_ewmh_focus           true
+bspc config removal_adjustment          true
 
 bspc config external_rules_command      "$(which bspwm-external_rules)"
 

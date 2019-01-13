@@ -147,7 +147,7 @@ super + g
 
 # send node to next monitor, use preselect area if available
 super + shift + g
-	bspc node -n 'next.!automatic' || bspc node -m next
+	bspc node -n 'next.!automatic.active' || bspc node -m next
 
 # swap current desktop with focused desktop of next monitor
 super + {_,shift} + dead_circumflex

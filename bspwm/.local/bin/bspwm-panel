@@ -92,6 +92,7 @@ icons[playback]='墳'
 icons[playbackmute]='婢'
 icons[capture]=''
 icons[capturemute]=''
+icons[music]=''
 
 typeset -a desktop_icons
 desktop_icons[1]='¹  '
@@ -131,6 +132,14 @@ ppDay() {
 ppMail() {
 	local cmd=$(notmuch count tag:unread 'folder:"/^.*/Inbox$/"')
 	REPLY="${module_left}${icons[mail]}%{O5}${cmd}${module_right}"
+}
+
+
+# $( ppMpd )
+ppMpd() {
+	title=$(mpc current --format '%title%')
+	aartist=$(mpc current --format '%albumartist%')
+	REPLY="${module_left}${icons[music]}%{O5}${aartist}${module_right}${___}${module_left}${title}${module_right}"
 }
 
 
@@ -182,7 +191,7 @@ ppDesktops() {
 				continue
 				;;
 			[FO]* )
-				if (( $focused_monitor )); then
+				if (( focused_monitor )); then
 					ws_bg=$ws_focused_bg
 					ws_fg=$ws_focused_fg
 				else
@@ -191,7 +200,7 @@ ppDesktops() {
 				fi
 				;;
 			U* )
-				if (( $focused_monitor )); then
+				if (( focused_monitor )); then
 					ws_bg=$ws_urgent_focused_bg
 					ws_fg=$ws_urgent_focused_fg
 				else
@@ -241,7 +250,7 @@ while :; do
 	ppClock
 	print "C$REPLY"
 	# 1 second past each minute
-	sleep $(( ${(%):-"61-%D{%-S}"} ))
+	sleep $(( ${(%):-"60-%D{%-S}"} ))
 done >&5 &
 
 while :; do
@@ -264,6 +273,10 @@ bspc subscribe report | while read -r line; do
 	print "W$REPLY"
 done >&5 &
 
+mpc idleloop player | while read -r line; do
+	ppMpd
+	print "A$REPLY"
+done >&5 &
 
 # -- Event handler --
 
@@ -277,6 +290,7 @@ while read -r cmd <&5; do
 		p* ) m='playback' ;;
 		c* ) m='capture' ;;
 		M* ) m='mail' ;;
+		A* ) m='mpd' ;;
 		*  ) continue ;;
 	esac
 
@@ -284,7 +298,7 @@ while read -r cmd <&5; do
 
 	print "%{l}${mods[title]}" \
 	      "%{c}${mods[desktops]}" \
-	      "%{r}${mods[mail]}${___}${mods[playback]}${___}${mods[capture]}${___}${mods[day]}${___}${mods[clock]}"
+	      "%{r}${mods[mpd]}${___}${mods[mail]}${___}${mods[playback]}${___}${mods[capture]}${___}${mods[day]}${___}${mods[clock]}"
 
 done | lemonbar -d \
        -g "${geometry[width]}x${geometry[height]}+${geometry[x]}+${geometry[y]}" \
@@ -300,3 +314,4 @@ xdo above -t "${${(@o)target}[1]}" "$(xdo id -m -a "$PANEL_NAME")"
 bspc config -m "$monitor" top_padding $(( $(bspc config -m focused top_padding) + geometry[height] + bar_bottom_padding + bar_top_padding ))
 
 wait $!
+

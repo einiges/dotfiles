@@ -35,5 +35,5 @@ files=( ${^target:h}/*.(jp(|e)g|bmp|png|gif|tiff)(.) )
 
 files=( ${(oin)files} )
 
-exec sxiv -n "${files[(I)$target]}" "${opts[@]}" -- "${files[@]}"
+exec sxiv -n "${files[(Ie)$target]}" "${opts[@]}" -- "${files[@]}"
 

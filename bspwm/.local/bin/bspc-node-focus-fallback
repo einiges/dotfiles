@@ -4,39 +4,15 @@
 # If there is none and layout is monocle fall back to next or prev.
 #
 # Usage:
-#   $0 {n|e|s|w}{n|p} [modifier]
-#
-# n:north, e:east, s:south, w:west := bspwm DIR
-# n:next, p:prev                   := bspwm CYCLE_DIR
-# modifier                         := bspwm Node Modifiers
-#
-# nn: north or next
-# ep: east or prev
+#   $0 DIR CYCLE_DIR
 #
 # Example:
-#   $0 wn '.local'
+#   $0 west.local next.local
 # > Will result in $(bspc node -f west.local) or $(bspc node -f next.local)
 
-dc="$1"
-mod="$2"
-
-case "$dc" in
-	n? ) dir=north ;;
-	e? ) dir=east ;;
-	s? ) dir=south ;;
-	w? ) dir=west ;;
-	* ) exit 1 ;;
-esac
-
-bspc node -f "${dir}${mod}" && exit 0
+bspc node -f "$1" && exit 0
 
 bspc query -T -d | jq -er '.layout == "tiled"' > /dev/null && exit 1
 
-case "$dc" in
-	?n ) dir=next ;;
-	?p ) dir=prev ;;
-	* ) exit 1 ;;
-esac
-
-bspc node -f "${dir}${mod}"
+bspc node -f "$2"
 

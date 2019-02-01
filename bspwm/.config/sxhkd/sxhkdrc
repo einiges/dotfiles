@@ -97,7 +97,8 @@ super + shift + {n,r,t,d}
 
 # focus node in direction
 super + {n,r,t,d}
-	bspc-node-focus-fallback '{wn,sp,np,en}' '.local'
+	m='.local'; \
+	bspc-node-focus-fallback {west$m next$m,south$m prev$m,north$m next$m,east$m prev$m}
 
 # focus/swap with biggest node at current monitor
 super + {_,shift} + space

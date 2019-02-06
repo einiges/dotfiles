@@ -504,7 +504,9 @@ prompt_pure_state_setup() {
 		who_out=$(who -m 2>/dev/null)
 		if (( $? )); then
 			# Who am I not supported, fallback to plain who.
-			who_out=$(who 2>/dev/null | grep ${TTY#/dev/})
+			local -a who_in
+			who_in=( ${(f)"$(who 2>/dev/null)"} )
+			who_out="${(M)who_in:#*[[:space:]]${TTY#/dev/}[[:space:]]*}"
 		fi
 
 		local reIPv6='([a-f0-9]*:){2,}[a-f0-9:]*'  # Simplified, but matches loopback as well (::1).

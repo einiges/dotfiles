@@ -106,7 +106,11 @@ prompt_pure_dir_colorizer() {
 	esac
 
 	dn="%F{default}${dn:gs/\//%F\{9\}\/%F\{default\}/}%f"
-	bn="%F{blue}${bn}%f"
+	if [[ -w "${(%):-%/}" ]]; then
+		bn="%F{blue}${bn}%f"
+	else
+		bn="%F{red}${bn}%f"
+	fi
 
 	print "${dn}${bn}"
 }

@@ -137,9 +137,9 @@ ppMail() {
 
 # $( ppMpd )
 ppMpd() {
-	title=$(mpc current --format '%title%')
-	artist=$(mpc current --format '%albumartist%|%artist%')
-	REPLY="${module_left}${icons[music]}%{O5}${artist}${module_right}${___}${module_left}${title}${module_right}"
+	local title=$(mpc current --format '%title%')
+	local artist=$(mpc current --format '[%{O5}[%albumartist%|%artist%]]')
+	REPLY="${module_left}${icons[music]}${artist}${module_right}${___}${module_left}${title}${module_right}"
 }
 
 
@@ -249,7 +249,6 @@ xtitle -t 60 -sf "T${REPLY}\n" >&5 &
 while :; do
 	ppClock
 	print "C$REPLY"
-	# 1 second past each minute
 	sleep $(( ${(%):-"60-%D{%-S}"} ))
 done >&5 &
 

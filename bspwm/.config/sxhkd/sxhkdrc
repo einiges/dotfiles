@@ -21,15 +21,12 @@ super + Return
 @super + x
 	PINENTRY_USER_DATA=gtk passmenu-rofi | xargs -I '@' notify-send 'copied' '@'
 
-super + shift + l
-	xautolock -locknow
-
-super + ctrl + l
-	xautolock -toggle
+super + {shift,ctrl} + l
+	xautolock -{locknow,toggle}
 
 # - screenshots
-{_,shift} + @Print
-	scrot {_,-s} "$HOME/Pictures/Screenshots/%Y-%m-%d_%H:%M:%S.png"
+{_,ctrl,shift} + @Print
+	scrot {_,-u,-s} "$HOME/Pictures/Screenshots/%Y-%m-%d_%H:%M:%S.png"
 
 # - Quick launch -
 super + e ; super + {e,f,p}
@@ -70,6 +67,10 @@ super + {_,shift} + adiaeresis
 super + f
 	bspc desktop -l next
 
+# force next node to spawn on current focused desktop
+# press n times for the next n nodes
+super + ctrl + Return
+	bspc rule -a '*' -o "desktop=$(bspc query -D -d)"
 
 # -- state/flags --
 

@@ -14,11 +14,11 @@ super + Return
 	$TERMINAL
 
 # - application launcher
-@super + l
+super + @l
 	rofi -show drun
 
 # - pass
-@super + x
+super + @x
 	PINENTRY_USER_DATA=gtk passmenu-rofi | xargs -I '@' notify-send 'copied' '@'
 
 super + {shift,ctrl} + l

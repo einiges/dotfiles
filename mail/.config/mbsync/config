@@ -14,7 +14,7 @@ IMAPAccount outlook
 	Host imap-mail.outlook.com
 	User <@MAIL_OUTLOOK@>
 	SSLType IMAPS
-	PassCmd "pass mail/outlook"
+	PassCmd "pass mail/outlook/passwd"
 
 IMAPStore outlook-remote
 	Account outlook
@@ -46,7 +46,7 @@ IMAPAccount gmx
 	Host imap.gmx.net
 	User <@MAIL_GMX1@>
 	SSLType IMAPS
-	PassCmd "pass mail/gmx"
+	PassCmd "pass mail/gmx/passwd"
 
 IMAPStore gmx-remote
 	Account gmx

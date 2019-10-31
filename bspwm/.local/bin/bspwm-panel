@@ -96,10 +96,10 @@ icons[music]=''
 
 typeset -a desktop_icons
 desktop_icons[1]='¹  '
-desktop_icons[2]='²  '
+desktop_icons[2]='²  '
 desktop_icons[3]='³  '
-desktop_icons[4]='⁴  '
-desktop_icons[5]='⁵  '
+desktop_icons[4]='⁴  '
+desktop_icons[5]='⁵  '
 desktop_icons[8]='⁸  '
 desktop_icons[9]='⁹  '
 desktop_icons[10]='⁰  '
@@ -137,8 +137,14 @@ ppMail() {
 
 # $( ppMpd )
 ppMpd() {
+	if [[ -z "$(mpc current)" ]]; then
+		REPLY=""
+		return 0
+	fi
 	local title=$(mpc current --format '%title%')
+	(( $#title > 25 )) && title="${title[0,24]%[[:space:]]}…"
 	local artist=$(mpc current --format '[%{O5}[%albumartist%|%artist%]]')
+	(( $#artist > 25 )) && artist="${artist[0,24]%[[:space:]]}…"
 	REPLY="${module_left}${icons[music]}${artist}${module_right}${___}${module_left}${title}${module_right}"
 }
 
@@ -238,44 +244,44 @@ ppDesktops() {
 
 { print init; stdbuf -oL alsactl monitor pulse } | while read line; do
 	case ${line} in
-		*Master\ Playback*|init ) ppPlayback; print "p$REPLY" ;&
-		*Capture*|init )          ppCapture;  print "c$REPLY" ;&
+		*Master\ Playback*|init ) ppPlayback; print "p$REPLY" >&5 ;&
+		*Capture*|init )          ppCapture;  print "c$REPLY" >&5 ;&
 	esac
-done >&5 &
+done &
 
 ppTitle '%s'
 xtitle -t 60 -sf "T${REPLY}\n" >&5 &
 
 while :; do
 	ppClock
-	print "C$REPLY"
+	print "C$REPLY" >&5
 	sleep $(( ${(%):-"60-%D{%-S}"} ))
-done >&5 &
+done &
 
 while :; do
 	ppDay
-	print "D$REPLY"
+	print "D$REPLY" >&5
 	# 86400s = 24 * 60 * 60s   # Seconds in a day
 	#  3600s = 60 * 60s        # Seconds in an hour
 	# 5 seconds past midnight
 	sleep $(( ${(%):-"%D{86405-(%-H*3600+%-M*60+%-S)}"} ))
-done >&5 &
+done &
 
 while :; do
 	ppMail
-	print "M$REPLY"
+	print "M$REPLY" >&5
 	sleep 600
-done >&5 &
+done &
 
 bspc subscribe report | while read -r line; do
 	ppDesktops "${line:1}"
-	print "W$REPLY"
-done >&5 &
+	print "W$REPLY" >&5
+done &
 
 mpc idleloop player | while read -r line; do
 	ppMpd
-	print "A$REPLY"
-done >&5 &
+	print "A$REPLY" >&5
+done &
 
 # -- Event handler --
 

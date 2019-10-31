@@ -9,6 +9,8 @@ alias -g TODAY='${(%):-"%D{%Y%m%d}"}'
 alias -g TODAYH='${(%):-"%D{%Y-%m-%d}"}'
 alias -g NOW='${(%):-"%D{%H%M%S}"}'
 alias -g NOWH='${(%):-"%D{%H:%M:%S}"}'
+alias -g TIMESTAMP='${(%):-"%D{%Y%m%d%H%M%S}"}'
+alias -g TIMESTAMPH='${(%):-"%D{%Y-%m-%d %H:%M:%S}"}'
 
 alias -g ::='$_'
 alias -g :::='$_:h'
@@ -17,6 +19,7 @@ alias ,='popd'
 
 # -- shorties --
 
+alias d='docker'
 alias l=${PAGER:-less}
 alias m='man'
 alias n='nvim'
@@ -32,8 +35,12 @@ alias  la='ls -A'
 alias lal='ls -lA'
 alias  lA='ls -a'
 
-alias ff='noglob find . -type f -name'
-alias fd='noglob find . -type d -name'
+alias rd='rmdir'
+
+alias find='noglob find'
+alias ff='find . -type f -iname'
+alias fd='find . -type d -iname'
+alias fl='find . -type l -iname'
 
 alias nan="MANPAGER=\"nvim -n '+set ft=man' -\" man"
 

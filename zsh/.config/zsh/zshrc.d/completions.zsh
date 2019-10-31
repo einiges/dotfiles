@@ -3,8 +3,9 @@ zstyle ':completion:*' accept-exact '*(N)'
 zstyle ':completion:*' cache-path "$XDG_CACHE_HOME/zsh/zcompcache"
 zstyle ':completion:*' complete-options true
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
-zstyle ':completion:*' matcher-list 'm:{[:lower:]}={[upper]}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
-zstyle ':completion:*' menu select
+zstyle ':completion:*' list-dirs-first true
+zstyle ':completion:*' matcher-list 'm:{[:lower:]}={[:upper:]}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+zstyle ':completion:*' menu yes=long select
 zstyle ':completion:*' rehash true
 zstyle ':completion:*' use-cache on
 zstyle ':completion:*' verbose yes
@@ -38,3 +39,12 @@ zstyle ':completion:*:*:kill:*'           menu yes select
 zstyle ':completion:*:*:kill:*'           force-list always
 zstyle ':completion:*:*:kill:*'           insert-ids single
 
+#	"${PREFIX:+=(#bi)($PREFIX:t)(?)(*)===01=34}:${(s.:.)LS_COLORS}"
+#zstyle -e ':completion:*:default' list-colors 'reply=(
+#	"${PREFIX:+=(#bi)($PREFIX:t)(?)(*)(#B)===01;04}:${(s.:.)LS_COLORS}"
+#)'
+#zstyle -e ':completion:*:default'      list-colors    'reply=(
+#	"${PREFIX:+=(#bi)($PREFIX:t)(?)(*)[[:space:]](―)[[:space:]](*)(#B)===01;04==02=03;02}:${(s.:.)LS_COLORS}"
+#	"${PREFIX:+=(#bi)($PREFIX:t)(?)(*)(#B)===01;04}:${(s.:.)LS_COLORS}"
+#	"=(#b)[[:space:]]#*(―)[[:space:]]#(*)(#B)==02=03;02"
+#)'

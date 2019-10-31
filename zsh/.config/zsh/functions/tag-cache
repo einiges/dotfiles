@@ -1,6 +1,7 @@
 # vim:ft=zsh
 
-# Create a CACHEDIR.TAG file in given directory
+# Create a CACHEDIR.TAG file in given directory based on the
+# Cache Directory Tagging Standard (Version 0.5) by Bryan Ford
 # http://bford.info/cachedir/spec.html
 
 cat <<- EOF > "${1:-.}/CACHEDIR.TAG"

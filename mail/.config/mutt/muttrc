@@ -38,6 +38,7 @@ set   mail_check_stats_interval = 60
 unset mark_old
 set   mbox_type = Maildir
 set   quit
+set   rfc2047_parameters
 unset score
 set   sidebar_divider_char = "┃"
 set   sidebar_folder_indent
@@ -49,6 +50,7 @@ set   ssl_starttls
 set   ssl_force_tls
 set   timeout = 5
 set   ts_enabled
+unset user_agent
 unset wait_key
 
 
@@ -108,12 +110,14 @@ set   status_format = " %?M?%M/?%m Mails %?n?%n new, ?%?u?%u unread, ?%?p?%p dra
 
 
 # -- GPG --
-set crypt_autosign
+#set crypt_autosign
+unset crypt_autosmime
 set crypt_replyencrypt
 set crypt_replysign
 set crypt_replysignencrypted
 set crypt_use_gpgme
 set crypt_verify_sig
+set crypt_protected_headers_subject="Veschlüsselter Betreff"
 
 
 

@@ -21,38 +21,38 @@
 # 6             | Steady Pipe
 # --------------------------------
 
-vicursor::cursor_on_execute()
+function __vicursor::cursor_on_execute
 {
-	print -n $vicursor_execute_cursor
+	print -n $__vicursor__execute_cursor
 }
 
-vicursor::cursor_on_command()
+function __vicursor::cursor_on_command
 {
-	print -n $vicursor_command_cursor
+	print -n $__vicursor__command_cursor
 }
 
-vicursor::cursor_on_insert()
+function __vicursor::cursor_on_insert
 {
-	print -n $vicursor_insert_cursor
+	print -n $__vicursor__insert_cursor
 }
 
-vicursor::cursor_on_replace()
+function __vicursor::cursor_on_replace
 {
-	print -n $vicursor_replace_cursor
+	print -n $__vicursor__replace_cursor
 }
 
-vicursor::keymap()
+function __vicursor::keymap
 {
 	case $KEYMAP in
 		vicmd )
-			vicursor::cursor_on_command ;;
+			__vicursor::cursor_on_command ;;
 		main|viins )
-			vicursor::cursor_on_insert ;;
+			__vicursor::cursor_on_insert ;;
 	esac
 }
 
 
-vicursor::setup()
+function __vicursor::setup
 {
 	local baseterm=${VICURSOR_TERM:-$TERM}
 
@@ -75,13 +75,13 @@ vicursor::setup()
 		return 1
 	fi
 
-	vicursor::sequence_to_var 5 "vicursor_insert_cursor"
-	vicursor::sequence_to_var 2 "vicursor_command_cursor"
-	vicursor::sequence_to_var 1 "vicursor_execute_cursor"
-	vicursor::sequence_to_var 4 "vicursor_replace_cursor"
+	__vicursor::sequence_to_var 5 "__vicursor__insert_cursor"
+	__vicursor::sequence_to_var 2 "__vicursor__command_cursor"
+	__vicursor::sequence_to_var 1 "__vicursor__execute_cursor"
+	__vicursor::sequence_to_var 4 "__vicursor__replace_cursor"
 }
 
-vicursor::sequence_to_var()
+function __vicursor::sequence_to_var
 {
 	local cursorshape=$1
 	local varname=$2
@@ -98,45 +98,65 @@ vicursor::sequence_to_var()
 	typeset -g $varname=$sequence
 }
 
-# Because replace mode is not treated in $KEYMAP
-vicursor::replace_widget()
+# Mimic mode changes
+function __vicursor::replace_widget
 {
 	zle .vi-replace
-	vicursor::cursor_on_replace
+	__vicursor::cursor_on_replace
 }
 
-vicursor::replace_chars_widget()
+function __vicursor::replace_chars_widget
 {
-	vicursor::cursor_on_replace
+	__vicursor::cursor_on_replace
 	zle .vi-replace-chars
-	vicursor::cursor_on_command
+	__vicursor::cursor_on_command
+}
+
+function __vicursor::delete_widget
+{
+	__vicursor::cursor_on_replace
+	zle .vi-delete
+	__vicursor::cursor_on_command
+}
+
+function __vicursor::yank_widget
+{
+	__vicursor::cursor_on_replace
+	zle .vi-yank
+	__vicursor::cursor_on_command
 }
 
 
-vicursor::stop()
-{
-	add-zle-hook-widget -d keymap-select vicursor::keymap
-	add-zsh-hook        -d precmd        vicursor::cursor_on_insert
-	add-zsh-hook        -d preexec       vicursor::cursor_on_execute
-	vicursor::cursor_on_execute
 
+
+function __vicursor::stop
+{
+	add-zle-hook-widget -d keymap-select __vicursor::keymap
+	add-zsh-hook        -d precmd        __vicursor::cursor_on_insert
+	add-zsh-hook        -d preexec       __vicursor::cursor_on_execute
+	__vicursor::cursor_on_execute
+
+	zle -A .vi-delete vi-delete
 	zle -A .vi-replace vi-replace
 	zle -A .vi-replace-chars vi-replace-chars
+	#zle -A .vi-yank vi-yank
 }
 
-vicursor::start()
+function __vicursor::start
 {
-	add-zle-hook-widget keymap-select vicursor::keymap
-	add-zsh-hook        precmd        vicursor::cursor_on_insert
-	add-zsh-hook        preexec       vicursor::cursor_on_execute
+	add-zle-hook-widget keymap-select __vicursor::keymap
+	add-zsh-hook        precmd        __vicursor::cursor_on_insert
+	add-zsh-hook        preexec       __vicursor::cursor_on_execute
 
-	zle -N vi-replace vicursor::replace_widget
-	zle -N vi-replace-chars vicursor::replace_chars_widget
+	zle -N vi-delete __vicursor::delete_widget
+	zle -N vi-replace __vicursor::replace_widget
+	zle -N vi-replace-chars __vicursor::replace_chars_widget
+	#zle -N vi-yank __vicursor::yank_widget
 }
 
-vicursor::setup || return 0
+__vicursor::setup || return 0
 
 autoload -Uz add-zle-hook-widget
 autoload -Uz add-zsh-hook
 
-vicursor::start
+__vicursor::start

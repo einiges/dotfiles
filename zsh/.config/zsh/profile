@@ -1,7 +1,7 @@
 # vim: ft=zsh
 
 (( $+commands[ruby] )) &&
-	PATH="${PATH}:$(ruby -e 'print Gem.user_dir')/bin"
+	path+="$(ruby -e 'print Gem.user_dir')/bin"
 
 PATH="${HOME}/.local/bin:${PATH}"
 

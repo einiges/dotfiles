@@ -10,8 +10,8 @@ super + @v
 # -- application launching --
 
 # - terminal
-super + Return
-	$TERMINAL
+super + {_,shift} + Return
+	$TERMINAL {_,-e tmux}
 
 # - application launcher
 super + @l
@@ -94,7 +94,12 @@ super + shift + {1-5,8,9,0}
 
 # swap node
 super + shift + {n,r,t,d}
-	bspc node -s {west,south,north,east}.local
+	{ d=west  x=-50 y=0 \
+	, d=south x=0   y=35 \
+	, d=north x=0   y=-35 \
+	, d=east  x=50  y=0 \
+	}; \
+	bspc node -v "$x" "$y" || bspc node -s $d.local
 
 # focus node in direction
 super + {n,r,t,d}

@@ -1,6 +1,6 @@
 autoload -U zcalc
 
 function = {
-	zcalc -e "$*"
+	zcalc -f -e "$*"
 }
 aliases[=]='noglob ='

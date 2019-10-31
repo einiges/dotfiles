@@ -77,6 +77,9 @@ export GIMP2_DIRECTORY="$XDG_CONFIG_HOME"/gimp
 # KDE
 export KDEHOME="$XDG_CONFIG_HOME"/kde
 
+# tmux
+export TMUX_TMPDIR="$XDG_RUNTIME_DIR"
+
 # weechat
 export WEECHAT_HOME="$XDG_CONFIG_HOME"/weechat
 

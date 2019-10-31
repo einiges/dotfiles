@@ -4,17 +4,17 @@
 
 
 # basic colors
-color attachment    red             default
-color error         red             default           # error messages printed by Mutt
-color indicator     default         black             # current selected index
-color markers       red             black             # the + markers at the beginning of wrapped lines in the pager
-color message       cyan            default           # informational messages
-color normal        brightblue      default
-color prompt        blue            black
-color search        brightblue      default           # highlight of words in pager
-color status        blue            black             # mode lines used to display info about mailbox or message
-color tilde         white           default
-color tree          brightcolor9    default           # arrow in threads
+color attachment                    red             default
+color error                         red             default           # error messages printed by Mutt
+color indicator                     default         black             # current selected index
+color markers                       red             black             # the + markers at the beginning of wrapped lines in the pager
+color message                       cyan            default           # informational messages
+color normal        bold            blue            default
+color prompt                        blue            black
+color search        bold            blue            black             # highlight of words in pager
+color status                        blue            black             # mode lines used to display info about mailbox or message
+color tilde                         white           default
+color tree          bold            color9          default           # arrow in threads
 
 
 
@@ -27,62 +27,65 @@ mono  error         bold
 
 
 # index
-color index         default         default         "~R"          # read messages
-color index         brightblue      default         "~N~u"        # new messages
-color index         blue            default         "~N!~u"       # new messages (mailist)
-color index         blue            default         "~U"          # unread messages
-color index         red             default         "~F"          # flagged messages
-color index         black           blue            "~v~(~N)"     # collapsed thread with some unread
-color index         brightcolor13   default         "~T"          # tagged messages
-color index         black           color9          "~D"          # deleted messages
+color index                         default        default         "~R"          # read messages
+color index         bold            blue           default         "~N~u"        # new messages
+color index                         blue           default         "~N!~u"       # new messages (mailist)
+color index                         blue           default         "~U"          # unread messages
+color index                         red            default         "~F"          # flagged messages
+color index                         black          blue            "~v~(~N)"     # collapsed thread with some unread
+color index         bold            color13        default         "~T"          # tagged messages
+color index                         black          color9          "~D"          # deleted messages
 
 
 
 # headers
-color hdrdefault    default         black
-color header        brightblue      black           "^(From|To|Cc|Subject):"
+color hdrdefault                    default        default
+color header        bold            lightmagenta   default         "^From:"
+color header                        blue           default         "^(To|Cc):"
+color header        bold            blue           default         "^Subject:"
 
 
 
 # Sidebar
-color sidebar_indicator  black          blue
-color sidebar_highlight  white          black
-color sidebar_divider    blue           default
+color sidebar_indicator             black          blue
+color sidebar_highlight             white          black
+color sidebar_divider               blue           default
 
 
 
 
 # body
-color quoted        color10         default
-color quoted1       color11         default
-color quoted2       color12         default
-color quoted3       color14         default
+color quoted                        color10         default
+color quoted1                       color11         default
+color quoted2                       color12         default
+color quoted3                       color14         default
 
-color signature     color11         default
-color bold          white           default
-color underline     white           default
-color normal        default         default
+color signature                     color11         default
+color bold                          white           default
+color underline                     white           default
+color normal                        default         default
 
 
 
 # Smileys
-color body          brightmagenta   default         "(^| )+(|[<>|])[8;:](|[^ ])[)(/|DOPS]( |$)+"
+color body                          magenta         default         "(^| )+[;:][-^]?[()/|DdOPpS]( |$)+"
+color body          bold            red             default         "(^| )+(<3)( |$)+"
 
 # Urls
-color body          brightblue      default         "(^|<| )mailto:[^ ]+@[^ ]( |>|$)"
-color body          brightblue      default         "(^|<| )(http|https|ftp|file|telnet)://[^ ]+( |>|$)"
+color body          underline       blue            default         "(^|<| )mailto:[^ ]+@[^ ]( |>|$)"
+color body          underline       blue            default         "(^|<| )(http|https|ftp|file|telnet)://[^ ]+( |>|$)"
 
 # PGP
-color body          green           default         "^gpg: Good signature .*"
-color body          yellow          default         "^gpg: "
-color body          red             default         "^gpg: BAD signature from.*"
+color body          bold            green           default         "^Good signature from"
+color body                          yellow          default         "End of"
+color body                          red             default         "^gpg: BAD signature from.*"
 
 
 
 # Compose
-color compose security_both         brightblack       green
-color compose security_encrypt      brightblack       cyan
-color compose security_none         red               default
-color compose security_sign         brightblack       cyan
-color compose header                brightblue        default
+color compose security_both         bold  black       green
+color compose security_encrypt      bold  black       cyan
+color compose security_none               red         default
+color compose security_sign         bold  black       cyan
+color compose header                bold  blue        default
 

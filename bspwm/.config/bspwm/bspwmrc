@@ -43,6 +43,8 @@ bspc rule -a 'Zathura'                  state=tiled
 bspc rule -a 'Pavucontrol'              state=floating
 bspc rule -a 'Lxappearance'             state=floating rectangle=950x600+0+0 center=on
 bspc rule -a 'scratchpad'               state=floating
+bspc rule -a 'mpv:gl'                   border=off
+bspc rule -a 'Eclipse:Eclipse'          desktop=2
 
 bspwm-panel "$(bspc query -M -m primary --names)" &
 

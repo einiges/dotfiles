@@ -54,8 +54,8 @@ c.tabs.show = 'multiple'
 c.url.default_page = "about:blank"
 c.url.start_pages = c.url.default_page
 c.url.searchengines = {
-    'DEFAULT': 'https://new.startpage.com/do/asearch?q={}',
-    'sp':      'https://new.startpage.com/do/asearch?q={}&cat=pics&nj=0',
+    'DEFAULT': 'https://startpage.com/do/asearch?q={}',
+    'sp':      'https://startpage.com/do/asearch?q={}&cat=pics&nj=0',
     'a':       'https://www.amazon.de/s/keyword={}',
     'aw':      'https://wiki.archlinux.org/index.php/{}',
     'd':       'https://dict.cc/?s={}',

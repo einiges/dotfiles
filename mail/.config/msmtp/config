@@ -13,7 +13,7 @@ tls_starttls on
 host smtp-mail.outlook.com
 user <@MAIL_OUTLOOK@>
 from <@MAIL_OUTLOOK@>
-passwordeval pass mail/outlook
+passwordeval pass mail/outlook/passwd
 
 
 account gmx
@@ -21,11 +21,12 @@ host mail.gmx.net
 user <@MAIL_GMX1@>
 from <@MAIL_GMX1@>
 from <@MAIL_GMX2@>
-passwordeval pass mail/gmx
+passwordeval pass mail/gmx/passwd
 
 
 account google
 host smtp.gmail.com
 user <@MAIL_GMAIL@>
 from <@MAIL_GMAIL@>
-passwordeval pass mail/gmail
+passwordeval pass mail/gmail/passwd
+

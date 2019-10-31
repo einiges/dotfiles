@@ -3,6 +3,9 @@ setlocal formatoptions=acnqtw
 setlocal spell
 setlocal spelllang=de_de,en
 setlocal listchars+=eol:¬
+setlocal nojoinspaces
+setlocal nosmartindent
+setlocal textwidth=72
 
 " Remove Signatures from plain mails
 command! SigAllClean   :%s/\(^ *>[> ]*\)-- \n\%(\1[^>\n]*$\|\n\)*

@@ -3,13 +3,21 @@
 shopt -s nullglob globstar
 
 prefix=${PASSWORD_STORE_DIR-~/.password-store}
-password_files=( "$prefix"/**/*.gpg )
+password_files=( "$prefix"/**/passwd.gpg )
 password_files=( "${password_files[@]#"$prefix"/}" )
-password_files=( "${password_files[@]%.gpg}" )
+password_files=( "${password_files[@]%/passwd.gpg}" )
 
 dest=$(printf '%s\n' "${password_files[@]}" | rofi -dmenu "$@")
 
 [[ -n "${dest}" ]] || exit
 
-pass show -c "$dest" >/dev/null 2>&1 &&
+#if [[ $1 == '-u' ]]; then
+#	notify-send lol
+#	{
+#		echo -n 'type --delay 0 --clearmodifiers '
+#		pass show "$dest/user"
+#	} | xdotool -
+#fi
+
+pass show -c "$dest/passwd" >/dev/null 2>&1 &&
 	printf "%s\n" "$dest"

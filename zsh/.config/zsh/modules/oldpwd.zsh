@@ -1,3 +1,4 @@
+
 # Go to $OLDPWD without putting it in $(dirs) so it does not get flooded.
 
 oldpwd() {
@@ -6,8 +7,8 @@ oldpwd() {
 	IFS=$'\n' ds=( $(dirs -lp) )
 
 	[[ "$ds[-1]" == "$OLDPWD" ]] &&
-		popd -q +0 ||
-		cd ~-
+		builtin popd -q +0 ||
+		builtin pushd ~-
 }
 
 alias .,='oldpwd'

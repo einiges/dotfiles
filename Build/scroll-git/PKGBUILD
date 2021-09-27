@@ -1,0 +1,36 @@
+_pkgname=scroll
+pkgname="${_pkgname}-git"
+pkgver=r239.51ee387
+pkgrel=1
+pkgdesc='scrollback buffer'
+arch=('i686' 'x86_64')
+url='http://st.suckless.org/'
+makedepends=('git')
+provides=("${_pkgname}")
+conflicts=("${_pkgname}")
+
+source=(
+	'git+http://git.suckless.org/scroll'
+)
+
+sha1sums=(
+	'SKIP'
+)
+
+pkgver() {
+	cd "${_pkgname}"
+	#git describe --tags | sed 's/-/./g'
+	printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+}
+
+build() {
+	cd "${_pkgname}"
+	make X11INC=/usr/include/X11 X11LIB=/usr/lib/X11
+}
+
+package() {
+	cd "${_pkgname}"
+	make PREFIX=/usr DESTDIR="${pkgdir}" install
+	install -Dm644 README "${pkgdir}/usr/share/doc/${pkgname}/README"
+}
+

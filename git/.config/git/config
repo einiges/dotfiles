@@ -1,6 +1,6 @@
 [user]
 	name = <@NAME12@>
-	email = <@MAIL_GMX1@>
+	email = <>
 
 [merge]
 	tool = vimdiff
@@ -19,19 +19,45 @@
 
 [alias]
 	a = add
-	af = add -f
 	b = branch
+	bd = branch -d
+	bdd = branch -D
 	c = commit
 	cm = commit -m
-	cam = commit -am
-	co = checkout
-	d = diff
-	l = log
-	l1 = log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(green)(%ar)%C(reset) %C(white)%s%C(reset) %C(yellow)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
-	l2 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(cyan)%aD%C(reset) %C(green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim green)- %an%C(reset)' --all
+	diff-prev = "!f() { \
+			git diff ${@:2} ${1:-HEAD}^ ${1:-HEAD}; \
+		}; f"
+	fixup = "!f() { \
+			git commit ${@:2} --fixup=${1:-@}; \
+		}; f"
+	; TODO: Any way to complete git alias functions?
+	; sw = "!f() { \
+	; 		git switch ${@:--}; \
+	; 	}; f"
+	sw = switch
+	sc = switch -c
+	lg = log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(green)(%ar)%C(reset) %C(white)%s%C(reset) %C(yellow)- %an%C(reset)%C(bold yellow)%d%C(reset)'
+	lgg = log --graph --abbrev-commit --decorate \
+		--format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''\
+		        %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all
 	m = merge
-	o = clone
-	p = pull
-	r = remote
-	s = status
-	st = stash
+	pushf = push --force-with-lease
+	squash = "!f() { \
+			defaultBranch=$(git config init.defaultBranch); \
+			mergebase=$(git merge-base @ ${1:-$defaultBranch}); \
+			git rebase -i --autosquash ${@:2} ${mergebase}; \
+		}; f"
+	st = status
+
+[push]
+	default = current
+
+[pull]
+	rebase = true
+
+[credential]
+	helper = store
+
+[init]
+	defaultBranch = main
+

@@ -6,16 +6,23 @@
 wid="$1"
 class="$2"
 instance="$3"
+consequences="$4"
+
+#e="$(bspc-execd "$wid")"
+#notify-send "e" "$e"
+
+#consequences="$consequences $e"
+
 
 case "$class" in
 	Soffice | libreoffice)
 		case "$(xprop -id "$wid" _NET_WM_WINDOW_TYPE)" in
-			*_NET_WM_WINDOW_TYPE_NORMAL* ) out="$out state=tiled" ;;
+			*_NET_WM_WINDOW_TYPE_NORMAL* ) consequences="$consequences state=tiled" ;;
 		esac
 		;;
 	Firefox )
-		[ "$(bspc query -N -d | wc -l)" -ge 1 ] && out="$out focus=off"
-		;;
+	   [ "$(bspc query -N -d | wc -l)" -ge 1 ] && consequences="$consequences focus=off"
+	   ;;
 esac
 
-echo $out
+echo $consequences

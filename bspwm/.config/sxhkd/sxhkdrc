@@ -25,8 +25,10 @@ super + {shift,ctrl} + l
 	xautolock -{locknow,toggle}
 
 # - screenshots
-{_,ctrl,shift} + @Print
-	scrot {_,-u,-s} "$HOME/Pictures/Screenshots/%Y-%m-%d_%H:%M:%S.png"
+# * -u focused
+# * -s interactive select
+{_,super} + {_,shift} + @Print
+	scrot {_,-e 'xclip -selection c -t image/png < $f'} {-u,-s} "$HOME/Pictures/Screenshots/%Y-%m-%d_%H:%M:%S.png" -q 100
 
 # - Quick launch -
 super + e ; super + {e,f,p}
@@ -78,6 +80,8 @@ super + ctrl + Return
 super + {ctrl,shift,mod5} + f
 	bspc node -t {\~floating,\~fullscreen,tiled}
 
+super + s; {s,p}
+	bspc node --flag {sticky,private}
 
 # -- focus/swap
 
@@ -103,23 +107,20 @@ super + shift + {n,r,t,d}
 
 # focus node in direction
 super + {n,r,t,d}
-	m='.local'; \
-	bspc-node-focus-fallback {west$m next$m,south$m prev$m,north$m next$m,east$m prev$m}
-
-# focus/swap with biggest node at current monitor
-super + {_,shift} + space
-	bspc node -{f,s} biggest.local
-
-# change focus between floating nodes
-super + {comma,period}
-	bspc node -f {prev,next}.floating.local
+	m='.local.!hidden.window'; \
+	{ d=west  o=next \
+	, d=south o=prev \
+	, d=north o=next \
+	, d=east  o=prev \
+	}; \
+	bspc query -D -d focused.tiled && bspc node -f "$d$m" || bspc node -f "$o$m"
 
 # Flip layout
-super + {_,shift} + b
+super + {_,shift} + m
 	bspc node @/ -F {vertical,horizontal}
 
 # Rotate Layout
-super + {_,shift} + m
+super + {_,shift} + b
 	bspc node @/ -R {90,270}
 
 

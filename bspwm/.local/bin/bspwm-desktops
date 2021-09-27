@@ -2,22 +2,51 @@
 
 # This setup is only useful if each desktop is focusable on any monitor
 
-# Secondary (non primary) monitors get the second to ${#secondary+1}th desktop
-# Primary monitor gets the first desktop and all remaining
+arg0="${0##*/}"
 
-# desktops=( p s1 s2 ... sn p p p p)
+usage() {
+	cat <<- EOF
+		$arg0 -h
+		$arg0 DESKTOP... -m MONITOR...
 
-# On a proper setup '#desktops >= #monitors' equals true.
+		Assign 1st DESKTOP to 1st MONITOR, 2nd DESKTOP to 2nd MONITOR and so on. Remaining DESKTOPs will be assigned to 1st monitor.
+	EOF
 
+	exit ${1:-0}
+}
 
-desktops=( $@ )
+destops=()
+monitors=()
 
-primary="$(bspc query -M -m primary)"
-secondary=( "$(bspc query -M | sed "/$primary/d")" )
-
-for mi in "${!secondary[@]}"; do
-	bspc monitor "${secondary[$mi]}" -d "${desktops[$mi+1]}"
+while [[ $# > 0 ]]; do
+	case "$1" in
+		-m)
+			shift
+			break
+			;;
+		-h)
+			usage 0
+			;;
+		*)
+			desktops=( "${desktops[@]}" "$1" )
+			shift
+			;;
+	esac
 done
 
-bspc monitor "${primary}" -d "${desktops[0]}" "${desktops[@]:${#secondary[@]}+1}"
+monitors=( "$@" )
 
+if [[ ${#desktops[@]} == 0
+|| ${#monitors[@]} == 0
+|| ${#desktops[@]} < ${#monitors[@]} ]]; then
+	usage 1
+fi
+
+for i in "${!monitors[@]}"; do
+	bspc monitor "${monitors[$i]}" -d "${desktops[$i]}"
+done
+
+# add remaining desktops to 1st monitor
+if [[ "${#desktops[@]}" > "${#monitors[@]}" ]]; then
+	bspc monitor "${monitors[0]}" -a "${desktops[@]:$i+1}"
+fi

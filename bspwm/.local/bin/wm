@@ -1,6 +1,4 @@
 #!/bin/sh
 
-sxhkd -m 1 &
-compton --config "$XDG_CONFIG_HOME/bspwm/compton.conf" &
 exec bspwm
 

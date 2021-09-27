@@ -105,12 +105,22 @@ desktop_icons[9]='⁹  '
 desktop_icons[10]='⁰  '
 
 
+
+# -- Helper --
+
+# $( sanitize string )
+sanitize() {
+	REPLY="${1:gs/%/%%}"
+	REPLY="${1:gs/\\n/ }"
+}
+
 # -- Pretty printer --
 
 
 # $( ppTitle title )
 ppTitle() {
-	REPLY="${module_left}$1${module_right}"
+	sanitize "$1"
+	REPLY="${module_left}${REPLY}${module_right}"
 }
 
 
@@ -152,7 +162,7 @@ ppMpd() {
 # $( ppPlayback )
 ppPlayback() {
 	local cmd=( $(amixer -M get Master) )
-	local playback_level=${cmd[-2][2,-3]}
+	local playback_level=${cmd[-3][2,-3]}
 
 	if [[ ${cmd[-1]} == '[off]' ]]; then
 		playback_state_icon=${icons[playbackmute]}
@@ -167,7 +177,7 @@ ppPlayback() {
 # $( ppCapture )
 ppCapture() {
 	local cmd=( $(amixer -M get Capture) )
-	local capture_level=${cmd[-2][2,-3]}
+	local capture_level=${cmd[-3][2,-3]}
 
 	if [[ ${cmd[-1]} == '[off]' ]]; then
 		capture_state_icon=${icons[capturemute]}
@@ -242,15 +252,17 @@ ppDesktops() {
 
 # -- Event generator --
 
-{ print init; stdbuf -oL alsactl monitor pulse } | while read line; do
+{ print init; stdbuf -oL alsactl monitor } | while read line; do
 	case ${line} in
 		*Master\ Playback*|init ) ppPlayback; print "p$REPLY" >&5 ;&
-		*Capture*|init )          ppCapture;  print "c$REPLY" >&5 ;&
+		#*Capture*|init )          ppCapture;  print "c$REPLY" >&5 ;&
 	esac
 done &
 
-ppTitle '%s'
-xtitle -t 60 -sf "T${REPLY}\n" >&5 &
+xtitle -t 60 -sf "%s\n" | while read title; do
+	ppTitle "$title"
+	print "T$REPLY" >&5
+done &
 
 while :; do
 	ppClock
@@ -302,8 +314,8 @@ while read -r cmd <&5; do
 	mods[$m]="${cmd[2,-1]}"
 
 	print "%{l}${mods[title]}" \
-	      "%{c}${mods[desktops]}" \
-	      "%{r}${mods[mpd]}${___}${mods[mail]}${___}${mods[playback]}${___}${mods[capture]}${___}${mods[day]}${___}${mods[clock]}"
+	      "%{c}${___}${mods[desktops]}${___}" \
+	      "%{r}${mods[mail]}${___}${mods[playback]}${___}${mods[capture]}${___}${mods[day]}${___}${mods[clock]}"
 
 done | lemonbar -d \
        -g "${geometry[width]}x${geometry[height]}+${geometry[x]}+${geometry[y]}" \

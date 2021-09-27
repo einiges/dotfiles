@@ -25,12 +25,10 @@ source ${ZGEN_INIT} 2>/dev/null || {
 	zgen load zdharma/fast-syntax-highlighting
 	zgen load zsh-users/zsh-completions src
 
-	#zgen load rupa/z
-
 	zgen oh-my-zsh plugins/fancy-ctrl-z
 
 	zgen load mafredri/zsh-async
-	zgen load "$HOME/Projects/public/zsh-bdi"
+	zgen load einiges/zsh-bdi
 
 	zgen save
 }

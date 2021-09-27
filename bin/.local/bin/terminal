@@ -1,4 +1,8 @@
 #!/bin/sh
 
+if [ ! ${TERMINAL+x} ]; then
+	return 1
+fi
+
 exec "$TERMINAL" "$@"
 

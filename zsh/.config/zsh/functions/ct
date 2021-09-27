@@ -1,0 +1,63 @@
+# vim:ft=zsh
+
+# Create tmp directory and change into it
+
+local p=@
+local quiet=0
+
+while [[ $# > 0 ]]; do
+	case "$1" in
+	-p)
+		p=$2
+		shift
+		;;
+	-q)
+		quiet=1
+		;;
+	-h)
+		cat <<- EOF >&2
+			Change into new temporary directory and
+			optionally run a command to prepare it.
+
+			        $0 [-qh] [-p seq] [--] [CMD [ARG...]]
+
+			CMD runs between the creation of the temporary
+			directory and changing into it. The temporary
+			directory can be queried with @ by default, or
+			with the sequence passed to -p.
+
+			Examples:
+
+			    ct
+			    ct touch @/test
+			    ct -p + cp -r dir/* +
+		EOF
+		return 0
+		;;
+	--)
+		shift
+		break
+		;;
+	*)
+		break
+	esac
+	shift
+done
+
+local td=$(mktemp -d)
+
+if (( ARGC )); then
+	"${@//$p/$td}"
+	local rc=$?
+	if (( rc )); then
+		rmdir "$td"
+		return $rc
+	fi
+fi
+
+if (( ! quiet )); then
+	printf "%s\n" "$td"
+fi
+
+cd "$td"
+

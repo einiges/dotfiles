@@ -1,0 +1,17 @@
+# vim:ft=zsh
+
+# Create directory and change into
+# mkdir + cd
+
+if (( ! ARGC )); then
+	builtin cd
+	return
+fi
+
+if [[ -d ${@[-1]} ]]; then
+	builtin cd "$@"
+	return
+fi
+
+mkdir -p "${@[-1]}" && builtin cd "$@"
+

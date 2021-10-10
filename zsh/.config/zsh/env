@@ -53,7 +53,7 @@ export    LESSKEYIN="$XDG_CONFIG_HOME"/less/lesskey
 
 # mariadb
 export   MARIADB_HOME="$XDG_CONFIG_HOME"/mariadb
-export MYSQL_HISTFILE="$XDG_DATA_HOME"/mariadb/history
+export MYSQL_HISTFILE="$XDG_STATE_HOME"/mariadb/history
 
 # ncurses
 #export TERMINFO="$XDG_DATA_HOME"/terminfo

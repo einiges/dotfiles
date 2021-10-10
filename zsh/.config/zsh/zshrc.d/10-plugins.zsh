@@ -13,7 +13,12 @@ function zgen {
 }
 
 
-for f ( ${ZDOTDIR}/plugin-config/*.pre.zsh(.,@N) ) source $f
+# source plugin pre config
+function {
+for f in ${ZDOTDIR}/plugin/before/*.zsh(.,@N); do
+	source $f
+done
+}
 
 # Generate zgen init script if needed
 # Static load plugins
@@ -25,6 +30,8 @@ source ${ZGEN_INIT} 2>/dev/null || {
 	zgen load zdharma/fast-syntax-highlighting
 	zgen load zsh-users/zsh-completions src
 
+	zgen load rupa/z
+
 	zgen oh-my-zsh plugins/fancy-ctrl-z
 
 	zgen load mafredri/zsh-async
@@ -33,5 +40,10 @@ source ${ZGEN_INIT} 2>/dev/null || {
 	zgen save
 }
 
-for f ( ${ZDOTDIR}/plugin-config/*.post.zsh(.,@N) ) source $f
+# source plugins post config
+function () {
+for f in ${ZDOTDIR}/plugin/after/*.zsh(.,@N); do
+	source $f
+done
+}
 

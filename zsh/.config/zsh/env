@@ -48,9 +48,8 @@ export PASSWORD_STORE_CLIP_TIME=3
 
 # less
 export LESS='-iRc~'
-export LESSHISTFILE="$XDG_DATA_HOME"/less/history
-export      LESSKEY="$XDG_CONFIG_HOME"/less/keys
-export   LESSKEYDEF="$XDG_CONFIG_HOME"/less/keydef #*
+export LESSHISTFILE="$XDG_STATE_HOME"/less/history
+export    LESSKEYIN="$XDG_CONFIG_HOME"/less/lesskey
 
 # mariadb
 export   MARIADB_HOME="$XDG_CONFIG_HOME"/mariadb

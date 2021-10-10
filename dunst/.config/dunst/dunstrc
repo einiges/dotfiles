@@ -1,27 +1,29 @@
+# vim: ft=dosini
+
+# man 5 dunst
+
 [global]
 follow = keyboard
 font = Noto Sans 11
+
+markup = full
 format = "<b>%s</b>\n%b"
-# (1920-350)/2
-geometry = "=350x10+758+110"
-history_length = 0
-horizontal_padding = 15
+
 icon_position = left
-idle_threshold = 0
 ignore_newline = false
 indicate_hidden = true
-markup = full
-padding = 15
-separator_color = auto
-separator_height = 1
-shrink = false
-sort = false
-transparency = 20
 
-#dmenu = "/usr/bin/dmenu -p dunst: -nb #FFFFFF -nf #000000 -sb $94DBFF -sf "000000"
-#browser = /usr/bin/firefox
+geometry = "=350x10-110+110"
+
+frame_color = "#2aa198"
+separator_color = frame
+frame_width = 5
+separator_height = 5
+horizontal_padding = 15
+padding = 15
+
 max_icon_size = 32
-icon_path = /usr/share/icons/hicolor/scalable/apps/:/usr/share/icons/hicolor/48x48/apps/:/usr/share/icons/hicolor/16x16/apps/:/home/june/.local/share/icons/hicolor/48x48/
+icon_path = /usr/share/icons/hicolor/scalable/apps/:/usr/share/icons/hicolor/48x48/apps/:/usr/share/icons/hicolor/16x16/apps/:/home/<@NAME1@>/.local/share/icons/hicolor/48x48/
 
 [shortcuts]
 close =
@@ -30,19 +32,21 @@ history =
 context =
 
 [urgency_low]
-background = "#212128"
-foreground = "#eeeeee"
+background = "#eee8d5"
+foreground = "#657b83"
+frame_color = "#657b83"
 timeout = 2
 
 [urgency_normal]
-background = "#212128"
-foreground = "#eeeeee"
+background = "#eee8d5"
+foreground = "#268bd2"
+frame_color = "#268bd2"
 timeout = 5
 
 [urgency_critical]
-background = "#4A3335"
-foreground = "#C84015"
+background = "#C84015"
+foreground = "#eee8d5"
+frame_color = "#C84015"
 timeout = 15
 
 
-# vim: ft=cfg

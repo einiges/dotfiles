@@ -12,7 +12,7 @@ function __title::idle {
 
 # Set title when executing a command
 function __title::work {
-	print -Pn -- '\e]0;$2\a'
+	print -Pn -- '\e]0;${2:gs/%/%%/}\a'
 }
 
 autoload -Uz add-zsh-hook

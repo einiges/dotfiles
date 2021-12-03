@@ -1,0 +1,25 @@
+# vim:ft=muttrc
+
+set from = "<@MAIL_3@>"
+set sendmail = "msmtp -a outlook"
+
+
+# -- Directories --
+set spoolfile    = "=outlook/Inbox"
+set postponed    = "=outlook/Drafts"
+set record       = "=outlook/Sent"
+set trash        = "=outlook/Deleted"
+
+
+# -- Misc --
+unset signature
+
+
+# -- Mailboxes --
+unmailboxes *
+mailboxes \
+	"=outlook/Inbox" \
+	`echo $HOME/.mail/outlook/*`
+
+unmailboxes "=outlook/Outbox"
+

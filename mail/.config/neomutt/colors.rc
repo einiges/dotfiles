@@ -1,0 +1,101 @@
+# vim:ft=muttrc
+
+# basic colors
+color normal        color244        default
+color error         color160        default
+color tilde         color254        default
+color message       color37         default
+color markers       color160        default
+color attachment    color234        default
+color search        color61         default
+color status        color10         black
+color indicator     default         black   # current selected index
+color tree          color9          default # arrow in threads
+
+# basic monocolor screen
+mono  bold          bold
+mono  underline     underline
+mono  indicator     reverse
+mono  error         bold
+
+# index
+
+color index_author   default         default         "~A"
+color index_date     color10         default
+#color index_collapsed
+color index_flags    color10         default         "~A"
+color index_number   color10         default
+color index_size     color10         default
+color index_subject  default         default         "~A"
+color index_subject  blue            default         "~U"
+color index_subject  black           red             "~D"
+
+#color index         color160        color233        "~D(!~p|~p)"               # deleted
+#color index         color254        color233        ~F                         # flagged
+#color index         color166        color233        ~=                         # duplicate messages
+#color index         color245        color233        "~A!~N!~T!~p!~Q!~F!~D!~P"  # the rest
+##color index         J_base          color233        "~A~N!~T!~p!~Q!~F!~D"      # the rest, new
+#color index         white         default         "~A"                        # all messages
+#color index         color10         default         "~E"                        # expired messages
+#color index         color33         default         "~N"                        # new messages
+#color index         color33         default         "~O"                        # old messages
+#color index         color61         default         "~Q"                        # messages that have been replied to
+#color index         color245        default         "~R"                        # read messages
+#color index         red         default         "~U"                        # unread messages
+#color index         color33         default         "~U~$"                      # unread, unreferenced messages
+#color index         color244        default         "~v"                        # messages part of a collapsed thread
+#color index         color244        default         "~P"                        # messages from me
+#color index         color37         default         "~p!~F"                     # messages to me
+#color index         color37         default         "~N~p!~F"                   # new messages to me
+#color index         color37         default         "~U~p!~F"                   # unread messages to me
+#color index         color10        default         "~R~p!~F"                   # messages to me
+#color index         color160        default         "~F"                        # flagged messages
+#color index         color160        default         "~F~p"                      # flagged messages to me
+#color index         color160        default         "~N~F"                      # new flagged messages
+#color index         color160        default         "~N~F~p"                    # new flagged messages to me
+#color index         color160        default         "~U~F~p"                    # new flagged messages to me
+#color index         black           red             "~D"                        # deleted messages
+#color index         color239        default         "~v~(!~N)"                  # collapsed thread with no unread
+#color index         color136        default         "~v~(~N)"                   # collapsed thread with some unread
+#color index         color64         default         "~N~v~(~N)"                 # collapsed thread with unread parent
+## statusbg used to indicated flagged when foreground color shows other status
+## for collapsed thread
+#color index         color160        color254        "~v~(~F)!~N"                # collapsed thread with flagged, no unread
+#color index         color136        color254        "~v~(~F~N)"                 # collapsed thread with some unread & flagged
+#color index         color64         color254        "~N~v~(~F~N)"               # collapsed thread with unread parent & flagged
+#color index         color64         color254        "~N~v~(~F)"                 # collapsed thread with unread parent, no unread inside, but some flagged
+#color index         color37         color254        "~v~(~p)"                   # collapsed thread with unread parent, no unread inside, some to me directly
+#color index         color136        color160        "~v~(~D)"                   # thread with deleted (doesn't differentiate between all or partial)
+#color index         color136        color233        "~(~N)"                    # messages in threads with some unread
+#color index         color64         color233        "~S"                       # superseded messages
+#color index         color160        color233        "~T"                       # tagged messages
+#color index         color166        color160        "~="                       # duplicated messages
+
+# message headers
+
+color hdrdefault    color11        black
+color header        color11        black         "^From: "
+color header        color11        default         "^Subject: "
+
+# body
+color quoted        color33         default
+color quoted1       color37         default
+color quoted2       color136        default
+color quoted3       color160        default
+color quoted4       color166        default
+
+color signature     color10         default
+color bold          color254        default
+color underline     color254        default
+color normal        color240        default
+
+## pgp
+color body          color160        default         "^(BAD signature)"
+color body          color160        default         "^(Problem signature)"
+color body          color37         default         "^(Good signature)"
+color body          color230        default         "^gpg: Good signature .*"
+color body          color244        default         "^gpg: "
+color body          color244        color160        "^gpg: BAD signature from.*"
+mono  body          bold                            "^gpg: Good signature"
+mono  body          bold                            "^gpg: BAD signature from.*"
+

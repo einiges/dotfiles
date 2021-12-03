@@ -1,6 +1,6 @@
 # vim:ft=muttrc
 
-set from = "<@MAIL_GMAIL@>"
+set from = "<@MAIL_4@>"
 set sendmail = "msmtp -a gmail"
 
 
@@ -13,4 +13,11 @@ set trash        = "=gmail/Deleted"
 
 # -- Misc --
 unset signature
+
+
+# -- Mailboxes --
+unmailboxes *
+mailboxes \
+	"=gmail/Inbox" \
+	`echo $HOME/.mail/gmail/*`
 

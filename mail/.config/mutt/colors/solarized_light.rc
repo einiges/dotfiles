@@ -34,7 +34,7 @@ color index                         blue           default         "~U"         
 color index                         red            default         "~F"          # flagged messages
 color index                         black          blue            "~v~(~N)"     # collapsed thread with some unread
 color index         bold            color13        default         "~T"          # tagged messages
-color index                         black          color9          "~D"          # deleted messages
+color index                         color9         default         "~D"          # deleted messages
 
 
 
@@ -47,8 +47,8 @@ color header        bold            blue           default         "^Subject:"
 
 
 # Sidebar
-color sidebar_indicator             black          blue
-color sidebar_highlight             white          black
+color sidebar_indicator             blue           default
+color sidebar_highlight             default        black
 color sidebar_divider               blue           default
 
 

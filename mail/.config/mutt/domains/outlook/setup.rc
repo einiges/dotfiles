@@ -1,6 +1,6 @@
 # vim:ft=muttrc
 
-set from = "<@MAIL_OUTLOOK@>"
+set from = "<@MAIL_3@>"
 set sendmail = "msmtp -a outlook"
 
 
@@ -9,6 +9,7 @@ set spoolfile    = "=outlook/Inbox"
 set postponed    = "=outlook/Drafts"
 set record       = "=outlook/Sent"
 set trash        = "=outlook/Deleted"
+set mbox         = "=outlook/Archive"
 
 
 # -- Misc --

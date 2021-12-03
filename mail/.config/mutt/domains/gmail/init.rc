@@ -1,0 +1,16 @@
+# vim:ft=muttrc
+
+alternates -group me -group gmail "<@NAME2@>\.<@NAME1@>@gmail\.com"
+
+mailboxes `echo =gmail{,/{Inbox,Archive,Sent,Drafts,Trash,Junk}}`
+
+
+
+send2-hook '%f gmail' 'source $my_config_home/domains/gmail/setup.rc'
+
+folder-hook gmail source $my_config_home/domains/gmail/setup.rc
+
+
+
+macro index ,g  "<change-folder> =gmail/Inbox<enter>"    "go to Inbox (gmail)"
+

@@ -1,4 +1,0 @@
-#!/bin/sh
-
-exec /usr/bin/msmtp -C "$XDG_CONFIG_HOME/msmtp/config" "$@"
-

@@ -1,6 +1,6 @@
 # vim:ft=muttrc
 
-set from = "<@MAIL_GMX1@>"
+set from = "<@MAIL_1@>"
 set sendmail = "msmtp -a gmx"
 
 
@@ -9,8 +9,9 @@ set spoolfile    = "=gmx/Inbox"
 set postponed    = "=gmx/Drafts"
 set record       = "=gmx/Sent"
 set trash        = "=gmx/Deleted"
+set mbox         = "=gmx/Archive"
 
 
 # -- Misc --
-set signature   = $my_config_home/domains/gmx-signature.txt
+set signature   = $my_config_home/domains/gmx/signature.txt
 

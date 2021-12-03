@@ -4,8 +4,8 @@ path=.mail
 
 [user]
 name=<@NAME12@>
-primary_email=<@MAIL_GMX1@>
-other_email=<@MAIL_GMX2@>;<@MAIL_OUTLOOK@>;<@MAIL_GMAIL@>;
+primary_email=<@MAIL_1@>
+other_email=<@MAIL_2@>;<@MAIL_3@>;<@MAIL_4@>;<@MAIL_5@>
 
 [new]
 ignore=.mbsyncstate;.uidvalidity;

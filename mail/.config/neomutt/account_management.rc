@@ -1,0 +1,24 @@
+# vim:ft=muttrc
+
+set folder = "~/.mail"
+
+alternates -group me -group     gmx "<@MAIL_2@>" "<@MAIL_1@>"
+alternates -group me -group outlook "<@MAIL_3@>"
+alternates -group me -group   gmail "<@MAIL_4@>"
+
+send2-hook '%f     gmx' 'source $my_accounts/gmx.rc'
+send2-hook '%f outlook' 'source $my_accounts/outlook.rc'
+send2-hook '%f   gmail' 'source $my_accounts/gmail.rc'
+
+# -- Account Sources --
+folder-hook     gmx source $my_accounts/gmx.rc
+folder-hook outlook source $my_accounts/outlook.rc
+folder-hook   gmail source $my_accounts/gmail.rc
+
+# -- Macros --
+macro index          ,gmx  "<change-folder> =gmx/Inbox<enter>"        "go to Inbox (GMX)"
+macro index          ,gou  "<change-folder> =outlook/Inbox<enter>"    "go to Inbox (Outlook)"
+macro index          ,gma  "<change-folder> =gmail/Inbox<enter>"      "go to Inbox (Gmail)"
+
+# Default account
+source $my_accounts/gmx.rc

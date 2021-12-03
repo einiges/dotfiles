@@ -1,0 +1,16 @@
+# vim:ft=muttrc
+
+alternates -group me -group outlook "<@NAME1@>\.<@NAME2@>@outlook\.com"
+
+mailboxes `echo =outlook{,/{Inbox,Archive,Sent,Drafts,Deleted,Junk}}`
+
+
+
+send2-hook '%f outlook' 'source $my_config_home/domains/outlook/setup.rc'
+
+folder-hook outlook source $my_config_home/domains/outlook/setup.rc
+
+
+
+macro index ,o  "<change-folder> =outlook/Inbox<enter>"    "go to Inbox (Outlook)"
+

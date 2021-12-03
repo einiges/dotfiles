@@ -4,7 +4,7 @@
 # -- Globals --
 
 SyncState *
-Create Slave
+Create Both
 Expunge Both
 
 
@@ -12,7 +12,7 @@ Expunge Both
 
 IMAPAccount outlook
 	Host imap-mail.outlook.com
-	User <@MAIL_OUTLOOK@>
+	User <@MAIL_3@>
 	SSLType IMAPS
 	PassCmd "pass mail/outlook/passwd"
 
@@ -23,15 +23,14 @@ MaildirStore outlook-local
 	Path  ~/.mail/outlook/
 	Inbox ~/.mail/outlook/Inbox
 	SubFolders Verbatim
-	Flatten "."
 
 Channel outlook-inbox
-	Master :outlook-remote:Inbox
-	Slave  :outlook-local:Inbox
+	Far :outlook-remote:Inbox
+	Near  :outlook-local:Inbox
 
 Channel outlook-remaining
-	Master :outlook-remote:
-	Slave  :outlook-local:
+	Far :outlook-remote:
+	Near  :outlook-local:
 	Patterns * !Inbox !Outbox !Notes
 
 Group outlook
@@ -44,7 +43,7 @@ Group outlook
 
 IMAPAccount gmx
 	Host imap.gmx.net
-	User <@MAIL_GMX1@>
+	User <@MAIL_1@>
 	SSLType IMAPS
 	PassCmd "pass mail/gmx/passwd"
 
@@ -55,31 +54,30 @@ MaildirStore gmx-local
 	Path  ~/.mail/gmx/ # trailing /
 	Inbox ~/.mail/gmx/Inbox
 	SubFolders Verbatim
-	Flatten "."
 
 Channel gmx-inbox
-	Master :gmx-remote:INBOX
-	Slave  :gmx-local:Inbox
+	Far :gmx-remote:INBOX
+	Near  :gmx-local:Inbox
 
 Channel gmx-archive
-	Master :gmx-remote:Archiv
-	Slave  :gmx-local:Archive
+	Far :gmx-remote:Archiv
+	Near  :gmx-local:Archive
 
 Channel gmx-deleted
-	Master :gmx-remote:"Gel&APY-scht" # UTF-7…
-	Slave  :gmx-local:Deleted
+	Far :gmx-remote:"Gel&APY-scht" # UTF-7…
+	Near  :gmx-local:Deleted
 
 Channel gmx-drafts
-	Master :gmx-remote:"Entw&APw-rfe"
-	Slave  :gmx-local:Drafts
+	Far :gmx-remote:"Entw&APw-rfe"
+	Near  :gmx-local:Drafts
 
 Channel gmx-junk
-	Master :gmx-remote:Spamverdacht
-	Slave  :gmx-local:Junk
+	Far :gmx-remote:Spamverdacht
+	Near  :gmx-local:Junk
 
 Channel gmx-sent
-	Master :gmx-remote:Gesendet
-	Slave  :gmx-local:Sent
+	Far :gmx-remote:Gesendet
+	Near  :gmx-local:Sent
 
 Group gmx
 	Channel gmx-inbox
@@ -88,4 +86,35 @@ Group gmx
 	Channel gmx-drafts
 	Channel gmx-junk
 	Channel gmx-sent
+
+
+
+# -- <@NAME2@>.me | mailbox.org --
+
+IMAPAccount <@NAME2@>.me
+	Host imap.mailbox.org
+	User <@MAIL_5@>
+	SSLType IMAPS
+	PassCmd "pass mail/<@NAME2@>.me/passwd"
+
+IMAPStore <@NAME2@>.me-remote
+	Account <@NAME2@>.me
+
+MaildirStore <@NAME2@>.me-local
+	Path  ~/.mail/<@NAME2@>.me/ # trailing /
+	Inbox ~/.mail/<@NAME2@>.me/Inbox
+	SubFolders Verbatim
+
+Channel <@NAME2@>.me-inbox
+	Far :<@NAME2@>.me-remote:INBOX
+	Near  :<@NAME2@>.me-local:Inbox
+
+Channel <@NAME2@>.me-remaining
+	Far :<@NAME2@>.me-remote:
+	Near  :<@NAME2@>.me-local:
+	Patterns * !Inbox
+
+Group <@NAME2@>.me
+	Channel <@NAME2@>.me-inbox
+	Channel <@NAME2@>.me-remaining
 

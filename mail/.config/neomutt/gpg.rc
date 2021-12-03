@@ -1,8 +1,0 @@
-# vim: ft=muttrc
-
-set crypt_use_gpgme
-set crypt_verify_sig
-set crypt_replysign
-set crypt_replyencrypt
-set crypt_replysignencrypted
-#set crypt_autosign

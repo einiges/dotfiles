@@ -14,7 +14,7 @@ while (( ARGC > 0 )); do
 		continue
 	fi
 
-	extract_dir="${1:t:r}"
+	local extract_dir="${1:t:r}"
 	case "$1" in
 		*.tar                   ) tar -xvf "$1"  ;;
 		*.(tar.gz|tgz)          ) tar -zxvf "$1" ;;

@@ -2,62 +2,46 @@
 
 # Create tmp directory and change into it
 
-local p=@
-local quiet=0
+local -A opts
+zparseopts -D -K -A opts p: I h
 
-while [[ $# > 0 ]]; do
-	case "$1" in
-	-p)
-		p=$2
-		shift
-		;;
-	-q)
-		quiet=1
-		;;
-	-h)
-		cat <<- EOF >&2
-			Change into new temporary directory and
-			optionally run a command to prepare it.
+if [[ -v opts[-h] ]]; then
+	cat <<- EOF >&2
+		Change into new temporary directory and
+		optionally run a command to prepare it.
 
-			        $0 [-qh] [-p seq] [--] [CMD [ARG...]]
+		    $0 [-qh] [-I replace-str] [--] [CMD [ARG...]]
 
-			CMD runs between the creation of the temporary
-			directory and changing into it. The temporary
-			directory can be queried with @ by default, or
-			with the sequence passed to -p.
+		CMD runs between the creation of the temporary
+		directory and changing into it. The temporary
+		directory can be queried by setting the -I argument.
 
-			Examples:
-
-			    ct
-			    ct touch @/test
-			    ct -p + cp -r dir/* +
-		EOF
-		return 0
-		;;
-	--)
-		shift
-		break
-		;;
-	*)
-		break
-	esac
-	shift
-done
+		Examples:
+		    ct
+		    ct -I @ cp -r dir/* @
+	EOF
+	return 0
+fi
 
 local td=$(mktemp -d)
 
 if (( ARGC )); then
-	"${@//$p/$td}"
-	local rc=$?
-	if (( rc )); then
+	local -a cmd
+	cmd=( "$@" )
+	if [[ -v opts[-I] ]]; then
+		cmd=( "${cmd[@]//${opts[-I]}/$td}" )
+	fi
+	"${cmd[@]}"
+	local ec=$?
+	if (( ec )); then
 		rmdir "$td"
-		return $rc
+		return $ec
 	fi
 fi
 
-if (( ! quiet )); then
+if [[ ! -v opts[-q] ]]; then
 	printf "%s\n" "$td"
 fi
 
-cd "$td"
+builtin cd "$td"
 

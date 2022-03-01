@@ -3,6 +3,9 @@
 # Create directory and change into
 # mkdir + cd
 
+# Synopsis
+#     cm [cd OPTIONS] directory
+
 if (( ! ARGC )); then
 	builtin cd
 	return

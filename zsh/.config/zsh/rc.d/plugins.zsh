@@ -16,7 +16,7 @@ function zgen {
 # source plugin pre config
 function {
 local src
-for src in "${ZDOTDIR}"/plugins.conf.d/pre/*.zsh(.,@N); do
+for src in "$ZDOTDIR"/plugins.conf.d/pre/*.zsh(.,@N); do
 	source "$src"
 done
 }
@@ -45,7 +45,7 @@ source "$ZGEN_INIT" &>/dev/null || {
 function {
 local src
 for src in "$ZDOTDIR"/plugins.conf.d/post/*.zsh(.,@N); do
-	source "$scr"
+	source "$src"
 done
 }
 

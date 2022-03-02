@@ -29,8 +29,6 @@ alias o='rifle'
 alias p='print'
 alias pf='print -f'
 alias rd='rmdir'
-alias t='tmux'
-alias ta='tmux attach -t'
 aliases[==]='noglob units'
 
 

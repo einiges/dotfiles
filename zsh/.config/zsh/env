@@ -2,7 +2,6 @@
 
 function {
 local src
-# TODO: Load zsh before anything else
 for src in "$ZDOTDIR"/env.d/env.zsh "$ZDOTDIR"/env.d/*/*(.,@N); do
 	source "$src"
 done

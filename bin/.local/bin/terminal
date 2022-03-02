@@ -1,7 +1,7 @@
 #!/bin/sh
 
-if [ ! ${TERMINAL+x} ]; then
-	return 1
+if [ -z "${TERMINAL+x}" ] || ! command -v "${TERMINAL}" >/dev/null; then
+	exit 1
 fi
 
 exec "$TERMINAL" "$@"

@@ -1,24 +1,31 @@
-#!/usr/bin/env zsh
+#!/bin/zsh
 
 trap 'kill 0' EXIT
 trap 'exit' INT TERM QUIT
 
-
-# -- Setup --
+# -- Basic Setup --
 
 monitor=${1:-primary}
 
 [[ -v PANEL_NAME ]] || PANEL_NAME="bspwm-panel-${DISPLAY[2,-1]}"
 
-# Kill existing panels
-xdo kill -a $PANEL_NAME > /dev/null 2>&1
-
 # - Create new filedescriptor -
-[[ -v PANEL_FIFO ]] || PANEL_FIFO="${XDG_RUNTIME_DIR}/${PANEL_NAME}"
+[[ -v PANEL_FIFO ]] || PANEL_FIFO="${XDG_RUNTIME_DIR:-${TMPDIR:-/tmp}}/${PANEL_NAME}"
 [[ -p $PANEL_FIFO ]] && rm "$PANEL_FIFO"
-mkfifo -m 600 "$PANEL_FIFO"
+mkfifo -m 600 "$PANEL_FIFO" || exit 1
 exec 5<>"$PANEL_FIFO"
 
+
+
+# -- Trap --
+
+cleanup() {
+	[[ -p $PANEL_FIFO ]] && rm "$PANEL_FIFO"
+	exit
+}
+
+# trap 'kill 0' EXIT
+# trap 'cleanup' INT TERM QUIT
 
 
 # -- Settings --
@@ -30,13 +37,12 @@ geometry_values=( $(bspc query --monitor $monitor -T | jq '.rectangle[]') )
 
 typeset -A geometry=( ${geometry_keys:^geometry_values} )
 
-bar_top_padding=3
-bar_bottom_padding=0
-bar_left_padding=3
-bar_right_padding=3
-(( geometry[x]     += bar_left_padding ))
-(( geometry[y]     += bar_top_padding ))
-(( geometry[width] -= bar_left_padding + bar_right_padding ))
+bar_tbo_padding=3 # top bottom outer
+bar_tbi_padding=3 # top bottom inner
+bar_lr_padding=3 # left right
+(( geometry[x]     = bar_lr_padding ))
+(( geometry[y]     = bar_tbo_padding ))
+(( geometry[width] -= 2 * bar_lr_padding ))
 (( geometry[height] = 28 ))
 
 
@@ -95,14 +101,14 @@ icons[capturemute]=''
 icons[music]=''
 
 typeset -a desktop_icons
-desktop_icons[1]='¹  '
-desktop_icons[2]='²  '
-desktop_icons[3]='³  '
-desktop_icons[4]='⁴  '
-desktop_icons[5]='⁵  '
-desktop_icons[8]='⁸  '
-desktop_icons[9]='⁹  '
-desktop_icons[10]='⁰  '
+desktop_icons[1]='1  '
+desktop_icons[2]='2  '
+desktop_icons[3]='3  '
+desktop_icons[4]='4  '
+desktop_icons[5]='5  '
+desktop_icons[8]='8  '
+desktop_icons[9]='9  '
+desktop_icons[10]='0  '
 
 
 
@@ -111,7 +117,7 @@ desktop_icons[10]='⁰  '
 # $( sanitize string )
 sanitize() {
 	REPLY="${1:gs/%/%%}"
-	REPLY="${1:gs/\\n/ }"
+	REPLY="${REPLY:gs/\\n/ }"
 }
 
 # -- Pretty printer --
@@ -161,10 +167,9 @@ ppMpd() {
 
 # $( ppPlayback )
 ppPlayback() {
-	local cmd=( $(amixer -M get Master) )
-	local playback_level=${cmd[-3][2,-3]}
+	local playback_level=$(pamixer --get-volume)
 
-	if [[ ${cmd[-1]} == '[off]' ]]; then
+	if pamixer --get-mute > /dev/null; then
 		playback_state_icon=${icons[playbackmute]}
 	else
 		playback_state_icon=${icons[playback]}
@@ -176,10 +181,9 @@ ppPlayback() {
 
 # $( ppCapture )
 ppCapture() {
-	local cmd=( $(amixer -M get Capture) )
-	local capture_level=${cmd[-3][2,-3]}
+	local capture_level=$(pamixer --source 44 --get-volume)
 
-	if [[ ${cmd[-1]} == '[off]' ]]; then
+	if pamixer --source 44 --get-mute >/dev/null; then
 		capture_state_icon=${icons[capturemute]}
 	else
 		capture_state_icon=${icons[capture]}
@@ -255,7 +259,7 @@ ppDesktops() {
 { print init; stdbuf -oL alsactl monitor } | while read line; do
 	case ${line} in
 		*Master\ Playback*|init ) ppPlayback; print "p$REPLY" >&5 ;&
-		#*Capture*|init )          ppCapture;  print "c$REPLY" >&5 ;&
+		*Capture*|init )          ppCapture;  print "c$REPLY" >&5 ;&
 	esac
 done &
 
@@ -317,18 +321,22 @@ while read -r cmd <&5; do
 	      "%{c}${___}${mods[desktops]}${___}" \
 	      "%{r}${mods[mail]}${___}${mods[playback]}${___}${mods[capture]}${___}${mods[day]}${___}${mods[clock]}"
 
-done | lemonbar -d \
-       -g "${geometry[width]}x${geometry[height]}+${geometry[x]}+${geometry[y]}" \
-       -B "${bar_bg}" \
-       -F "${bar_fg}" \
-       -U "${bar_bg}" \
-       -o "${font_offset}" -f "${font}" \
-       -n "$PANEL_NAME" 2>/dev/null &
+done | lemonbar -p -b \
+	-g "${geometry[width]}x${geometry[height]}+${geometry[x]}+${geometry[y]}" \
+	-B "${bar_bg}" \
+	-F "${bar_fg}" \
+	-U "${bar_bg}" \
+	-o "${font_offset}" -f "${font}" \
+	-g "x${geometry[height]}++" \
+	-n "$PANEL_NAME" 2>/dev/null
 
-target=( $(xdo id -N Bspwm -n root) )
-xdo above -t "${${(@o)target}[1]}" "$(xdo id -m -a "$PANEL_NAME")"
+# lemonbar -b -g "1x$(( geometry[height] + 2*bar_tbi_padding))+"
 
-bspc config -m "$monitor" top_padding $(( $(bspc config -m focused top_padding) + geometry[height] + bar_bottom_padding + bar_top_padding ))
+# bspc config -m "$monitor" bottom_padding $(( (bspc config -m "$monitor" bottom_padding) + bar_tpi_padding ))
+# target=( $(xdo id -N Bspwm -n root) )
+# echo Target ${target[@]}
+# xdo below -t "${${(@o)target}[1]}" "$(xdo id -m -a "$PANEL_NAME")"
 
-wait $!
+#bspc config -m "$monitor" top_padding $(( $(bspc config -m focused top_padding) + geometry[height] + bar_bottom_padding + bar_top_padding ))
+
 

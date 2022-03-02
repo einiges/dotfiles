@@ -1,0 +1,17 @@
+
+--output "%(uploader)s/%(title)s {%(uploader)s:%(id)s}.%(ext)s"
+
+# Extract Audio
+#-x
+
+# Batch file
+#-a FILE
+
+--audio-format "flac"
+--audio-quality 0
+
+--ignore-errors
+
+
+#--download-archive FILE
+

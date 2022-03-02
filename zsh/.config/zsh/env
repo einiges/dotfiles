@@ -3,8 +3,7 @@
 function {
 local src
 # TODO: Load zsh before anything else
-# TODO: Subdir to much?
-for src in "$ZDOTDIR"/env.d/*/*(.,@N); do
+for src in "$ZDOTDIR"/env.d/env.zsh "$ZDOTDIR"/env.d/*/*(.,@N); do
 	source "$src"
 done
 }

@@ -30,7 +30,7 @@ zstyle ':completion:*:approximate:*' max-errors 2 numeric
 
 
 zstyle ':completion:*:*:cd:*' ignored-patterns '(*/)#lost+found' parent pwd
-zstyle ":completion:*:*:$EDITOR:*" ignored-patterns '*.o'
+zstyle ":completion:*:*:${EDITOR}:*" ignored-patterns '*.o'
 
 
 zstyle ':completion:*:*:*:*:processes'    command 'ps -u $USER -o pid,command -w'
@@ -39,12 +39,3 @@ zstyle ':completion:*:*:kill:*'           menu yes select
 zstyle ':completion:*:*:kill:*'           force-list always
 zstyle ':completion:*:*:kill:*'           insert-ids single
 
-#	"${PREFIX:+=(#bi)($PREFIX:t)(?)(*)===01=34}:${(s.:.)LS_COLORS}"
-#zstyle -e ':completion:*:default' list-colors 'reply=(
-#	"${PREFIX:+=(#bi)($PREFIX:t)(?)(*)(#B)===01;04}:${(s.:.)LS_COLORS}"
-#)'
-#zstyle -e ':completion:*:default'      list-colors    'reply=(
-#	"${PREFIX:+=(#bi)($PREFIX:t)(?)(*)[[:space:]](―)[[:space:]](*)(#B)===01;04==02=03;02}:${(s.:.)LS_COLORS}"
-#	"${PREFIX:+=(#bi)($PREFIX:t)(?)(*)(#B)===01;04}:${(s.:.)LS_COLORS}"
-#	"=(#b)[[:space:]]#*(―)[[:space:]]#(*)(#B)==02=03;02"
-#)'

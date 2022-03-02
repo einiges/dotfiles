@@ -7,6 +7,9 @@ zle -N kill-word-match
 # Vim Mode
 bindkey -v
 
+# Complete word before cursor
+bindkey '\t' expand-or-complete-prefix
+
 
 # FIXME: Why does tmux receives different sequences?
 keyfile=${ZDOTDIR}/keydef/${TERM}

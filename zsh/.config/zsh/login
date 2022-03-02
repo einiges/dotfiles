@@ -1,4 +1,5 @@
 # vim: ft=zsh
 
-[[ ! -v DISPLAY && $XDG_VTNR -eq 1 ]] && exec startx "$XINITRC"
+[[ ! -v DISPLAY && $XDG_VTNR -eq 1 ]] &&
+	exec startx "$XINITRC" -- "$SERVERRC" vt1
 

@@ -1,5 +1,7 @@
 # vim: ft=zsh
 
+function {
+
 setopt   autocd
 setopt   auto_pushd
 setopt   cdable_vars
@@ -19,7 +21,6 @@ setopt   interactive_comments
 setopt   magic_equal_subst
 setopt   rm_star_wait
 
-# -- History --
 
 setopt   append_history
 setopt   hist_expire_dups_first
@@ -41,10 +42,24 @@ setopt   extended_glob
 unsetopt list_ambiguous
 setopt   glob_star_short
 
-autoload -Uz ${ZDOTDIR}/functions/*(N)
+autoload -Uz "$ZDOTDIR"/functions/*(.,@N)
 
-for f in $ZDOTDIR/{zshrc.d/*,modules/*}.zsh; do
-	source "$f"
+local -a sources
+sources=(
+	"$ZDOTDIR"/rc.d/plugins.zsh
+	"$ZDOTDIR"/modules/*.zsh(.,@N)
+	"$ZDOTDIR"/rc.d/aliases.zsh
+	"$ZDOTDIR"/rc.d/completions.zsh
+	"$ZDOTDIR"/rc.d/dirhashes.zsh
+	"$ZDOTDIR"/rc.d/keybindings.zsh
+	"$ZDOTDIR"/rc.d/prompt.zsh
+	"$ZDOTDIR"/rc.d/*/.zsh(.,@N)
+)
+
+local src
+for src in "${(@)sources}"; do
+	source "$src"
 done
-unset f
+
+}
 

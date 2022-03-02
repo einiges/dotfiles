@@ -1,20 +1,7 @@
 #!/usr/bin/env sh
 
-primon="$(bspc query -M -m primary)"
-secmons=( "$(bspc query -M | sed "/$primon/d")" )
 
-
-if [ "$1" -eq 0 ]; then
-	bspwm-desktops 1 2 3 4 5 8 9 10 -m "$primon" "${secmons[@]}"
-	wmname LG3D
-
-	sxhkd -m -1 &
-	picom --config "$XDG_CONFIG_HOME/bspwm/picom.conf" &
-else
-	pkill --signal SIGUSR1 sxhkd
-	pkill --signal SIGUSR1 picom
-fi
-
+# -- General --
 
 bspc config focused_border_color        '#657B83'
 bspc config active_border_color         '#AAB7B7'
@@ -31,12 +18,11 @@ bspc config right_padding              -1
 bspc config bottom_monocle_padding     -4
 bspc config right_monocle_padding      -4
 
-if [ $(bspc query -M | wc -l) -le 1 ]; then
+[ $(bspc query -M | wc -l) -le 1 ] &&
 	bspc config borderless_monocle true
-fi
 
-bspc config split_ratio                 0.5
-bspc config initial_polarity            first_child
+bspc config split_ratio                 0.46
+bspc config initial_polarity            second_child
 bspc config pointer_modifier            mod4
 bspc config focus_follows_pointer       true
 bspc config pointer_follows_monitor     true
@@ -77,6 +63,7 @@ bspc rule -a 'Zathura'                  state=tiled
 bspc rule -a 'Pavucontrol'              state=floating
 bspc rule -a 'Lxappearance'             state=floating rectangle=950x600+0+0 center=on
 bspc rule -a 'St:scratchpad'            state=floating center=on
+bspc rule -a 'St:float'                 state=floating center=on
 bspc rule -a 'mpv:gl'                   border=off
 bspc rule -a 'Eclipse:Eclipse'          desktop=2
 bspc rule -a 'jetbrains-idea:jetbrains-idea' desktop=2
@@ -86,6 +73,19 @@ bspc rule -a 'Signal:signal'            desktop=8
 bspc rule -a 'firefox:Browser'          state=floating
 bspc rule -a 'Steam:Steam'              state=floating
 bspc rule -a 'Steam:Steam:Steam'        state=tiled
+bspc rule -a 'Bar:lemonbar'             layer=below
 
+
+# -- Cmds --
+
+bspc config -m primary bottom_padding "$(( $(bspc config -m primary bottom_padding) + 3 ))"
+bspc config -m primary bottom_monocle_padding "$(( $(bspc config -m primary bottom_monocle_padding) + 3 ))"
 bspwm-panel "$(bspc query -M -m primary --names)" &
+
+killall --user "$USER" -USR1 sxhkd || {
+	sxhkd -m -1 &
+}
+killall --user "$USER" -USR1 picom || {
+	picom --config "$XDG_CONFIG_HOME/bspwm/picom.conf" &
+}
 

@@ -9,11 +9,6 @@ done
 
 export TERMCMD=$TERMINAL # ranger
 
-# dircolors
-DIRCOLORS="$XDG_CONFIG_HOME"/dircolors/solarized_light
-DIRCOLORS_GEN="$XDG_CACHE_HOME"/zsh/dircolors.sh
-source $DIRCOLORS_GEN
-
 # GnuPG
 export GNUPGHOME="$XDG_CONFIG_HOME"/gnupg
 export GPG_TTY="$TTY"

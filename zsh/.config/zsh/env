@@ -7,8 +7,6 @@ for src in "$ZDOTDIR"/env.d/env.zsh "$ZDOTDIR"/env.d/*/*(.,@N); do
 done
 }
 
-export TERMCMD=$TERMINAL # ranger
-
 # history
 export SAVEHIST=50000
 export HISTSIZE=50000

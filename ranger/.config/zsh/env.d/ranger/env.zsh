@@ -1,0 +1,2 @@
+export TERMCMD=$TERMINAL # ranger
+

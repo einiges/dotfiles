@@ -9,10 +9,6 @@ done
 
 export TERMCMD=$TERMINAL # ranger
 
-# GnuPG
-export GNUPGHOME="$XDG_CONFIG_HOME"/gnupg
-export GPG_TTY="$TTY"
-
 # history
 export SAVEHIST=50000
 export HISTSIZE=50000

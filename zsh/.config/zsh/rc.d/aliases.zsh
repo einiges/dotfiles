@@ -36,7 +36,6 @@ aliases[==]='noglob units'
 
 #   brain support
 
-alias paur='paru'
 alias mpvao='mpv --no-video'
 
 alias taghere='touch .tags'

@@ -21,8 +21,6 @@ alias ,='popd'
 alias l="${PAGER:-less}"
 alias d='docker'
 alias g='noglob git'
-alias m='MANPAGER="nvim +Man!" man '
-alias n='nvim'
 alias nn='sudoedit'
 alias ns='notify-send'
 alias o='rifle'

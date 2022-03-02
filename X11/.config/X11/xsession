@@ -1,0 +1,34 @@
+#!/bin/sh
+
+# user xinitrc.d
+for f in "$XDG_CONFIG_HOME"/X11/xinitrc.d/?*; do
+	[ -f "$f" ] && . "$f" >/dev/null
+done
+
+# user xresources
+[ -f "$XDG_CONFIG_HOME"/X11/xresources ] &&
+	xrdb -merge "$XDG_CONFIG_HOME"/X11/xresources
+
+# user xresources.d
+for res in "$XDG_CONFIG_HOME"/X11/xresources.d/?*; do
+	[ -f "$res" ] && xrdb -merge "$res" >/dev/null
+done
+
+
+{
+	sleep 3
+
+	xsettingsd &
+
+	# -- Launch Applications --
+
+	"$BROWSER" >/dev/null 2>&1 &
+	"$TERMINAL" -n ncmpcpp    -e ncmpcpp &
+	"$TERMINAL" -n mutt       -e mutt &
+	"$TERMINAL" -n calcurse   -e calcurse &
+	"$TERMINAL" -n newsboat   -e newsboat &
+
+	# ( mbsync --config "${XDG_CONFIG_HOME}"/mbsync/config -a & ) >/dev/null 2>&1
+
+} >/dev/null &
+

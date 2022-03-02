@@ -1,5 +1,23 @@
 # Monitor Setup
 export primonitor='DisplayPort-0'
-export secmonitor='HDMI-A-0'
-xrandr --output $primonitor --auto --primary \
-       --output $secmonitor --auto --left-of $primonitor
+export secmonitor='HDMI-A-1'
+# xrandr --output $primonitor --auto --primary \
+#        --output $secmonitor --auto --right-of $primonitor
+
+# xrandr --output $primonitor --auto --primary \
+#        --output $secmonitor --auto --above $primonitor --rotate inverted
+
+#xrandr --output $primonitor --auto --primary --mode 2560x1440 --pos 0x180 \
+#       --output $secmonitor                  --mode 1920x1080 --pos 2560x0 --rotate left
+
+xrandr \
+	--output $primonitor \
+		--primary \
+		--mode 2560x1440 \
+		--pos 0x1080 \
+		--rotate normal \
+		\
+	--output $secmonitor \
+		--mode 1920x1080 \
+		--pos 122x0 \
+		--rotate inverted

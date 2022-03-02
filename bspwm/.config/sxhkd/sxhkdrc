@@ -14,8 +14,8 @@ super + {_,shift} + Return
 	$TERMINAL {_,-e tmux}
 
 # - application launcher
-super + @l
-	rofi -show drun
+super + {_,shift} + @l
+	rofi -show drun {_,-run-command 'bspawn here!!  \{cmd\}'}
 
 # - pass
 super + @x

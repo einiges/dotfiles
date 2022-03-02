@@ -46,6 +46,23 @@ bspc config single_monocle              true
 bspc config ignore_ewmh_focus           true
 bspc config directional_focus_tightness low
 
+
+primon="$(bspc query -M -m primary)"
+secmons=( "$(bspc query -M | sed "/$primon/d")" )
+
+if [ "$1" -eq 0 ]; then
+	bspwm-desktops 1 2 3 4 5 8 9 10 -m "$primon" "${secmons[@]}"
+	wmname LG3D
+fi
+
+
+# -- Rules --
+
+# - WM_CLASS = "class", "instance"
+# - WM_NAME = "title"
+# bspc rule -a 'instance:class:title'
+
+[ "$1" -eq 0 ] && bspawn rm '*'
 bspc config external_rules_command      "$(which bspwm-external_rules)"
 
 bspc rule -r '*:*'

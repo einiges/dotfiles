@@ -1,0 +1,324 @@
+#!/usr/bin/env bash
+
+# General Setup
+# -------------
+# In External rules script (bspc config external_rules)
+#     - Get consequences from bspawn
+#         bspawn_consequences="$(bspawn where "$1")"
+#     - and Output consequences
+#         printf '%s\n' "$bspawn_consequences"
+#
+# OPTIONAL
+# Setup executer keybinding
+#     - (sxhkd + rofi)
+#         MODIFIER + KEYSYM
+#             rofi -comand-run 'bspawn here \{cmd\}' ...
+#
+# * OPTIONAL
+# Cleanup db on startup
+#     - Add to bspwmrc
+#         [ "$1" -eq 0 ] && bspawn rm '*'
+
+
+# TODO:
+# - Lock db while accessing
+
+arg0="${0##*/}"
+
+db="${BSPAWM_DB:-${XDG_RUNTIME_DIR:-${TMPDIR:-/tmp}}/bspawn-${DISPLAY:1}}"
+
+
+#
+# -- global --
+#
+
+usage_global() {
+	cat <<- EOF
+		$arg0 [-h] COMMAND
+
+		COMMAND
+		    here,   !,!!  Specify consequences for specific command
+		    where,  ?     Ask for consequences of specific window
+		    list,   ls    List saved consequences
+		    remove, rm    Remove consequences from database
+
+		    Use '$arg0 COMMAND -h' to show help for that command.
+
+
+			
+	EOF
+
+	exit "${1:-1}"
+}
+
+
+
+#
+# -- list --
+#
+
+usage_list() {
+	cat <<- EOF
+		$arg0 {list|ls}
+
+		    List stored consequences
+	EOF
+
+	exit "${1:-1}"
+}
+
+
+spawn_list() {
+	printf "%5s  %5s  %10s  %s\n" PID SHOTS DEADLINE CONSEQUENCES
+	[[ ! -s "$db" ]] &&
+		return 0
+
+	printf "%5d  %5d  %10d  %s\n" $(cat $db)
+}
+
+
+
+#
+# -- remove --
+#
+
+# TODO: Add ~ to remove died processes
+usage_remove() {
+	cat <<- EOF
+		$arg0 {remove|rm} [*|+|<pid>]...
+
+		    Remove saved consequences
+
+		    *     all
+		    +     exceeded
+		    <pid> for pid
+	EOF
+
+	exit "${1:-1}"
+}
+
+
+spawn_remove() {
+	while getopts ':h' arg
+	do
+		case "$arg" in
+			h) usage_remove 0 ;;
+			*) usage_remove 1 ;;
+		esac
+	done
+
+	shift $((OPTIND-1))
+	(( $# == 0 )) &&
+		usage_remove 1
+
+	[[ ! -f "${db}" ]] &&
+		return 0
+
+
+	for arg in "$@"
+	do
+		case "$arg" in
+			'*')
+				# remove everything
+				: > "$db"
+				;;
+			'+')
+				# TODO: Remove multiple pids in one iteration "bspawn rm p1 p2 … pn"
+				# remove deadline <= {now}
+				awk -v now="$(date '+%s')" '{
+						if ($3 == 0 || $3 > now)
+							print $0
+					}' "${db}" > "${db}.new"
+				mv "${db}.new" "${db}"
+				;;
+			*[^0-9]*|'')
+				printf "unknown operatition '%s'\n" "$arg"
+				;;
+			* )
+				awk -v pid="$arg" '$1 != pid { print $0 }' "${db}" > "${db}.new"
+				mv "${db}.new" "${db}"
+				;;
+		esac
+	done
+}
+
+
+
+#
+# -- here --
+#
+
+usage_here() {
+	cat <<- EOF
+		$arg0 {here[!][!]|!|!!} OPTIONS [--] COMMAND...
+
+		OPTIONS
+		    -c CONSEQUENCE (default: desktop={focused desktop})
+		    -n SHOTS (default: 1)
+		        0 for infinite
+		    -t TIMETOLIVE (default: disabled)
+		        When set overwrites default of -n
+		        If both are passed by the user, it works like a logical AND.
+		    -h --help
+
+		    '$arg0 !!' is a shortcut for '$arg0 here -n 0'
+	EOF
+
+	exit "${1:-1}"
+}
+
+
+spawn_here() {
+	local -a consequences
+	local nshot=1 timetolive=0
+
+	while getopts ':hc:n:t:' arg
+	do
+		case $arg in
+			c) consequences+=( "${OPTARG}" ) ;;
+			n) nshot="${OPTARG}" ;;
+			t) timetolive="${OPTARG}" ;;
+			h) usage_here 0 ;;
+			*) usage_here 1 ;;
+		esac
+	done
+
+	shift $((OPTIND-1))
+
+
+	# If desktop is passed by user, bspwm will use the last occurence
+	consequences=( desktop="$(bspc query -D -d)" "${consequences[@]}" )
+
+	local deadline=0
+	if [[ $timetolive =~ ^[1-9][0-9]*$ ]]
+	then
+		deadline="$(date --date="$timetolive seconds" '+%s')"
+	fi
+
+	if [[ $nshot =~ ^(0|[1-9][0-9]*)$ ]]
+	then
+		nshot=$nshot
+	fi
+
+	"$@" &
+	pid="$!"
+
+	printf '%d %d %s %s\n' \
+		"$pid" \
+		"$nshot" \
+		"$deadline" \
+		"${consequences[*]}" >> "$db"
+}
+
+
+
+#
+# -- where --
+#
+
+usage_where() {
+	cat <<- EOF
+		$arg0 {where|?} [OPTIONS] wid
+
+		    OPTIONS
+		    -n Do not decrease amount of remaining shots
+		    -h Print this help
+	EOF
+
+	exit "${1:-1}"
+}
+
+
+spawn_where() {
+
+	local shoots=1
+
+	while getopts ':hn' arg
+	do
+		case "$arg" in
+			n) shoots=0 ;;
+			h) usage_where 0 ;;
+			*) usage_where 1 ;;
+		esac
+	done
+
+	shift $((OPTIND-1))
+	(( $# != 1 )) &&
+		usage_where 1
+
+	[[ ! -f "${db}" ]] &&
+		return 1
+
+
+
+	local wid wpid pid now deadline consequences
+	wid="$1"
+
+
+	# TODO: Support xprop: "xprop xprop -id wid"
+	# TODO: Support xdotool: "xdotool getwindowpid?"
+	wpid="$(xdo pid "$wid")"
+	[[ $? -ne 0 || -z "$wpid" ]] &&
+		return 1
+
+
+	# try to find record by ancestor wpid
+	pid=$wpid
+	while :
+	do
+		record=$(grep --max-count 1 --no-filename "^${pid} " "${db}" 2>/dev/null) &&
+			break
+
+		pid="$(ps o 'ppid:1=' "$pid")"
+		if (( $? != 0 || ${pid} <= 1 ))
+		then
+			return 1
+		fi
+	done
+
+	read  _ shots deadline consequences <<< "$record"
+
+	now="$(date '+%s')"
+
+	if (( $deadline > 0 && $deadline - $now > 0))
+	then
+		# exceeded -> remove
+		sed -i "|^$pid |d" "${db}"
+		return
+
+	elif (( $shots == 1 && $shoots > 0 ))
+	then
+		# last time -> remove
+		sed -i "|^$pid |d" "${db}"
+
+	elif (( $shots > 0 && $shoots > 0 ))
+	then
+		# decrease shots
+		shots=$(( $shots - $shoots ))
+		sed -i "s|^\($pid\) [[:digit:]]\+ |\1 $shots |" "${db}"
+
+	fi
+
+	printf "%s\n" "$consequences"
+}
+
+
+
+#
+# -- Main --
+#
+
+cmd=$1
+shift
+
+case "$cmd" in
+	here|here!|!)   spawn_here "${@}" ;;
+	here!!|!!)      spawn_here -n 0 "${@}" ;;
+	where|where?|?) spawn_where "${@}" ;;
+	remove|rm)      spawn_remove "${@}" ;;
+	list|ls)        spawn_list "${@}" ;;
+	-h) usage_global 0 ;;
+	*)  usage_global 1 ;;
+esac
+
+

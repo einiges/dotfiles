@@ -8,21 +8,19 @@ class="$2"
 instance="$3"
 consequences="$4"
 
-#e="$(bspc-execd "$wid")"
-#notify-send "e" "$e"
+bspawn_consequences="$(bspawn where "$wid")"
 
-#consequences="$consequences $e"
-
-
-case "$class" in
-	Soffice | libreoffice)
+case "${class}:${instance}" in
+	Soffice:*|\
+	libreoffice:* )
 		case "$(xprop -id "$wid" _NET_WM_WINDOW_TYPE)" in
-			*_NET_WM_WINDOW_TYPE_NORMAL* ) consequences="$consequences state=tiled" ;;
+			*_NET_WM_WINDOW_TYPE_NORMAL* ) ext_consequences="state=tiled" ;;
 		esac
 		;;
-	Firefox )
-	   [ "$(bspc query -N -d | wc -l)" -ge 1 ] && consequences="$consequences focus=off"
+	Firefox)
+	   [ "$(bspc query -N -d | wc -l)" -ge 1 ] && ext_consequences="focus=off"
 	   ;;
 esac
 
-echo $consequences
+printf "%s %s\n" "${ext_consequences}" "${bspawn_consequences}"
+

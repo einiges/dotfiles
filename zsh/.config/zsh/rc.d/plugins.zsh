@@ -30,12 +30,11 @@ source "$ZGEN_INIT" &>/dev/null || {
 	zgen load zsh-users/zsh-autosuggestions
 	zgen load zdharma-continuum/fast-syntax-highlighting
 	zgen load zsh-users/zsh-completions src
-
 	zgen load agkozak/zsh-z
 
-	zgen oh-my-zsh plugins/fancy-ctrl-z
-
 	zgen load mafredri/zsh-async
+
+	zgen load "$ZDOTDIR"/plugins/fancier-ctrl-z
 	zgen load "$HOME"/Workspace/zsh/zsh-bdi
 
 	zgen save

@@ -1,0 +1,9 @@
+# vim:ft=zsh
+
+if (( $#BUFFER )); then
+	zle push-input -w
+fi
+
+BUFFER="fg"
+zle accept-line -w
+

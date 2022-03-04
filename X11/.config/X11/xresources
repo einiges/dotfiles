@@ -12,33 +12,3 @@ Sxiv.font: monospace:size=11
 Sxiv.background: #FDF6E3
 Sxiv.foreground: #073642
 
-St.font: Fira Code:size=10
-!St.scroll: /bin/scroll
-St.borderpx: 15
-
-St.color0:  #eee8d5
-St.color1:  #dc322f
-St.color2:  #859900
-St.color3:  #b58900
-St.color4:  #268bd2
-St.color5:  #d33682
-St.color6:  #2aa198
-St.color7:  #073642
-St.color8:  #fdf6e3
-St.color9:  #cb4b16
-St.color10: #93a1a1
-St.color11: #839496
-St.color12: #657b83
-St.color13: #6c71c4
-St.color14: #586e75
-St.color15: #002b36
-St.background: #fdf6e3
-St.foreground: #657b83
-St.selectionBackgroundColor: #eee8d5
-St.selectionUseGlyphForegroundColor: 1
-
-St.cursorColor:     #586e75
-St.cursorStyle:     3
-St.cursorThickness: 15
-St.underlineThickness: 50
-

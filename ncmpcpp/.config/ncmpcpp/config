@@ -1,6 +1,6 @@
 
 
-# -- Basic Setup --
+#   Basic Setup
 
 lyrics_directory  = ~/Audio/lyrics
 mpd_music_dir     = ~/Audio
@@ -11,19 +11,19 @@ ncmpcpp_directory = ~/.config/ncmpcpp
 
 
 
-# -- Formats --
+#   Formats
 
 alternative_header_first_line_format = $(blue){%t}|{%f}$(end)
 
 alternative_header_second_line_format = $(green){%a}|{%A}$(end){ $(11)■$(end) $(green)%b$(end)}{ $(11)■$(end) $(green)%y$(end)}
 
-song_library_format = %t $R $(yellow)%n$(end)
+song_library_format = $(yellow)%n$(end) %t
 
 song_list_format = " $(yellow)%l$(end) $(blue){%t}|{%f}$(end) $(11)■$(end) $(green){%a}|{%A}$(end) $R $(14)%b$(end) $(yellow)%n$(end) "
 
 song_columns_list_format = (3f)[]{: } (6f)[4]{lr} (3f)[]{: } (40)[5]{t|f:Title} (3f)[]{: } (15)[3]{a|A:Artist} (3f)[]{: } (15)[14]{b} (3f)[]{: }  (4f)[4]{nr} (3f)[]{: }
 
-song_window_title_format = %t - {%a}|{%A}
+song_window_title_format = {%a}|{%A} - %t
 
 song_status_format = $(green)%t$(end){ $(11)■$(end) $(green){%a}|{%A}$(end)}
 
@@ -31,7 +31,7 @@ progressbar_look = "   "
 
 
 
-# -- Prefix & Suffix --
+#   Prefix & Suffix
 
 browser_playlist_prefix = $(magenta)list›$(end)
 current_item_inactive_column_prefix = $(blue)
@@ -46,7 +46,7 @@ selected_item_suffix = $(end)
 
 
 
-# -- Modes --
+#   Modes
 
 search_engine_display_mode = columns
 playlist_display_mode = classic
@@ -55,13 +55,13 @@ user_interface = alternative
 
 
 
-# -- Misc --
+#   Misc
 
 autocenter_mode = yes
 centered_cursor = yes
 clock_display_seconds = yes
 discard_colors_if_item_is_selected = no
-display_bitrate = yes
+display_bitrate = no
 #execute_on_song_change = notify-send --category=mpd 'mpd: current track' "$(mpc --format='%artist% • %title%' | head -n 1)"
 empty_tag_marker = 
 header_text_scrolling = no
@@ -77,7 +77,17 @@ use_console_editor = yes
 
 
 
-# -- Colors --
+#   Visualizer
+
+# visualizer_data_source = "/tmp/mpd.fifo"
+# visualizer_output_name = "my_fifo"
+# visualizer_in_stereo = "yes"
+# visualizer_type = "spectrum"
+# visualizer_look = "+|"
+
+
+
+#   Colors
 
 active_window_border = red
 window_border_color = 10

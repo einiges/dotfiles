@@ -5,14 +5,7 @@ for f in "$XDG_CONFIG_HOME"/X11/xinitrc.d/?*; do
 	[ -f "$f" ] && . "$f" >/dev/null
 done
 
-# user xresources
-[ -f "$XDG_CONFIG_HOME"/X11/xresources ] &&
-	xrdb -merge "$XDG_CONFIG_HOME"/X11/xresources
-
-# user xresources.d
-for res in "$XDG_CONFIG_HOME"/X11/xresources.d/?*; do
-	[ -f "$res" ] && xrdb -merge "$res" >/dev/null
-done
+update-xrdb
 
 
 {

@@ -26,6 +26,7 @@ alias ns='notify-send'
 alias p='print'
 alias pf='print -f'
 alias rd='rmdir'
+alias s='sudo'
 aliases[==]='noglob units'
 
 

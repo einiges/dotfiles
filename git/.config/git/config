@@ -1,63 +1,74 @@
+
+
 [user]
 	name = <@NAME12@>
 	email = <>
 
+[init]
+	defaultBranch = main
+
+[core]
+	autocrlf = input
+
 [merge]
-	tool = vimdiff
+	tool = nvimdiff
+	ff = false
 
 [mergetool]
-	prompt = true
-
-[mergetool "vimdiff"]
-	cmd = nvim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
-
-[diff]
-	tool = vimdiff
-
-[difftool]
 	prompt = false
 
-[alias]
-	a = add
-	b = branch
-	bd = branch -d
-	bdd = branch -D
-	c = commit
-	cm = commit -m
-	diff-prev = "!f() { \
-			git diff ${@:2} ${1:-HEAD}^ ${1:-HEAD}; \
-		}; f"
-	fixup = "!f() { \
-			git commit ${@:2} --fixup=${1:-@}; \
-		}; f"
-	; TODO: Any way to complete git alias functions?
-	; sw = "!f() { \
-	; 		git switch ${@:--}; \
-	; 	}; f"
-	sw = switch
-	sc = switch -c
-	lg = log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(green)(%ar)%C(reset) %C(white)%s%C(reset) %C(yellow)- %an%C(reset)%C(bold yellow)%d%C(reset)'
-	lgg = log --graph --abbrev-commit --decorate \
-		--format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''\
-		        %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all
-	m = merge
-	pushf = push --force-with-lease
-	squash = "!f() { \
-			defaultBranch=$(git config init.defaultBranch); \
-			mergebase=$(git merge-base @ ${1:-$defaultBranch}); \
-			git rebase -i --autosquash ${@:2} ${mergebase}; \
-		}; f"
-	st = status
+[pull]
+	rebase = true
+	ff = true
 
 [push]
 	default = current
 
-[pull]
-	rebase = true
+[rebase]
+	autosquash = true
+	autostash = true
+	verbose = true
+	abbreviateCommands = true
 
-[credential]
-	helper = store
+[diff]
+	tool = nvimdiff
 
-[init]
-	defaultBranch = main
+[difftool]
+	prompt = false
+
+[blame]
+	date = human
+
+[alias]
+	a = add
+	b = branch
+	branches = branch -a
+	bd = branch -d
+	bdd = branch -D
+	c = commit
+	cm = commit -m
+	diff-prev = "!f() { git diff ${@:2} ${1:-HEAD}^ ${1:-HEAD}; }; f"
+	exec = "!exec "
+	fixup = "!f() { git commit ${@:2} --fixup=${1:-@}; }; f"
+	lg = log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(green)(%ar)%C(reset) %C(white)%s%C(reset) %C(yellow)- %an%C(reset)%C(bold yellow)%d%C(reset)'
+	lgg = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''        %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all
+	m = merge
+	ma = merge --abort
+	mc = merge --continue
+	mt = mergetool
+	pushf = push --force-with-lease
+	r = rebase
+	ra = rebase --abort
+	rc = rebase --continue
+	remotes = remote -v
+	root = rev-parse --show-toplevel
+	squash = "!f() { defaultBranch=$(git config init.defaultBranch); mergebase=$(git merge-base @ ${1:-$defaultBranch}); git rebase -i --autosquash ${@:2} ${mergebase}; }; f"
+	st = status
+	sw = switch
+	swc = switch -c
+	swd = !git switch $(git config init.defaultBranch)
+	versions = tag --list --sort=-version:refname v\\*
+
+[include]
+	path = alternative.config
 

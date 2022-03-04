@@ -1,4 +1,0 @@
-#!/bin/sh
-
-exec /usr/bin/calcurse -D "$XDG_CONFIG_HOME/calcurse" "$@"
-

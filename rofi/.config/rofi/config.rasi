@@ -1,6 +1,5 @@
 configuration {
 	modi: "drun,run,window";
-	theme: "solarized-bar" ;
 	terminal: "terminal";
 	auto-select: false;
 	matching: "normal";
@@ -12,7 +11,7 @@ configuration {
 
 	kb-primary-paste: "Insert";
 	kb-secondary-paste: "Control+v";
-	kb-clear-line: "Control+l";
+	kb-clear-line: "";
 	kb-move-front: "Home";
 	kb-move-end: "End";
 	kb-move-word-back: "Control+Left";
@@ -82,5 +81,6 @@ configuration {
 	me-accept-entry: "MousePrimary";
 	me-accept-custom: "Control+MousePrimary";
 }
+@theme "solarized-bar"
 
 // vim: ft=scss

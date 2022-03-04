@@ -21,25 +21,18 @@ window {
 	location: north;
 	anchor: north;
 	width: 100%;
-	border: 3px 0px 3px 0px;
-	orientation: vertical;
+	border: 3px 3px 3px 3px;
+	//orientation: vertical;
 	height: 35px;
 	children: [ mainbox ];
 }
 
 mainbox {
 	orientation: horizontal;
-	children: [ textbox-prompt-colon, entry, listview ];
+	children: [ entry, listview ];
 }
 
-textbox-prompt-colon {
-	expand: false;
-	str: "";
-	padding: 0px 10px;
-	margin: 0px 0px 1px 0px;
-	background-color: @normal-bg;
-}
-
+// Eingabefeld
 entry {
 	vertical-align: 0.5;
 	padding: 0px 1em;
@@ -56,14 +49,22 @@ listview {
 }
 
 element {
-	text-color: @fg;
 	background-color: @normal-bg;
 	padding: 7px 1em 6px 1em;
 }
 
-element selected {
+element-text {
+	background-color: @normal-bg;
 	text-color: @fg;
+}
+
+element.selected {
 	background-color: @selected-bg;
+}
+
+element-text.selected {
+	background-color: @selected-bg;
+	text-color: @fg;
 }
 
 

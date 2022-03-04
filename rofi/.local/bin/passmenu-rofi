@@ -11,13 +11,5 @@ dest=$(printf '%s\n' "${password_files[@]}" | rofi -dmenu "$@")
 
 [[ -n "${dest}" ]] || exit
 
-#if [[ $1 == '-u' ]]; then
-#	notify-send lol
-#	{
-#		echo -n 'type --delay 0 --clearmodifiers '
-#		pass show "$dest/user"
-#	} | xdotool -
-#fi
+pass show "$dest/passwd" | xdotool type --delay 0 --clearmodifiers --file -
 
-pass show -c "$dest/passwd" >/dev/null 2>&1 &&
-	printf "%s\n" "$dest"

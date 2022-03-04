@@ -9,6 +9,7 @@
 *.hi
 *.o
 *.so
+*.zwc # zsh
 
 a.out
 

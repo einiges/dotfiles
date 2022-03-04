@@ -30,7 +30,7 @@ zstyle ':completion:*:approximate:*' max-errors 2 numeric
 
 
 zstyle ':completion:*:*:cd:*' ignored-patterns '(*/)#lost+found' parent pwd
-zstyle ":completion:*:*:${EDITOR}:*" ignored-patterns '*.o'
+zstyle ":completion:*:*:${EDITOR}:*" ignored-patterns '*.(o|zwc)'
 
 
 zstyle ':completion:*:*:*:*:processes'    command 'ps -u $USER -o pid,command -w'

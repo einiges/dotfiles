@@ -51,6 +51,7 @@ STICKY_OTHER_WRITABLE 48;5;0;38;5;4;1 # Directory that is sticky and other-writa
 .sed                  38;5;3
 .sh                   38;5;3
 .zsh                  38;5;3
+.zwc                  38;5;10;3
 .vim                  38;5;3
 
                                 # -- interpreted --

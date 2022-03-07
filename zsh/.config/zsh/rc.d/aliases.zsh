@@ -11,8 +11,12 @@ alias sudo='sudo '
 
 alias -g L="| ${PAGER:-less}"
 alias -g G='| grep --color=auto'
-alias -g W='| wc --lines'
+alias -g S='| sort'
 alias -g T='| tee'
+alias -g U='| uniq'
+alias -g W='| wc --lines'
+alias -g X='| xargs'
+alias -g Y='| fzy'
 
 
 #   shorties

@@ -35,7 +35,9 @@ source "$ZGEN_INIT" &>/dev/null || {
 	zgen load mafredri/zsh-async
 
 	zgen load "$ZDOTDIR"/plugins/fancier-ctrl-z
-	zgen load "$HOME"/Workspace/zsh/zsh-bdi
+	[[ -d "$HOME"/Workspace/zsh/zsh-bdi ]] &&
+		zgen load "$HOME"/Workspace/zsh/zsh-bdi ||
+		zgen load einiges/zsh-bdi
 
 	zgen save
 }

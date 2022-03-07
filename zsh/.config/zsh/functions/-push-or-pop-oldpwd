@@ -1,0 +1,14 @@
+# vim:ft=zsh
+
+# Go to $OLDPWD without putting it in $(dirs) so it does not get flooded.
+
+unsetopt local_options pushd_minus
+
+local -a ds
+IFS=$'\n' ds=( $(dirs -lp) )
+
+[[ "$ds[-1]" == "$OLDPWD" ]] &&
+	builtin popd -q +0 ||
+	builtin pushd ~-
+
+

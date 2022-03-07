@@ -1,0 +1,5 @@
+# vim:ft=zsh
+
+autoload -Uz zcalc &&
+	zcalc -f -e "$*"
+

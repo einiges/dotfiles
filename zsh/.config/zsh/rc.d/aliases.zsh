@@ -53,3 +53,8 @@ alias rs='rsync -ahu'
 alias TS='print -P -f "%s" "%D{%Y%m%d%H%M%S}"'
 alias TSH='print -P -f "%s" "%D{%Y-%m-%d %H:%M:%S}"'
 
+#   custom functions
+aliases[=]='noglob -zcalc'
+alias .,='-push-or-pop-oldpwd'
+
+

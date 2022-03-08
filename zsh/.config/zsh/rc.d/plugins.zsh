@@ -32,7 +32,8 @@ source "$ZGEN_INIT" &>/dev/null || {
 	zgen load zsh-users/zsh-completions src
 	zgen load agkozak/zsh-z
 
-	zgen load mafredri/zsh-async
+	zgen load romkatv/powerlevel10k powerlevel10k
+	#zgen load mafredri/zsh-async
 
 	zgen load "$ZDOTDIR"/plugins/fancier-ctrl-z
 	[[ -d "$HOME"/Workspace/zsh/zsh-bdi ]] &&

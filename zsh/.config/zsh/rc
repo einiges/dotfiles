@@ -52,7 +52,7 @@ sources=(
 	"$ZDOTDIR"/rc.d/completions.zsh
 	"$ZDOTDIR"/rc.d/dirhashes.zsh
 	"$ZDOTDIR"/rc.d/keybindings.zsh
-	"$ZDOTDIR"/rc.d/prompt.zsh
+	#"$ZDOTDIR"/rc.d/prompt.zsh
 	"$ZDOTDIR"/rc.d/*/*.zsh(.,@N)
 )
 

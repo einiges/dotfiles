@@ -47,6 +47,7 @@
 	bdd = branch -D
 	c = commit
 	cm = commit -m
+	reword = commit --amend
 	diff-prev = "!f() { git diff ${@:2} ${1:-HEAD}^ ${1:-HEAD}; }; f"
 	exec = "!exec "
 	fixup = "!f() { git commit ${@:2} --fixup=${1:-@}; }; f"
@@ -68,6 +69,7 @@
 	swc = switch -c
 	swd = !git switch $(git config init.defaultBranch)
 	versions = tag --list --sort=-version:refname v\\*
+	xxx = push -d origin
 
 [include]
 	path = alternative.config

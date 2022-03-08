@@ -1,21 +1,23 @@
 
-[[ -v EMACS ]] && return
-
-case $TTY in
-	/dev/ttyS[0-9]*) return ;;
-esac
-
-# Set window title, when waiting for command
-function __title::idle {
-	print -Pn -- '\e]0;%(1j,%j job%(2j|s|); ,)%~\a'
+# Display $1 in terminal title.
+function -title::set {
+	emulate -L zsh
+	if [[ -t 1 ]]; then
+		print -rn -- $'\e]0;'${(V)1}$'\a'
+	elif [[ -w $TTY ]]; then
+		print -rn -- $'\e]0;'${(V)1}$'\a' >$TTY
+	fi
 }
 
-# Set title when executing a command
-function __title::work {
-	print -Pn -- '\e]0;${2:gs/%/%%/}\a'
+function -title::work {
+	-title::set $1
+}
+
+function -title::idle {
+	-title::set ${(V%):-"%~"}
 }
 
 autoload -Uz add-zsh-hook
-add-zsh-hook precmd  __title::idle
-add-zsh-hook preexec __title::work
+add-zsh-hook preexec -title::work
+add-zsh-hook precmd  -title::idle
 

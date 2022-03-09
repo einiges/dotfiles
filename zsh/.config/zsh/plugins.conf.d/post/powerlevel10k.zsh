@@ -155,8 +155,9 @@ function my_git_formatter() {
 	fi
 
 	# Styling for different parts of Git status.
+	local    branchc='%14F%B'
 	local       meta='%14F'
-	local      clean='%14F'
+	local      clean='%14F%b%u'
 	local   modified='%6F'
 	local  untracked='%3F'
 	local conflicted='%1F'
@@ -165,19 +166,13 @@ function my_git_formatter() {
 
 	if [[ -n $VCS_STATUS_LOCAL_BRANCH ]]; then
 		local branch=${(V)VCS_STATUS_LOCAL_BRANCH}
-		# If local branch name is at most 32 characters long, show it in full.
-		# Otherwise show the first 12 .. the last 12.
-		# Tip: To always show local branch name in full without truncation, delete the next line.
-		(( $#branch > 32 )) && branch[13,-13]=".."
-		res+="${clean}${(g::)POWERLEVEL9K_VCS_BRANCH_ICON}${branch//\%/%%}"
+		# Trim branchname
+		(( $#branch > 32 )) && branch[32,-1]="…"
+		res+="${clean}${(g::)POWERLEVEL9K_VCS_BRANCH_ICON}${branchc}${branch//\%/%%}${clean}"
 	fi
 
 	if [[ -n $VCS_STATUS_TAG ]]; then
 		local tag=${(V)VCS_STATUS_TAG}
-		# If tag name is at most 32 characters long, show it in full.
-		# Otherwise show the first 12 .. the last 12.
-		# Tip: To always show tag name in full without truncation, delete the next line.
-		(( $#tag > 32 )) && tag[13,-13]=".."
 		res+="${meta}#${clean}${tag//\%/%%}"
 	fi
 
@@ -203,13 +198,13 @@ function my_git_formatter() {
 	(( VCS_STATUS_PUSH_COMMITS_AHEAD && !VCS_STATUS_PUSH_COMMITS_BEHIND )) && res+=" "
 	(( VCS_STATUS_PUSH_COMMITS_AHEAD  )) && res+="${clean}⇢${VCS_STATUS_PUSH_COMMITS_AHEAD}"
 
-	(( VCS_STATUS_STASHES        )) && res+=" ${clean}≡${VCS_STATUS_STASHES}"
+	(( VCS_STATUS_STASHES        )) && res+=" ${clean}=${VCS_STATUS_STASHES}"
 	[[ -n $VCS_STATUS_ACTION     ]] && res+=" ${conflicted}${VCS_STATUS_ACTION}"
-	(( VCS_STATUS_NUM_CONFLICTED )) && res+=" ${conflicted}${VCS_STATUS_NUM_CONFLICTED}"
-	(( VCS_STATUS_NUM_STAGED     )) && res+=" ${modified}${VCS_STATUS_NUM_STAGED}"
-	(( VCS_STATUS_NUM_UNSTAGED   )) && res+=" ${modified}${VCS_STATUS_NUM_UNSTAGED}"
+	(( VCS_STATUS_NUM_CONFLICTED )) && res+=" ${conflicted}%Bχ%b${VCS_STATUS_NUM_CONFLICTED}"
+	(( VCS_STATUS_NUM_STAGED     )) && res+=" ${modified}%Bτ%b${VCS_STATUS_NUM_STAGED}"
+	(( VCS_STATUS_NUM_UNSTAGED   )) && res+=" ${modified}%Bυ%b${VCS_STATUS_NUM_UNSTAGED}"
 
-	(( VCS_STATUS_NUM_UNTRACKED  )) && res+=" ${untracked}?${VCS_STATUS_NUM_UNTRACKED}"
+	(( VCS_STATUS_NUM_UNTRACKED  )) && res+=" ${untracked}%Bη%b${VCS_STATUS_NUM_UNTRACKED}"
 
 	(( VCS_STATUS_HAS_UNSTAGED == -1 )) && res+=" ${modified}-"
 

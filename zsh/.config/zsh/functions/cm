@@ -1,20 +1,21 @@
 # vim:ft=zsh
 
-# Create directory and change into
-# mkdir + cd
-
-# Synopsis
-#     cm [cd OPTIONS] directory
+# DESCRIPTION
+#    Create directory and change into (mkdir + cd)
+# SYNOPSIS
+#    cm directory
 
 if (( ! ARGC )); then
 	builtin cd
 	return
 fi
 
-if [[ -d ${@[-1]} ]]; then
-	builtin cd "$@"
-	return
+(( ARGC > 1)) &&
+	return 1
+
+if [[ ! -d "$1" ]]; then
+	mkdir -p -- "$1" || return
 fi
 
-mkdir -p "${@[-1]}" && builtin cd "$@"
+builtin cd -- "$1"
 

@@ -49,10 +49,12 @@
 	cm = commit -m
 	reword = commit --amend
 	diff-prev = "!f() { git diff ${@:2} ${1:-HEAD}^ ${1:-HEAD}; }; f"
+	diffs = diff --staged
 	exec = "!exec "
-	fixup = "!f() { git commit ${@:2} --fixup=${1:-@}; }; f"
+	fix = "!f() { git commit ${@:2} --fixup=${1:-@}; }; f"
+	fixl = commit --amend --no-edit
 	lg = log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(green)(%ar)%C(reset) %C(white)%s%C(reset) %C(yellow)- %an%C(reset)%C(bold yellow)%d%C(reset)'
-	lgg = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''        %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all
+	lgg = log --graph --abbrev-commit --decorate --all --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n        %C(white)%s%C(reset) %C(dim white)- %an%C(reset)'
 	m = merge
 	ma = merge --abort
 	mc = merge --continue
@@ -67,8 +69,10 @@
 	st = status
 	sw = switch
 	swc = switch -c
-	swd = !git switch $(git config init.defaultBranch)
-	versions = tag --list --sort=-version:refname v\\*
+	swd = switch --detach
+	main = !git switch $(git config init.defaultBranch)
+	u = restore
+	versions = tag --list --sort=-version:refname --format='%(color:bold blue)%(refname:strip=2)%(color:reset)%(if)%(taggerdate)%(then) - %(color:green)%(taggerdate)%(color:reset)%(end)%(if)%(taggername)%(then) - %(color:yellow)%(taggername)%(color:reset)%(end)' 'v*'
 	xxx = push -d origin
 
 [include]

@@ -1,9 +1,4 @@
 
-
-[user]
-	name = <@NAME12@>
-	email = <>
-
 [init]
 	defaultBranch = main
 

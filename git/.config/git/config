@@ -34,6 +34,9 @@
 [blame]
 	date = human
 
+[log]
+	date = human
+
 [alias]
 	a = add
 	b = branch
@@ -48,8 +51,8 @@
 	exec = "!exec "
 	fix = "!f() { git commit ${@:2} --fixup=${1:-@}; }; f"
 	fixl = commit --amend --no-edit
-	lg = log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(green)(%ar)%C(reset) %C(white)%s%C(reset) %C(yellow)- %an%C(reset)%C(bold yellow)%d%C(reset)'
-	lgg = log --graph --abbrev-commit --decorate --all --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n        %C(white)%s%C(reset) %C(dim white)- %an%C(reset)'
+	lg = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)%ad%C(reset) %C(white)%s%C(reset) - %C(yellow)%an%C(reset)%C(bold magenta)%d%C(reset)'
+	lgg = log --graph --abbrev-commit --decorate --all --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)%ad%C(reset)%C(bold magenta)%d%C(reset)%n        %C(white)%s%C(reset) - %C(yellow)%an%C(reset)'
 	m = merge
 	ma = merge --abort
 	mc = merge --continue
@@ -67,7 +70,8 @@
 	swd = switch --detach
 	main = !git switch $(git config init.defaultBranch)
 	u = restore
-	versions = tag --list --sort=-version:refname --format='%(color:bold blue)%(refname:strip=2)%(color:reset)%(if)%(taggerdate)%(then) - %(color:green)%(taggerdate)%(color:reset)%(end)%(if)%(taggername)%(then) - %(color:yellow)%(taggername)%(color:reset)%(end)' 'v*'
+	tags = tag --list --format='%(color:bold blue)%(refname:strip=2)%(color:reset)%(if)%(taggerdate)%(then) - %(color:bold green)%(taggerdate:human)%(color:reset)%(end)%(if)%(taggername)%(then) - %(color:yellow)%(taggername)%(color:reset)%(end)'
+	versions = tags --sort=-version:refname 'v*'
 	xxx = push -d origin
 
 [include]

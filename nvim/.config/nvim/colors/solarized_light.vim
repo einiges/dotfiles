@@ -199,7 +199,7 @@ hi link lCursor                    Cursor
 
 hi link vimFunc                    Function
 hi link vimUserFunc                Function
-hi link vipmVar                    Identifier
+hi link vimVar                     Identifier
 
 hi clear SyntasticErrorLine
 hi clear SyntasticWarningLine

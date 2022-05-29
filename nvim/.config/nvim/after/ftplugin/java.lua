@@ -1,0 +1,135 @@
+vim.opt_local.foldlevel = 1
+
+
+--    LSP Setup
+
+--local ok, jdtls = pcall(require, 'jdtls')
+--if not ok then
+--	return
+--end
+--
+--
+--local project_dir = require('jdtls.setup').find_root({
+--	'.git',
+--	'mvnw',
+--	'gradlew',
+--})
+--
+--if not project_dir then
+--	-- Force myself to create projects
+--	return
+--end
+--
+--local capabilities = vim.lsp.protocol.make_client_capabilities()
+--capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+--
+--local jdtls_install_dir = vim.fn.stdpath('data') .. '/lsp_servers/jdtls/'
+--
+--local config = {
+--
+--	settings = {
+--		java = {
+--			signatureHelp = { enabled = true },
+--			completion = {
+--				favoriteStaticMembers = {
+--					"org.hamcrest.MatcherAssert.assertThat",
+--					"org.hamcrest.Matchers.*",
+--					"org.hamcrest.CoreMatchers.*",
+--					"org.junit.jupiter.api.Assertions.*",
+--					"java.util.Objects.requireNonNull",
+--					"java.util.Objects.requireNonNullElse",
+--					"org.mockito.Mockito.*"
+--				},
+--				filteredTypes = {
+--					'com.sun.*',
+--					'io.io.micrometer.shaded.*',
+--					'java.awt.*',
+--					'jdk.*',
+--					'sun.*',
+--				},
+--			},
+--			sources = {
+--				organizeImports = {
+--					starThreshold = 9999,
+--					staticStarThreshold = 9999,
+--				},
+--			},
+--			codeGeneration = {
+--				toString = {
+--					template = '${object.className}{${member.name()}=${member.value}, ${otherMembers}}',
+--				},
+--				hashCodeEquals = {
+--					useJava7Objects = false,
+--				},
+--				useBlocks = true,
+--			},
+--
+--			configuration = {
+--				runtimes = {
+--					{
+--						name = 'JavaSE-1.8',
+--						path = '/usr/lib/jvm/java-8-openjdk/',
+--					},
+--					{
+--						name = 'JavaSE-18',
+--						path = '/usr/lib/jvm/java-18-openjdk/',
+--					},
+--				}
+--			},
+--		},
+--	},
+--
+--	-- The command that starts the language server
+--	cmd = {
+--		'java',
+--		'-Dosgi.bundles.defaultStartLevel=4',
+--		'-Declipse.application=org.eclipse.jdt.ls.core.id1',
+--		'-Declipse.product=org.eclipse.jdt.ls.core.product',
+--		'-Dlog.protocol=true',
+--		'-Dlog.level=ALL',
+--		'-Xmx1G',
+--		'--add-modules=ALL-SYSTEM',
+--		'--add-opens', 'java.base/java.util=ALL-UNNAMED',
+--		'--add-opens', 'java.base/java.lang=ALL-UNNAMED',
+--		'-jar', vim.fn.glob(jdtls_install_dir .. '/plugins/org.eclipse.equinox.launcher_*.jar'),
+--		'-configuration', jdtls_install_dir .. '/config_linux',
+--		--'-data', os.getenv('XDG_CACHE_HOME') ..
+--		--	'/eclipse/jdtls/' ..
+--		--	vim.fn.fnamemodify(vim.fn.getcwd(), ':p:h:t')
+--		--'-data', project_dir .. '/jdtls',
+--	},
+--
+--	root_dir = project_dir,
+--
+--	capabilities = capabilities,
+--}
+--
+--
+--
+--jdtls.start_or_attach(config)
+--
+--if nil then
+--vim.keymap.set('n', 'gD',         vim.lsp.buf.declaration)
+--vim.keymap.set('n', 'gd',         vim.lsp.buf.definition)
+----vim.keymap.set('n', 'K',          vim.lsp.buf.hover)
+--vim.keymap.set('n', 'gi',         vim.lsp.buf.implementation)
+--vim.keymap.set('n', '<C-k>',      vim.lsp.buf.signature_help)
+--vim.keymap.set('n', '<leader>wc', vim.lsp.buf.add_workspace_folder)
+--vim.keymap.set('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder)
+--vim.keymap.set('n', '<leader>wl', function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end)
+--vim.keymap.set('n', '<leader>D',  vim.lsp.buf.type_definition)
+--vim.keymap.set('n', '<leader>rr', vim.lsp.buf.rename)
+----vikeymap.setap('n', 'gr',         function() vim.lsp.buf.references() && vim.cmd("copen") end)
+----vikeymap.setap('n', '<leader>e',  function() vim.lsp.diagnostic.show_line_diagnostics)
+--vim.keymap.set('n', '[d',         vim.lsp.diagnostic.goto_prev)
+--vim.keymap.set('n', ']d',         vim.lsp.diagnostic.goto_next)
+--vim.keymap.set('n', '<leader>q',  vim.lsp.diagnostic.set_loclist)
+--
+---- Java keymap
+----vim.keymap.set('n', '<leader>di', require("jdtls").organize_imports)
+----vim.keymap.set('n', '<leader>dt', require("jdtls").test_class)
+----vim.keymap.set('n', '<leader>dn', require("jdtls").test_nearest_method)
+----vim.keymap.set('v', '<leader>de', '<Esc><cmd>lua require("jdtls").extract_variable(true)<cr>')
+----vim.keymap.set('n', '<leader>de', '<cmd>lua require("jdtls).extract_variable()<cr>')
+----vim.keymap.set('v', '<leader>dm', '<Esc><cmd>lua require("jdtls").extract_method(true)<cr>')
+--end

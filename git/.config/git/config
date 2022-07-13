@@ -37,43 +37,9 @@
 [log]
 	date = human
 
-[alias]
-	a = add
-	b = branch
-	branches = branch -a
-	bd = branch -d
-	bdd = branch -D
-	c = commit
-	cm = commit -m
-	reword = commit --amend
-	diff-prev = "!f() { git diff ${@:2} ${1:-HEAD}^ ${1:-HEAD}; }; f"
-	diffs = diff --staged
-	exec = "!exec "
-	fix = "!f() { git commit ${@:2} --fixup=${1:-@}; }; f"
-	fixl = commit --amend --no-edit
-	lg = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)%ad%C(reset) %C(white)%s%C(reset) - %C(yellow)%an%C(reset)%C(bold magenta)%d%C(reset)'
-	lgg = log --graph --abbrev-commit --decorate --all --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)%ad%C(reset)%C(bold magenta)%d%C(reset)%n        %C(white)%s%C(reset) - %C(yellow)%an%C(reset)'
-	m = merge
-	ma = merge --abort
-	mc = merge --continue
-	mt = mergetool
-	pushf = push --force-with-lease
-	r = rebase
-	ra = rebase --abort
-	rc = rebase --continue
-	remotes = remote -v
-	root = rev-parse --show-toplevel
-	squash = "!f() { defaultBranch=$(git config init.defaultBranch); mergebase=$(git merge-base @ ${1:-$defaultBranch}); git rebase -i --autosquash ${@:2} ${mergebase}; }; f"
-	st = status
-	sw = switch
-	swc = switch -c
-	swd = switch --detach
-	main = !git switch $(git config init.defaultBranch)
-	u = restore
-	tags = tag --list --format='%(color:bold blue)%(refname:strip=2)%(color:reset)%(if)%(taggerdate)%(then) - %(color:bold green)%(taggerdate:human)%(color:reset)%(end)%(if)%(taggername)%(then) - %(color:yellow)%(taggername)%(color:reset)%(end)'
-	versions = tags --sort=-version:refname 'v*'
-	xxx = push -d origin
+[include]
+	path = aliases.gitconfig
 
 [include]
-	path = alternative.config
+	path = alternative.gitconfig
 

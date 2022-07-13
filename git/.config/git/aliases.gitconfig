@@ -1,0 +1,126 @@
+
+[alias]
+	# add
+	a = add
+	aa = add --all
+	ap = add --patch
+	au = add --update
+
+	# branch
+	b = branch
+	bb = branch --all
+	branches = branch --all
+	bd = branch --delete
+	bdd = branch --delete --force
+
+	# commit
+	c = commit
+	ca = commit --amend
+	cam = commit --amend --message
+	cm = commit --message
+	fixlast = commit --amend --no-edit
+
+	# cherry-pick
+	cp = cherry-pick
+	cpa = cherry-pick --abort
+	cpc = cherry-pick --continue
+
+	# diff
+	d = diff
+	dc = diff --cached
+	ds = diff --staged
+	dw = diff --word-diff
+	diff-prev = diff @^ @
+
+	# fetch
+	f = fetch
+
+	# log
+	l = log
+	ll = log --graph --topo-order --boundary --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)%ad%C(reset) %C(white)%s%C(reset) - %C(yellow)%an%C(reset)%C(bold magenta)%d%C(reset)'
+	lll = log --graph --topo-order --boundary --branches --remotes --tags --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)%ad%C(reset)%C(bold magenta)%d%C(reset)%n        %C(white)%s%C(reset) - %C(yellow)%an%C(reset)'
+
+	# merge
+	m = merge
+	ma = merge --abort
+	mc = merge --continue
+
+	mt = mergetool
+
+	# rebase
+	r = rebase
+	ra = rebase --abort
+	rc = rebase --continue
+	ri = rebase --interactive
+
+	# remote
+	rr = remote
+	rrr = remote --verbose
+	remotes = remote --verbose
+
+	# reset
+	uncommit = reset --soft HEAD~1
+	unadd = reset HEAD
+
+	# restore
+	rs = restore
+	rss = restore --staged
+
+	# revert
+	rv = revert
+
+	# stash
+	stashes = stash list
+
+	# submodule
+    sm = submodule
+    smi = submodule init
+    sma = submodule add
+    sms = submodule sync
+    smu = submodule update
+    smui = submodule update --init
+    smuir = submodule update --init --recursive
+
+
+	# switch
+	sw = switch
+	swc = switch --create
+	swd = switch --detach
+	main = !"git switch $(git config init.defaultBranch)"
+
+	# status
+	s = status
+	ss = status --short --branch
+
+	# tags
+	tags = tag --list --format='%(color:bold blue)%(refname:strip=2)%(color:reset)%(if)%(taggerdate)%(then) - %(color:bold green)%(taggerdate:human)%(color:reset)%(end)%(if)%(taggername)%(then) - %(color:yellow)%(taggername)%(color:reset)%(end)'
+	versions = tags --sort=-version:refname 'v*'
+
+	# whatchanged
+	wc = whatchanged
+
+	# worktree
+	wt = worktree
+	wta = worktree add
+	wtl = worktree list
+	wtp = worktree prune
+	wtr = worktree remove
+
+	# clean
+	cleaner = clean -d --force -force
+	cleanest = clean -d -x --force -force
+
+	# helper
+	initer = !"git init && git commit --allow-empty --message 'init'"
+
+	keep = !"touch ${GIT_PREFIX}/.gitignore"
+	keep-empty = !"test ! -f ${GIT_PREFIX}/.gitignore && printf '# keep directory\n*\n!.gitignore\n\n' > $_"
+
+	
+	fix = !"f() { git commit ${@:2} --fixup=${1:-@}; }; f"
+	squash = !"f() { defaultBranch=$(git config init.defaultBranch); mergebase=$(git merge-base @ ${1:-$defaultBranch}); git rebase --interactive --autosquash ${@:2} ${mergebase}; }; f"
+	exec = !"exec "
+	pushf = push --force-with-lease
+	root = rev-parse --show-toplevel
+	xxx = push --delete origin
+

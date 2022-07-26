@@ -13,6 +13,10 @@
 	bd = branch --delete
 	bdd = branch --delete --force
 
+	# clean
+	cleaner = clean -d --force --force
+	cleanest = clean -d -x --force --force
+
 	# commit
 	c = commit
 	ca = commit --amend
@@ -35,6 +39,9 @@
 	# fetch
 	f = fetch
 
+	# init
+	init-empty = !"git init && git commit --allow-empty --message 'init'"
+
 	# log
 	l = log
 	ll = log --graph --topo-order --boundary --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)%ad%C(reset) %C(white)%s%C(reset) - %C(yellow)%an%C(reset)%C(bold magenta)%d%C(reset)'
@@ -46,6 +53,10 @@
 	mc = merge --continue
 
 	mt = mergetool
+
+	# push
+	pushf = push --force-with-lease
+	xxx = push --delete origin
 
 	# rebase
 	r = rebase
@@ -81,7 +92,6 @@
     smui = submodule update --init
     smuir = submodule update --init --recursive
 
-
 	# switch
 	sw = switch
 	swc = switch --create
@@ -92,7 +102,7 @@
 	s = status
 	ss = status --short --branch
 
-	# tags
+	# tag
 	tags = tag --list --format='%(color:bold blue)%(refname:strip=2)%(color:reset)%(if)%(taggerdate)%(then) - %(color:bold green)%(taggerdate:human)%(color:reset)%(end)%(if)%(taggername)%(then) - %(color:yellow)%(taggername)%(color:reset)%(end)'
 	versions = tags --sort=-version:refname 'v*'
 
@@ -106,21 +116,15 @@
 	wtp = worktree prune
 	wtr = worktree remove
 
-	# clean
-	cleaner = clean -d --force -force
-	cleanest = clean -d -x --force -force
-
 	# helper
-	initer = !"git init && git commit --allow-empty --message 'init'"
 
-	keep = !"touch ${GIT_PREFIX}/.gitignore"
-	keep-empty = !"test ! -f ${GIT_PREFIX}/.gitignore && printf '# keep directory\n*\n!.gitignore\n\n' > $_"
+	# using .gitignore instead of .gitkeep
+	keep = !"touch ${GIT_PREFIX:-.}/.gitignore"
+	keep-empty = !"test ! -f ${GIT_PREFIX:-.}/.gitignore && printf '# keep directory empty \n*\n!.gitignore\n' > $_"
 
-	
 	fix = !"f() { git commit ${@:2} --fixup=${1:-@}; }; f"
 	squash = !"f() { defaultBranch=$(git config init.defaultBranch); mergebase=$(git merge-base @ ${1:-$defaultBranch}); git rebase --interactive --autosquash ${@:2} ${mergebase}; }; f"
+
 	exec = !"exec "
-	pushf = push --force-with-lease
 	root = rev-parse --show-toplevel
-	xxx = push --delete origin
 

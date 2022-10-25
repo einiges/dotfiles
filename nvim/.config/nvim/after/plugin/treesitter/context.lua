@@ -1,11 +1,10 @@
-require('paq').register('romgrk/nvim-treesitter-context')
+PAQ('romgrk/nvim-treesitter-context')
 
-local ok, context = pcall(require, 'treesitter-context.configs')
-if not ok then
+if not PREQUIRE('treesitter-context.configs') then
 	return
 end
 
-context.setup {
+require('treesitter-context.configs').setup {
 	enable = true,
 	throttle = true,
 }

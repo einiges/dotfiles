@@ -1,11 +1,11 @@
 
-local M = {}
+local capabilities
 
-M.setup = function() 
-	local capabilities = vim.lsp.protocol.make_client_capabilities()
-	capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
-	return capabilities
+if pcall(require, 'cmp_nvim_lsp') then
+	capabilities = require('cmp_nvim_lsp').default_capabilities()
+else
+	capabilities  = vim.lsp.protocol.make_client_capabilities()
 end
 
-return M
+return capabilities
 

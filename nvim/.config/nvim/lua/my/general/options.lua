@@ -18,7 +18,6 @@ opt.formatoptions = 'crnlqjp'
 opt.hidden = true
 opt.history = 100
 opt.laststatus = 3
-opt.lazyredraw = true
 
 opt.list = true
 opt.listchars:append {
@@ -87,6 +86,8 @@ opt.timeoutlen  = 800
 opt.ttimeout    = true
 opt.ttimeoutlen = 15
 -- opt.updatetime  = 250
+
+opt.cmdheight   = 1
 opt.wildmenu    = true
 opt.wildoptions = 'pum'
 opt.wildmode    = {
@@ -108,12 +109,9 @@ opt.wildignore:append {
 }
 
 
--- TODO: Set only of supports truecolors
+-- TODO: Set only if supports truecolors
 opt.background='light'
-vim.api.nvim_cmd({
-	cmd = 'colorscheme',
-	args = { 'gruvbox' }
-}, {})
+vim.cmd.colorscheme('gruvbox')
 
 -- TODO: infocmp Tc
 opt.termguicolors = true

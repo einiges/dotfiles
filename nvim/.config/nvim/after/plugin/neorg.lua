@@ -1,7 +1,7 @@
-require('paq').register('nvim-neorg/neorg')
-require('paq').register('nvim-lua/plenary.nvim')
+PAQ('nvim-neorg/neorg')
+PAQ('nvim-lua/plenary.nvim')
 
-if not pcall(require, 'neorg') then
+if not PREQUIRE('neorg') then
 	return
 end
 

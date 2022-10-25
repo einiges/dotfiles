@@ -1,12 +1,12 @@
 -- Automatically close <tags>
-require('paq').register('windwp/nvim-ts-autotag')
+PAQ('windwp/nvim-ts-autotag')
 
-local ok, treesitter = pcall(require, 'nvim-treesitter.configs')
-if not ok then
+
+if not PREQUIRE('nvim-treesitter.configs') then
 	return
 end
 
-treesitter.setup {
+require('nvim-treesitter.configs').setup({
 	autotag = {
 		enable = true,
 		filetypes = {
@@ -15,6 +15,4 @@ treesitter.setup {
 			'xml',
 		},
 	},
-}
-
-
+})

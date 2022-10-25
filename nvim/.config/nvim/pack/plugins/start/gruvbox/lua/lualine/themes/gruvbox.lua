@@ -1,85 +1,86 @@
 local T = {}
 
 local colors = require('gruvbox.colors').palette()
+local helper = require('gruvbox.theme').helper()
 
 
 T.normal = {
 	a = {
-		fg = colors.c0.l,
-		bg = colors.c4.h,
+		fg = helper.ui2.fg,
+		bg = helper.ui2.bg,
 		gui = 'bold',
 	},
 	b = {
-		fg = colors.c4.h,
-		bg = colors.c2.l,
+		fg = helper.ui1.fg,
+		bg = helper.ui1.bg,
 	},
 	c = {
-		fg = colors.c4.h,
-		bg = colors.c1.l,
+		fg = helper.ui.fg,
+		bg = helper.ui.bg,
 	},
 }
 
 T.insert = {
 	a = {
-		fg = colors.c0.l,
+		fg = helper.ui2.fg,
 		bg = colors.green.n,
 		gui = 'bold',
 	},
 	b = {
-		fg = colors.c4.h,
-		bg = colors.c2.l,
+		fg = helper.ui1.fg,
+		bg = helper.ui1.bg,
 	},
 }
 
 T.visual = {
 	a = {
-		fg = colors.c0.l,
+		fg = helper.ui2.fg,
 		bg = colors.purple.n,
 		gui = 'bold',
 	},
 	b = {
-		fg = colors.c4.h,
-		bg = colors.c2.l,
+		fg = helper.ui1.fg,
+		bg = helper.ui1.bg,
 	},
 }
 
 T.replace = {
 	a = {
-		fg = colors.c0.l,
+		fg = helper.ui2.fg,
 		bg = colors.red.n,
 		gui = 'bold',
 	},
 	b = {
-		fg = colors.c4.h,
-		bg = colors.c2.l,
+		fg = helper.ui1.fg,
+		bg = helper.ui1.bg,
 	},
 }
 
 T.command = {
 	a = {
-		fg = colors.c0.l,
+		fg = helper.ui2.fg,
 		bg = colors.yellow.n,
 		gui = 'bold',
 	},
 	b = {
-		fg = colors.c4.h,
-		bg = colors.c2.l,
+		fg = helper.ui1.fg,
+		bg = helper.ui1.bg,
 	},
 }
 
 T.inactive = {
 	a = {
-		fg = colors.c0.l,
-		bg = colors.c0.l,
+		fg = helper.ui2.fg,
+		bg = helper.ui2.bg,
 		gui = 'bold',
 	},
 	b = {
-		fg = colors.c0.l,
-		bg = colors.c0.l,
+		fg = helper.ui1.fg,
+		bg = helper.ui1.bg,
 	},
 	c = {
-		fg = colors.c0.l,
-		bg = colors.c3.l,
+		fg = helper.ui.fg,
+		bg = helper.ui.bg,
 	}
 }
 

@@ -1,4 +1,4 @@
-require('paq').register('nvim-telescope/telescope-fzy-native.nvim')
+PAQ('nvim-telescope/telescope-fzy-native.nvim')
 
 require('telescope').setup({
 	extensions = {

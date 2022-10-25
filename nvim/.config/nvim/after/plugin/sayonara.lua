@@ -1,4 +1,4 @@
-require('paq').register('mhinz/vim-sayonara') -- Closing of buffers
+PAQ('mhinz/vim-sayonara') -- Closing of buffers
 
 vim.keymap.set('n', 'qQ', '<cmd>Sayonara<CR>', {
 	desc = 'Delete buffer and close window'

@@ -1,4 +1,4 @@
-local T = {}
+local M = {}
 
 local palette = {
 	-- ,-------,----------------------------------------------------------------,
@@ -36,28 +36,31 @@ local palette = {
 	c3       = { d='#665C54',                                        b='#BDAE93' },
 	-- c4 dark & bright = gray dark & bright
 	c4       = { d='#7C6F64',                                        b='#A89984' },
-	-- c5 dark & bright = gray dark & darker
+	-- c5 dark & bright = gray darker & neutral
 	c5       = { d='#87796C',                                        b='#928374' },
 }
 
-function T.palette()
+function M.palette()
 
-	for color,def in pairs(palette) do
-		if vim.opt.background:get() == 'light' then
-			palette[color].h = def.d
-			palette[color].i = def.a
-			palette[color].l = def.b
-			palette[color].o = def.r
+	local result = {}
+	for color, def in pairs(palette) do
+		result[color] = {}
+		result[color].n = def.n
+		if 'light' == vim.opt.background:get() then
+			result[color].h = def.d
+			result[color].i = def.a
+			result[color].l = def.b
+			result[color].o = def.r
 		else
-			palette[color].h = def.b
-			palette[color].i = def.r
-			palette[color].l = def.d
-			palette[color].o = def.a
+			result[color].h = def.b
+			result[color].i = def.r
+			result[color].l = def.d
+			result[color].o = def.a
 		end
 	end
 
-	return palette
+	return result
 end
 
-return T
+return M
 

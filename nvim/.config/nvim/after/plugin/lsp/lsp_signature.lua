@@ -1,0 +1,16 @@
+PAQ('ray-x/lsp_signature.nvim')
+
+if not PREQUIRE('lsp_signature') then
+	return
+end
+
+-- TODO: Make sure this works
+
+vim.api.nvim_create_autocmd('LspAttach', {
+	group = vim.api.nvim_create_augroup('LspSignatureAttach', {}),
+	once = true,
+	callback = function()
+		require('lsp_signature').setup({})
+	end,
+})
+

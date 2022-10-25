@@ -1,12 +1,11 @@
-	-- Pretty higlight for  TODO: comments
-require('paq').register('folke/todo-comments.nvim')
+-- Pretty higlight for  TODO: comments
+PAQ('folke/todo-comments.nvim')
 
-local ok, todo = pcall(require, 'todo-comments')
-if not ok then
+if not PREQUIRE('todo-comments') then
 	return
 end
 
-todo.setup {
+require('todo-comments').setup {
 	highlight = {
 		max_line_len = 200,
 		exclude = {

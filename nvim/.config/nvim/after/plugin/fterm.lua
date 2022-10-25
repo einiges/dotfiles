@@ -1,6 +1,6 @@
-require('paq').register('numtostr/FTerm.nvim')
+PAQ('numtostr/FTerm.nvim')
 
-if not pcall(require, 'FTerm') then
+if not PREQUIRE('FTerm') then
 	return
 end
 

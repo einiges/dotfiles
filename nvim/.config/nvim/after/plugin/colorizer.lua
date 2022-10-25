@@ -1,10 +1,9 @@
 -- colored rgb #1CE7EA
-require('paq').register('norcalli/nvim-colorizer.lua')
+PAQ('norcalli/nvim-colorizer.lua')
 
-local ok, colorizer = pcall(require, 'colorizer')
-if not ok then
+if not PREQUIRE('colorizer') then
 	return
 end
 
-colorizer.setup()
+require('colorizer').setup()
 

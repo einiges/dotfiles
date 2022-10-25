@@ -1,15 +1,21 @@
+PAQ('nvim-telescope/telescope-file-browser.nvim')
 
-require('paq').register('nvim-telescope/telescope-file-browser.nvim')
+local actions = require('telescope').extensions.file_browser.actions
 
 require('telescope').setup({
 	extensions = {
 		file_browser = {
 			hijack_netrw = false,
+			mappings = {
+				['i'] = {
+					-- FIX:
+					['<C-c>'] = actions.create,
+					['<C-r>'] = actions.remove,
+				},
+			},
 		};
 	};
 })
-
-require('telescope').load_extension('file_browser')
 
 
 vim.keymap.set('n', '<leader>eb',

@@ -1,10 +1,9 @@
-require('paq').register('ggandor/leap.nvim')
-require('paq').register('tpope/vim-repeat')
+PAQ('ggandor/leap.nvim')
+PAQ('tpope/vim-repeat')
 
-local ok, leap = pcall(require, 'leap')
-if not ok then
+if not PREQUIRE('leap') then
 	return
 end
 
-leap.set_default_keymaps()
+require('leap').set_default_keymaps()
 

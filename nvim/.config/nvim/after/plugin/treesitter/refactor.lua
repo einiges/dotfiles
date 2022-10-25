@@ -1,11 +1,10 @@
-require('paq').register('nvim-treesitter/nvim-treesitter-refactor')
+PAQ('nvim-treesitter/nvim-treesitter-refactor')
 
-local ok, treesitter = pcall(require, 'nvim-treesitter.configs')
-if not ok then
+if not PREQUIRE('nvim-treesitter.configs') then
 	return
 end
 
-treesitter.setup {
+require('nvim-treesitter.configs').setup({
 	refactor = {
 		highlight_definitions = {
 			enable = true,
@@ -16,16 +15,15 @@ treesitter.setup {
 		smart_rename = {
 			enable = true,
 			keymaps = {
-				smart_rename = "grr",
+				smart_rename = 'grr',
 			},
 		},
 		navigation = {
 			enable = false,
 			keymaps = {
-				goto_definition = "gnd",
-				list_definitions = "gnD",
+				goto_definition = 'gnd',
+				list_definitions = 'gnd',
 			},
-		 },
+		},
 	},
-}
-
+})

@@ -1,7 +1,6 @@
---   Telescope
-require('paq').register('nvim-telescope/telescope.nvim')
-require('paq').register('nvim-lua/popup.nvim')
-require('paq').register('nvim-lua/plenary.nvim')
+PAQ('nvim-telescope/telescope.nvim')
+PAQ('nvim-lua/popup.nvim')
+PAQ('nvim-lua/plenary.nvim')
 
 local ok, telescope = pcall(require, 'telescope')
 if not ok then

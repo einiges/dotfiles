@@ -1,13 +1,13 @@
-require('paq').register({ 'nvim-treesitter/nvim-treesitter',
+PAQ({ 'nvim-treesitter/nvim-treesitter',
 	run = function()
 		vim.api.nvim_cmd({ cmd = 'TSUpdate' }, {})
 	end
 })
 
-local ok, treesitter = pcall(require, 'nvim-treesitter.configs')
-if not ok then
+if not PREQUIRE('nvim-treesitter.configs') then
 	return
 end
+
 
 local parsers = {
 	'bash',
@@ -15,7 +15,7 @@ local parsers = {
 	'css', 'scss',
 	'dockerfile',
 	'html',
-	--'help', -- buggy
+	'help', -- buggy
 	'java',
 	'json',
 	'latex', 'bibtex',
@@ -25,11 +25,17 @@ local parsers = {
 	'norg',
 	'query',
 	'regex',
+	'sql',
 	'toml',
 	'yaml',
+
+	'diff',
+
+	'comment',
+	'gitattributes',
 }
 
-treesitter.setup {
+require('nvim-treesitter.configs').setup({
 	ensure_installed = parsers,
 
 	highlight = {
@@ -39,5 +45,4 @@ treesitter.setup {
 	indent = {
 		enable = true,
 	},
-}
-
+})

@@ -1,12 +1,12 @@
 -- Indention guides
-require('paq').register('lukas-reineke/indent-blankline.nvim')
+PAQ('lukas-reineke/indent-blankline.nvim')
 
-local ok, indent = pcall(require, 'indent_blankline')
-if not ok then
+
+if not PREQUIRE('indent_blankline') then
 	return
 end
 
-indent.setup {
+require('indent_blankline').setup {
 	-- char_highlight_list = {
 	-- 	'IndentBlanklineIndent1',
 	-- 	'IndentBlanklineIndent2',

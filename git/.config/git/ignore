@@ -4,32 +4,17 @@
 *.bak
 
 
-# Compiled
-*.class
-*.hi
-*.o
-*.so
-*.zwc # zsh
-
-a.out
-
-
 # Tags
 tags
 .tags
 
 
-# Packages
-*.7z
-*.dmg
-*.gz
-*.iso
-*.jar
-*.rar
-*.tar
-*.zip
-
-
 # Logs
 *.log
 
+
+
+# java+eclipse
+.project
+.settings/
+.classpath

@@ -314,7 +314,7 @@ shift
 case "$cmd" in
 	here|here!|!)   spawn_here "${@}" ;;
 	here!!|!!)      spawn_here -n 0 "${@}" ;;
-	where|where?|?) spawn_where "${@}" ;;
+	where|where\?|\?) spawn_where "${@}" ;;
 	remove|rm)      spawn_remove "${@}" ;;
 	list|ls)        spawn_list "${@}" ;;
 	-h) usage_global 0 ;;

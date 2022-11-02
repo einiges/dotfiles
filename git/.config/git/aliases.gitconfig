@@ -56,6 +56,7 @@
 
 	# push
 	pushf = push --force-with-lease
+	pusht = push --tags
 	xxx = push --delete origin
 
 	# rebase
@@ -103,6 +104,7 @@
 	main = !"git switch $(git config init.defaultBranch)"
 
 	# tag
+	ta = tag -a
 	tags = tag --list --format='%(color:bold blue)%(refname:strip=2)%(color:reset)%(if)%(taggerdate)%(then) - %(color:bold green)%(taggerdate:human)%(color:reset)%(end)%(if)%(taggername)%(then) - %(color:yellow)%(taggername)%(color:reset)%(end)'
 	versions = tags --sort=-version:refname 'v*'
 
@@ -119,8 +121,8 @@
 	# helper
 
 	# using .gitignore instead of .gitkeep
-	keep = !"touch ${GIT_PREFIX:-.}/.gitignore"
-	keep-empty = !"test ! -f ${GIT_PREFIX:-.}/.gitignore && printf '# keep directory empty\n*\n!.gitignore\n' > ${GIT_PREFIX:-.}/.gitignore"
+	keep = !"f() { touch ${1:-${GIT_PREFIX:-.}}/.gitignore; }; f"
+	keep-empty = !"f() { gitignore=\"${1:-${GIT_PREFIX:-.}}/.gitignore\"; test ! -f \"${gitignore}\" && printf '# keep directory empty\n*\n!.gitignore\n' > \"${gitignore}\"; }; f"
 
 	fix = !"f() { git commit ${@:2} --fixup=${1:-@}; }; f"
 	squash = !"f() { defaultBranch=$(git config init.defaultBranch); mergebase=$(git merge-base @ ${1:-$defaultBranch}); git rebase --interactive --autosquash ${@:2} ${mergebase}; }; f"

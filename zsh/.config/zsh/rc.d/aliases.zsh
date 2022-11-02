@@ -5,6 +5,7 @@ alias cp='cp --reflink=auto'
 alias ls='ls -khF --group-directories-first --color=auto'
 alias find='noglob find'
 alias sudo='sudo '
+alias man='man '
 
 
 #   globals

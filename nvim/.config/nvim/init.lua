@@ -1,5 +1,5 @@
 if pcall(require, 'impatient') then
-	require('impatient').enable_profile()
+	--require('impatient').enable_profile()
 end
 
 require('my.general.disable_builtin')

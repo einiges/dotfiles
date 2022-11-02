@@ -6,3 +6,4 @@ PAQ('nvim-telescope/telescope-dap.nvim')
 --	return
 --end
 
+--telescope.load_extension('dap')

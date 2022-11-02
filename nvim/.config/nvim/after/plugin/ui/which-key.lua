@@ -5,5 +5,6 @@ if not PREQUIRE('which-key') then
 	return
 end
 
-require('which-key').setup()
+require('which-key').setup({
+})
 

@@ -1,6 +1,5 @@
---PAQ('stevearc/dressing.nvim')
+PAQ('stevearc/dressing.nvim')
 
---if not pcall(require, 'dressing') then
---	return
---end
-
+if not pcall(require, 'dressing') then
+	return
+end

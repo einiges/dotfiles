@@ -5,11 +5,6 @@ if not PREQUIRE('mason') then
 end
 
 require('mason').setup({
-	install_root_dir = require('mason-core.path').concat({
-		vim.fn.stdpath('data'),
-		'lsp-servers',
-	}),
-
 	ui = {
 		border = 'single',
 

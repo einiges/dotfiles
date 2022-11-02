@@ -81,8 +81,9 @@ opt.linebreak = true
 
 opt.splitbelow  = true
 opt.splitright  = true
+
 opt.timeout     = true
-opt.timeoutlen  = 800
+opt.timeoutlen  = 300
 opt.ttimeout    = true
 opt.ttimeoutlen = 15
 -- opt.updatetime  = 250
@@ -94,6 +95,9 @@ opt.wildmode    = {
 	'longest',
 	'full',
 }
+
+opt.spell = true
+opt.spelllang = { 'en', 'de' }
 
 vim.api.nvim_command('set wildcharm=<Tab>')
 

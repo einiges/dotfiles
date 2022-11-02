@@ -6,10 +6,6 @@ PAQ('savq/paq-nvim')
 PAQ('lewis6991/impatient.nvim')
 
 
-PAQ('L3MON4D3/LuaSnip') -- TODO: Configure
-PAQ('rafamadriz/friendly-snippets')
-
-
 --   Helper
 
 -- Write readonly files, when stupid me forgot to `sudoedit`.

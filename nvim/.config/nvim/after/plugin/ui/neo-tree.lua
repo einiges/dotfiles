@@ -12,6 +12,9 @@ require('neo-tree').setup({
 	source_selector = {
 		winbar = false,
 	},
+	filesystem = {
+		group_empty_dirs = true,
+	},
 })
 
 

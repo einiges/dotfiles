@@ -1,4 +1,3 @@
-
 vim.diagnostic.config({
 	signs = {
 		severity = vim.diagnostic.severity.WARN,
@@ -19,10 +18,10 @@ local signs = {
 	Error = ' ',
 	Warn = '',
 	Hint = ' ',
-	Info = ' '
+	Info = ' ',
 }
 
 for type, icon in pairs(signs) do
-	local hl = "DiagnosticSign" .. type
-	vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+	local name = 'DiagnosticSign' .. type
+	vim.fn.sign_define(name, { text = icon, texthl = name, numhl = name })
 end

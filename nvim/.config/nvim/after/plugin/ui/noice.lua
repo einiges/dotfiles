@@ -7,5 +7,16 @@ if not PREQUIRE('noice') then
 	return
 end
 
-require('noice').setup({})
-
+require('noice').setup({
+	messages = {
+		enabled = false,
+	},
+	lsp = {
+		signature = {
+			enabled = false,
+		},
+		hover = {
+			enabled = false,
+		},
+	},
+})

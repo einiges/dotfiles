@@ -1,9 +1,7 @@
 PAQ('neovim/nvim-lspconfig')
 PAQ('williamboman/mason-lspconfig.nvim')
 
-if not PREQUIRE('mason-lspconfig') or
-	not PREQUIRE('lspconfig')
-then
+if not PREQUIRE('mason-lspconfig') or not PREQUIRE('lspconfig') then
 	return
 end
 
@@ -21,6 +19,5 @@ require('mason-lspconfig').setup({
 		'sumneko_lua', -- lua
 		'taplo', -- TOML
 		'yamlls', -- YAML
-	}
+	},
 })
-

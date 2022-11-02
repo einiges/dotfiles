@@ -29,7 +29,7 @@ local mappingsP = {
 	}},
 	{ 'documentFormattingProvider', 'n', 'gF',
 		function()
-			vim.lsp.buf.format({async = true})
+	vim.lsp.buf.format({ async = true })
 		end,
 		{
 			desc = 'Format',
@@ -37,7 +37,7 @@ local mappingsP = {
 	},
 	{ 'documentRangeFormattingProvider', 'v', 'gF',
 		function()
-			vim.lsp.buf.format({ async = true })
+	vim.lsp.buf.format({ async = true })
 		end,
 		{
 			desc = "Format",
@@ -70,4 +70,3 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
 	end,
 })
-

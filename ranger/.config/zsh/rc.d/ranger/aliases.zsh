@@ -1,2 +1,0 @@
-alias o='rifle'
-

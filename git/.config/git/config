@@ -41,5 +41,7 @@
 	path = aliases.gitconfig
 
 [include]
-	path = alternative.gitconfig
+	path = overwrite.gitconfig
 
+[include]
+	path = secret.gitconfig

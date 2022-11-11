@@ -46,6 +46,7 @@
 	l = log
 	ll = log --graph --topo-order --boundary --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)%ad%C(reset) %C(white)%s%C(reset) - %C(yellow)%an%C(reset)%C(bold magenta)%d%C(reset)'
 	lll = log --graph --topo-order --boundary --branches --remotes --tags --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)%ad%C(reset)%C(bold magenta)%d%C(reset)%n        %C(white)%s%C(reset) - %C(yellow)%an%C(reset)'
+	wc = log --raw --no-merges
 
 	# merge
 	m = merge
@@ -57,7 +58,7 @@
 	# push
 	pushf = push --force-with-lease
 	pusht = push --tags
-	xxx = push --delete origin
+	pushd = push --delete
 
 	# rebase
 	r = rebase
@@ -104,12 +105,9 @@
 	main = !"git switch $(git config init.defaultBranch)"
 
 	# tag
-	ta = tag -a
+	ta = tag --annotate
 	tags = tag --list --format='%(color:bold blue)%(refname:strip=2)%(color:reset)%(if)%(taggerdate)%(then) - %(color:bold green)%(taggerdate:human)%(color:reset)%(end)%(if)%(taggername)%(then) - %(color:yellow)%(taggername)%(color:reset)%(end)'
 	versions = tags --sort=-version:refname 'v*'
-
-	# whatchanged
-	wc = whatchanged
 
 	# worktree
 	wt = worktree
@@ -121,10 +119,10 @@
 	# helper
 
 	# using .gitignore instead of .gitkeep
-	keep = !"f() { touch ${1:-${GIT_PREFIX:-.}}/.gitignore; }; f"
+	keep = !"f() { touch \"${1:-${GIT_PREFIX:-.}}/.gitignore\"; }; f"
 	keep-empty = !"f() { gitignore=\"${1:-${GIT_PREFIX:-.}}/.gitignore\"; test ! -f \"${gitignore}\" && printf '# keep directory empty\n*\n!.gitignore\n' > \"${gitignore}\"; }; f"
 
-	fix = !"f() { git commit ${@:2} --fixup=${1:-@}; }; f"
+	fix = !"f() { git commit --fixup=${1:-@}; }; f"
 	squash = !"f() { defaultBranch=$(git config init.defaultBranch); mergebase=$(git merge-base @ ${1:-$defaultBranch}); git rebase --interactive --autosquash ${@:2} ${mergebase}; }; f"
 
 	exec = !"exec "

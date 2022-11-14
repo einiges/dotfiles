@@ -14,7 +14,10 @@ tags
 
 
 
-# java+eclipse
+# java (jdt.ls)
 .project
 .settings/
 .classpath
+
+# lua (lua-language-server)
+.luarc.json

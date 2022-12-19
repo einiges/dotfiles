@@ -82,10 +82,10 @@ bspc config -m primary bottom_padding "$(( $(bspc config -m primary bottom_paddi
 bspc config -m primary bottom_monocle_padding "$(( $(bspc config -m primary bottom_monocle_padding) + 3 ))"
 bspwm-panel "$(bspc query -M -m primary --names)" &
 
-killall --user "$USER" -USR1 sxhkd || {
+killall --quiet --user "$USER" -USR1 sxhkd || {
 	sxhkd -m -1 &
 }
-killall --user "$USER" -USR1 picom || {
-	picom --config "$XDG_CONFIG_HOME/bspwm/picom.conf" &
+killall --quiet --user "$USER" -USR1 picom || {
+	picom &
 }
 

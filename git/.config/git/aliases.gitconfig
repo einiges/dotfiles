@@ -90,13 +90,13 @@
 	ss = status --short --branch
 
 	# submodule
-    sm = submodule
-    smi = submodule init
-    sma = submodule add
-    sms = submodule sync
-    smu = submodule update
-    smui = submodule update --init
-    smuir = submodule update --init --recursive
+	sm = submodule
+	smi = submodule init
+	sma = submodule add
+	sms = submodule sync
+	smu = submodule update
+	smui = submodule update --init
+	smuir = submodule update --init --recursive
 
 	# switch
 	sw = switch

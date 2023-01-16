@@ -16,27 +16,28 @@ local settings = {
 			right = '',
 		},
 	},
+}
 
-	winbar = {
-		lualine_a = { 'vim.fn.winnr()' },
-		lualine_b = { 'filename' },
-		lualine_c = { 'empty' },
-		lualine_x = { 'diagnostics' },
-		lualine_y = { },
-		lualine_z = { },
-	},
-	inactive_winbar = {
-		lualine_a = { 'vim.fn.winnr()' },
-		lualine_b = { 'filename' },
-		lualine_c = { 'empty' },
-		lualine_x = { 'diagnostics' },
-		lualine_y = { },
-		lualine_z = { },
-	},
+settings.winbar = {
+	lualine_a = { 'vim.fn.winnr()' },
+	lualine_b = { 'filename' },
+	lualine_c = { 'empty' },
+	lualine_x = { 'diagnostics' },
+	lualine_y = { },
+	lualine_z = { },
+}
+
+settings.inactive_winbar = {
+	lualine_a = { 'vim.fn.winnr()' },
+	lualine_b = { 'filename' },
+	lualine_c = { 'empty' },
+	lualine_x = { 'diagnostics' },
+	lualine_y = { },
+	lualine_z = { },
 }
 
 local empty = function()
-	return ''
+	return ' '
 end
 
 if pcall(require, 'nvim-navic') then

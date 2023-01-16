@@ -11,6 +11,7 @@ local actions = require('telescope.actions')
 
 telescope.setup {
 	defaults = {
+		color_devicons = false,
 		layout_strategy = 'horizontal',
 		mappings = {
 			i = {
@@ -25,33 +26,60 @@ telescope.setup {
 local map = require('my.utils.nvim.keymap')()
 
 -- code
-map:setX('<leader>sd', require('telescope.builtin').diagnostics,
-	{ desc = 'Show diagnostics' })
-map:setX('<leader>sq', require('telescope.builtin').quickfix,
-	{ desc = 'Show quickfix' })
+map
+	:desc('Show diagnostics')
+	:setX('<leader>fd',
+	function() require('telescope.builtin').diagnostics() end)
+
+map
+	:desc('Show quickfix')
+	:setX('<leader>q',
+	function() require('telescope.builtin').quickfix() end)
 
 
 -- files
-map:setX('<leader>ff',
-	function() require('telescope.builtin').find_files({follow=true}) end,
-	{ desc = 'Find files by name' })
-map:setX('<leader>fg', require('telescope.builtin').live_grep,
-	{ desc = 'Find files by content' })
-map:setX('<leader>fF', require('telescope.builtin').git_files,
-	{ desc = 'Find tracked git files' })
-map:setX('<leader>fo', require('telescope.builtin').oldfiles,
-	{ desc = 'Find old files by name' })
+map
+	:desc('Find files by name')
+	:setX('<leader>ff',
+	function() require('telescope.builtin').find_files({follow=true}) end)
+
+map
+	:desc('Find tracked git files by name')
+	:setX('<leader>fF',
+	function() require('telescope.builtin').git_files() end)
+
+map
+	:desc('Find old files by name' )
+	:setX('<leader>fo',
+	function() require('telescope.builtin').oldfiles() end)
+
+map
+	:desc('Find files by content')
+	:setX('<leader>fg',
+	function() require('telescope.builtin').live_grep() end)
+
+map
+	:desc('Find text in current buffer' )
+	:setX('<leader>fG',
+	function() require('telescope.builtin').current_buffer_fuzzy_find() end)
+
 
 -- nvim
-map:setX('<leader>fb', require('telescope.builtin').buffers,
-	{ desc = 'Find nvim buffers' })
-map:setX('<leader>fG', require('telescope.builtin').current_buffer_fuzzy_find,
-	{ desc = 'Find text in current buffer' })
+map
+	:desc('Find nvim buffers' )
+	:setX('<leader>fb',
+	function() require('telescope.builtin').buffers() end)
 
-map:setX('<leader>hh', require('telescope.builtin').help_tags,
-	{ desc = 'Nvim help' })
-map:setX('<leader>hc', require('telescope.builtin').highlights,
-	{ desc = 'Nvim highlights' })
-map:setX('<leader>hk', require('telescope.builtin').keymaps,
-	{ desc = 'Nvim keymaps' })
+map
+	:desc('Nvim help' )
+	:setX('<leader>hh',
+	function() require('telescope.builtin').help_tags() end)
+map
+	:desc('Nvim highlights' )
+	:setX('<leader>hc',
+	function() require('telescope.builtin').highlights() end)
+map
+	:desc('Nvim keymaps' )
+	:setX('<leader>hk',
+	function() require('telescope.builtin').keymaps() end)
 

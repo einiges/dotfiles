@@ -5,7 +5,7 @@ if not PREQUIRE('gitsigns') then
 	return
 end
 
-require('gitsigns').setup {
+require('gitsigns').setup({
 	numhl = false,
 	current_line_blame = true,
-}
+})

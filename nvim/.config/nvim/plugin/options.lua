@@ -7,12 +7,6 @@ opt.colorcolumn = { '+1', '+2', '+3', '+41', '+42', '+81' }
 opt.belloff = 'all'
 
 opt.autoread = true
-opt.completeopt = {
-	'menu',
-	'menuone',
-	'noinsert',
-	'noselect',
-}
 opt.copyindent = true
 opt.formatoptions = 'crnlqjp'
 opt.hidden = true
@@ -30,8 +24,8 @@ opt.listchars:append {
 	-- Pilcrow: ¶ (u01b6)
 	-- ↵
 	--eol      = '¬',
-	extends  = '…',
-	precedes = '…',
+	extends  = '▶',
+	precedes = '◀',
 }
 
 opt.fillchars:append {
@@ -73,7 +67,7 @@ opt.softtabstop = -1 -- <0 -> 'shiftwidth'
 
 opt.autoindent = true
 opt.cindent = true
-opt.wrap = true
+opt.wrap = false
 
 opt.breakindent = true
 opt.showbreak = string.rep(' ', 3)

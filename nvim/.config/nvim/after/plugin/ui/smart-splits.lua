@@ -7,13 +7,36 @@ end
 
 local ss = require('smart-splits')
 
-vim.keymap.set('n', '<C-Left>' , ss.move_cursor_left)
-vim.keymap.set('n', '<C-Down>' , ss.move_cursor_down)
-vim.keymap.set('n', '<C-Up>'   , ss.move_cursor_up)
-vim.keymap.set('n', '<C-Right>', ss.move_cursor_right)
+vim.keymap.set({ 'n', 't' }, '<C-Left>', ss.move_cursor_left,
+	{ desc = 'Select ◀' })
+vim.keymap.set({ 'n', 't' }, '<C-Down>', ss.move_cursor_down,
+	{ desc = 'Select ▼' })
+vim.keymap.set({ 'n', 't' }, '<C-Up>', ss.move_cursor_up,
+	{ desc = 'Select ▲' })
+vim.keymap.set({ 'n', 't' }, '<C-Right>', ss.move_cursor_right,
+	{ desc = 'Select ▶' })
 
-vim.keymap.set('n', '<M-Left>' , function() ss.resize_left(8) end)
-vim.keymap.set('n', '<M-Down>' , function() ss.resize_down(3) end)
-vim.keymap.set('n', '<M-Up>'   , function() ss.resize_up(3) end)
-vim.keymap.set('n', '<M-Right>', function() ss.resize_right(8) end)
+local has_hydra, Hydra = PREQUIRE('hydra')
+if not has_hydra then
+	return
+end
 
+Hydra({
+	name = 'Buffer Resize',
+	mode = 'n',
+	body = '<leader>b',
+	heads = {
+		{ 'n', function() ss.resize_left(8) end, {
+			desc = 'resize ◀'
+		} },
+		{ 'r', function() ss.resize_down(3) end, {
+			desc = 'resize ▼'
+		} },
+		{ 't', function() ss.resize_up(3) end, {
+			desc = 'Resize ▲'
+		} },
+		{ 'd', function() ss.resize_right(8) end, {
+			desc = 'Resize ▶'
+		} },
+	},
+})

@@ -1,6 +1,6 @@
 
 P = function(value)
-	print(vim.inspect(value))
+	vim.pretty_print(value)
 	return value
 end
 

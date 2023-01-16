@@ -13,8 +13,13 @@ if not PREQUIRE('cmp') then
 	return
 end
 
+vim.opt.completeopt = {
+	'menu',
+	'menuone',
+	'noselect',
+}
+
 local cmp = require('cmp')
-local has_luasnip, luasnip = PREQUIRE('luasnip')
 
 local settings = {
 	experimental = {
@@ -25,35 +30,27 @@ local settings = {
 		{ name = 'nvim_lsp' },
 		{ name = 'nvim_lsp_signature_help' },
 		{ name = 'luasnip' },
-		{ name = 'nvim_lua', group_index = 2 },
+		{ name = 'nvim_lua' },
 		{ name = 'path' },
-		{ name = 'buffer', group_index = 10 },
+		{ name = 'buffer',
+			keyword_length = 5,
+		},
 	}),
 
 	mapping = cmp.mapping.preset.insert({
-		['<C-Space>'] = cmp.mapping.complete({}),
-		['<C-n>'] = cmp.mapping.select_next_item(),
-		['<C-p>'] = cmp.mapping.select_prev_item(),
+		['<C-Space>'] = cmp.mapping.complete(),
+
 		['<CR>'] = cmp.mapping.confirm({
-			behavior = cmp.ConfirmBehavior.Replace,
+			behavior = cmp.ConfirmBehavior.Insert,
 			select = true,
 		}),
-		['<Tab>'] = cmp.mapping(function(fallback)
-			if has_luasnip and luasnip.jumpable(1) then
-				luasnip.jump(1)
-			else
-				fallback()
-			end
-		end, { 'i', 's' }),
-		['<S-Tab>'] = cmp.mapping(function(fallback)
-			if has_luasnip and luasnip.jumpable(-1) then
-				luasnip.jump(-1)
-			else
-				fallback()
-			end
-		end, { 'i', 's' }),
-		['<C-b>'] = cmp.mapping.scroll_docs(-1),
-		['<C-f>'] = cmp.mapping.scroll_docs(1),
+
+		['<C-n>'] = cmp.mapping.select_next_item({
+			behavior = cmp.SelectBehavior.Insert,
+		}),
+		['<C-p>'] = cmp.mapping.select_prev_item({
+			behavior = cmp.SelectBehavior.Insert,
+		}),
 		['<C-u>'] = cmp.mapping.scroll_docs(-4),
 		['<C-d>'] = cmp.mapping.scroll_docs(4),
 		['<C-e>'] = cmp.mapping({
@@ -72,6 +69,7 @@ local settings = {
 	},
 }
 
+local has_luasnip, luasnip = PREQUIRE('luasnip')
 if has_luasnip then
 	settings.snippet = {
 		expand = function(args)
@@ -81,23 +79,12 @@ if has_luasnip then
 end
 
 local has_lspkind, lspkind = PREQUIRE('lspkind')
-
 if has_lspkind then
 	settings.formatting = {
 		format = lspkind.cmp_format({
 			mode = 'text',
 			maxwidth = '50',
 			ellipsis_char = '…',
-			--menu = {
-			--	nvim_lsp = 'LSP',
-			--	nvim_lua = 'lua',
-			--	treesitter = 'Tree',
-			--	path = 'Path',
-			--	buffer = 'Buf',
-			--	zsh = 'Zsh',
-			--	luasnip = 'Snip',
-			--	spell = 'Spell',
-			--}
 		}),
 	}
 end

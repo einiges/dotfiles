@@ -2,17 +2,14 @@
 local map = require('my.utils.nvim.keymap')()
 
 vim.g.mapleader   = ' '
-vim.g.maplocalleader = 'ü'
+--vim.g.maplocalleader = ''
+map:set('', '<S-Space>', '<localleader>')
 
 -- :h map-table
-
-map:set('n', 'q', '<nop>')
-
 map:set('t', '<Esc><Esc>', '<C-\\><C-n>')
-map:set('n', ',', ':')
 
-map:set('n', 'ß', '<C-]>')
-map:set('n', 'ẞ', '<C-T>')
+map:set('n', '<C-CR>', '<C-]>')
+map:set('n', '<S-CR>', '<C-T>')
 
 -- Do not overwrite register
 map:set('x', 'p'         , '"_dP')
@@ -44,12 +41,12 @@ map:set('n', '<S-PageUp>', '<CMD>tabprevious<CR>')
 map:set('n', '<S-PageDown>', '<CMD>tabnext<CR>')
 
 -- Move lines
-map:set('x', '<S-Up>' , [[<CMD>m '<-2<CR>gv=gv]])
-map:set('x', '<S-Down>', [[<CMD>m '>+1<CR>gv=gv]])
-map:set('i', '<S-Up>' , [[<CMD>m .-2<CR>]])
-map:set('i', '<S-Down>', [[<CMD>m .+1<CR>]])
-map:set('n', '<S-Up>' , [[<CMD>m .-2<CR>==]])
-map:set('n', '<S-Down>', [[<CMD>m .+1<CR>==]])
+map:set('x', '<S-Up>' , [[:m '<-2<CR>gv=gv]])
+map:set('x', '<S-Down>', [[:m '>+1<CR>gv=gv]])
+map:set('i', '<S-Up>' , [[:m .-2<CR>]])
+map:set('i', '<S-Down>', [[:m .+1<CR>]])
+map:set('n', '<S-Up>' , [[:m .-2<CR>==]])
+map:set('n', '<S-Down>', [[:m .+1<CR>==]])
 
 -- Additional Undo break points
 map:set('i', ',', ',<C-g>u')
@@ -66,8 +63,8 @@ map:set('n', 'J', 'mzJ`z')
 map:set('n', '<C-j>', 'i<CR><Esc>')
 
 -- Visual search
-map:set('v', '*', [[y/\V<C-r>=escape(@",'/\')<CR><CR>]])
-map:set('v', '?', [[y?\V<C-r>=escape(@",'/\')<CR><CR>]])
+map:set('x', '*', [[y/\V<C-r>=escape(@",'/\')<CR><CR>]])
+map:set('x', '?', [[y?\V<C-r>=escape(@",'/\')<CR><CR>]])
 
 -- Stay VISUAL after indenting
 map:set('x', '>', '>gv')

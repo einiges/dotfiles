@@ -6,5 +6,17 @@ if not PREQUIRE('which-key') then
 end
 
 require('which-key').setup({
+	key_labels = {
+		['<space>'] = '␣',
+		['<cr>'] = '⏎',
+		['<tab>'] = '↹',
+	},
+	icons = {
+		breadcrumb = '→',
+		separator = '→',
+	},
+	window = {
+		border = 'single',
+	},
 })
 

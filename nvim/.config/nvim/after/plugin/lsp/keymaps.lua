@@ -35,7 +35,8 @@ local mappingsP = {
 			desc = 'Format',
 		}
 	},
-	{ 'documentRangeFormattingProvider', 'v', 'gF',
+	-- TODO: Buggy? How is this supposed to work?
+	{ 'documentRangeFormattingProvider', 'x', 'gF',
 		function()
 	vim.lsp.buf.format({ async = true })
 		end,

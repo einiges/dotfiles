@@ -17,3 +17,4 @@ require('bufferline').setup {
 
 vim.keymap.set('n', '<PageUp>', '<CMD>BufferLineCyclePrev<CR>')
 vim.keymap.set('n', '<PageDown>', '<CMD>BufferLineCycleNext<CR>')
+

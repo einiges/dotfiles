@@ -1,0 +1,1 @@
+PAQ('anuvyklack/hydra.nvim')

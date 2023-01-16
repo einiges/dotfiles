@@ -1,8 +1,7 @@
--- Pretty higlight for  TODO: comments
 PAQ('folke/todo-comments.nvim')
 
 if not PREQUIRE('todo-comments') then
-	return
+	return true
 end
 
 require('todo-comments').setup {

@@ -68,7 +68,7 @@ local cmd = function()
 	local jdtls_bin =
 		vim.fn.glob(jdtls_root .. '/plugins/org.eclipse.equinox.launcher_*.jar')
 
-	local data_dir = os.getenv('XDG_CACHE_HOME')
+	local data_dir = vim.env.XDG_CACHE_HOME
 		.. '/eclipse/jdtls/'
 		.. vim.fn.fnamemodify(vim.fn.getcwd(), ':p:h')
 
@@ -79,7 +79,6 @@ local cmd = function()
 		'-Declipse.product=org.eclipse.jdt.ls.core.product',
 		'-Dlog.protocol=true',
 		'-Dlog.level=ALL',
-		'-Xms1G',
 		'--add-modules=ALL-SYSTEM',
 		'--add-opens',
 		'java.base/java.util=ALL-UNNAMED',
@@ -119,30 +118,55 @@ local bundles = function()
 end
 
 local keymaps = function(bufnr)
-	local map = require('my.utils.nvim.keymap')({ buffer = bufnr })
+	local map = require('my.utils.nvim.keymap')():buffer(bufnr)
 
-	map:set('n', '<leader>ai', require('jdtls').organize_imports, {
-		desc = 'Organize imports',
-	})
-	map:set('n', '<leader>aT', require('jdtls').test_class, {
-		desc = 'Test class',
-	})
-	map:set('n', '<leader>at', require('jdtls').test_nearest_method, {
-		desc = 'Test nearest method',
-	})
-	map:set('v', '<leader>aev', function()
-		require('jdtls').extract_variable(true)
-	end, {
-		desc = 'Extract variable',
-	})
-	map:set('n', '<leader>aev', require('jdtls').extract_variable, {
-		desc = 'Extract variable',
-	})
-	map:set('v', '<leader>aem', function()
-		require('jdtls').extract_method(true)
-	end, {
-		desc = 'Extract method',
-	})
+	map
+		:desc('Organize imports')
+		:set('n', '<leader>ai',
+			function()
+				require('jdtls').organize_imports()
+			end)
+
+	map
+		:desc('Test class')
+		:set('n', '<leader>T',
+			function()
+				if vim.bo.modified and vim.bo.modifiable then
+					vim.cmd.write()
+				end
+				require('jdtls').test_class()
+			end)
+
+	map
+		:desc('Test nearest method')
+		:set('n', '<leader>t',
+			function()
+				if vim.bo.modified and vim.bo.modifiable then
+					vim.cmd.write()
+				end
+				require('jdtls').test_nearest_method()
+			end)
+
+	map
+		:desc('Extract variable')
+		:set('v', '<leader>aev',
+			function()
+				require('jdtls').extract_variable(true)
+			end)
+
+	map
+		:desc('Extract variable')
+		:set('n', '<leader>aev',
+			function()
+				require('jdtls').extract_variable()
+			end)
+
+	map
+		:desc('Extract method')
+		:set('v', '<leader>aem',
+			function()
+				require('jdtls').extract_method(true)
+			end)
 end
 
 local setup = function()
@@ -159,15 +183,17 @@ local setup = function()
 		return
 	end
 
-	--local extendedClientCapabilities = require('jdtls').extendedClientCapabilities
-	--extendedClientCapabilities.resolveAdditionalTextEditsSupport = true
+	local jdtls = require('jdtls')
+
+	local extendedClientCapabilities = jdtls.extendedClientCapabilities
+	extendedClientCapabilities.resolveAdditionalTextEditsSupport = true
 
 	local config = {
 		cmd = cmd(),
 		settings = settings(),
 		capabilities = require('my.lsp.capabilities'),
 		on_attach = function(client, bufnr)
-			require('jdtls').setup_dap({ hotcodereplace = 'auto' })
+			jdtls.setup_dap({ hotcodereplace = 'auto' })
 			keymaps(bufnr)
 		end,
 
@@ -175,15 +201,16 @@ local setup = function()
 
 		init_options = {
 			bundles = bundles(),
+			extendedClientCapabilities = extendedClientCapabilities,
 		},
 	}
 
-	require('jdtls').start_or_attach(config)
+	jdtls.start_or_attach(config)
 end
 
---Start only when java file is getting edited
 vim.api.nvim_create_autocmd({ 'BufNewFile', 'BufRead' }, {
-	group = vim.api.nvim_create_augroup('StartJdtlsForJava', {}),
+	desc = [[Start jdtls on java files]],
+	group = vim.api.nvim_create_augroup('MyStartJdtls', {}),
 	pattern = '*.java',
 	callback = setup,
 })

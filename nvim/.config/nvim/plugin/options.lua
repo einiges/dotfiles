@@ -109,7 +109,7 @@ opt.wildignore:append {
 
 -- TODO: Set only if supports truecolors
 opt.background='light'
-vim.cmd.colorscheme('gruvbox')
+vim.cmd.colorscheme('my-gruvbox')
 
 -- TODO: infocmp Tc
 opt.termguicolors = true

@@ -2,9 +2,7 @@
 
 local M = {}
 
-local c = require('gruvbox.colors').palette()
-
-M.helper = function()
+M.helper = function(c)
 	return {
 		default                        = { fg=c.c1.h    , bg=c.c0.l    , },
 		ui                             = { fg=c.c2.h    , bg=c.c1.l    , },
@@ -20,8 +18,8 @@ M.helper = function()
 end
 
 
-M.get = function()
-	local h = M.helper()
+M.get = function(c)
+	local h = M.helper(c)
 	local theme = {}
 
 	theme.editor = {
@@ -393,9 +391,10 @@ M.get = function()
 		rainbowcol7                = { fg=c.red.h   ,                                            },
 
 		-- https://github.com/ggandor/leap.nvim
-		LeapMatch                  = { fg=c.c1.h    ,                               nocombine=true, underline=true},
-		LeapLabelPrimary           = { fg=c.c0.l    , bg=c.aqua.l  ,                nocombine=true, bold=true },
-		LeapLabelSecondary         = { fg=c.c0.l    , bg=c.aqua.l  ,                nocombine=true, bold=true },
+		LeapMatch                  = { fg=c.c1.h    , bg=c.c00.n   ,                nocombine=true, bold=true },
+		LeapLabelPrimary           = { fg=c.c0.l    , bg=c.blue.l  ,                nocombine=true, bold=true },
+		LeapLabelSecondary         = { fg=c.c1.l    , bg=c.yellow.l,                nocombine=true, bold=true },
+		LeapLabelSelected          = { fg=c.c0.l    , bg=c.aqua.l  ,                nocombine=true, bold=true },
 		--LeapBackdrop               = {                                                           },
 
 		-- https://github.com/folke/which-key.nvim

@@ -1,7 +1,7 @@
 local T = {}
 
-local colors = require('gruvbox.colors').palette()
-local helper = require('gruvbox.theme').helper()
+local colors = require('my-gruvbox.colors').palette()
+local helper = require('my-gruvbox.theme').helper(colors)
 
 
 T.normal = {

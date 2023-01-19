@@ -18,6 +18,9 @@ end
 
 M.setup = function()
 
+	local palette = require('my-gruvbox.colors').palette()
+	local theme = require('my-gruvbox.theme').get(palette)
+
 	vim.cmd.highlight('clear')
 
 	if vim.fn.exists('syntax_on') then
@@ -25,8 +28,6 @@ M.setup = function()
 	end
 
 	vim.g.colors_name = 'gruvbox'
-
-	local theme = require('gruvbox.theme').get()
 	set_theme(theme.editor)
 	set_theme(theme.plugin)
 end

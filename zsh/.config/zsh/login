@@ -1,5 +1,9 @@
 # vim: ft=zsh
 
-[[ ! -v DISPLAY && $XDG_VTNR -eq 1 ]] &&
-	exec startx "$XINITRC" -- "$SERVERRC" vt1
+function {
+local src
+for src in "$ZDOTDIR"/login.d/*.zsh(.,@N) "$ZDOTDIR"/login.d/*/*(.,@N); do
+	source "$src"
+done
+}
 

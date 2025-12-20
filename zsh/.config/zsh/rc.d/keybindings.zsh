@@ -1,48 +1,45 @@
-autoload backward-kill-word-match
-zle -N backward-kill-word-match
-
-autoload kill-word-match
-zle -N kill-word-match
+function {
 
 # Vim Mode
 bindkey -v
 
+autoload kill-word-match && zle -N $_
+autoload backward-kill-word-match && zle -N $_
+
 # Complete word before cursor
 bindkey '\t' expand-or-complete-prefix
 
+# generate keyfile with 'autoload zkbd && zkbd'
+local kbdfile="$ZDOTDIR/.zkbd/$TERM-${${DISPLAY:t}:-$VENDOR-$OSTYPE}"
+[[ ! -f "$kbdfile" ]] && return 0
 
-# FIXME: Why does tmux receives different sequences?
-keyfile=${ZDOTDIR}/keydef/${TERM}
-[[ $TERM =~ '^tmux-.*' ]] &&
-	keyfile+="_${$(tmux show-environment -g TERM)#*=}"
 
-if [[ -f $keyfile ]]; then
-	source $keyfile
-	unset keyfile
-else
-	unset keyfile
-	return
-fi
+source "$kbdfile"
 
-[[ -n ${key[Backspace]} ]]    && bindkey "${key[Backspace]}" backward-delete-char
-[[ -n ${key[C-Backspace]} ]]  && bindkey "${key[C-Backspace]}" backward-kill-word-match
-[[ -n ${key[S-Backspace]} ]]  && bindkey "${key[S-Backspace]}" backward-delete-char
-#[[ -n ${key[Insert]} ]]       && bindkey "${key[Insert]}" overwrite-mode
-[[ -n ${key[Home]} ]]         && bindkey "${key[Home]}" beginning-of-line
-[[ -n ${key[Home]} ]]         && bindkey -M vicmd "${key[Home]}" vi-beginning-of-line
-[[ -n ${key[PageUp]} ]]       && bindkey "${key[PageUp]}" backward-word
-[[ -n ${key[Delete]} ]]       && bindkey "${key[Delete]}" delete-char
-[[ -n ${key[C-Delete]} ]]     && bindkey "${key[C-Delete]}" kill-word-match
-[[ -n ${key[S-Delete]} ]]     && bindkey "${key[S-Delete]}" delete-char
-[[ -n ${key[End]} ]]          && bindkey "${key[End]}" end-of-line
-[[ -n ${key[End]} ]]          && bindkey -M vicmd "${key[End]}" vi-end-of-line
-[[ -n ${key[PageDown]} ]]     && bindkey "${key[PageDown]}" forward-word
-[[ -n ${key[Up]} ]]           && bindkey "${key[Up]}" up-line-or-history
-[[ -n ${key[S-Up]} ]]         && bindkey "${key[S-Up]}" up-history
-[[ -n ${key[Left]} ]]         && bindkey "${key[Left]}" backward-char
-[[ -n ${key[Down]} ]]         && bindkey "${key[Down]}" down-line-or-history
-[[ -n ${key[S-Down]} ]]       && bindkey "${key[S-Down]}" down-history
-[[ -n ${key[Right]} ]]        && bindkey "${key[Right]}" forward-char
-[[ -n ${key[S-Space]} ]]      && bindkey "${key[S-Space]}" magic-space
-[[ -n ${key[S-Return]} ]]     && bindkey "${key[S-Return]}" accept-line
+test -n "${key[Backspace]}"    && bindkey $_ backward-delete-char
+test -n "${key[C-Backspace]}"  && bindkey $_ backward-delete-word
 
+test -n "${key[S-Tab]}"        && bindkey $_ reverse-menu-complete
+
+test -n "${key[Delete]}"       && bindkey $_ delete-char
+test -n "${key[C-Delete]}"     && bindkey $_ delete-word
+
+test -n "${key[Insert]}"       && bindkey $_ overwrite-mode
+
+test -n "${key[Home]}"         && bindkey $_ beginning-of-line
+test -n "${key[Home]}"         && bindkey -M vicmd $_ vi-beginning-of-line
+
+test -n "${key[End]}"          && bindkey $_ end-of-line
+test -n "${key[End]}"          && bindkey -M vicmd $_ vi-end-of-line
+
+test -n "${key[Up]}"           && bindkey $_ up-line-or-history
+
+test -n "${key[Left]}"         && bindkey $_ backward-char
+test -n "${key[C-Left]}"       && bindkey $_ backward-word
+
+test -n "${key[Down]}"         && bindkey $_ down-line-or-history
+
+test -n "${key[Right]}"        && bindkey $_ forward-char
+test -n "${key[C-Right]}"      && bindkey $_ forward-word
+
+}

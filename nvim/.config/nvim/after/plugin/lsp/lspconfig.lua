@@ -1,9 +1,12 @@
-PAQ('neovim/nvim-lspconfig')
-PAQ('williamboman/mason-lspconfig.nvim')
+local spec = {
+	'neovim/nvim-lspconfig',
+	lazy = false,
 
-if not PREQUIRE('mason-lspconfig') or not PREQUIRE('lspconfig') then
-	return
-end
+	dependencies = {
+		{ 'mason.nvim' },
+		{ 'williamboman/mason-lspconfig.nvim', config = function() end },
+	},
+}
 
 require('lspconfig.ui.windows').default_options.border = 'single'
 
@@ -11,13 +14,20 @@ require('mason-lspconfig').setup({
 	automatic_installation = false,
 
 	ensure_installed = {
-		'bashls', -- bash
-		'jdtls', -- java
-		'lemminx', -- XML
-		'perlnavigator', -- perl
-		'rust_analyzer', -- rust
-		'sumneko_lua', -- lua
-		'taplo', -- TOML
-		'yamlls', -- YAML
+		--'bashls', -- bash
+		--'jdtls', -- java
+		--'lemminx', -- XML
+		--'perlnavigator', -- perl
+		--'rust_analyzer', -- rust
+		--'lua_ls', -- lua
+		--'taplo', -- TOML
+		--'yamlls', -- YAML
 	},
 })
+
+vim.api.nvim_create_autocmd('User', {
+	desc = '',
+	pattern = 'LazyLoad',
+	callback = function(args)
+		print(args.data)
+	end

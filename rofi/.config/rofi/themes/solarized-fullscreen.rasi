@@ -1,0 +1,91 @@
+* {
+//	font: "Noto 18";
+
+	pad-below: 0 0 0.7em 0;
+	indent: 0 0 0 34px;
+
+	transparent: rgba(0,0,0,0);
+
+	selected-fc: #6C71C4;
+	urgent-fc: #CB4B16;
+	active-fc: #2AA198;
+	normal-fc: #93A1A1;
+	ci-fc: @selected-fc;
+	textbox-fc: #657B83;
+
+	text-color: #93A1A1;
+	background-color: @transparent;
+	highlight: None;
+}
+
+window {
+	background-color: #FDF6E3F9;
+	location: center;
+	anchor: center;
+	transparency: "real";
+	fullscreen: true;
+	orientation: vertical;
+	children: [ mainbox ];
+}
+
+mainbox {
+	expand: false;
+	margin: 40% 20% 0 25%;
+	orientation: vertical;
+	children: [ case-indicator, message, inputbar, listview ];
+}
+
+inputbar {
+	padding: @pad-below;
+	children: [ textbox-prompt-colon, entry ];
+}
+
+textbox {
+	text-color: @textbox-fc;
+	padding: @pad-below;
+}
+
+listview {
+	margin: @indent;
+	spacing: 0.7em;
+	lines: 5;
+}
+
+textbox-prompt-colon {
+	expand: false;
+	margin: 0 8px 0 0;
+	vertical-align: 0.5;
+	str: "";
+}
+
+case-indicator {
+	padding: @pad-below;
+	text-color: @case-indicator;
+}
+
+element {
+	vertical-align: 0.5;
+}
+
+element selected active,
+element selected normal,
+element selected urgent {
+	text-color: @selected-fc;
+}
+
+element normal urgent,
+element alternate urgent {
+	text-color: @urgent-fc;
+}
+
+element normal active,
+element alternate active {
+	text-color: @active-fc;
+}
+
+element normal normal,
+element alternate normal {
+	text-color: @normal-fc;
+}
+
+// vim: ft=scss

@@ -19,21 +19,62 @@ require('nvim-treesitter.configs').setup({
 			enable = true,
 			lookahead = true,
 			keymaps = {
-				['af'] = '@function.outer',
-				['if'] = '@function.inner',
-				['ac'] = '@class.outer',
-				['ic'] = '@class.inner',
-				['aC'] = '@comment.outer',
+				['af'] = {
+					query = '@function.outer',
+					desc = 'A function',
+				},
+				['if'] = {
+					query = '@function.inner',
+					desc = 'Inner function',
+				},
+				['ac'] = {
+					query = '@class.outer',
+					desc = 'A class',
+				},
+				['ic'] = {
+					query = '@class.inner',
+					desc = 'Inner class',
+				},
+				['al'] = {
+					query = '@loop.outer',
+					desc = 'A loop',
+				},
+				['il'] = {
+					query = '@loop.inner',
+					desc = 'Inner loop'
+				},
+				['a-'] = {
+					query = '@comment.outer',
+					desc = 'A comment',
+				},
+				['aß'] = {
+					query = '@block.outer',
+					desc = 'A block'
+				},
 			},
 		},
 
 		swap = {
 			enable = true,
 			swap_next = {
-				['<leader>aa'] = '@parameter.inner',
+				['<leader>sa'] = {
+					query = '@parameter.inner',
+					desc = 'Swap with next parameter',
+				},
+				['<leader>sf'] = {
+					query = '@function.outer',
+					desc = 'Swap with next function'
+				}
 			},
 			swap_previous = {
-				['<leader>aA'] = '@parameter.inner',
+				['<leader>Sa'] = {
+					query = '@parameter.inner',
+					desc = 'Swap with previous parameter',
+				},
+				['<leader>Sf'] = {
+					query = '@function.outer',
+					desc = 'Swap with previous function'
+				}
 			},
 		},
 
@@ -41,21 +82,47 @@ require('nvim-treesitter.configs').setup({
 			enable = true,
 			set_jumbs = false,
 			goto_next_start = {
-				[']m'] = '@function.outer',
-				[']]'] = '@class.outer',
+				[']m'] = {
+					query = '@function.outer',
+					desc = 'Next function start',
+				},
+				[']]'] = {
+					query = '@class.outer',
+					desc = 'Next class start',
+				},
 			},
 			goto_next_end = {
-				[']M'] = '@function.outer',
-				[']['] = '@class.outer',
+				[']M'] = {
+					query = '@function.outer',
+					desc = 'Next function end',
+				},
+				[']['] = {
+					query = '@class.outer',
+					desc = 'Next class end',
+				},
 			},
 			goto_previous_start = {
-				['[m'] = '@function.outer',
-				['[['] = '@class.outer',
+				['[m'] = {
+					query = '@function.outer',
+					desc = 'Previous function start',
+				},
+				['[['] = {
+					query = '@class.outer',
+					desc = 'Previous class start',
+				}
 			},
 			goto_previous_end = {
-				['[M'] = '@function.outer',
-				['[]'] = '@class.outer',
+				['[M'] = {
+					query = '@function.outer',
+					desc = 'Previous function end',
+				},
+				['[]'] = {
+					query = '@class.outer',
+					desc = 'Previous class end',
+				},
 			},
 		},
+
 	},
 })
+

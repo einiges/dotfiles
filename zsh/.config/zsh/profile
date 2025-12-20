@@ -1,7 +1,10 @@
 # vim: ft=zsh
 
-(( $+commands[ruby] )) &&
-	path+="$(ruby -e 'print Gem.user_dir')/bin"
-
 PATH="${HOME}/.local/bin:${PATH}"
 
+function {
+	local src
+	for src in "$ZDOTDIR"/profile.d/*/*(.,@N); do
+		source "$src"
+	done
+}

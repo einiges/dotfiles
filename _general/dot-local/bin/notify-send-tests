@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+message='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
+
+case "${1:-all}" in
+	l|low|a|all)      notify-send -t 10000 -u low      "Title LOW"      "$message" ;;&
+	n|normal|a|all)   notify-send -t 10000 -u normal   "Title NORMAL"   "$message" ;;&
+	c|critical|a|all) notify-send -t 10000 -u critical "Title CRITICAL" "$message" ;;&
+esac
+

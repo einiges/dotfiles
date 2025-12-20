@@ -90,10 +90,12 @@ opt.wildmode    = {
 	'full',
 }
 
+opt.completeopt = { 'menu', 'menuone', 'noinsert', 'noselect' }
+
 opt.spell = true
 opt.spelllang = { 'en', 'de' }
 
-vim.api.nvim_command('set wildcharm=<Tab>')
+opt.wildcharm = ('\t'):byte() -- set wildcharm=<Tab>
 
 opt.wildignorecase = true
 opt.wildignore:append {

@@ -1,0 +1,15 @@
+configurations:
+- hostCMD: pass show mail/gmx/imap
+  port: 993
+
+  usernameCMD: pass show mail/gmx/user
+  passwordCMD: pass show mail/gmx/passwd
+
+  tls: true
+  tlsOptions:
+    rejectUnauthorized: true
+    starttls: false
+
+  onNewMail: mbsync gmx
+  onNewMailPost: SKIP
+  wait: 5

@@ -2,14 +2,68 @@
 
 shopt -s nullglob globstar
 
-prefix=${PASSWORD_STORE_DIR-~/.password-store}
-password_files=( "$prefix"/**/passwd.gpg )
-password_files=( "${password_files[@]#"$prefix"/}" )
-password_files=( "${password_files[@]%/passwd.gpg}" )
+main() {
+	prefix="${PASSWORD_STORE_DIR-~/.password-store}"
+	password_files=( "$prefix"/**/passwd.gpg )
+	password_files=( "${password_files[@]#"$prefix"/}" )
+	password_files=( "${password_files[@]%/passwd.gpg}" )
 
-dest=$(printf '%s\n' "${password_files[@]}" | rofi -dmenu "$@")
+	dest=$(printf '%s\n' "${password_files[@]}" | rofi -dmenu "$@")
 
-[[ -n "${dest}" ]] || exit
+	[[ -n "${dest}" ]] || exit
 
-pass show "$dest/passwd" | xdotool type --delay 0 --clearmodifiers --file -
+	pass show "$dest/passwd" | _type
+}
+
+_type() {
+	case "$(_session_type)" in
+		wayland) _type_wayland ;;
+		#x) type_xorg ;;
+		*) return 1
+	esac
+}
+
+_session_type() {
+	case "$(ps -p 1 -o comm=)" in
+		systemd) loginctl show-session auto -P Type ;;
+	esac
+}
+
+_type_xorg() {
+	for cmd in xdotool
+	do
+		_has $cmd || continue
+
+		case "$cmd" in
+			xdotool)
+				xdotool type --delay 10 --clearmodifiers --file -
+				;;
+			*)
+				continue
+				;;
+		esac
+
+		break
+	done
+}
+
+_type_wayland() {
+
+	#xargs -n1 notify-send
+
+	: &&
+		_doifi wtype -d 10 - ||
+		_doifi ydotool type --key-delay 10 --file -
+
+}
+
+_doifi() {
+	_has "$1" && "$@"
+}
+
+_has() {
+	command -v "$1" >/dev/null
+}
+
+main "$@"
 

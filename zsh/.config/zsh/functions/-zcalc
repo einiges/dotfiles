@@ -1,4 +1,4 @@
-# vim:ft=zsh
+#!/bin/zsh
 
 autoload -Uz zcalc &&
 	zcalc -f -e "$*"

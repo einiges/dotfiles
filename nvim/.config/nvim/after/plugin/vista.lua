@@ -7,6 +7,8 @@ vim.g.vista_floating_delay = 50
 
 vim.g.vista_icon_indent = { '╰─  ', '├─  ' }
 
-vim.keymap.set('n', '<leader>v', '<CMD>Vista!!<CR>',
-	{ desc = 'Toggle Vista' })
+vim.keymap.set('n', '<leader>mv', '<CMD>Vista!!<CR>',
+	{ desc = 'Vista',
+	}
+)
 

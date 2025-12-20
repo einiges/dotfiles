@@ -1,5 +1,5 @@
 PAQ({ 'nvim-treesitter/nvim-treesitter',
-	run = function()
+	build = function()
 		vim.api.nvim_cmd({ cmd = 'TSUpdate' }, {})
 	end
 })
@@ -10,8 +10,6 @@ end
 
 
 local parsers = {
-	'help',
-
 	'bash',
 
 	'dockerfile',
@@ -39,7 +37,7 @@ local parsers = {
 
 	'diff',
 
-	'comment',
+	--'comment',
 	'gitattributes',
 }
 

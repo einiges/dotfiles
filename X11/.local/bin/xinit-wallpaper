@@ -1,2 +1,3 @@
 # Background
-test -f "$HOME/Pictures/Wallpapers/current" && feh --no-fehbg --bg-fill --no-xinerama "$_"
+hsetroot -solid '#ebdbb2'
+# test -f "$HOME/Pictures/Wallpapers/current" && feh --no-fehbg --bg-fill --no-xinerama "$_"

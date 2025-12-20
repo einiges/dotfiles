@@ -1,27 +1,19 @@
-PAQ('hrsh7th/nvim-cmp')
-PAQ('hrsh7th/cmp-nvim-lsp')
-PAQ('hrsh7th/cmp-nvim-lsp-signature-help')
-PAQ('hrsh7th/cmp-buffer')
-PAQ('hrsh7th/cmp-path')
-PAQ('hrsh7th/cmp-cmdline')
-PAQ('hrsh7th/cmp-nvim-lsp-document-symbol')
-PAQ('hrsh7th/cmp-nvim-lua')
-PAQ('saadparwaiz1/cmp_luasnip')
-PAQ('onsails/lspkind-nvim')
-
-if not PREQUIRE('cmp') then
-	return
-end
-
-vim.opt.completeopt = {
-	'menu',
-	'menuone',
-	'noselect',
+local spec = {
+	{
+		'hrsh7th/nvim-cmp',
+		'hrsh7th/cmp-nvim-lsp',
+		'hrsh7th/cmp-nvim-lsp-signature-help',
+		'hrsh7th/cmp-buffer',
+		'hrsh7th/cmp-path',
+		'hrsh7th/cmp-cmdline',
+		'hrsh7th/cmp-nvim-lsp-document-symbol',
+		'hrsh7th/cmp-nvim-lua',
+		'saadparwaiz1/cmp_luasnip',
+		'onsails/lspkind-nvim',
+	}
 }
 
-local cmp = require('cmp')
-
-local settings = {
+spec.opts = {
 	experimental = {
 		ghost_text = true,
 	},
@@ -59,6 +51,15 @@ local settings = {
 		}),
 	}),
 
+	snippet = {
+		expand = function(args)
+			local has_luasnip, luasnip = pcall('require', 'luasnip')
+			if has_luasnip then
+				luasnip.lsp_expand(args.body)
+			end
+		end,
+	}
+
 	view = {
 		entries = { name = 'custom', selection_order = 'near_cursor' },
 	},
@@ -67,42 +68,35 @@ local settings = {
 		completion = cmp.config.window.bordered(),
 		documentation = cmp.config.window.bordered(),
 	},
-}
 
-local has_luasnip, luasnip = PREQUIRE('luasnip')
-if has_luasnip then
-	settings.snippet = {
-		expand = function(args)
-			luasnip.lsp_expand(args.body)
-		end,
-	}
-end
-
-local has_lspkind, lspkind = PREQUIRE('lspkind')
-if has_lspkind then
-	settings.formatting = {
+	formatting = {
 		format = lspkind.cmp_format({
 			mode = 'text',
-			maxwidth = '50',
+			maxwidth = 50,
 			ellipsis_char = '…',
 		}),
 	}
+}
+
+spec.config = function(_, opts)
+	local cmp = require('cmp')
+	cmp.setup.cmdline({ '/', '?' }, {
+		mapping = cmp.mapping.preset.cmdline(),
+		sources = cmp.config.sources({
+			{ name = 'nvim_lsp_document_symbols', group_index = 0},
+			{ name = 'buffer', group_index = 1},
+		}),
+	})
+
+	cmp.setup.cmdline(':', {
+		mapping = cmp.mapping.preset.cmdline(),
+		sources = cmp.config.sources({
+			{ name = 'path', group_index = 0 },
+			{ name = 'cmdline', group_index = 1 },
+		}),
+	})
+
 end
 
-cmp.setup(settings)
 
-cmp.setup.cmdline({ '/', '?' }, {
-	mapping = cmp.mapping.preset.cmdline(),
-	sources = cmp.config.sources({
-		{ name = 'nvim_lsp_document_symbols', group_index = 0},
-		{ name = 'buffer', group_index = 1},
-	}),
-})
-
-cmp.setup.cmdline(':', {
-	mapping = cmp.mapping.preset.cmdline(),
-	sources = cmp.config.sources({
-		{ name = 'path', group_index = 0 },
-		{ name = 'cmdline', group_index = 1 },
-	}),
-})
+return spec

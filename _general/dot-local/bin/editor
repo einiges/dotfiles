@@ -1,0 +1,11 @@
+#!/bin/sh
+
+
+for editor in "${VISUAL}" "${EDITOR}" nvim vim vi nano
+do
+	if command -v "$editor" >/dev/null 2>&1
+	then
+		exec "$editor" "$@"
+	fi
+done
+

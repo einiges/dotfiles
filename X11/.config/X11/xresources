@@ -1,6 +1,9 @@
 ! vim:ft=xdefaults
 
-Sxiv.font: monospace:size=11
-Sxiv.background: #FDF6E3
-Sxiv.foreground: #073642
+Nsxiv.window.background: #fbf1c7
+Nsxiv.window.foreground: #282828
+
+Nsxiv.bar.font: monospace:size=11
+Nsxiv.bar.background: #ebdbb2
+
 

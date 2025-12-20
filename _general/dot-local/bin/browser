@@ -1,0 +1,11 @@
+#!/bin/sh
+
+for browser in "${BROWSER}" firefox chromium
+do
+	if command -v "$browser" >/dev/null 2>&1
+	then
+		exec "$browser" "$@"
+	fi
+done
+
+exit 1

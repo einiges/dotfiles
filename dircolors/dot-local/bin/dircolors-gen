@@ -1,0 +1,31 @@
+#!/bin/sh
+
+arg0="$(basename $0)"
+
+help() {
+	printf 'Usage: %s [CONFIG [TARGET]]\n' "$arg0"
+	printf 'If SOURCE is omitted, reads DIRCOLORS_GEN_CONFIG\n'
+	printf 'If TARGET is omitted, reads DIRCOLORS_INIT\n'
+}
+
+main() {
+	src="${1:-$DIRCOLORS_GEN_CONFIG}"
+	if [ -z "$src" -o ! -f "$src" ]; then
+		printf 'Missing source. Pass as first argument or set $DIRCOLORS\n'
+		return 1
+	fi
+
+	trg="${2:-$DIRCOLORS_INIT}"
+	if [ -z "$trg" ]; then
+		printf 'Missing target. Pass as second argument or set $DIRCOLORS_OUTPUT\n'
+		return 1
+	fi
+
+	trg_dir="$(dirname "$trg")"
+	mkdir -p "$trg_dir"
+
+	dircolors "$src" > "$trg"
+}
+
+main "$@"
+

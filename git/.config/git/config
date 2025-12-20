@@ -45,3 +45,6 @@
 
 [include]
 	path = secret.gitconfig
+
+[advice]
+	detachedHead = false

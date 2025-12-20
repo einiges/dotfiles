@@ -14,11 +14,14 @@ require('neo-tree').setup({
 	},
 	filesystem = {
 		group_empty_dirs = true,
-		follow_current_file = true,
+		follow_current_file = {
+			enable = true,
+		},
 	},
 })
 
 
-vim.keymap.set('n', '<leader>e', '<CMD>NeoTreeFocusToggle<CR>',
-	{ desc = 'Toggle file explorer' })
-
+vim.keymap.set('n', '<leader>me', '<CMD>NeoTreeFocusToggle<CR>',
+	{
+		desc = 'File Explorer'
+	})

@@ -1,9 +1,0 @@
-[Desktop Entry]
-Type=Application
-Name=lock
-TryExec=xautolock
-Exec=xautolock -locknow
-Terminal=false
-Icon=lock
-StartupNotify=false
-Categories=UserSession;

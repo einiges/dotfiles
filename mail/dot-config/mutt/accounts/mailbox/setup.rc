@@ -1,0 +1,17 @@
+# vim:ft=muttrc
+
+set from     = `pass show mail/mailbox/me`
+set sendmail = "msmtp --account=mailbox"
+
+
+# -- Directories --
+set spoolfile    = "=mailbox/Inbox"
+set postponed    = "=mailbox/Drafts"
+set record       = "=mailbox/Sent"
+set trash        = "=mailbox/Trash"
+set mbox         = "=mailbox/Archive"
+
+
+# -- Misc --
+set signature   = $my_config_home/accounts/mailbox/signature.txt
+

@@ -1,0 +1,17 @@
+# vim:ft=muttrc
+
+set from     = `pass show mail/gmx/user`
+set sendmail = "msmtp --account=gmx"
+
+
+# -- Directories --
+set spoolfile    = "=gmx/Inbox"
+set postponed    = "=gmx/Drafts"
+set record       = "=gmx/Sent"
+set trash        = "=gmx/Deleted"
+set mbox         = "=gmx/Archive"
+
+
+# -- Misc --
+set signature   = $my_config_home/accounts/gmx/signature.txt
+

@@ -1,130 +1,149 @@
 
 [alias]
 	# add
-	a = add
-	aa = add --all
-	ap = add --patch
-	au = add --update
+	a        = add
+	aa       = add --all
+	ap       = add --patch
+	au       = add --update
 
 	# branch
-	b = branch
-	bb = branch --all
 	branches = branch --all
-	bd = branch --delete
-	bdd = branch --delete --force
+	b        = branch
+	bb       = branches
+	bd       = branch --delete
+	bddd     = branch --delete --force
+	bm       = branch --move
 
 	# clean
-	cleaner = clean -d --force --force
+	cleaner  = clean -d    --force --force
 	cleanest = clean -d -x --force --force
 
 	# commit
-	c = commit
-	ca = commit --amend
-	cam = commit --amend --message
-	cm = commit --message
-	fixlast = commit --amend --no-edit
+	c       = commit
+	ca      = commit --amend
+	cam     = commit --amend --message
+	cm      = commit --message
+	cfix    = commit --amend --no-edit
 
 	# cherry-pick
-	cp = cherry-pick
-	cpa = cherry-pick --abort
-	cpc = cherry-pick --continue
+	cp      = cherry-pick
+	cpa     = cherry-pick --abort
+	cpc     = cherry-pick --continue
 
 	# diff
-	d = diff
-	dc = diff --cached
-	ds = diff --staged
-	dw = diff --word-diff
-	diff-prev = diff @^ @
+	d         = diff
+	dc        = diff --cached
+	ds        = diff --staged
+	dw        = diff --word-diff
+	dprev     = diff @^ @
 
 	# fetch
-	f = fetch
+	f         = fetch
 
 	# init
 	init-empty = !"git init && git commit --allow-empty --message 'init'"
 
 	# log
-	l = log
-	ll = log --graph --topo-order --boundary --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)%ad%C(reset) %C(white)%s%C(reset) - %C(yellow)%an%C(reset)%C(bold magenta)%d%C(reset)'
-	lll = log --graph --topo-order --boundary --branches --remotes --tags --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)%ad%C(reset)%C(bold magenta)%d%C(reset)%n        %C(white)%s%C(reset) - %C(yellow)%an%C(reset)'
-	wc = log --raw --no-merges
+	l         = log
+	ll        = log --graph --topo-order --boundary --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)%ad%C(reset) %C(white)%s%C(reset) - %C(yellow)%an%C(reset)%C(bold magenta)%d%C(reset)'
+	lll       = log --graph --topo-order --boundary --branches --remotes --tags --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)%ad%C(reset)%C(bold magenta)%d%C(reset)%n        %C(white)%s%C(reset) - %C(yellow)%an%C(reset)'
+	wc        = log --raw --no-merges
 
 	# merge
-	m = merge
-	ma = merge --abort
-	mc = merge --continue
+	m         = merge
+	ma        = merge --abort
+	mc        = merge --continue
 
-	mt = mergetool
+	mt        = mergetool
 
 	# push
-	pushf = push --force-with-lease
-	pusht = push --tags
-	pushd = push --delete
+	pushf     = push --force-with-lease
+	pushfff   = push --force
+	pusht     = push --tags
+	pushd     = push --delete
 
 	# rebase
-	r = rebase
-	ra = rebase --abort
-	rc = rebase --continue
-	ri = rebase --interactive
+	r         = rebase
+	ra        = rebase --abort
+	rc        = rebase --continue
+	ri        = rebase --interactive
 
 	# remote
-	rr = remote
-	rrr = remote --verbose
-	remotes = remote --verbose
+	remotes   = remote --verbose
+	rr        = remote
+	rrr       = remotes
 
 	# reset
-	uncommit = reset --soft HEAD~1
-	unadd = reset HEAD
+	uncommit   = reset --soft HEAD~1 --
+	uncommittt = reset --hard HEAD~1 --
+	uc         = uncommit
+	uccc       = uncommittt
+	unadd      = reset HEAD
+	unstage    = reset HEAD
 
 	# restore
-	rs = restore
-	rss = restore --staged
+	rs        = restore
+	rss       = restore --staged
 
 	# revert
-	rv = revert
+	rv        = revert
 
 	# stash
-	stashes = stash list
+	stashes   = stash list
+	st        = stash push
+	stt       = stash push --include-untracked
+	sttt      = stash push --all
+	sta       = stash apply
+	stp       = stash pop
+	stl       = stashes
 
 	# status
-	s = status
-	ss = status --short --branch
+	;s = status .
+	s         = status
+	ss        = status --untracked-files
+	sss       = status --untracked-files --short --branch
 
 	# submodule
-	sm = submodule
-	smi = submodule init
-	sma = submodule add
-	sms = submodule sync
-	smu = submodule update
-	smui = submodule update --init
-	smuir = submodule update --init --recursive
+	sm        = submodule
+	smi       = submodule init
+	sma       = submodule add
+	sma1      = submodule add --depth 1
+	smd       = submodule deinit
+	sms       = submodule sync
+	smu       = submodule update
+	smui      = submodule update --init
+	smuir     = submodule update --init --recursive
 
 	# switch
-	sw = switch
-	swc = switch --create
-	swd = switch --detach
-	main = !"git switch $(git config init.defaultBranch)"
+	sw        = switch
+	swc       = switch --create
+	swd       = switch --detach
+	main      = !"git switch $(git config init.defaultBranch)"
 
 	# tag
-	ta = tag --annotate
-	tags = tag --list --format='%(color:bold blue)%(refname:strip=2)%(color:reset)%(if)%(taggerdate)%(then) - %(color:bold green)%(taggerdate:human)%(color:reset)%(end)%(if)%(taggername)%(then) - %(color:yellow)%(taggername)%(color:reset)%(end)'
-	versions = tags --sort=-version:refname 'v*'
+	tags      = tag --list --format='%(color:bold blue)%(refname:strip=2)%(color:reset)%(if)%(taggerdate)%(then) - %(color:bold green)%(taggerdate:human)%(color:reset)%(end)%(if)%(taggername)%(then) - %(color:yellow)%(taggername)%(color:reset)%(end)'
+	ta        = tag --annotate
+	versions  = tags --sort=-version:refname 'v*'
 
 	# worktree
-	wt = worktree
-	wta = worktree add
-	wtl = worktree list
-	wtp = worktree prune
-	wtr = worktree remove
+	wt        = worktree
+	wta       = worktree add
+	wtl       = worktree list
+	wtp       = worktree prune
+	wtr       = worktree remove
 
 	# helper
 
+	# g g g g g g sw
+	g = !"git "
+
 	# using .gitignore instead of .gitkeep
-	keep = !"f() { touch \"${1:-${GIT_PREFIX:-.}}/.gitignore\"; }; f"
-	keep-empty = !"f() { gitignore=\"${1:-${GIT_PREFIX:-.}}/.gitignore\"; test ! -f \"${gitignore}\" && printf '# keep directory empty\n*\n!.gitignore\n' > \"${gitignore}\"; }; f"
+	keep       = !"f() { touch \"${1:-${GIT_PREFIX:-.}}/.gitignore\"; }; f"
+	keep-empty = !"f() { gitignore=\"${1:-${GIT_PREFIX:-.}}/.gitignore\"; test ! -e \"${gitignore}\" && printf '# keep directory empty\n*\n!.gitignore\n' > \"${gitignore}\"; }; f"
 
-	fix = !"f() { git commit --fixup=${1:-@}; }; f"
-	squash = !"f() { defaultBranch=$(git config init.defaultBranch); mergebase=$(git merge-base @ ${1:-$defaultBranch}); git rebase --interactive --autosquash ${@:2} ${mergebase}; }; f"
+	fix        = !"f() { [ $# > 0 ] && git commit --fixup=$1; }; f"
+	squash     = !"f() { defaultBranch=$(git config init.defaultBranch); mergebase=$(git merge-base @ ${1:-$defaultBranch}); git rebase --interactive --autosquash ${@:2} ${mergebase}; }; f"
 
-	exec = !"exec "
-	root = rev-parse --show-toplevel
+	exec       = !"exec "
+	root       = rev-parse --show-toplevel
 

@@ -4,14 +4,13 @@ super + Escape ; s
 	pkill --signal SIGUSR1 sxhkd
 
 super + @v
-	sspaste 'primary' 'ctrl+v'
-
+	xclip -o | xdotool type --delay 0 --clearmodifiers --file -
 
 # -- application launching --
 
 # - terminal
 super + {_,shift} + Return
-	$TERMINAL {_,-e tmux}
+	$TERMINAL {_,tmux}
 
 # - application launcher
 super + {_,shift} + @l
@@ -19,21 +18,28 @@ super + {_,shift} + @l
 
 # - pass
 super + @x
-	PINENTRY_USER_DATA=gtk passmenu-rofi | xargs -I '@' notify-send 'copied' '@'
+	PINENTRY_USER_DATA=gtk passmenu-rofi
+
+super + p
+	notify-send -c progress -h INT:value:$(( $(date '+(%S + (%M * 60) + (%H* 60 * 60))/(24.00*60*60)*100 ') )) "$(date '+%d. %B')" "$(date '+%_H %_M')"
 
 super + {shift,ctrl} + l
 	xautolock -{locknow,toggle}
 
 # - screenshots
-# * -u focused
-# * -s interactive select
 {_,super} + {_,shift} + @Print
-	scrot {_,-e 'xclip -selection c -t image/png < $f'} {-u,-s} "$HOME/Pictures/Screenshots/%Y-%m-%d_%H:%M:%S.png" -q 100
+	scrot {_,--exec 'xclip -selection c -t image/png < $f'} {--focussed,--select} "$HOME/Pictures/Screenshots/%Y-%m-%d_%H:%M:%S.png" -q 100
 
 # - Quick launch -
 super + e ; super + {e,f,p}
 	{pcmanfm,firefox,pavucontrol}
 
+super + {ctrl,_} + shift + v
+	uri="$(xclip -o)"; \
+	ytdl-reserve {-k,_} "$uri" && notify-send "ytdl-reserve - success" "reserved '$uri'" || notify-send "ytdl-reserve - error" "unable to reserve '$uri'"
+
+super + shift + ctrl + m
+	st -n float -e sh -c "xprop -id $(bspc query -N -n) | less"
 
 # -- media keys --
 
@@ -43,23 +49,23 @@ XF86Audio{Play,Stop,Next,Prev}
 
 # - volume (basic)
 {_,shift} + XF86AudioMute
-	amixer -qD pulse set {Master,Capture} toggle
+	wpctl set-mute @DEFAULT_{SINK,SOURCE}@ toggle
 
-{_,shift} + {_,control} + XF86Audio{Raise,Lower}Volume
-	amixer -qD pulse set {Master,Capture} {3,7}%{+,-}
+{_,shift} + XF86Audio{Raise,Lower}Volume
+	wpctl set-volume @DEFAULT_{SINK,SOURCE}@ 5%{+,-}
 
 
 
 
 # --- bspwm ---
 
+# bspwm-node menu
+super + ctrl + @l
+	rofi-bspwm-node-menu
+
 # quit bspwm
 super + shift + Escape
 	bspc quit
-
-# reload config
-super + Escape ; b
-	bspwm-update
 
 # close/kill node
 super + {_,shift} + adiaeresis
@@ -78,7 +84,7 @@ super + ctrl + Return
 
 # Toggle states
 super + {ctrl,shift,mod5} + f
-	bspc node -t {\~floating,\~fullscreen,tiled}
+	bspc node -t '{~floating,~fullscreen,tiled}'
 
 super + s; {s,p}
 	bspc node --flag {sticky,private}
@@ -95,6 +101,10 @@ super + {1-5,8,9,0}
 super + shift + {1-5,8,9,0}
 	d='{1-5,8,9,10}'; \
 	bspc node -n "@${d}:.\!automatic" || bspc node -d "${d}"
+
+# TODO: swap and focus previously (last) focused desktop
+# super + space
+# 	[ "$(bspc query -M -d last)" = "$(bspc query -M -m)" ] && bspc desktop -f 'last' || bspc desktop -s 'last.!local'
 
 # swap node
 super + shift + {n,r,t,d}
@@ -139,12 +149,15 @@ super + alt + {n,r,t,d}
 
 # preselect the direction
 super + mod5 + {n,r}
-	d='~{east,south}'; \
+	[ $(bspc config initial_polarity) = 'first_child' ] && \
+		{  d='~east' || d='~west' \
+		,  d='~south' || d='~north' \
+		}; \
 	bspc query -N -n 'focused.automatic' && bspc node -p "$d" || bspc-presel-mirrored "$d"
 
-# move to preselcted area with weight: local > active > {other}
+# move to preselcted area with weight: local > active
 super + mod5 + space
-	bspc node -n 'any.!automatic.local' || bspc node -n 'any.!automatic.active' || bspc node -n 'any.!automatic'
+	bspc node -n 'any.!automatic.local' || bspc node -n 'any.!automatic.active'
 
 
 # -- monitors --

@@ -61,6 +61,7 @@ function __vicursor::setup
 		baseterm=${$(tmux show-environment -g TERM)#*=}
 	fi
 
+	local match mbegin mend
 	if [[ "$baseterm" =~ "Konsole" || -v KONSOLE_DBUS_SESSION ]]
 	then
 		return 1

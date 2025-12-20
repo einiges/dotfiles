@@ -1,0 +1,71 @@
+#!/bin/bash
+
+destination=
+sources=()
+
+main() {
+	parse_args "$@"
+
+	# Try to be smart and avoid multiple tar levels
+	if [ ${#sources[@]} -eq 1 ]
+	then
+		case "${sources[1]}" in
+			*.tar)
+				archive_single_tar "$destination" "${sources[1]}"
+				return
+				;;
+			*) ;;
+		esac
+	fi
+
+	archive_all "$destination" "${sources[@]}"
+}
+
+parse_args() {
+	if [ $# -lt 2 ]; then
+		printf 'Usage: %s DESTINATION SOURCE...\n' "$(basename "$0")"
+		exit 1
+	fi
+
+	destination=$1
+	shift
+
+	sources=( "$@" )
+}
+
+archive_single_tar() {
+	dst=$1
+	src=$2
+	case "$dst" in
+		*.tar.gz|*.tgz           ) gzip  -c "$src" > "$dst" ;;
+		*.tar.bz2|*.tbz2|*.tbz   ) bzip2 -c "$src" > "$dst" ;;
+		*.tar.xz|*.txz           ) xz    -c "$src" > "$dst" ;;
+		*.tar.zma|*.tlz          ) lzma  -c "$src" > "$dst" ;;
+
+		* ) return 1;;
+	esac
+}
+
+archive_all() {
+	dst=$1
+	srcs=( ${@:1} )
+
+	case "$dst" in
+		*.tar                   ) tar -cvf        "$dst" "${src[@]}" ;;
+		*.tar.gz|*.tgz          ) tar -zcvf       "$dst" "${src[@]}" ;;
+		*.tar.bz2|*.tbz2|*.tbz  ) tar -jcvf       "$dst" "${src[@]}" ;;
+		*.tar.xz|*.txz          ) tar -Jcvf       "$dst" "${src[@]}" ;;
+		*.tar.zma|*.tlz         ) tar --lzma -cvf "$dst" "${src[@]}" ;;
+		*.gz                    ) gzip     --keep        "${src[@]}" ;;
+		*.bz2                   ) bzip2    --keep        "${src[@]}" ;;
+		*.xz                    ) xz       --keep        "${src[@]}" ;;
+		*.lzma                  ) lzma     --keep        "${src[@]}" ;;
+		*.zip                   ) zip -r          "$dst" "${src[@]}" ;;
+		*.7z                    ) 7z a -t7z       "$dst" "${src[@]}" ;;
+
+		* ) printf "unsupported archive for '%s'\n" "$dst" >&2 ;;
+	esac
+}
+
+main "$@"
+

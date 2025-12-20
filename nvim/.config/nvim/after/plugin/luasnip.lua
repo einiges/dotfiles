@@ -1,8 +1,9 @@
 PAQ('L3MON4D3/LuaSnip')
 PAQ('rafamadriz/friendly-snippets')
 
-if not PREQUIRE('luasnip') then
-	return
+local ok, plugin = PREQUIRE('luasnip')
+if not ok then
+	return not ok
 end
 
 local luasnip = require('luasnip')
@@ -12,14 +13,19 @@ luasnip.setup({
 	delete_check_events = 'InsertLeave',
 })
 
-vim.keymap.set({ 'i', 's' }, '<C-f>', function()
-	if luasnip.jumpable(1) then
-		luasnip.jump(1)
-	end
-end)
 
-vim.keymap.set({ 'i', 's' }, '<C-b>', function()
-	if luasnip.jumpable(-1) then
-		luasnip.jump(-1)
+vim.keymap.set({ 'i', 's' }, '<C-f>',
+	function()
+		if require('luasnip').jumpable(1) then
+			require('luasnip').jump(1)
+		end
 	end
-end)
+)
+
+vim.keymap.set({ 'i', 's' }, '<C-b>',
+	function()
+		if require('luasnip').jumpable(-1) then
+			require('luasnip').jump(-1)
+		end
+	end
+)

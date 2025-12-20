@@ -1,4 +1,4 @@
-# vim:ft=zsh
+#!/bin/zsh
 
 # DESCRIPTION
 #    Create tmp directory and change into it

@@ -1,0 +1,3 @@
+--verbose
+--dotfiles
+--ignore='README\\.md'

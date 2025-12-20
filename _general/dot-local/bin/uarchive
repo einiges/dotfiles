@@ -1,0 +1,40 @@
+#!/bin/sh
+
+if [ $# -eq 0 ]; then
+	printf 'Usage: %s SOURCE...\n' "$(basename "$0")"
+	exit 1
+fi
+
+for target in "$@"
+do
+	if [ ! -r "$target" ]; then
+		printf "invalid file '%s'\n" "$target" >&2
+		continue
+	fi
+
+	# TODO: If archive top level contains more than one file
+	# extract everything into new subdirectory.
+	extract_dir="$(dirname "$target")"
+	if [ ! -w "$extract_dir" ]
+	then
+		printf "missing permissions '%s'\n" "$extract_dir" >&2
+		continue
+	fi
+
+	case "$target" in
+		*.tar                   ) tar -xvf "$target"  ;;
+		*.tar.gz|*.tgz          ) tar -zxvf "$target" ;;
+		*.tar.bz2|*.tbz2|*.tbz  ) tar -jxvf "$target" ;;
+		*.tar.xz|*.txz          ) tar -Jxvf "$target" ;;
+		*.tar.zma|*.tlz         ) tar --lzma -xvf "$target" ;;
+		*.gz                    ) gunzip --keep "$target";;
+		*.bz2                   ) bunzip --keep "$target" ;;
+		*.xz                    ) unxz   --keep "$target" ;;
+		*.lzma                  ) unlzma --keep "$target" ;;
+		*.zip                   ) unzip "$target" -d "$extract_dir" ;;
+		*.7z                    ) 7z a -t7z "$target" ;;
+
+		* ) printf "unsupported archive for '%s'\n" "$target" >&2 ;;
+	esac
+done
+

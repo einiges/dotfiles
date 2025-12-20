@@ -11,15 +11,15 @@ update-xrdb
 {
 	sleep 3
 
-	xsettingsd &
+	#xsettingsd >/dev/null &
 
 	# -- Launch Applications --
 
 	"$BROWSER" >/dev/null 2>&1 &
-	"$TERMINAL" -n ncmpcpp    -e ncmpcpp &
-	"$TERMINAL" -n mutt       -e mutt &
-	"$TERMINAL" -n calcurse   -e calcurse &
-	"$TERMINAL" -n newsboat   -e newsboat &
+	#"$TERMINAL" -n ncmpcpp    -e ncmpcpp &
+	#"$TERMINAL" -n mutt       -e mutt &
+	#"$TERMINAL" -n calcurse   -e calcurse &
+	#"$TERMINAL" -n newsboat   -e newsboat &
 
 	# ( mbsync --config "${XDG_CONFIG_HOME}"/mbsync/config -a & ) >/dev/null 2>&1
 

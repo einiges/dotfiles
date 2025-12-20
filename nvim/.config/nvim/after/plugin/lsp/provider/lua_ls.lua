@@ -26,7 +26,7 @@ local settings = {
 	},
 }
 
-require('lspconfig').sumneko_lua.setup({
+require('lspconfig').lua_ls.setup({
 	settings = settings,
 	capabilities = require('my.lsp.capabilities'),
 	on_attach = function(client, bufnr)
@@ -34,3 +34,4 @@ require('lspconfig').sumneko_lua.setup({
 		client.server_capabilities.document_range_formatting = false
 	end,
 })
+

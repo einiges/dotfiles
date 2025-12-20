@@ -167,9 +167,11 @@ ppMpd() {
 
 # $( ppPlayback )
 ppPlayback() {
-	local playback_level=$(pamixer --get-volume)
+	local target='@DEFAULT_SINK@'
+	local playback_level=$(pamixer --sink $target --get-volume)
 
-	if pamixer --get-mute > /dev/null; then
+	local mute=$()
+	if [[ "$(pamixer --sink $target --get-mute)" = 'true' ]]; then
 		playback_state_icon=${icons[playbackmute]}
 	else
 		playback_state_icon=${icons[playback]}
@@ -181,9 +183,10 @@ ppPlayback() {
 
 # $( ppCapture )
 ppCapture() {
-	local capture_level=$(pamixer --source 44 --get-volume)
+	local target='@DEFAULT_SOURCE@'
+	local capture_level=$(pamixer --source $target --get-volume)
 
-	if pamixer --source 44 --get-mute >/dev/null; then
+	if [[ "$(pamixer --source $target --get-mute)" = 'true' ]]; then
 		capture_state_icon=${icons[capturemute]}
 	else
 		capture_state_icon=${icons[capture]}
@@ -258,8 +261,8 @@ ppDesktops() {
 
 { print init; stdbuf -oL alsactl monitor } | while read line; do
 	case ${line} in
-		*Master\ Playback*|init ) ppPlayback; print "p$REPLY" >&5 ;&
-		*Capture*|init )          ppCapture;  print "c$REPLY" >&5 ;&
+		init|*Master\ Playback* ) ppPlayback; print "p$REPLY" >&5 ;|
+		init|*Capture* )          ppCapture;  print "c$REPLY" >&5 ;|
 	esac
 done &
 

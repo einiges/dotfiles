@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=lock users session
+TryExec=loginctl
+Exec=loginctl lock-session
+Terminal=false
+Icon=lock
+StartupNotify=false
+Categories=UserSession

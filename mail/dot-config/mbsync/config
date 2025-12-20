@@ -1,0 +1,146 @@
+#    GLOBAL
+
+SyncState *
+Create    Both
+Expunge   Both
+
+
+
+
+
+#    MAILBOX
+
+
+IMAPAccount mb
+Host        imap.mailbox.org
+UserCmd     "pass show mail/mailbox/user"
+PassCmd     "pass show mail/mailbox/passwd"
+TLSType     IMAPS
+
+
+IMAPStore mb-remote
+Account   mb
+
+
+MaildirStore mb-local
+Path         ~/.mail/mailbox/
+Inbox        ~/.mail/mailbox/Inbox
+SubFolders   Verbatim
+
+
+Channel mb-inbox
+Far    :mb-remote:INBOX
+Near   :mb-local:Inbox
+
+Channel mb-remaining
+Far    :mb-remote:
+Near   :mb-local:
+Patterns * !Inbox
+
+
+Group   mb
+Channel mb-inbox
+Channel mb-remaining
+
+
+
+
+
+#    GMX
+
+IMAPAccount gmx
+Host        imap.gmx.net
+UserCmd     "pass show mail/gmx/user"
+PassCmd     "pass show mail/gmx/passwd"
+TLSType     IMAPS
+
+
+IMAPStore gmx-remote
+Account   gmx
+
+
+MaildirStore gmx-local
+Path         ~/.mail/gmx/
+Inbox        ~/.mail/gmx/Inbox
+SubFolders   Verbatim
+
+
+Channel gmx-inbox
+Far    :gmx-remote:INBOX
+Near   :gmx-local:Inbox
+
+Channel gmx-archive
+Far    :gmx-remote:Archiv
+Near   :gmx-local:Archive
+
+Channel gmx-deleted
+#UTF-7: Gel&APY-scht
+Far    :gmx-remote:Gelöscht
+Near   :gmx-local:Deleted
+
+Channel gmx-drafts
+# UTF-7: Entw&APw-rfe
+Far    :gmx-remote:Entwürfe
+Near   :gmx-local:Drafts
+
+Channel gmx-junk
+Far    :gmx-remote:Spamverdacht
+Near   :gmx-local:Junk
+
+Channel gmx-sent
+Far    :gmx-remote:Gesendet
+Near   :gmx-local:Sent
+
+Channel gmx-remaining
+Far    :gmx-remote:
+Near   :gmx-local:
+Patterns * !INBOX !Archive !Archiv !Deleted !Gelöscht !Drafts !Entwürfe !Junk !Spamverdacht !Sent !Gesendet !OUTBOX
+
+
+Group   gmx
+Channel gmx-inbox
+Channel gmx-archive
+Channel gmx-deleted
+Channel gmx-drafts
+Channel gmx-junk
+Channel gmx-sent
+Channel gmx-remaining
+
+
+
+
+
+#    OUTLOOK
+
+
+IMAPAccount outlook
+Host        outlook.office365.com
+UserCmd     "pass mail/outlook/user"
+PassCmd     "pass mail/outlook/passwd"
+TLSType     IMAPS
+
+
+IMAPStore outlook-remote
+Account   outlook
+
+
+MaildirStore outlook-local
+Path         ~/.mail/outlook/
+Inbox        ~/.mail/outlook/Inbox
+SubFolders   Verbatim
+
+
+Channel outlook-inbox
+Far    :outlook-remote:Inbox
+Near   :outlook-local:Inbox
+
+Channel outlook-remaining
+Far    :outlook-remote:
+Near   :outlook-local:
+Patterns * !Inbox !Outbox !Notes
+
+
+Group   outlook
+Channel outlook-inbox
+Channel outlook-remaining
+

@@ -1,0 +1,15 @@
+configurations:
+- hostCMD: pass show mail/outlook/imap
+  port: 993
+
+  usernameCMD: pass show mail/outlook/user
+  passwordCMD: pass show mail/outlook/passwd
+
+  tls: true
+  tlsOptions:
+    rejectUnauthorized: true
+    starttls: false
+
+  onNewMail: mbsync outlook
+  onNewMailPost: SKIP
+  wait: 5

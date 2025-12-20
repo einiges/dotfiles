@@ -6,7 +6,10 @@ end
 
 require('oil').setup()
 
-vim.keymap.set('n', '<leader>o', require('oil').open, {
-	desc = 'Open parent directory',
+vim.keymap.set('n', '<leader>O',
+	function()
+		require('oil').open()
+	end, {
+		desc = 'File explorer',
 })
 

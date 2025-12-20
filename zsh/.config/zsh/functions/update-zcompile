@@ -1,0 +1,30 @@
+#!/bin/zsh
+
+setopt local_options extended_glob
+
+# Remove compiled forms of files that are no longer persistent
+local zwc
+for zwc in {"$ZDOTDIR","$XDG_DATA_HOME"/zsh,"$XDG_CACHE_HOME"/zsh}/***.zwc(-.)
+do
+	[[ ! -f "$zwc" ]] &&
+		continue
+
+	[[ ! -f ${zwc:r} ]] &&
+		rm -f "$zwc"
+done
+
+# Compile all .zsh and .sh files
+local file
+for file in {"$ZDOTDIR","$XDG_DATA_HOME"/zsh,"$XDG_CACHE_HOME"/zsh}/***(-.)
+do
+
+	[[ ! -f "$file" ]] &&
+		continue
+
+	# TODO: 
+	zsh -n "$file" 2>/dev/null ||
+		continue
+
+	zcompile $file
+
+done

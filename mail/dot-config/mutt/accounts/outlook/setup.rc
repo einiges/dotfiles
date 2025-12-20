@@ -1,0 +1,18 @@
+# vim:ft=muttrc
+
+set from     = `pass show mail/outlook/user`
+set sendmail = "msmtp --account=outlook"
+
+
+# -- Directories --
+set spoolfile    = "=outlook/Inbox"
+set postponed    = "=outlook/Drafts"
+set record       = "=outlook/Sent"
+set trash        = "=outlook/Deleted"
+set mbox         = "=outlook/Archive"
+
+
+# -- Misc --
+unset signature
+
+

@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=logout
+TryExec=loginctl
+Exec=sh -c 'loginctl terminate-session $XDG_SESSION_ID'
+Terminal=false
+Icon=logout
+StartupNotify=false
+Categories=UserSession

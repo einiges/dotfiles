@@ -31,7 +31,7 @@ urlview-title-format      "   └─── URL ───┘"
 external-url-viewer "urlscan"
 html-renderer "w3m -dump -T text/html"
 
-browser "rifle -f f %u"
+browser "xdg-open %u"
 player mpv
 
 

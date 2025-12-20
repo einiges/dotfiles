@@ -8,5 +8,12 @@ require('FTerm').setup({
 	border = 'double'
 })
 
-vim.keymap.set('n', '<leader>T', function() require('FTerm').toggle() end)
+vim.keymap.set('n', '<leader>T',
+	function()
+		require('FTerm').toggle()
+	end,
+	{
+		desc = 'Terminal (floating)'
+	}
+)
 

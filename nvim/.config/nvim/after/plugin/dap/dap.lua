@@ -9,56 +9,137 @@ end
 -- Signs
 --
 --
-local signs = {
-	Breakpoint = ' ',
-	BreakpointCondition = '',
-	LogPoint = ' ',
-	Stopped = ' ',
-	BreakpointRejected = '',
-}
+require('my.utils.nvim.sign').define('Dap', {
+	Breakpoint = '●',
+	BreakpointCondition = '●',
+	LogPoint = '◒',
+	Stopped = '→',
+	BreakpointRejected = '○',
+})
 
-for type, icon in pairs(signs) do
-	local name = 'Dap' .. type
-	-- TODO: Define Colors, probably dont want texthl=numhl=linehl and especially culhl=name
-	vim.fn.sign_define(name, { text = icon, texthl = name, numhl = name, linehl = name, culhl = name })
-end
 
 --
 --
 -- Keymaps
 --
 --
-local nmap = require('my.utils.nvim.keymap')():mode('n')
 
-nmap:desc('Continue'):setX('<F5>', function()
-	require('dap').continue()
-end)
 
-nmap:desc('Step over'):setX('<F6>', function()
-	require('dap').step_over()
-end)
+--
+-- Steps
+--
+local has_hydra, Hydra = PREQUIRE('hydra')
+if has_hydra then
+	Hydra({
+		name = 'DAP',
+		mode = 'n',
+		body = '<leader>d',
+		heads = {
+			{
+				'n',
+				function()
+					require('dap').continue()
+				end, {
+					desc = 'Continue'
+				}
+			},
+			{
+				'r',
+				function()
+					require('dap').step_over()
+				end, {
+					desc = 'Step over'
+				}
+			},
+			{
+				'i',
+				function()
+					require('dap').step_into()
+				end, {
+					desc = 'Step into ↴'
+				}
+			},
+			{
+				'o',
+				function()
+					require('dap').step_out()
+				end, {
+					desc = 'Step out ↱'
+				}
+			},
+			{
+				'b',
+				function()
+					require('dap').step_back()
+				end, {
+					desc = 'Step back ↰'
+				}
+			},
+		}
+	})
+end
 
-nmap:desc('Step into'):setX('<F7>', function()
-	require('dap').step_into()
-end)
-nmap:desc('Step out'):setX('<F8>', function()
-	require('dap').step_out()
-end)
-nmap:desc('Step back'):setX('<F4>', function()
-	require('dap').step_back()
-end)
-nmap:desc('Toggle breakpoint'):setX('<leader>b', function()
-	require('dap').toggle_breakpoint()
-end)
-nmap:desc('Set conditional breakpoint'):setX('<leader>B', function()
-	require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: '))
-end)
-nmap:desc(''):setX('<leader>lp', function()
-	require('dap').set_breakpoint(nil, nil, vim.fn.input('Log point message: '))
-end)
-nmap:desc('Open'):setX('<leader>dr', function()
-	require('dap').repl.open()
-end)
-nmap:desc('Run last'):setX('<leader>dl', function()
-	require('dap').run_last()
-end)
+
+vim.keymap.set('n', '<leader>dL',
+	function()
+		require('dap').run_last()
+	end, {
+		desc = 'Run last',
+	}
+)
+
+
+vim.keymap.set('n', '<leader>dR',
+	function()
+		require('dap').restart()
+	end, {
+		desc = 'Restart',
+	}
+)
+
+
+vim.keymap.set('n', '<leader>dT',
+	function()
+		require('dap').terminate()
+	end, {
+		desc = 'Terminate',
+	}
+)
+
+--
+-- Breakpont Setup
+--
+
+vim.keymap.set('n', 'db',
+	function()
+		require('dap').toggle_breakpoint()
+	end,
+	{
+		desc = 'Breakpoint',
+	}
+)
+
+vim.keymap.set('n', '<leader>dc',
+	function()
+		require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: '))
+	end, {
+		desc = 'Conditional Breakpoint',
+	}
+)
+
+vim.keymap.set('n', '<leader>dl',
+	function()
+		require('dap').set_breakpoint(nil, nil, vim.fn.input('Log point message: '))
+	end, {
+		desc = 'Logpoint',
+	}
+)
+
+-- TODO: ?
+vim.keymap.set('n', '<leader>dC',
+	function()
+		require('dap').repl.open()
+	end, {
+		desc = 'Debug-console',
+	}
+)

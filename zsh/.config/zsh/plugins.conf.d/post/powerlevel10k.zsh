@@ -1,3 +1,4 @@
+return
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.config/zsh/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -35,6 +36,7 @@ typeset -g POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(
 
 typeset -g POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(
 	#   Line #1
+	time
 	status
 	command_execution_time
 
@@ -200,11 +202,11 @@ function my_git_formatter() {
 
 	(( VCS_STATUS_STASHES        )) && res+=" ${clean}=${VCS_STATUS_STASHES}"
 	[[ -n $VCS_STATUS_ACTION     ]] && res+=" ${conflicted}${VCS_STATUS_ACTION}"
-	(( VCS_STATUS_NUM_CONFLICTED )) && res+=" ${conflicted}%Bχ%b${VCS_STATUS_NUM_CONFLICTED}"
-	(( VCS_STATUS_NUM_STAGED     )) && res+=" ${modified}%Bτ%b${VCS_STATUS_NUM_STAGED}"
-	(( VCS_STATUS_NUM_UNSTAGED   )) && res+=" ${modified}%Bυ%b${VCS_STATUS_NUM_UNSTAGED}"
+	(( VCS_STATUS_NUM_CONFLICTED )) && res+=" ${conflicted}✘%B${VCS_STATUS_NUM_CONFLICTED}%b"
+	(( VCS_STATUS_NUM_STAGED     )) && res+=" ${modified}!%B${VCS_STATUS_NUM_STAGED}%b"
+	(( VCS_STATUS_NUM_UNSTAGED   )) && res+=" ${modified}?%B${VCS_STATUS_NUM_UNSTAGED}%b"
 
-	(( VCS_STATUS_NUM_UNTRACKED  )) && res+=" ${untracked}%Bη%b${VCS_STATUS_NUM_UNTRACKED}"
+	(( VCS_STATUS_NUM_UNTRACKED  )) && res+=" ${untracked}η%B${VCS_STATUS_NUM_UNTRACKED}%b"
 
 	(( VCS_STATUS_HAS_UNSTAGED == -1 )) && res+=" ${modified}-"
 

@@ -1,20 +1,34 @@
 -- Natural split resizing
 PAQ('mrjones2014/smart-splits.nvim')
 
-if not PREQUIRE('smart-splits') then
-	return
-end
+vim.keymap.set({ 'n', 't' }, '<C-Left>',
+	function()
+		require('smart-splits').move_cursor_left()
+	end,
+	{ desc = 'Select ◀', }
+)
 
-local ss = require('smart-splits')
+vim.keymap.set({ 'n', 't' }, '<C-Down>',
+	function()
+		require('smart-splits').move_cursor_down()
+	end,
+	{ desc = 'Select ▼', }
+)
 
-vim.keymap.set({ 'n', 't' }, '<C-Left>', ss.move_cursor_left,
-	{ desc = 'Select ◀' })
-vim.keymap.set({ 'n', 't' }, '<C-Down>', ss.move_cursor_down,
-	{ desc = 'Select ▼' })
-vim.keymap.set({ 'n', 't' }, '<C-Up>', ss.move_cursor_up,
-	{ desc = 'Select ▲' })
-vim.keymap.set({ 'n', 't' }, '<C-Right>', ss.move_cursor_right,
-	{ desc = 'Select ▶' })
+vim.keymap.set({ 'n', 't' }, '<C-Up>',
+	function()
+		require('smart-splits').move_cursor_up()
+	end,
+	{ desc = 'Select ▲', }
+)
+
+vim.keymap.set({ 'n', 't' }, '<C-Right>',
+	function()
+		require('smart-splits').move_cursor_right()
+	end,
+	{ desc = 'Select ▶', }
+)
+
 
 local has_hydra, Hydra = PREQUIRE('hydra')
 if not has_hydra then
@@ -22,21 +36,82 @@ if not has_hydra then
 end
 
 Hydra({
-	name = 'Buffer Resize',
+	name = 'Window',
 	mode = 'n',
-	body = '<leader>b',
+	body = '<leader>w',
 	heads = {
-		{ 'n', function() ss.resize_left(8) end, {
-			desc = 'resize ◀'
+
+		-- resize windows
+		{ 'n',
+			function()
+				require('smart-splits').resize_left(8)
+			end, {
+			desc = 'Resize ◀',
 		} },
-		{ 'r', function() ss.resize_down(3) end, {
-			desc = 'resize ▼'
+		{ 'r',
+			function()
+				require('smart-splits').resize_down(3)
+			end, {
+			desc = 'Resize ▼',
 		} },
-		{ 't', function() ss.resize_up(3) end, {
-			desc = 'Resize ▲'
+		{ 't',
+			function()
+				require('smart-splits').resize_up(3)
+			end, {
+			desc = 'Resize ▲',
 		} },
-		{ 'd', function() ss.resize_right(8) end, {
-			desc = 'Resize ▶'
+		{ 'd',
+			function()
+				require('smart-splits').resize_right(8)
+			end, {
+			desc = 'Resize ▶',
 		} },
+
+		-- swap windows
+		{ 'N',
+			'<C-w>H', {
+			desc = 'Swap ◀',
+		} },
+		{ 'R',
+			'<C-w>J', {
+			desc = 'Swap ▼',
+		} },
+		{ 'T',
+			'<C-w>K', {
+			desc = 'Swap ▲',
+		} },
+		{ 'D',
+			'<C-w>L', {
+			desc = 'Swap ▶',
+		} },
+
+		-- select windows
+		{ 'h',
+			function()
+				require('smart-splits').move_cursor_left()
+			end, {
+			desc = 'Select ◀',
+		} },
+		{ 'g',
+			function()
+				require('smart-splits').move_cursor_up()
+			end, {
+			desc = 'Select ▼',
+		} },
+		{ 'f',
+			function()
+				require('smart-splits').move_cursor_down()
+			end, {
+			desc = 'Select ▲',
+		} },
+		{ 'q',
+			function()
+				require('smart-splits').move_cursor_right()
+			end, {
+			desc = 'Select ▶',
+		} },
+
+
 	},
 })
+

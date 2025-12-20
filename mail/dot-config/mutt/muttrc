@@ -1,0 +1,238 @@
+
+
+
+# Variables
+
+set my_config_home = "$XDG_CONFIG_HOME/mutt"
+set my_cache_home = "$XDG_CACHE_HOME/mutt"
+set my_data_home = "$XDG_DATA_HOME/mutt"
+set my_state_home = "$XDG_STATE_HOME/mutt"
+#set my_folder="~/.mail"
+
+
+# Directories
+
+set folder = "~/.mail"
+set header_cache = $my_cache_home/headers
+set history_file = $my_state_home/history
+set mailcap_path = $my_config_home/mailcap
+set message_cachedir = $my_cache_home/bodies
+
+
+
+# Commands
+
+set   display_filter = "sed -f $my_config_home/display_filter.sed"
+# set   query_command = "abook --mutt-query %s"
+
+
+
+# General
+
+unset beep
+set   beep_new
+set   delete
+unset help
+set   history_remove_dups
+set   save_history = 30
+unset imap_peek
+set   mail_check = 0 # mbsync
+set   mail_check_stats
+set   mail_check_stats_interval = 60
+#set   maildir_trash
+unset mark_old
+set   mbox_type = Maildir
+set   quit
+set   rfc2047_parameters
+unset score
+set   sidebar_delim_chars = "/"
+set   sidebar_divider_char = "┃"
+set   sidebar_folder_indent
+set   sidebar_indent_string = "  "
+set   sidebar_relative_shortpath_indent
+set   sidebar_short_path
+set   sidebar_sort_method = unsorted
+set   sidebar_width = 17
+set   ssl_starttls
+set   ssl_force_tls
+set   timeout = 5
+set   ts_enabled
+unset user_agent
+unset wait_key
+
+
+
+# Compose
+
+set   abort_noattach = ask-yes
+set   abort_noattach_regexp = "([Aa]ngehängt|Anh(ang|änge)|[Aa]nhängend|hängt an)"
+unset abort_nosubject
+set   abort_unmodified
+set   fast_reply
+unset forward_decode
+set   mime_forward
+set   mime_forward_rest
+set   use_envelope_from
+set   realname = "<@NAME12@>"
+set   reverse_name
+set   send_charset = "UTF-8"
+set   sig_dashes
+set   text_flowed
+
+
+
+# Index
+
+set   narrow_tree
+set   sort = reverse-threads
+set   sort_aux = last-date-received
+set   sort_browser = alpha
+set   strict_threads
+set   thread_received
+set   uncollapse_jump
+
+
+
+# Pager
+
+unset markers
+set   menu_scroll
+set   pager_context = 4
+set   pager_index_lines = 26
+set   pager_stop
+set   tilde
+
+auto_view text/html
+alternative_order text/plain text/enriched text/html
+
+
+
+# Formats
+
+set   to_chars= "- +c!l"
+set   attach_format  = "%2n ┆ %u%D%I%t │ %7s %15.15M │ %T %d %*  [%.6e%?C?, %C?]"
+set   attribution = "Am %d, schrieb %n:"
+set   date_format  = "%a, %d. %b %Y um %H:%M Uhr"
+set   folder_format = "%2C ┆ %t │ %f"
+set   forward_format = "Fw: %s"
+set   index_format = "%4C ┆ %Z │ %-25.25F │ %s %*  │ %[%e %_2m %y ┆ %k %_2M]"
+set   sidebar_format = "%B%*  %?N?%N? "
+set   status_format = " %?M?%M/?%m Mails %?n?%n new, ?%?u?%u unread, ?%?p?%p drafts, ?%?t?%t +tagged, ?%?d?%d deleted, ?%f %l %?b?%b unread messages. ?%>  %V [%P]"
+
+
+
+# Encryption
+
+#set crypt_autosign
+unset crypt_autosmime
+set crypt_protected_headers_write
+set crypt_replyencrypt
+set crypt_replysign
+set crypt_replysignencrypted
+set crypt_use_gpgme
+set crypt_verify_sig
+
+
+
+# Header
+
+ignore *
+unignore  from: to: cc: subject:
+hdr_order from: to: cc: subject:
+
+
+
+# Mailboxes
+
+unmailboxes *
+
+
+
+# Colors
+
+set cursor_overlay
+set header_color_partial
+source $my_config_home/colors/solarized_light.rc
+
+
+
+# Account Management
+
+source $my_config_home/accounts/gmx/setup.rc # default
+source "printf 'source %s\n' '$my_config_home/accounts/'*'/init.rc' |"
+
+
+
+# Bindings
+
+bind index,pager &   sidebar-toggle-visible
+bind index,pager =   sidebar-open
+bind index,pager <   sidebar-prev
+bind index,pager >   sidebar-next
+
+
+bind pager <Down>    next-line
+bind pager <Up>      previous-line
+bind index <Down>    next-entry
+bind index <Up>      previous-entry
+bind pager (         next-undeleted
+bind pager )         previous-undeleted
+bind index (         next-unread
+bind index )         previous-unread
+
+bind pager \cd       half-down
+bind pager \cu       half-up
+
+bind index,pager N search-opposite
+
+bind compose p       pgp-menu
+
+bind editor <Up>     history-up
+bind editor <Down>   history-down
+bind editor <Delete> delete-char
+
+bind generic <Right> select-entry
+
+
+
+# Macros
+
+macro index,pager c  "<change-folder>?"
+
+macro index,pager <F1> "<shell-escape>w3m /usr/share/doc/mutt/manual.html<enter>" "Show Mutt documentation"
+macro index,pager <F2> ":toggle help<enter>" "toggle help status line"
+macro index,pager <F5> ":source $my_config_home/muttrc<enter>" "reload muttrc"
+
+# View URLs
+macro index,pager \cb "<pipe-message> urlscan<Enter>" "call urlscan to extract URLs out of a message"
+macro attach,compose \cb "<pipe-entry> urlscan<Enter>" "call urlscan to extract URLs out of a message"
+
+# Abook
+bind editor <tab> complete-query
+
+macro generic,index,pager \ca "<shell-escape>abook<return>" "launch abook"
+macro index,pager A "<pipe-message>abook --add-email-quiet > /dev/null<return>" "add the sender address to abook"
+
+# Notmuch
+
+#macro index <F8> \
+#	"<enter-command>set my_old_pipe_decode=\$pipe_decode my_old_wait_key=\$wait_key nopipe_decode nowait_key<enter>\
+#	<shell-escape>notmuch-mutt -r --prompt search<enter>\
+#	<change-folder-readonly>`echo ${XDG_CACHE_HOME:-$HOME/.cache}/notmuch/mutt/results`<enter>\
+#	<enter-command>set pipe_decode=\$my_old_pipe_decode wait_key=\$my_old_wait_key<enter>" \
+#	"notmuch: search mail"
+#
+#macro index <F9> \
+#	"<enter-command>set my_old_pipe_decode=\$pipe_decode my_old_wait_key=\$wait_key nopipe_decode nowait_key<enter>\
+#	<pipe-message>notmuch-mutt -r thread<enter>\
+#	<change-folder-readonly>`echo ${XDG_CACHE_HOME:-$HOME/.cache}/notmuch/mutt/results`<enter>\
+#	<enter-command>set pipe_decode=\$my_old_pipe_decode wait_key=\$my_old_wait_key<enter>" \
+#	"notmuch: reconstruct thread"
+#
+#macro index <F6> \
+#	"<enter-command>set my_old_pipe_decode=\$pipe_decode my_old_wait_key=\$wait_key nopipe_decode nowait_key<enter>\
+#	<pipe-message>notmuch-mutt tag -- -inbox<enter>\
+#	<enter-command>set pipe_decode=\$my_old_pipe_decode wait_key=\$my_old_wait_key<enter>" \
+#	"notmuch: remove message from inbox"
+
+

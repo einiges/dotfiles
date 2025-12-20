@@ -10,10 +10,17 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 	end,
 })
 
+local myTerminalGroup = vim.api.nvim_create_augroup('MyNvimTerminal', {})
 vim.api.nvim_create_autocmd('TermOpen', {
 	desc = 'Start terminal in insert',
-	group = vim.api.nvim_create_augroup('MyNvimTerminal', {}),
-	pattern = '*',
+	group = myTerminalGroup,
+	command = 'startinsert',
+})
+
+vim.api.nvim_create_autocmd('BufEnter', {
+	desc = 'Enter terminal in insert',
+	group = myTerminalGroup,
+	pattern = 'term://*',
 	command = 'startinsert',
 })
 

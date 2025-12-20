@@ -1,0 +1,1 @@
+include $XDG_CONFIG_HOME/kanshi/config.d/*

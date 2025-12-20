@@ -1,0 +1,190 @@
+'$schema' = 'https://starship.rs/config-schema.json'
+
+format = """
+$directory \
+($git_branch )($git_status )($git_commit )($git_state )\
+($docker_context )\
+$fill\
+( $status )( $jobs )\
+$fill\
+( $cmd_duration)( $time)\
+$line_break\
+$character\
+"""
+
+follow_symlinks = false
+
+palette = 'gruvbox_light'
+
+[palettes.gruvbox_light]
+color_bg0_h      = '#f9f5d7'
+color_bg0        = '#fbf1c7'
+color_bg0_s      = '#f2e5bc'
+
+# bg = bg0*
+color_bg         = '#fbf1c7'
+# fg = fg1
+color_fg         = '#3c3836'
+
+color_bg1        = '#ebdbb2'
+color_bg2        = '#d5c4a1'
+color_bg3        = '#bdae93'
+color_bg4        = '#a89884'
+
+color_fg0        = '#282828'
+color_fg1        = '#3c3836'
+color_fg2        = '#504945'
+color_fg3        = '#665c54'
+color_fg4        = '#7c6f64'
+
+color_red        = '#cc241d'
+color_red_h      = '#9d0006'
+color_red_s      = '#fb4934'
+color_green      = '#98971a'
+color_green_h    = '#79740e'
+color_green_s    = '#b8bb26'
+color_yellow     = '#d79921'
+color_yellow_h   = '#b57614'
+color_yellow_s   = '#fabd2f'
+color_blue       = '#458588'
+color_blue_h     = '#076678'
+color_blue_s     = '#83a598'
+color_purple     = '#b16286'
+color_purple_h   = '#8f3f71'
+color_purple_s   = '#d3869b'
+color_aqua       = '#689d6a'
+color_aqua_h     = '#427b58'
+color_aqua_s     = '#8ec07c'
+color_orange     = '#d65d0e'
+color_orange_h   = '#af3a03'
+color_orange_s   = '#fe8019'
+color_gray       = '#7c6f64'
+color_gray_h     = '#928374'
+color_gray_s     = '#a89984'
+
+
+
+[directory]
+format = '[ ($read_only )$path ]($style)'
+style  = 'fg:color_fg bg:color_yellow_s'
+
+read_only = ''
+read_only_style = 'fg:color_fg0 bg:color_yellow_s'
+
+before_repo_root_style = 'fg:color_fg0 bg:color_yellow_s'
+repo_root_style        = 'fg:color_fg0 bg:color_yellow_s underline'
+repo_root_format       = '[( $read_only)( $before_root_path)]($before_repo_root_style)[$repo_root]($repo_root_style)[$path ]($style)'
+
+truncate_to_repo = true
+truncation_length = 99
+truncation_symbol = '…/'
+
+
+
+[directory.substitutions]
+Documents = '󰈙'
+Downloads = '󰇚'
+Music = '󰝚'
+Audio = '󰎇'
+Pictures = '󰋩'
+Developer = '󰅩'
+
+
+
+[jobs]
+symbol = ''
+format = '[ $symbol$number[ ](fg:color_bg bg:prev_bg)]($style)'
+style  = 'bg:color_purple_s fg:color_fg0 bold'
+number_threshold = 1
+
+
+
+[status]
+disabled = false
+format = '[ $status ]($style)'
+style  = 'bg:color_red fg:color_bg0'
+
+pipestatus = true
+pipestatus_separator = '[→](bg:prev_bg fg:prev_fg)'
+pipestatus_format = '$pipestatus'
+
+
+
+[cmd_duration]
+format = '[ $duration ]($style)'
+style = 'fg:color_fg0 bg:color_purple_s'
+min_time = 3000
+
+
+
+[time]
+disabled = false
+format = '[ $time ]($style)'
+style  = 'bg:color_bg0_s fg:color_fg bold'
+time_format = '%R'
+
+
+
+[fill]
+symbol = ' '
+style = 'bg:color_bg0_s fg:color_bg'
+
+
+
+[character]
+format = '$symbol '
+
+success_symbol            = '[ # ](fg:color_fg4      bg:color_fg4)'
+error_symbol              = '[ # ](fg:color_red      bg:color_red)'
+vimcmd_symbol             = '[ # ](fg:color_aqua     bg:color_aqua)'
+vimcmd_replace_one_symbol = '[ # ](fg:color_purple   bg:color_purple)'
+vimcmd_replace_symbol     = '[ # ](fg:color_purple_s bg:color_purple_s)'
+vimcmd_visual_symbol      = '[ # ](fg:color_fg       bg:color_fg)'
+
+
+
+[git_branch]
+symbol = ''
+style  = 'fg:color_fg0 bg:color_aqua_s'
+format = '[ $symbol $branch ]($style)'
+truncation_length = 25
+
+[git_commit]
+format = '[ $hash$tag ]($style)'
+style = 'fg:color_fg0 bg:color_aqua_s'
+tag_symbol = '󰓹'
+tag_disabled = false
+only_detached = true
+
+[git_state]
+format = '[$state($progress_current/$progress_total)]($style)'
+style  = 'fg:color_fg0 bg:color_orange_s'
+
+[git_status]
+format     = '[( $all_status$ahead_behind )]($style)'
+style      = 'bg:color_aqua_s'
+conflicted = '[ ✗$count ](fg:color_red_h bg:prev_bg bold)'
+ahead      = ' ⇡$count '
+behind     = ' ⇣$count '
+diverged   = '⇕'
+up_to_date = ''
+untracked  = '?'
+stashed    = '≡'
+modified   = '!'
+staged     = '+'
+renamed    = '→'
+deleted    = '-'
+typechanged = ''
+
+
+
+[docker_context]
+format = '[( $symbol$context )]($style)'
+style = 'fg:color_fg0 bg:color_blue_s'
+symbol = '󰡨'
+
+detect_files = [
+	'docker-compose.yaml',
+	'compose.yaml',
+	'Dockerfile'
+]

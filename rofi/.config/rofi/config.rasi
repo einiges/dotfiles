@@ -1,3 +1,4 @@
+
 configuration {
 	modi: "drun,run,window";
 	terminal: "terminal";
@@ -28,12 +29,10 @@ configuration {
 	kb-accept-custom: "Control+Return";
 	kb-accept-alt: "Shift+Return";
 	kb-delete-entry: "";
-	kb-mode-next: "Tab";
-	kb-mode-previous: "ISO_Left_Tab";
 	kb-row-left: "";
 	kb-row-right: "";
-	kb-row-up: "Up,Control+Up,Control+p";
-	kb-row-down: "Down,Control+Down,Control+n";
+	kb-row-up: "Up,Control+p";
+	kb-row-down: "Down,Control+n";
 	kb-row-tab: "";
 	kb-page-prev: "Prior";
 	kb-page-next: "Next";
@@ -41,9 +40,9 @@ configuration {
 	kb-row-last: "Control+r";
 	kb-row-select: "Control+space";
 	kb-screenshot: "";
-	kb-toggle-case-sensitivity: "Control+q";
 	kb-toggle-sort: "";
-	kb-cancel: "Super_L,Escape";
+	//sorting-method: "fzf";
+	kb-cancel: "Escape";
 	kb-custom-1: "";
 	kb-custom-2: "";
 	kb-custom-3: "";
@@ -81,6 +80,6 @@ configuration {
 	me-accept-entry: "MousePrimary";
 	me-accept-custom: "Control+MousePrimary";
 }
-@theme "solarized-bar"
 
-// vim: ft=scss
+@theme "windows11-list-light"
+

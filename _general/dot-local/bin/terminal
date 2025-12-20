@@ -1,0 +1,11 @@
+#!/bin/sh
+
+for terminal in "${TERMINAL}" kitty ghostty gnome-terminal mate-terminal
+do
+	if command -v "$terminal" >/dev/null 2>&1
+	then
+		exec "$terminal" "$@"
+	fi
+done
+
+exit 1

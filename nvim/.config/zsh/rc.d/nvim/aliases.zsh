@@ -1,3 +1,3 @@
-alias m='MANPAGER="nvim +Man!" man '
+alias mm='MANPAGER="nvim +Man!" man '
 alias n='nvim'
 

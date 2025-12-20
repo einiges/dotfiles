@@ -1,0 +1,15 @@
+configurations:
+- hostCMD: pass show mail/mailbox/imap
+  port: 993
+
+  usernameCMD: pass show mail/mailbox/user
+  passwordCMD: pass show mail/mailbox/passwd
+
+  tls: true
+  tlsOptions:
+    rejectUnauthorized: true
+    starttls: false
+
+  onNewMail: mbsync mailbox
+  onNewMailPost: SKIP
+  wait: 5

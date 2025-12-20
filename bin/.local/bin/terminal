@@ -1,8 +1,0 @@
-#!/bin/sh
-
-if [ -z "${TERMINAL+x}" ] || ! command -v "${TERMINAL}" >/dev/null; then
-	exit 1
-fi
-
-exec "$TERMINAL" "$@"
-

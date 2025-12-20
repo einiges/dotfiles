@@ -1,0 +1,41 @@
+defaults
+protocol     smtp
+port         465
+auth         on
+tls          on
+tls_starttls off
+#tls_trust_file /etc/ssl/certs/ca-certificates.crt
+
+
+
+# GMX
+
+account gmx
+eval         echo -n 'host ' && pass show mail/gmx/smtp
+user         <@MAIL_1@>
+from         <@MAIL_1@>
+from         <@MAIL_2@>
+passwordeval pass show mail/gmx/passwd
+
+
+
+# MAILBOX
+
+account mailbox
+eval         echo -n 'host ' && pass show mail/mailbox/smtp
+user         <@NAME1@>.<@NAME2@>@mailbox.org
+from         <@NAME1@>.<@NAME2@>@mailbox.org
+from         <@MAIL_5@>
+passwordeval pass show mail/mailbox/passwd
+
+
+
+# OUTLOOK
+
+account outlook
+port         587
+tls_starttls on
+eval         echo -n 'host ' && pass show mail/outlook/smtp
+user         <@MAIL_3@>
+from         <@MAIL_3@>
+passwordeval pass show mail/outlook/passwd

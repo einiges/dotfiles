@@ -1,0 +1,291 @@
+/*fineman's styling*/
+
+/*IN CASE YOU FORGOR*/
+/*padding/margin: up right down left*/
+
+/*Colors [Gruvbox light]*/
+@define-color bg0_h       #f9f5d7;
+@define-color bg0         #fbf1c7;
+@define-color bg0_s       #f2e5bc;
+
+@define-color bg          #fbf1c7; /* bg = bg0* */
+@define-color fg          #3c3836; /* fg = fg1  */
+
+@define-color bg1         #ebdbb2;
+@define-color bg2         #d5c4a1;
+@define-color bg3         #bdae93;
+@define-color bg4         #a89884;
+
+@define-color fg0         #282828;
+@define-color fg1         #3c3836;
+@define-color fg2         #504945;
+@define-color fg3         #665c54;
+@define-color fg4         #7c6f64;
+
+@define-color red         #cc241d;
+@define-color red_h       #9d0006;
+@define-color red_s       #fb4934;
+@define-color green       #98971a;
+@define-color green_h     #79740e;
+@define-color green_s     #b8bb26;
+@define-color yellow      #d79921;
+@define-color yellow_h    #b57614;
+@define-color yellow_s    #fabd2f;
+@define-color blue        #458588;
+@define-color blue_h      #076678;
+@define-color blue_s      #83a598;
+@define-color purple      #b16286;
+@define-color purple_h    #8f3f71;
+@define-color purple_s    #d3869b;
+@define-color aqua        #689d6a;
+@define-color aqua_h      #427b58;
+@define-color aqua_s      #8ec07c;
+@define-color orange      #d65d0e;
+@define-color orange_h    #af3a03;
+@define-color orange_s    #fe8019;
+@define-color gray        #7c6f64;
+@define-color gray_h      #928374;
+@define-color gray_s      #a89984;
+
+* {
+	all: unset;
+	/*font-family: "Symbols Nerd Font Mono", "JetBrains Mono";*/
+	font-family: "Liberation Mono";
+	font-size: 14px;
+}
+
+window#waybar {
+	background-color: @bg;
+	color: @fg;
+	/*border: 8px solid @red;*/
+	/*margin: 8px 8px;*/
+	/*padding: 8px 8px;*/
+}
+
+tooltip {
+	background-color: @bg;
+	border: 2px solid @fg0;
+	padding: 20px 8px;
+}
+
+tooltip label {
+	color: @fg0;
+}
+
+#privacy-item {
+	background-color: @bg1;
+	color: @red;
+	padding: 0.5em 0;
+}
+
+#privacy.tooltip {
+	padding: 20px 8px;
+}
+
+/* WORKSPACES */
+#workspaces button {
+	border-style: solid;
+	border-width: 1px;
+	margin: 0.1em 0;
+	padding: 0.5em 0;
+}
+
+/* normal */
+#workspaces button:not(.visible):not(.active):not(:hover) {
+	background-color: @bg1;
+	color: @fg;
+	border-color: @fg;
+	/*font-weight: bold;*/
+	text-shadow: 1px 1px 2px @fg3;
+}
+
+/* focused */
+#workspaces button.active:not(:hover) {
+	background-color: @blue;
+	border-color: @blue_h;
+	color: @bg;
+	font-weight: bold;
+	text-shadow: 1px 1px 2px @fg3;
+}
+
+/* active (on other monitor) */
+#workspaces button.visible:not(.active):not(:hover) {
+	background-color: @blue_s;
+	border-color: @blue;
+	color: @bg;
+	font-weight: bold;
+	text-shadow: 1px 1px 2px @fg3;
+}
+
+#workspaces button.urgent:not(:hover) {
+	background-color: @orange_s;
+	border-color: @orange;
+	color: @bg;
+	font-weight: bold;
+	text-shadow: 1px 1px 2px @fg3;
+}
+
+#workspaces button:hover {
+	background-color: @aqua;
+	border-color: @aqua_h;
+	color: @bg;
+	font-weight: bold;
+	text-shadow: 1px 1px 2px @fg3;
+}
+
+
+#tray {
+	background-color: @bg1;
+	color: @fg;
+	padding: 0.5em 0;
+	margin: 0.1em 0;
+}
+
+#tray menu {
+	background-color: @bg1;
+	border: 1px solid @fg;
+}
+
+#tray menuitem:hover {
+	background-color: @blue;
+}
+
+#tray menuitem.inactive {
+	background-color: @bg2;
+}
+
+#tray > .needs-attention {
+	background-color: @orange_s;
+}
+
+
+
+#wireplumber {
+	border-style: solid;
+	border-width: 1px;
+	padding: 1em 0;
+	/*font-weight: bold;*/
+	text-shadow: 1px 1px 2px @fg4;
+}
+
+#wireplumber.sink {
+	background-color: @yellow_s;
+	border-color: @yellow;
+	color: @fg2;
+}
+
+#wireplumber.source {
+	background-color: @orange_s;
+	border-color: @orange;
+	color: @fg0;
+}
+
+#wireplumber.source.source-muted,
+#wireplumber.sink.muted {
+	text-decoration-line: line-through;
+	/*text-decoration-color: @bg;*/
+}
+
+
+#network {
+	border-style: solid;
+	border-width: 1px;
+	padding: 1em 0;
+	border-color: @blue_h;
+	background-color: @blue;
+	color: @bg;
+	text-shadow: 1px 1px 2px @fg2;
+	font-weight: bold;
+}
+
+#network.disconnected {
+	background-color: @red;
+	color: @fg;
+	text-decoration-line: line-through;
+}
+
+#network.disabled {
+	background-color: @fg;
+	color: @bg;
+	font-style: italic;
+}
+
+
+
+#bluetooth {
+	padding: 1em 0;
+	background-color: @blue_s;
+	/*font-size: 18px;*/
+	color: @fg0;
+}
+
+
+
+#backlight {
+	padding: 1px 0;
+	font-size: 18px;
+	color: @fg0;
+}
+
+
+
+#battery {
+	padding: 2px 0 4px 0;
+	color: @fg0;
+}
+
+#battery.warning:not(.charging) {
+	background-color: @orange;
+	color: @bg_dim;
+}
+
+#battery.critical:not(.charging) {
+	background-color: @red;
+	color: @bg_dim;
+}
+
+
+
+#language {
+	padding: 1em 0;
+	background-color: @aqua;
+	color: @bg;
+	font-weight: bold;
+	text-shadow: 1px 1px 2px @fg3;
+}
+
+
+#mpris {
+	text-shadow: 1px 1px 5px @fg4;
+}
+
+#mpris.playing {
+	background-color: @bg1;
+	color: @fg;
+	padding: 1em 0;
+}
+
+#mpris.stopped {
+	text-decoration-line: line-through;
+}
+
+#mpris.paused {
+	background-color: @bg1;
+	color: @fg;
+	font-style: italic;
+	padding: 1em 0;
+}
+
+
+
+#clock {
+	background-color: @bg1;
+	border-style: solid;
+	border-width: 1px;
+	border-color: @bg2;
+	color: @fg;
+	font-weight: bold;
+	text-shadow: 1px 1px 2px @bg3;
+	padding: 1em 0;
+}
+

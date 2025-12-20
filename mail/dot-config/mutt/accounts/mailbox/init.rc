@@ -1,0 +1,17 @@
+# vim:ft=muttrc
+
+alternates -group me -group mailbox "<@NAME1@>@<@NAME2@>\.me"
+
+mailboxes `echo =mailbox{,/{Inbox,Archive,Sent,Drafts,Trash,Junk}}`
+#source "find ~/.mail/mailbox -type d -exec test -d '{}/cur' -a -d '{}/new' -a -d '{}/tmp' ; -printf 'mailbox =mailbox/%P\n' |"
+
+
+
+send2-hook '%f mailbox' 'source $my_config_home/accounts/mailbox/setup.rc'
+
+folder-hook mailbox 'source $my_config_home/accounts/mailbox/setup.rc'
+
+
+
+macro index ,m  "<change-folder> =mailbox/Inbox<enter>"        "go to Inbox (mailbox)"
+

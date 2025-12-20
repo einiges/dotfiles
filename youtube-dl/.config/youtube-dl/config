@@ -7,11 +7,20 @@
 # Batch file
 #-a FILE
 
+--format 'bestvideo+bestaudio/best'
 --audio-format "flac"
 --audio-quality 0
 
 --ignore-errors
 
+--external-downloader 'aria2c'
 
 #--download-archive FILE
 
+--add-metadata
+--xattrs
+
+--no-call-home
+--no-overwrites
+
+--no-warnings

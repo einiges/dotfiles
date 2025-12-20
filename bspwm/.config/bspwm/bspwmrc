@@ -1,46 +1,49 @@
 #!/usr/bin/env sh
 
-
 # -- General --
 
-bspc config focused_border_color        '#657B83'
-bspc config active_border_color         '#AAB7B7'
-bspc config normal_border_color         '#FDF6E3'
-bspc config presel_feedback_color       '#93A1A1'
+bspc config focused_border_color        '#076678'
+bspc config active_border_color         '#83a598'
+bspc config normal_border_color         '#ebdbb2'
+bspc config presel_feedback_color       '#ebdbb2'
 
-bspc config border_width                1
-bspc config window_gap                  8
-bspc config top_padding                -5
-bspc config left_padding               -5
-bspc config bottom_padding             -1
-bspc config right_padding              -1
+bspc config border_width                5
+bspc config borderless_singleton        true
 
-bspc config bottom_monocle_padding     -4
-bspc config right_monocle_padding      -4
+bspc config window_gap                  10
+bspc config gapless_monocle             true
 
-[ $(bspc query -M | wc -l) -le 1 ] &&
-	bspc config borderless_monocle true
+bspc config top_padding                 -5
+bspc config left_padding                -5
+bspc config bottom_padding              -5
+bspc config right_padding               -5
 
-bspc config split_ratio                 0.46
+bspc config single_monocle              true
+bspc config top_monocle_padding         $(( 0 + ( - $(bspc config top_padding   ) ) ))
+bspc config right_monocle_padding       $(( 0 + ( - $(bspc config right_padding ) ) ))
+bspc config bottom_monocle_padding      $(( 0 + ( - $(bspc config bottom_padding) ) ))
+bspc config left_monocle_padding        $(( 0 + ( - $(bspc config left_padding  ) ) ))
+
+#bspc config automatic_scheme            spiral
 bspc config initial_polarity            second_child
+bspc config split_ratio                 0.46
+bspc config directional_focus_tightness low
+bspc config ignore_ewmh_focus           true
+bspc config removal_adjustment          true
+
 bspc config pointer_modifier            mod4
 bspc config focus_follows_pointer       true
 bspc config pointer_follows_monitor     true
 bspc config click_to_focus              any
-bspc config removal_adjustment          true
-bspc config single_monocle              true
-bspc config ignore_ewmh_focus           true
-bspc config directional_focus_tightness low
+bspc config pointer_motion_interval     $(( 1000/144 ))
 
-
-primon="$(bspc query -M -m primary)"
-secmons=( "$(bspc query -M | sed "/$primon/d")" )
+bspc config remove_disabled_monitors    true
+bspc config remove_unplugged_monitors   true
+bspc config merge_overlapping_monitors  true
 
 if [ "$1" -eq 0 ]; then
-	bspwm-desktops 1 2 3 4 5 8 9 10 -m "$primon" "${secmons[@]}"
-	wmname LG3D
+	bspwm-desktop-adjust
 fi
-
 
 # -- Rules --
 
@@ -60,7 +63,7 @@ bspc rule -a 'St:ncmpcpp'               desktop=10
 bspc rule -a 'St:calcurse'              desktop=10
 bspc rule -a 'St:newsboat'              desktop=10
 bspc rule -a 'Zathura'                  state=tiled
-bspc rule -a 'Pavucontrol'              state=floating
+bspc rule -a 'pavucontrol'              state=floating
 bspc rule -a 'Lxappearance'             state=floating rectangle=950x600+0+0 center=on
 bspc rule -a 'St:scratchpad'            state=floating center=on
 bspc rule -a 'St:float'                 state=floating center=on
@@ -71,16 +74,12 @@ bspc rule -a 'DBeaver'                  desktop=4
 bspc rule -a 'TeamSpeak 3'              desktop=8
 bspc rule -a 'Signal:signal'            desktop=8
 bspc rule -a 'firefox:Browser'          state=floating
-bspc rule -a 'Steam:Steam'              state=floating
-bspc rule -a 'Steam:Steam:Steam'        state=tiled
+bspc rule -a 'steam'                    state=floating
+bspc rule -a 'steam:*:Steam'            state=tiled
 bspc rule -a 'Bar:lemonbar'             layer=below
 
 
 # -- Cmds --
-
-bspc config -m primary bottom_padding "$(( $(bspc config -m primary bottom_padding) + 3 ))"
-bspc config -m primary bottom_monocle_padding "$(( $(bspc config -m primary bottom_monocle_padding) + 3 ))"
-bspwm-panel "$(bspc query -M -m primary --names)" &
 
 killall --quiet --user "$USER" -USR1 sxhkd || {
 	sxhkd -m -1 &

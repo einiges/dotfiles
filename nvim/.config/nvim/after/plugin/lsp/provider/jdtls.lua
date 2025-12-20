@@ -24,13 +24,18 @@ local settings = function()
 			signatureHelp = { enabled = true },
 			completion = {
 				favoriteStaticMembers = {
-					'org.hamcrest.MatcherAssert.assertThat',
-					'org.hamcrest.Matchers.*',
-					'org.hamcrest.CoreMatchers.*',
-					'org.junit.jupiter.api.Assertions.*',
-					'java.util.Objects.requireNonNull',
-					'java.util.Objects.requireNonNullElse',
-					'org.mockito.Mockito.*',
+					"io.crate.testing.Asserts.assertThat",
+					"org.assertj.core.api.Assertions.assertThat",
+					"org.assertj.core.api.Assertions.assertThatThrownBy",
+					"org.assertj.core.api.Assertions.assertThatExceptionOfType",
+					"org.assertj.core.api.Assertions.catchThrowable",
+					"org.hamcrest.MatcherAssert.assertThat",
+					"org.hamcrest.Matchers.*",
+					"org.hamcrest.CoreMatchers.*",
+					"org.junit.jupiter.api.Assertions.*",
+					"java.util.Objects.requireNonNull",
+					"java.util.Objects.requireNonNullElse",
+					"org.mockito.Mockito.*",
 				},
 				filteredTypes = {
 					'com.sun.*',
@@ -39,6 +44,9 @@ local settings = function()
 					'jdk.*',
 					'sun.*',
 				},
+			},
+			saveActions = {
+				organizeImports = true,
 			},
 			sources = {
 				organizeImports = {
@@ -80,8 +88,10 @@ local cmd = function()
 		'-Dlog.protocol=true',
 		'-Dlog.level=ALL',
 		'--add-modules=ALL-SYSTEM',
+
 		'--add-opens',
 		'java.base/java.util=ALL-UNNAMED',
+
 		'--add-opens',
 		'java.base/java.lang=ALL-UNNAMED',
 
@@ -122,14 +132,14 @@ local keymaps = function(bufnr)
 
 	map
 		:desc('Organize imports')
-		:set('n', '<leader>ai',
+		:set('n', '<localleader>ai',
 			function()
 				require('jdtls').organize_imports()
 			end)
 
 	map
 		:desc('Test class')
-		:set('n', '<leader>T',
+		:set('n', '<localleader>T',
 			function()
 				if vim.bo.modified and vim.bo.modifiable then
 					vim.cmd.write()
@@ -139,7 +149,7 @@ local keymaps = function(bufnr)
 
 	map
 		:desc('Test nearest method')
-		:set('n', '<leader>t',
+		:set('n', '<localleader>t',
 			function()
 				if vim.bo.modified and vim.bo.modifiable then
 					vim.cmd.write()
@@ -149,21 +159,21 @@ local keymaps = function(bufnr)
 
 	map
 		:desc('Extract variable')
-		:set('v', '<leader>aev',
+		:set('v', '<localleader>aev',
 			function()
 				require('jdtls').extract_variable(true)
 			end)
 
 	map
 		:desc('Extract variable')
-		:set('n', '<leader>aev',
+		:set('n', '<localleader>aev',
 			function()
 				require('jdtls').extract_variable()
 			end)
 
 	map
 		:desc('Extract method')
-		:set('v', '<leader>aem',
+		:set('v', '<localleader>aem',
 			function()
 				require('jdtls').extract_method(true)
 			end)

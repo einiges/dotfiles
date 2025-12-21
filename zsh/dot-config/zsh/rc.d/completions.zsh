@@ -1,4 +1,6 @@
 
+autoload -Uz compinit && compinit
+
 zstyle ':completion:*' accept-exact '*(N)'
 zstyle ':completion:*' cache-path "$XDG_CACHE_HOME/zsh/zcompcache"
 zstyle ':completion:*' complete-options true

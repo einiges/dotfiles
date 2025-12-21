@@ -1,3 +1,3 @@
-(( $+commands[dircolors-gen] )) &&
-	[[ ! -f "$DIRCOLORS_INIT" ]] &&
-	dircolors-gen
+#(( $+commands[dircolors-gen] )) &&
+#	[[ ! -f "$DIRCOLORS_INIT" ]] &&
+#	dircolors-gen

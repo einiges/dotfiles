@@ -61,7 +61,7 @@ autoload -Uz "$ZDOTDIR"/functions/*(.,@N)
 local -a sources
 sources=(
 	"$ZDOTDIR"/rc.d/prompt.zsh
-	"$ZDOTDIR"/rc.d/plugins.zsh
+	"$ZDOTDIR"/rc.d/plugins-zgen.zsh
 	"$ZDOTDIR"/modules/*.zsh(.,@N)
 	"$ZDOTDIR"/rc.d/aliases.zsh
 	"$ZDOTDIR"/rc.d/completions.zsh

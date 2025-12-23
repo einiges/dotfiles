@@ -1,0 +1,55 @@
+# vim: ft=zsh
+
+# changing directories
+setopt   auto_cd
+setopt   auto_pushd
+setopt   cdable_vars
+unsetopt pushd_ignore_dups
+setopt   pushd_minus
+setopt   pushd_silent
+setopt   pushd_to_home
+
+# completion
+setopt   always_to_end
+setopt   auto_list
+setopt   auto_name_dirs
+setopt   auto_param_keys
+setopt   auto_param_slash
+setopt   glob_complete
+unsetopt list_ambiguous
+
+# expansion
+setopt   extended_glob
+setopt   glob_star_short
+setopt   magic_equal_subst
+#setopt   warn_create_global
+#setopt   warn_nested_var
+
+# history
+setopt   append_history
+setopt   hist_expire_dups_first
+setopt   hist_find_no_dups
+setopt   hist_ignore_all_dups
+setopt   hist_ignore_dups
+setopt   hist_ignore_space
+setopt   hist_no_store
+setopt   hist_reduce_blanks
+setopt   hist_save_no_dups
+setopt   hist_verify
+setopt   inc_append_history
+setopt   share_history
+
+# input/output
+unsetopt clobber
+setopt   correct
+unsetopt correct_all
+setopt   interactive_comments
+#setopt   ignore_eof
+setopt   rm_star_wait
+
+# job control
+setopt   auto_resume
+
+# zle
+unsetopt beep
+

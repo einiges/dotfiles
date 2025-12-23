@@ -37,6 +37,9 @@ source "$ZGEN_INIT" &>/dev/null || {
 	zgen load agkozak/zsh-z
 
 	zgen load "$ZDOTDIR"/plugins/fancier-ctrl-z
+	zgen load "$ZDOTDIR"/plugins/title
+	zgen load "$ZDOTDIR"/plugins/vicursor
+
 	[[ -d "$HOME"/Workspace/zsh/zsh-bdi ]] &&
 		zgen load "$HOME"/Workspace/zsh/zsh-bdi ||
 		zgen load einiges/zsh-bdi

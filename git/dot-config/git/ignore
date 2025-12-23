@@ -13,11 +13,40 @@ tags
 *.log
 
 
-
 # java (jdt.ls)
 .project
 .settings/
 .classpath
 
+
+# quarkus
+**/src/main/resources/application-dev.yaml
+.env
+
+
+# intellij IDEA
+.idea/
+*.iws
+*.iml
+*.ipr
+
+
+# VS Code
+.vscode/
+
+
 # lua (lua-language-server)
 .luarc.json
+
+
+# auth
+*.key
+*.pem
+*.crt
+*.der
+*.jks
+*.pfx
+*.p12
+*.p7b
+*.p7c
+

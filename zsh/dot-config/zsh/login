@@ -1,9 +1,0 @@
-# vim: ft=zsh
-
-function {
-local src
-for src in "$ZDOTDIR"/login.d/*.zsh(.,@N) "$ZDOTDIR"/login.d/*/*(.,@N); do
-	source "$src"
-done
-}
-

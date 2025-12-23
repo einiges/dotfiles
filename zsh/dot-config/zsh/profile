@@ -1,10 +1,8 @@
 # vim: ft=zsh
 
-PATH="${HOME}/.local/bin:${PATH}"
-
 function {
 	local src
-	for src in "$ZDOTDIR"/profile.d/*/*(.,@N); do
+	for src in "$ZDOTDIR"/profile.d/*.zsh(.,@N); do
 		source "$src"
 	done
 }

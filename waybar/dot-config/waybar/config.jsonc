@@ -1,0 +1,197 @@
+[{
+	"reload_style_on_change": true,
+	"output": "DP-1",
+	"position": "left",
+	"spacing": 4,
+	"width": 30,
+
+	"modules-left": [
+		"privacy",
+		"hyprland/workspaces",
+	],
+
+	//"modules-center": [
+	//	"mpris",
+	//],
+
+	"modules-right": [
+		"tray",
+		"network",
+		//"backlight",
+		"hyprland/language",
+
+		"wireplumber#sink",
+		"wireplumber#source",
+
+		"clock#date",
+		"clock#time",
+	],
+
+
+
+
+	"hyprland/workspaces": {
+		"rotate": 90,
+		"all-outputs": true,
+		"sort": "id",
+		"format": "{icon}",
+		"format-icons": {
+			"1":  "",
+			"2":  "󰅩",
+			"3":  "",
+			"4":  "",
+			"5":  "",
+			"8":  "󰻞",
+			"9":  "",
+			"10": "󰕰",
+		},
+	},
+
+	"hyprland/language": {
+		"rotate": 90,
+		"format": "{}",
+		"format-de-neo": "neo",
+		"format-th": "thai",
+		"format-de": "qwertz",
+
+		"on-scroll-down": "hyprctl switchxkblayout all next",
+		"on-scroll-up":   "hyprctl switchxkblayout all prev",
+	},
+
+	// FIXME: playerctld is broken
+
+	//"mpris": {
+	//	"rotate": 90,
+	//	"format": "{dynamic}",
+	//	"dynamic-order": ["artist", "title"],
+	//	"dynamic-importance-order": ["title", "artist", "album", "length", "position"],
+	//
+	//	"tooltip-format": "Title: {title}\nArtist: {artist}\nAlbum: {album}",
+	//
+	//	"status-icons": {
+	//		"playing": "▶",
+	//		"paused": "⏸",
+	//		"stopped": "■",
+	//	},
+	//
+	//	"artist-len": 10,
+	//	"title-len":  24,
+	//	"dynamic-len": "24",
+	//	"dynamic-separator": " • ",
+	//
+	//	"on-click-middle": "playerctld shift",
+	//},
+
+	"clock#time": {
+		// https://github.com/Alexays/Waybar/issues/1469
+		// FIXME: %-H and %-M
+		//"format": "{:%-H\n%-M}",
+		"format": "{:L%H\n%M}",
+		"tooltip": false,
+		"timezones": [
+			"Europe/Berlin",
+			"Etc/UTC",
+			"Asia/Bangkok",
+		],
+
+		"actions": {
+			"on-scroll-up": "tz_down",
+			"on-scroll-down": "tz_up",
+		},
+	},
+
+	"clock#date": {
+		// https://github.com/Alexays/Waybar/issues/1469
+		// FIXME: %-d
+		//"format": "{:L%a\n%-d}",
+		"format": "{:L%a\n%d}",
+		"tooltip-format": "<tt>{calendar}</tt>",
+		"calendar": {
+			"mode": "year",
+			"mode-mon-col"  : 3,
+			"weeks-pos": "left",
+			"format": {
+				"months":     "<span color='#7c6f64'><b>{}</b></span>",
+				"weeks":      "<span color='#689d6a'><b>W{}</b></span>",
+				"weekdays":   "<span color='#b57614'><b>{}</b></span>",
+				"days":       "<span color='#7c6f64'>{}</span>",
+				"today":      "<span color='#d65d0e'><b>{}</b></span>",
+			},
+		},
+		"actions":  {
+			"on-click":        "shift_reset",
+			"on-click-middle": "shift_reset",
+			"on-click-right":  "mode",
+			"on-scroll-up":    "shift_down",
+			"on-scroll-down":  "shift_up",
+		},
+	},
+
+	"wireplumber#sink": {
+		"format": "{volume}",
+		"format-muted": "{volume}",
+
+		"on-click-right": "pavucontrol --tab=1",
+		"on-click":       "wpctl set-mute   @DEFAULT_SINK@ toggle",
+	},
+
+	"wireplumber#source": {
+		"format":       "{format_source}",
+		"format-muted": "{format_source}",
+
+		"format-source":       "{volume}",
+		"format-source-muted": "{volume}",
+
+		"on-click":       "wpctl set-mute   @DEFAULT_SOURCE@ toggle",
+		"on-click-right": "pavucontrol --tab=4",
+		"on-scroll-up":   "wpctl set-volume @DEFAULT_SOURCE@ 1%+",
+		"on-scroll-down": "wpctl set-volume @DEFAULT_SOURCE@ 1%-",
+	},
+
+
+	"privacy": {
+		"modules": [
+			{ "type": "screenshare" },
+			//{ "type": "audio-out" },
+			{ "type": "audio-in" },
+		]
+	},
+
+	"network": {
+		"rotate": 90,
+		"format-wifi": " {essid}",
+		"format-alt": "{ipaddr}",
+		"format-ethernet": "",
+		"format-linked": "",
+		"format-disconnected": "⚠",
+
+		"tooltip-format": "Interface: {ifname}\nGateway: {gwaddr}\nIP: {ipaddr}/{cidr}\nESSID: {essid}\nSignal: {signalStrength}%",
+	},
+
+	"tray": {
+		"icon-size": 17,
+		"spacing": 10,
+		"show-passive": true,
+	},
+
+	"backlight": {
+		"format": "{icon}",
+		"tooltip-format": "Backlight: {percent}%",
+		"format-icons": [ "", "", "", "", "", "", "", "", "" ],
+	},
+
+	"battery": {
+		"format": "{capacity}",
+		"format-full": "FULL",
+		"format-charging": "{capacity}",
+		"format-plugged": "{capacity}",
+		"format-alt": "{time}",
+		"tooltip-format": "Battery: {capacity}\nTime: {timeTo}\nPower: {power}\nHealth: {health}\nCycles: {cycles}",
+
+		"states": {
+			"good": 80,
+			"warning": 30,
+			"critical": 15,
+		}
+	}
+}]

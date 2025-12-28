@@ -12,7 +12,7 @@
 	bb       = branches
 	bd       = branch --delete
 	bddd     = branch --delete --force
-	bm       = branch --move
+	bmv      = branch --move
 
 	# clean
 	cleaner  = clean -d    --force --force
@@ -23,7 +23,9 @@
 	ca      = commit --amend
 	cam     = commit --amend --message
 	cm      = commit --message
+	wip     = commit --message=wip
 	cfix    = commit --amend --no-edit
+	fixup   = !"f() { git commit --fixup=${1:-@}; }; f"
 
 	# cherry-pick
 	cp      = cherry-pick
@@ -76,8 +78,6 @@
 	# reset
 	uncommit   = reset --soft HEAD~1 --
 	uncommittt = reset --hard HEAD~1 --
-	uc         = uncommit
-	uccc       = uncommittt
 	unadd      = reset HEAD
 	unstage    = reset HEAD
 
@@ -98,7 +98,6 @@
 	stl       = stashes
 
 	# status
-	;s = status .
 	s         = status
 	ss        = status --untracked-files
 	sss       = status --untracked-files --short --branch
@@ -118,7 +117,7 @@
 	sw        = switch
 	swc       = switch --create
 	swd       = switch --detach
-	main      = !"git switch $(git config init.defaultBranch)"
+	main      = !"git switch \"$(git default-branch)\""
 
 	# tag
 	tags      = tag --list --format='%(color:bold blue)%(refname:strip=2)%(color:reset)%(if)%(taggerdate)%(then) - %(color:bold green)%(taggerdate:human)%(color:reset)%(end)%(if)%(taggername)%(then) - %(color:yellow)%(taggername)%(color:reset)%(end)'
@@ -135,15 +134,15 @@
 	# helper
 
 	# g g g g g g sw
-	g = !"git "
+	g          = !"git "
 
 	# using .gitignore instead of .gitkeep
 	keep       = !"f() { touch \"${1:-${GIT_PREFIX:-.}}/.gitignore\"; }; f"
-	keep-empty = !"f() { gitignore=\"${1:-${GIT_PREFIX:-.}}/.gitignore\"; test ! -e \"${gitignore}\" && printf '# keep directory empty\n*\n!.gitignore\n' > \"${gitignore}\"; }; f"
+	keep-empty = !"f() { gitignore=\"${1:-${GIT_PREFIX:-.}}/.gitignore\"; test ! -e \"${gitignore}\" && printf '%s\n' '# keep directory empty' '*' '!.gitignore' >\"${gitignore}\"; }; f"
 
-	fix        = !"f() { [ $# > 0 ] && git commit --fixup=$1; }; f"
-	squash     = !"f() { defaultBranch=$(git config init.defaultBranch); mergebase=$(git merge-base @ ${1:-$defaultBranch}); git rebase --interactive --autosquash ${@:2} ${mergebase}; }; f"
+	squash     = !"f() { defaultBranch=$(git default-branch); mergebase=$(git merge-base @ ${1:-$defaultBranch}); git rebase --interactive --autosquash ${@:2} ${mergebase}; }; f"
 
 	exec       = !"exec "
 	root       = rev-parse --show-toplevel
 
+	default-branch = config init.defaultBranch

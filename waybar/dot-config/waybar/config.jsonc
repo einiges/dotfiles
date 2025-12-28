@@ -85,9 +85,9 @@
 	"clock#time": {
 		// https://github.com/Alexays/Waybar/issues/1469
 		// FIXME: %-H and %-M
-		//"format": "{:%-H\n%-M}",
+		//"format": "{:L%-H\n%-M}",
 		"format": "{:L%H\n%M}",
-		"tooltip": false,
+		"tooltip-format": "Zone: {:L%Z}",
 		"timezones": [
 			"Europe/Berlin",
 			"Etc/UTC",
@@ -98,6 +98,7 @@
 			"on-scroll-up": "tz_down",
 			"on-scroll-down": "tz_up",
 		},
+
 	},
 
 	"clock#date": {

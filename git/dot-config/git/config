@@ -39,12 +39,6 @@
 
 [include]
 	path = aliases.gitconfig
-
-[include]
-	path = overwrite.gitconfig
-
-[include]
-	path = secret.gitconfig
-
-[advice]
-	detachedHead = false
+	path = advices.gitconfig
+	path = priority.gitconfig
+	path = secrets.gitconfig

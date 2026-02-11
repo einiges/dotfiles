@@ -1,8 +1,3 @@
-/*fineman's styling*/
-
-/*IN CASE YOU FORGOR*/
-/*padding/margin: up right down left*/
-
 /*Colors [Gruvbox light]*/
 @define-color bg0_h       #f9f5d7;
 @define-color bg0         #fbf1c7;
@@ -47,11 +42,14 @@
 @define-color gray_h      #928374;
 @define-color gray_s      #a89984;
 
+
 * {
 	all: unset;
 	/*font-family: "Symbols Nerd Font Mono", "JetBrains Mono";*/
 	font-family: "Liberation Mono";
 	font-size: 14px;
+
+	border-radius: 9px;
 }
 
 window#waybar {
@@ -60,11 +58,18 @@ window#waybar {
 	/*border: 8px solid @red;*/
 	/*margin: 8px 8px;*/
 	/*padding: 8px 8px;*/
+	/*padding: 1px;*/
+	/*border-radius: 6px;*/
+	/*padding: 5px 0px;*/
 }
+
+
 
 tooltip {
 	background-color: @bg;
-	border: 2px solid @fg0;
+	border-color: @fg0;
+	border-style: solid;
+	border-width: 2px;
 	padding: 20px 8px;
 }
 
@@ -72,9 +77,11 @@ tooltip label {
 	color: @fg0;
 }
 
+
+
 #privacy-item {
 	background-color: @bg1;
-	color: @red;
+	color: @red_h;
 	padding: 0.5em 0;
 }
 
@@ -82,11 +89,13 @@ tooltip label {
 	padding: 20px 8px;
 }
 
+
+
 /* WORKSPACES */
 #workspaces button {
 	border-style: solid;
 	border-width: 1px;
-	margin: 0.1em 0;
+	margin:  0.1em 1px;
 	padding: 0.5em 0;
 }
 
@@ -117,7 +126,8 @@ tooltip label {
 	text-shadow: 1px 1px 2px @fg3;
 }
 
-#workspaces button.urgent:not(:hover) {
+/* urgent */
+#workspaces button.urgent:not(.active):not(:hover) {
 	background-color: @orange_s;
 	border-color: @orange;
 	color: @bg;
@@ -131,19 +141,24 @@ tooltip label {
 	color: @bg;
 	font-weight: bold;
 	text-shadow: 1px 1px 2px @fg3;
+	box-shadow: inset 3px 0   @bg;
 }
+
 
 
 #tray {
 	background-color: @bg1;
 	color: @fg;
+	margin:  0     1px;
 	padding: 0.5em 0;
-	margin: 0.1em 0;
+	border-color: @bg4;
+	border-style: solid;
+	border-width: 1px;
 }
 
 #tray menu {
 	background-color: @bg1;
-	border: 1px solid @fg;
+	/*border: 1px solid @fg;*/
 }
 
 #tray menuitem:hover {
@@ -161,9 +176,12 @@ tooltip label {
 
 
 #wireplumber {
+	color: @fg;
+	text-decoration-color: @fg;
 	border-style: solid;
 	border-width: 1px;
-	padding: 1em 0;
+	margin:  0     1px;
+	padding: 0.5em 0;
 	/*font-weight: bold;*/
 	text-shadow: 1px 1px 2px @fg4;
 }
@@ -171,27 +189,35 @@ tooltip label {
 #wireplumber.sink {
 	background-color: @yellow_s;
 	border-color: @yellow;
-	color: @fg2;
+}
+
+#wireplumber.sink.muted {
+	box-shadow: inset 3px 0   @yellow;
 }
 
 #wireplumber.source {
 	background-color: @orange_s;
 	border-color: @orange;
-	color: @fg0;
+}
+
+#wireplumber.source.source-muted {
+	box-shadow: inset 3px 0   @orange;
 }
 
 #wireplumber.source.source-muted,
 #wireplumber.sink.muted {
-	text-decoration-line: line-through;
-	/*text-decoration-color: @bg;*/
+	text-decoration-line: underline;
+	font-style: italic;
 }
+
 
 
 #network {
 	border-style: solid;
 	border-width: 1px;
-	padding: 1em 0;
 	border-color: @blue_h;
+	margin:  0     1px;
+	padding: 0.8em 0;
 	background-color: @blue;
 	color: @bg;
 	text-shadow: 1px 1px 2px @fg2;
@@ -213,7 +239,8 @@ tooltip label {
 
 
 #bluetooth {
-	padding: 1em 0;
+	margin:  0     1px;
+	padding: 0.5em 0;
 	background-color: @blue_s;
 	/*font-size: 18px;*/
 	color: @fg0;
@@ -222,7 +249,8 @@ tooltip label {
 
 
 #backlight {
-	padding: 1px 0;
+	margin:  0     1px;
+	padding: 0.5em 0;
 	font-size: 18px;
 	color: @fg0;
 }
@@ -230,7 +258,8 @@ tooltip label {
 
 
 #battery {
-	padding: 2px 0 4px 0;
+	margin:  0     1px;
+	padding: 0.5em 0;
 	color: @fg0;
 }
 
@@ -247,22 +276,28 @@ tooltip label {
 
 
 #language {
-	padding: 1em 0;
+	margin:  0     1px;
+	padding: 0.8em 0;
 	background-color: @aqua;
+	border-style: solid;
+	border-width: 1px;
+	border-color: @aqua_h;
 	color: @bg;
 	font-weight: bold;
 	text-shadow: 1px 1px 2px @fg3;
 }
 
 
+
 #mpris {
+	margin:  0     1px;
+	padding: 1em   0;
 	text-shadow: 1px 1px 5px @fg4;
 }
 
 #mpris.playing {
 	background-color: @bg1;
 	color: @fg;
-	padding: 1em 0;
 }
 
 #mpris.stopped {
@@ -282,10 +317,15 @@ tooltip label {
 	background-color: @bg1;
 	border-style: solid;
 	border-width: 1px;
-	border-color: @bg2;
+	border-color: @bg4;
 	color: @fg;
 	font-weight: bold;
 	text-shadow: 1px 1px 2px @bg3;
-	padding: 1em 0;
+	margin:  0px   1px;
+	padding: 0.5em 0;
+}
+
+#clock.time {
+	margin: 2px 1px;
 }
 

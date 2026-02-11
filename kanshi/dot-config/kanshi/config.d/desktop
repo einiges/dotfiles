@@ -20,20 +20,25 @@ output "LG Electronics LG TV SSCR2 0x01010101" {
 
 profile desktop.multi {
 	output "$main" enable
-	output "$off1"  enable
+	output "$off1" enable
 	output "$tv"   disable
 }
 
 profile desktop.focus {
 	output "$main" enable
-	output "$off1"  disable
+	output "$off1" disable
 	output "$tv"   disable
 }
 
 profile desktop.lazy {
 	output "$main" disable
-	output "$off1"  disable
+	output "$off1" disable
 	output "$tv"   enable
 }
 
+profile desktop.all {
+	output "$main" enable
+	output "$off1" enable
+	output "$tv"   enable
+}
 

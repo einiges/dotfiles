@@ -1,9 +1,11 @@
 [{
-	"reload_style_on_change": true,
+	"name": "primary",
 	"output": "DP-1",
 	"position": "left",
-	"spacing": 4,
-	"width": 30,
+	"width": 32,
+	"margin": "5px 2px 5px 0",
+	"spacing": 2,
+	"reload_style_on_change": true,
 
 	"modules-left": [
 		"privacy",
@@ -134,6 +136,8 @@
 
 		"on-click-right": "pavucontrol --tab=1",
 		"on-click":       "wpctl set-mute   @DEFAULT_SINK@ toggle",
+		"on-scroll-up":   "wpctl set-volume @DEFAULT_SINK@ 1%+",
+		"on-scroll-down": "wpctl set-volume @DEFAULT_SINK@ 1%-",
 	},
 
 	"wireplumber#source": {

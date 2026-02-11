@@ -68,26 +68,35 @@ color_gray_s     = '#a89984'
 format = '[ ($read_only )$path ]($style)'
 style  = 'fg:color_fg bg:color_yellow_s'
 
-read_only = ''
-read_only_style = 'fg:color_fg0 bg:color_yellow_s'
+
+read_only              = ''
+read_only_style        = 'fg:color_fg0 bg:color_yellow_s'
 
 before_repo_root_style = 'fg:color_fg0 bg:color_yellow_s'
-repo_root_style        = 'fg:color_fg0 bg:color_yellow_s underline'
+# directory missing, if symlink
+# https://github.com/starship/starship/issues/6858
+# https://github.com/starship/starship/issues/5600
+#repo_root_style        = 'fg:color_fg0 bg:color_yellow_s underline'
 repo_root_format       = '[( $read_only)( $before_root_path)]($before_repo_root_style)[$repo_root]($repo_root_style)[$path ]($style)'
 
-truncate_to_repo = true
+fish_style_pwd_dir_length = 3
+truncate_to_repo  = true
 truncation_length = 99
 truncation_symbol = '…/'
 
 
-
 [directory.substitutions]
+"\n" = '↵'
+"\t" = '→'
+' '  = '⍽'
+#' '  = '␣'
 Documents = '󰈙'
 Downloads = '󰇚'
 Music = '󰝚'
 Audio = '󰎇'
 Pictures = '󰋩'
 Developer = '󰅩'
+
 
 
 

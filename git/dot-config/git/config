@@ -25,6 +25,12 @@
 	verbose = true
 	abbreviateCommands = true
 
+[branch]
+	sort = -committerdate
+
+[tag]
+	sort = -version:refname
+
 [diff]
 	tool = nvimdiff
 

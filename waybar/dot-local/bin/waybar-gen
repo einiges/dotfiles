@@ -1,0 +1,48 @@
+#!/bin/sh
+
+waybar_home="${XDG_CONFIG_HOME:-${HOME}/.config}/waybar"
+
+yaml_config="${waybar_home}/config.yaml"
+json_config="${waybar_home}/config.jsonc"
+
+if [ ! -f "${waybar_home}/config.yaml" ]
+then
+	return 1
+fi
+
+gen_cmd=(
+	yq
+	--monochrome-output
+	.
+	"${yaml_config}"
+)
+
+opt_write=0
+opt_start=0
+
+while getopts 'ws' opt
+do
+	case "$opt" in
+		w)
+			opt_write=1
+			;;
+		s)
+			opt_start=1
+			;;
+	esac
+done
+
+if [ $opt_write -eq 1 ]
+then
+	"${gen_cmd[@]}" > "${json_config}" || exit 1
+else
+	"${gen_cmd[@]}" || exit 1
+fi
+
+
+if [ $opt_start -eq 1 ]
+then
+	systemctl --user restart waybar || exit 1
+fi
+
+exit 0

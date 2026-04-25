@@ -77,12 +77,14 @@
       paused:  ⏸
       stopped: ■
 
-    artist-len: 10
-    title-len:  24
+    artist-len:  10
+    title-len:   24
     dynamic-len: 24
     dynamic-separator: ' • '
 
     on-click-middle: playerctld shift
+    on-scroll-up:    playerctl  previous
+    on-scroll-down:  playerctl  next
 
   clock#time:
     # https://github.com/Alexays/Waybar/issues/1469

@@ -1,40 +1,129 @@
 #!/bin/sh
 
-if [ $# -eq 0 ]; then
-	printf 'Usage: %s SOURCE...\n' "$(basename "$0")"
-	exit 1
-fi
+help() {
+	printf 'Usage: %s ARCHIVE\n' "$(basename "$0")"
+	exit "${1:-1}"
+}
 
-for target in "$@"
-do
-	if [ ! -r "$target" ]; then
-		printf "invalid file '%s'\n" "$target" >&2
-		continue
+
+arg_archive=
+
+main() {
+	parse_args "$@"
+
+	if [ ! -r "$arg_archive" ]; then
+		die "invalid file '${arg_archive}'"
 	fi
 
-	# TODO: If archive top level contains more than one file
-	# extract everything into new subdirectory.
-	extract_dir="$(dirname "$target")"
-	if [ ! -w "$extract_dir" ]
-	then
-		printf "missing permissions '%s'\n" "$extract_dir" >&2
-		continue
+	unarchive_one "${arg_archive}"
+}
+
+# 1... args
+parse_args() {
+	if [ $# -ne 1 ]
+	then help
 	fi
 
-	case "$target" in
-		*.tar                   ) tar -xvf "$target"  ;;
-		*.tar.gz|*.tgz          ) tar -zxvf "$target" ;;
-		*.tar.bz2|*.tbz2|*.tbz  ) tar -jxvf "$target" ;;
-		*.tar.xz|*.txz          ) tar -Jxvf "$target" ;;
-		*.tar.zma|*.tlz         ) tar --lzma -xvf "$target" ;;
-		*.gz                    ) gunzip --keep "$target";;
-		*.bz2                   ) bunzip --keep "$target" ;;
-		*.xz                    ) unxz   --keep "$target" ;;
-		*.lzma                  ) unlzma --keep "$target" ;;
-		*.zip                   ) unzip "$target" -d "$extract_dir" ;;
-		*.7z                    ) 7z a -t7z "$target" ;;
+	arg_archive="$1"
+}
 
-		* ) printf "unsupported archive for '%s'\n" "$target" >&2 ;;
+
+
+# TODO: Handle variable dest_dir and dest_name
+unarchive_one() {
+	archive=$1
+	case "$archive" in
+		*.tar)
+			if [ $(tar --list --file="$archive" | wc --lines) -gt 1 ]
+			then mkdir -p "${extract_dir:=${archive%.tar}}"
+			fi
+			tar --extract --file="$archive" --directory="${extract_dir:-.}"
+			;;
+		*.tar.gz|*.tgz)
+			if [ $(tar --gzip --list --file="$archive" | wc --lines) -gt 1 ]
+			then
+				extract_dir="${archive%.tar.gz}"
+				extract_dir="${archive%.tgz}"
+				mkdir -p "$extract_dir"
+			fi
+			tar --gzip --extract --file="$archive" --directory="${extract_dir:-.}"
+			;;
+		*.gz)
+			gunzip --keep "$archive"
+			;;
+		*.tar.bz2|*.tbz2|*.tbz)
+			if [ $(tar --bzip2 --list --file="$archive" | wc --lines) -gt 1 ]
+			then
+				extract_dir="${archive%.tar.bz2}"
+				extract_dir="${archive%.tbz2}"
+				extract_dir="${archive%.tbz}"
+				mkdir -p "$extract_dir"
+			fi
+			tar --bzip2 --extract --file="$archive" --directory="${extract_dir:-.}"
+			;;
+		*.bz2)
+			bunzip --keep "$archive"
+			;;
+		*.tar.xz|*.txz)
+			if [ $(tar --xz --list --file="$archive" | wc --lines) -gt 1 ]
+			then
+				extract_dir="${archive%.tar.xz}"
+				extract_dir="${archive%.txz}"
+				mkdir -p "$extract_dir"
+			fi
+			tar --xz --extract --file="$archive" --directory="${extract_dir:-.}"
+			;;
+		*.xz)
+			unxz --keep "$archive"
+			;;
+		*.tar.lzma|*.tlz)
+			if [ $(tar --lzma --list --file="$archive" | wc --lines) -gt 1 ]
+			then
+				extract_dir="${archive%.tar.lzma}"
+				extract_dir="${archive%.tlz}"
+				mkdir -p "$extract_dir"
+			fi
+			tar --lzma --extract --file="$archive" --directory="${extract_dir:-.}"
+			;;
+		*.lzma|*.lz)
+			unlzma --keep "$archive"
+			;;
+		*.tar.zst|*.tzst)
+			if [ $(tar --lzma --list --file="$archive" | wc --lines) -gt 1 ]
+			then
+				extract_dir="${archive%.tar.zst}"
+				extract_dir="${archive%.tzst}"
+				mkdir -p "$extract_dir"
+			fi
+			tar --zstd --extract --file="$archive" --directory="${extract_dir:-.}"
+			;;
+		*.zst)
+			unzstd --keep --output-dir-mirror "$extract_dir" "$archive"
+			;;
+		*.zip)
+			if [ $(unzip -Z1 "$archive" | wc --lines) -gt 1 ]
+			then mkdir -p "${extract_dir:=${archive%.zip}}"
+			fi
+			unzip -q "$archive" -d "${extract_dir:-.}"
+			;;
+		*.7z)
+			if [ $(7z l "$archive" | tail -n1 | awk '{print $(NF-1)}') -gt 1 ]
+			then extract_dir="${archive%.7z}"
+			fi
+			7z x -o"${extract_dir:-.}" -- "$archive" >/dev/null
+			;;
+
+		* )
+			die "unsupported archive for file '$archive'"
+			;;
 	esac
-done
+}
+
+die() {
+	printf '%s\n' "$*" >&2
+	exit 1
+}
+
+
+main "$@"
 

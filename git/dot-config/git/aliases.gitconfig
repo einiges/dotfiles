@@ -1,165 +1,165 @@
 
 [alias]
 
-	# add
-	a        = add
-	aa       = add --all
-	ap       = add --patch
-	au       = add --update
+# add
+a        = add
+aa       = add --all
+ap       = add --patch
+au       = add --update
 
-	# branch
-	branches = branch --all
-	b        = branch
-	bb       = branches
-	bd       = branch --delete
-	bddd     = branch --delete --force
-	bmv      = branch --move
-	current-branch = rev-parse --abbrev-ref HEAD
-	default-branch = config init.defaultBranch
+# branch
+branches = branch --all
+b        = branch
+bb       = branches
+bd       = branch --delete
+bddd     = branch --delete --force
+bmv      = branch --move
+current-branch = rev-parse --abbrev-ref HEAD
+default-branch = config init.defaultBranch
 
-	# clean
-	cleaner  = clean -d    --force --force
-	cleanest = clean -d -x --force --force
+# clean
+cleaner  = clean -d    --force --force
+cleanest = clean -d -x --force --force
 
-	# commit
-	c       = commit
-	ca      = commit --amend
-	cam     = commit --amend --message
-	cm      = commit --message
-	cmm     = !"f() { git commit --message=\"$(git current-branch): ${*}\" ; }; f"
-	wip     = !"f() { git commit --message=\"wip${1:+: }${*}\" ; }; f"
-	cfix    = commit --amend --no-edit
-	fixup   = !"f() { git commit --fixup=\"${1:-@}\" ; }; f"
+# commit
+c       = commit
+ca      = commit --amend
+cam     = commit --amend --message
+cm      = commit --message
+cmm     = !"f() { git commit --message=\"$(git current-branch): ${*}\" ; }; f"
+wip     = !"f() { git commit --message=\"wip${1:+: }${*}\" ; }; f"
+cfix    = commit --amend --no-edit
+fixup   = !"f() { git commit --fixup=\"${1:-@}\" ; }; f"
 
 
-	# cherry-pick
-	cp      = cherry-pick
-	cpa     = cherry-pick --abort
-	cpc     = cherry-pick --continue
+# cherry-pick
+cp      = cherry-pick
+cpa     = cherry-pick --abort
+cpc     = cherry-pick --continue
 
-	# diff
-	d         = diff
-	dc        = diff --cached
-	ds        = diff --staged
-	dw        = diff --word-diff
-	dprev     = diff @^ @
+# diff
+d         = diff
+dc        = diff --cached
+ds        = diff --staged
+dw        = diff --word-diff
+dprev     = diff @^ @
 
-	# fetch
-	f         = fetch
-	prune     = fetch --prune
+# fetch
+f         = fetch
+prune     = fetch --prune
 
-	# init
-	init-empty = !"git init && git commit --allow-empty --message 'init'"
+# init
+init-empty = !"git init && git commit --allow-empty --message 'init'"
 
-	# log
-	l         = log
-	ll        = log --graph --topo-order --boundary --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)%ad%C(reset) %C(white)%s%C(reset) - %C(yellow)%an%C(reset)%C(bold magenta)%d%C(reset)'
-	lll       = log --graph --topo-order --boundary --branches --remotes --tags --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)%ad%C(reset)%C(bold magenta)%d%C(reset)%n        %C(white)%s%C(reset) - %C(yellow)%an%C(reset)'
-	wc        = log --raw --no-merges
+# log
+l         = log
+ll        = log --graph --topo-order --boundary --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)%ad%C(reset) %C(white)%s%C(reset) - %C(yellow)%an%C(reset)%C(bold magenta)%d%C(reset)'
+lll       = log --graph --topo-order --boundary --branches --remotes --tags --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)%ad%C(reset)%C(bold magenta)%d%C(reset)%n        %C(white)%s%C(reset) - %C(yellow)%an%C(reset)'
+wc        = log --raw --no-merges
 
-	log-hour       = log --since=1-hour-ago
-	log-day        = log --since=1-day-ago
-	log-week       = log --since=1-week-ago
-	log-month      = log --since=1-month-ago
+log-hour       = log --since=1-hour-ago
+log-day        = log --since=1-day-ago
+log-week       = log --since=1-week-ago
+log-month      = log --since=1-month-ago
 
-	# merge
-	m         = merge
-	ma        = merge --abort
-	mc        = merge --continue
+# merge
+m         = merge
+ma        = merge --abort
+mc        = merge --continue
 
-	mt        = mergetool
+mt        = mergetool
 
-	# push
-	pushf     = push --force-with-lease
-	pushfff   = push --force
-	pusht     = push --tags
-	pushd     = push --delete
-	pushdo    = push --delete origin
+# push
+pushf     = push --force-with-lease
+pushfff   = push --force
+pusht     = push --tags
+pushd     = push --delete
+pushdo    = push --delete origin
 
-	# rebase
-	r         = rebase
-	ra        = rebase --abort
-	rc        = rebase --continue
-	ri        = rebase --interactive
+# rebase
+r         = rebase
+ra        = rebase --abort
+rc        = rebase --continue
+ri        = rebase --interactive
 
-	# remote
-	remotes   = remote --verbose
-	rr        = remote
-	rrr       = remotes
+# remote
+remotes   = remote --verbose
+rr        = remote
+rrr       = remotes
 
-	# reset
-	uncommit   = reset --soft HEAD~1 --
-	uncommittt = reset --hard HEAD~1 --
-	unadd      = reset HEAD
-	unstage    = reset HEAD
+# reset
+uncommit   = reset --soft HEAD~1 --
+uncommittt = reset --hard HEAD~1 --
+unadd      = reset HEAD
+unstage    = reset HEAD
 
-	# restore
-	rs        = restore
-	rss       = restore --staged
+# restore
+rs        = restore
+rss       = restore --staged
 
-	# revert
-	rv        = revert
+# revert
+rv        = revert
 
-	# stash
-	stashes   = stash list
-	st        = stash push
-	stt       = stash push --include-untracked
-	sttt      = stash push --all
-	sta       = stash apply
-	stp       = stash pop
-	stl       = stashes
+# stash
+stashes   = stash list
+st        = stash push
+stt       = stash push --include-untracked
+sttt      = stash push --all
+sta       = stash apply
+stp       = stash pop
+stl       = stashes
 
-	# status
-	s         = status
-	ss        = status --untracked-files
-	sss       = status --untracked-files --short --branch
+# status
+s         = status
+ss        = status --untracked-files
+sss       = status --untracked-files --short --branch
 
-	# submodule
-	sm        = submodule
-	smi       = submodule init
-	sma       = submodule add
-	sma1      = submodule add --depth 1
-	smd       = submodule deinit
-	sms       = submodule sync
-	smu       = submodule update
-	smui      = submodule update --init
-	smuir     = submodule update --init --recursive
+# submodule
+sm        = submodule
+smi       = submodule init
+sma       = submodule add
+sma1      = submodule add --depth 1
+smd       = submodule deinit
+sms       = submodule sync
+smu       = submodule update
+smui      = submodule update --init
+smuir     = submodule update --init --recursive
 
-	# switch
-	sw        = switch
-	swc       = switch --create
-	swd       = switch --detach
-	main      = !"git switch \"$(git default-branch)\""
+# switch
+sw        = switch
+swc       = switch --create
+swd       = switch --detach
+main      = !"git switch \"$(git default-branch)\""
 
-	# tag
-	tags      = tag --list --format='%(color:bold blue)%(refname:strip=2)%(color:reset)%(if)%(taggerdate)%(then) - %(color:bold green)%(taggerdate:human)%(color:reset)%(end)%(if)%(taggername)%(then) - %(color:yellow)%(taggername)%(color:reset)%(end)'
-	ta        = tag --annotate
-	versions  = tags --sort=-version:refname 'v*'
+# tag
+tags      = tag --list --format='%(color:bold blue)%(refname:strip=2)%(color:reset)%(if)%(taggerdate)%(then) - %(color:bold green)%(taggerdate:human)%(color:reset)%(end)%(if)%(taggername)%(then) - %(color:yellow)%(taggername)%(color:reset)%(end)'
+ta        = tag --annotate
+versions  = tags --sort=-version:refname 'v*'
 
-	# worktree
-	wt        = worktree
-	wta       = worktree add
-	wtl       = worktree list
-	wtp       = worktree prune
-	wtr       = worktree remove
+# worktree
+wt        = worktree
+wta       = worktree add
+wtl       = worktree list
+wtp       = worktree prune
+wtr       = worktree remove
 
-	# helper
+# helper
 
-	# g g g g g g sw
-	g          = !"git "
+# g g g g g g sw
+g          = !"git "
 
-	keep       = !"f() { touch \"${1:-${GIT_PREFIX:-.}}/.gitignore\" ; }; f"
-	keep-empty = !"f() { gitignore=\"${1:-${GIT_PREFIX:-.}}/.gitignore\" ; test ! -e \"${gitignore}\" && printf '%s\n' '# keep directory empty' '*' '!.gitignore' >\"${gitignore}\" ; }; f"
+keep       = !"f() { touch \"${1:-${GIT_PREFIX:-.}}/.gitignore\" ; }; f"
+keep-empty = !"f() { gitignore=\"${1:-${GIT_PREFIX:-.}}/.gitignore\" ; test ! -e \"${gitignore}\" && printf '%s\n' '# keep directory empty' '*' '!.gitignore' >\"${gitignore}\" ; }; f"
 
-	squash     = !"f() { defaultBranch=\"$(git default-branch)\" ; mergebase=\"$(git merge-base @ \"${1:-$defaultBranch}\")\" ; git rebase --interactive --autosquash \"${@:2}\" \"${mergebase}\" ; }; f"
+squash     = !"f() { defaultBranch=\"$(git default-branch)\" ; mergebase=\"$(git merge-base @ \"${1:-$defaultBranch}\")\" ; git rebase --interactive --autosquash \"${@:2}\" \"${mergebase}\" ; }; f"
 
-	exec       = !"exec "
-	root       = rev-parse --show-toplevel
+exec       = !"exec "
+root       = rev-parse --show-toplevel
 
-	is-repo    = !"f() { \
-		if [ $# -gt 0 -a -f \"$1\" ]; \
-		then gitdir=\"$(dirname \"$1\")\" ; \
-		else gitdir=\"${1:-.}\" ; \
-		fi ; \
-		git -C \"$gitdir\" rev-parse 2>/dev/null ; \
-	}; f"
+is-repo    = !"f() { \
+	if [ $# -gt 0 -a -f \"$1\" ]; \
+	then gitdir=\"$(dirname \"$1\")\" ; \
+	else gitdir=\"${1:-.}\" ; \
+	fi ; \
+	git -C \"$gitdir\" rev-parse 2>/dev/null ; \
+}; f"

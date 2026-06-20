@@ -1,0 +1,7 @@
+require('hyprland.apps.blueman-manager')
+require('hyprland.apps.firefox')
+require('hyprland.apps.jetbrains')
+require('hyprland.apps.keepassxc')
+require('hyprland.apps.pavucontrol')
+require('hyprland.apps.steam')
+require('hyprland.apps.thunar')

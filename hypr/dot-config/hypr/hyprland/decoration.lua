@@ -4,10 +4,22 @@ local smart_gaps = function ()
 	-- Smart gaps (ignoring special workspaces)previous_per_monitor
 	hl.workspace_rule({ workspace = "w[tv1]s[false]", gaps_out = 0, gaps_in = 0 })
 	hl.workspace_rule({ workspace = "f[1]s[false]", gaps_out = 0, gaps_in = 0 })
-	hl.window_rule({ match = { float = false, workspace = "w[tv1]s[false]" }, border_size = 0 })
+
+	if #hl.get_monitors() == 1 then
+		hl.window_rule({ match = { float = false, workspace = "w[tv1]s[false]" }, border_size = 0 })
+		hl.window_rule({ match = { float = false, workspace = "f[1]s[false]" }, border_size = 0 })
+	end
 	hl.window_rule({ match = { float = false, workspace = "w[tv1]s[false]" }, rounding = 0 })
-	hl.window_rule({ match = { float = false, workspace = "f[1]s[false]" }, border_size = 0 })
 	hl.window_rule({ match = { float = false, workspace = "f[1]s[false]" }, rounding = 0 })
+end
+
+local no_shadow = function ()
+	hl.window_rule({
+		match = {
+			workspace = 'w[tv1]',
+		},
+		no_shadow = true,
+	})
 end
 
 M.apply = function ()
@@ -20,19 +32,19 @@ M.apply = function ()
 
 		col = {
 			active_border = { angle = 90, colors = {
-				"rgba(9d0006FF)",
-				"rgba(9d0006FF)",
-				"rgba(9d0006FF)",
-				"rgba(FFFFFF60)",
+				'rgba(9d0006FF)',
+				'rgba(9d0006FF)',
+				'rgba(9d0006FF)',
+				'rgba(ffffff60)',
 			}},
 			inactive_border = { colors = {
-				"rgba(FFFFFF00)"
+				'rgba(ffffff00)'
 			}},
 		},
 
 		snap = {
 			enabled = true,
-		}
+		},
 	}
 
 	config.decoration = {
@@ -43,11 +55,20 @@ M.apply = function ()
 			enabled = true,
 			range   = 8,
 
-			color          = "rgba(555555AA)",
-			color_inactive = "rgba(555555AA)",
+			color          = 'rgba(555555AA)',
+			color_inactive = 'rgba(555555AA)',
 
 			offset         = { 1, 3 },
-		}
+		},
+
+		glow = {
+			enabled = false,
+			range   = 50,
+			--render_power = 10,
+
+			color          = 'rgba(9d0006FF)',
+			color_inactive = 'rgba(ffffff00)',
+		},
 	}
 
 	config.dwindle = {
@@ -73,6 +94,7 @@ M.apply = function ()
 
 	hl.config(config)
 	smart_gaps()
+	no_shadow()
 
 	--hl.window_rule({
 	--	match = {

@@ -3,6 +3,13 @@ local M = {}
 local gamemode = function ()
 	if hl.get_config('animations.enabled') then
 		hl.config({
+			--input = {
+			--	kb_layout = "de",
+			--	kb_variant = "",
+			--	kb_model = "",
+			--	kb_options = "",
+			--	kb_rules = "",
+			--},
 			general = {
 				gaps_in  = 0,
 				gaps_out = 0,
@@ -20,11 +27,28 @@ local gamemode = function ()
 				shadow = {
 					enabled = false,
 				},
+				glow = {
+					enabled = false,
+				},
+				motion_blur = {
+					enabled = false,
+				},
 			}
 		})
 	else
 		hl.dispatch(hl.dsp.exec_cmd('hyprctl reload'))
 	end
+end
+
+local mouse = function ()
+	hl.bind('SUPER + mouse:272', hl.dsp.window.drag(), { mouse = true })
+	hl.bind('SUPER + mouse:273', hl.dsp.window.resize(), { mouse = true })
+	--hl.bind('SUPER + SHIFT + mouse:273', hl.dsp.window.resize({ keep_aspect_ratio = true }), { mouse = true })
+	hl.bind('SUPER + mouse:275', hl.dsp.window.float('toggle', 'activewindow'))
+	hl.bind('SUPER + mouse:274', hl.dsp.window.close('activewindow'))
+
+	hl.bind('SUPER + mouse_down', hl.dsp.focus({workspace = 'e+1', on_current_monitor = true}))
+	hl.bind('SUPER + mouse_up',   hl.dsp.focus({workspace = 'e-1', on_current_monitor = true}))
 end
 
 M.apply = function ()
@@ -67,60 +91,89 @@ M.apply = function ()
 
 
 	-- position windows
+	hl.bind('SUPER + ALT   + n', hl.dsp.window.move({direction = 'left'}))
 	hl.bind('SUPER + SHIFT + n', function ()
-		if not hl.get_active_window().floating then
-			hl.dispatch(hl.dsp.window.swap({direction = 'left'}))
-		else
-			hl.dispatch(hl.dsp.window.move({x = -250, y = 0, relative = true}))
+		if not hl.get_active_window().floating
+		then hl.dispatch(hl.dsp.window.swap({direction = 'left'}))
+		else hl.dispatch(hl.dsp.window.move({
+				x = hl.get_active_monitor().width / -10,
+				y = 0,
+				relative = true,
+			}))
 		end
 	end)
 
+	hl.bind('SUPER + ALT   + r', hl.dsp.window.move({direction = 'down'}))
 	hl.bind('SUPER + SHIFT + r', function ()
-		if not hl.get_active_window().floating then
-			hl.dispatch(hl.dsp.window.swap({direction = 'down'}))
-		else
-			hl.dispatch(hl.dsp.window.move({x = 0, y = 100, relative = true}))
+		if not hl.get_active_window().floating
+		then hl.dispatch(hl.dsp.window.swap({direction = 'down'}))
+		else hl.dispatch(hl.dsp.window.move({
+				x = 0,
+				y = hl.get_active_monitor().width / 10,
+				relative = true,
+			}))
 		end
 	end)
 
+	hl.bind('SUPER + ALT   + t', hl.dsp.window.move({direction = 'up'}))
 	hl.bind('SUPER + SHIFT + t', function ()
-		if not hl.get_active_window().floating then
-			hl.dispatch(hl.dsp.window.swap({direction = 'up'}))
-		else
-			hl.dispatch(hl.dsp.window.move({x = 0, y = -100, relative = true}))
+		if not hl.get_active_window().floating
+		then hl.dispatch(hl.dsp.window.swap({direction = 'up'}))
+		else hl.dispatch(hl.dsp.window.move({
+				x = 0,
+				y = hl.get_active_monitor().width / -10,
+				relative = true,
+			}))
 		end
 	end)
 
+	hl.bind('SUPER + ALT   + d', hl.dsp.window.move({direction = 'right'}))
 	hl.bind('SUPER + SHIFT + d', function ()
-		if not hl.get_active_window().floating then
-			hl.dispatch(hl.dsp.window.swap({direction = 'right'}))
-		else
-			hl.dispatch(hl.dsp.window.move({x = 250, y = 0, relative = true}))
+		if not hl.get_active_window().floating
+		then hl.dispatch(hl.dsp.window.swap({direction = 'right'}))
+		else hl.dispatch(hl.dsp.window.move({
+				x = hl.get_active_monitor().width / 10,
+				y = 0,
+				relative = true,
+			}))
 		end
 	end)
 
-
-	hl.bind('SUPER + ALT + n', hl.dsp.window.move({direction = 'left'}))
-	hl.bind('SUPER + ALT + r', hl.dsp.window.move({direction = 'down'}))
-	hl.bind('SUPER + ALT + t', hl.dsp.window.move({direction = 'up'}))
-	hl.bind('SUPER + ALT + d', hl.dsp.window.move({direction = 'right'}))
 
 
 	-- resize window
-	local resizing = {
-		n = {x = -200, y =    0},
-		r = {x =    0, y =  200},
-		t = {x =    0, y = -200},
-		d = {x =  200, y =    0},
-	}
-
-	for key, ori in pairs(resizing) do
-		hl.bind('SUPER + CTRL + ' .. key, hl.dsp.window.resize({
-			x = ori.x,
-			y = ori.y,
+	hl.bind('SUPER + CTRL + n', function ()
+		hl.dispatch(hl.dsp.window.resize({
+			x = hl.get_active_window().size.x / -10,
+			y = 0,
 			relative = true,
-		}), { repeating = true })
-	end
+		}))
+	end, { repeating = true })
+
+	hl.bind('SUPER + CTRL + r', function ()
+		hl.dispatch(hl.dsp.window.resize({
+			x = 0,
+			y = hl.get_active_window().size.y / 10,
+			relative = true,
+		}))
+	end, { repeating = true })
+
+	hl.bind('SUPER + CTRL + t', function ()
+		hl.dispatch(hl.dsp.window.resize({
+			x = 0,
+			y = hl.get_active_window().size.y / -10,
+			relative = true,
+		}))
+	end, { repeating = true })
+
+	hl.bind('SUPER + CTRL + d', function ()
+		hl.dispatch(hl.dsp.window.resize({
+			x = hl.get_active_window().size.x / 10,
+			y = 0,
+			relative = true,
+		}))
+	end, { repeating = true })
+
 
 
 
@@ -181,16 +234,14 @@ M.apply = function ()
 	hl.bind('SUPER + b', hl.dsp.exec_cmd([[systemctl --user kill --signal=SIGUSR1 waybar]]), {release = true})
 
 
-	-- MOUSE BINDINGS
+	mouse()
 
-	hl.bind('SUPER + mouse:272', hl.dsp.window.drag(), { mouse = true })
-	hl.bind('SUPER + mouse:273', hl.dsp.window.resize(), { mouse = true })
-	hl.bind('SUPER + mouse:275', hl.dsp.window.float('toggle', 'activewindow'))
-	hl.bind('SUPER + mouse:274', hl.dsp.window.close('activewindow'))
-
-	hl.bind('SUPER + mouse_down', hl.dsp.focus({workspace = 'e+1', on_current_monitor = true}))
-	hl.bind('SUPER + mouse_up',   hl.dsp.focus({workspace = 'e-1', on_current_monitor = true}))
-	
+	hl.bind('SUPER + q', function ()
+		hl.notification.create({
+			text = ('monitor orientation: %s'):format(H.monitor_orientation()),
+			timeout = 4000,
+		})
+	end)
 end
 
 return M

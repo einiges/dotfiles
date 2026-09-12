@@ -7,6 +7,7 @@ require('hyprland.keybinds').apply()
 require('hyprland.decoration').apply()
 require('hyprland.animations').apply()
 require('hyprland.windowrules').apply()
+require('hyprland.events')
 require('hyprland.apps')
 
 

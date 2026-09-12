@@ -1,0 +1,23 @@
+
+
+--hl.on('workspace.move_to_monitor', function(workspace, new_monitor)
+--
+--	-- local prev_monitor = '???'
+--	-- if prev_monitor.width > prev_monitor.height
+--	-- and new_monitor.width <  new_monitor.height
+--	-- then
+--	--     rotate clockwise
+--	-- elseif prev_monitor.width < prev_monitor.height
+--	-- and     new_monitor.width >  new_monitor.height
+--	-- then
+--	--     rotate counter clockwise
+--	-- end
+--
+--	hl.notification.create({
+--		text = ('Workspace: %s, moved from monitor: %s, to: %s'):format(
+--			workspace.name,
+--			workspace.monitor.name,
+--			new_monitor.name),
+--		timeout = 4000,
+--	})
+----end)

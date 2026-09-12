@@ -6,7 +6,7 @@
 - hypridle (enable systemd unit: hypridle)
 - hyprlock
 - hyprpaper
-- nwg-display
+- nwg-displays
 - nwg-look
 - _kanshi_
 

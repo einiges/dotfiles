@@ -1,42 +1,45 @@
 local M = {}
 
 local screenshot = function ()
+	local save_cmd = [[tee "$(xdg-user-dir PICTURES)/Screenshots/$(date --iso-8601=ns)"]]
+	local sscc_fmt = ([[grim -g "%%s" - | %s | wl-copy]]):format(save_cmd)
+
+	hl.bind('SUPER + s', function ()
+		local region = H.window_region()
+		hl.dispatch(hl.dsp.exec_cmd(sscc_fmt:format(region)))
+	end)
+
 	hl.bind('SUPER + SHIFT + s', hl.dsp.submap('screenshot'))
 
-	-- TODO: Add functionality to delay taking the screenshot
-	-- TODO: Add functionality to open taken screenshot in an editor
-	-- TODO: Add functionality to save screenshot to storage and clipboard
 	hl.define_submap('screenshot', 'reset', function ()
-		local scrn    = [[grim -g -]]
-		local scrncpy = [[grim -g - - | wl-copy]]
-
-		--hl.bind('l/o', rofi show screenshots, open in editor)
-
 		-- active window
-		local active_window_geometry_cmd = [[hyprctl activewindow -j | jq -r '"\(.at[0]),\(.at[1]) \(.size[0])x\(.size[1])"']]
-		hl.bind('w',        hl.dsp.exec_cmd(active_window_geometry_cmd .. '|' .. scrn))
-		hl.bind('SHIFT + w',hl.dsp.exec_cmd(active_window_geometry_cmd .. '|' .. scrncpy))
+		hl.bind('w', function ()
+			local region = H.window_region()
+			hl.dispatch(hl.dsp.exec_cmd(sscc_fmt:format(region)))
+		end)
 
-		-- active workspace - like monitor, excluding reserved area
-		local active_workspace_geomentry_cmd = [[hyprctl monitors -j | jq -r --arg monitor "$(hyprctl activeworkspace -j | jq -r '.monitor')" 'map(select(.name == $monitor) | "\(.x + .reserved[0]),\(.y + .reserved[1]) \(.width - .reserved[0] - .reserved[2])x\(.height - .reserved[1] - .reserved[3])") | first']]
-		hl.bind('s',         hl.dsp.exec_cmd(active_workspace_geomentry_cmd .. '|' .. scrn))
-		hl.bind('SHIFT + S', hl.dsp.exec_cmd(active_workspace_geomentry_cmd .. '|' .. scrncpy))
+		hl.bind('s', function ()
+			local region = H.workspace_region()
+			hl.dispatch(hl.dsp.exec_cmd(sscc_fmt:format(region)))
+		end)
 
 		-- active monitor
-		local active_monitor_geomentry_cmd = [[hyprctl monitors -j | jq -r --arg monitor "$(hyprctl activeworkspace -j | jq -r '.monitor')" 'map(select(.name == $monitor) | "\(.x),\(.y) \(.width)x\(.height)") | first']]
-		hl.bind('m',         hl.dsp.exec_cmd(active_monitor_geomentry_cmd .. '|' .. scrn))
-		hl.bind('SHIFT + m', hl.dsp.exec_cmd(active_monitor_geomentry_cmd .. '|' .. scrncpy))
+		hl.bind('m', function ()
+			local region = H.monitor_region()
+			hl.dispatch(hl.dsp.exec_cmd(sscc_fmt:format(region)))
+		end)
 
 		-- area: free selection
-		local area_selection_geomentry_cmd = 'slurp -d'
-		hl.bind('a',         hl.dsp.exec_cmd(area_selection_geomentry_cmd .. '|' .. scrn))
-		hl.bind('SHIFT + a', hl.dsp.exec_cmd(area_selection_geomentry_cmd .. '|' .. scrncpy))
+		hl.bind('a', function ()
+			hl.dispatch(hl.dsp.exec_cmd(sscc_fmt:format([[$(slurp -d)]])))
+		end)
 
 		-- everything
-		hl.bind('e',         hl.dsp.exec_cmd([[grim]]))
-		hl.bind('SHIFT + E', hl.dsp.exec_cmd([[grim | wl-copy]]))
+		hl.bind('e', hl.dsp.exec_cmd(
+			([[grim - | %s | wl-copy]]):format(save_cmd)
+		))
 
-		hl.bind('catchall', hl.dsp.submap('reset'))
+		hl.bind('escape', hl.dsp.submap('reset'))
 	end)
 end
 

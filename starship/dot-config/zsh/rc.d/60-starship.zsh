@@ -1,6 +1,6 @@
-(( $+commands[starship] )) &&
-	[[ ! -f "$STARSHIP_INIT" ]] &&
-	starship init zsh > "$STARSHIP_INIT"
+(( ! $+commands[starship] )) && return
 
-(( $+commands[starship] )) &&
-	source "$STARSHIP_INIT"
+[[ ! -f "$STARSHIP_INIT" ]] &&
+	command starship init zsh >! "$STARSHIP_INIT"
+
+source "$STARSHIP_INIT"

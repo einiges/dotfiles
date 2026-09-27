@@ -10,6 +10,7 @@
 SAVEHIST=50000
 HISTSIZE=50000
 HISTFILE="$XDG_STATE_HOME/${SHELL##*/}"/history
+HISTORY_IGNORE='((fg|bg|exit|cat|ls|l|ll|lll)(| *))'
 
 KEYTIMEOUT=10
 WORDCHARS="?_-.~;!#$%^"

@@ -6,7 +6,7 @@ hash -d radio=~/Audio/RadioPlay
 hash -d wall=~/Pictures/Wallpapers
 hash -d shots=~/Pictures/Screenshots
 hash -d media=/run/media/"${USER}"
-hash -d ws=~/Workspace
+hash -d w=~/Workspace
 hash -d dots=~/.dotfiles
 
 hash -d config="${XDG_CONFIG_HOME:-$HOME/.config}"

@@ -1,11 +1,11 @@
 
 # globals
 
-alias -g 'P'='| ${PAGER:-less}'
-alias -g 'G'='| grep --color=auto'
-alias -g 'W'='| wc --lines'
-alias -g 'X'='| xargs'
-
+alias -g P='| ${PAGER:-less}'
+alias -g F='| grep --color=auto'
+alias -g LN='| wc --lines'
+alias -g X='| xargs'
+alias -g Z='| zargs'
 
 # navigation
 alias ,='popd'
@@ -31,54 +31,63 @@ alias l='\ls --kibibytes --human-readable --classify --group-directories-first -
 alias ll='l -l'
 alias lll='ll -A'
 alias llll='lll -a'
-alias l.='l -ld . ..'
-
+alias lt='ll -t'
+alias lh='l --directory -- .*(N)'
+alias lhh='l -l --directory -- . .. .*(N)'
+alias lf='l -- *(.N)'
+alias llf='ll -- *(.N)'
+alias llff='ll -- *(.N) .*(.N)'
+alias ld='l --directory -- *(/N)'
+alias lld='ll --directory -- *(/N)'
+alias lldd='ll --directory -- *(/N) .*(/N)'
 
 # development
 alias e='editor --'
 alias g='noglob git'
 
 alias k='kubectl'
-alias d='docker'
-alias dc='docker compose'
-alias dcl='docker compose logs --tail 500'
-alias dcll='docker compose logs --tail 500 --follow'
-alias dclll='docker compose logs'
-alias dcllll='docker compose logs --follow'
-alias dcu='docker compose up'
-alias dcuu='docker compose up --detach'
-alias dcd='docker compose down'
-alias dcdd='docker compose down --volumes'
-alias dca='docker compose start'
-alias dco='docker compose stop'
-alias dcx='docker compose exec'
+alias c=podman
+alias cc='podman compose'
+alias ccl='podman compose logs --tail 500 --follow'
+alias ccll='podman compose logs'
+alias cclll='podman compose logs --follow'
+alias ccu='podman compose up'
+alias ccuu='podman compose up --detach'
+alias ccd='podman compose down'
+alias ccdd='podman compose down --volumes'
+alias cca='podman compose start'
+alias cco='podman compose stop'
+alias ccx='podman compose exec'
 
 alias taghere='touch .tags'
 
 
 # system administration
-alias P='pacman'
-alias Pu='pacman -Syu'
-alias Pr='pacman -Rs'
-alias Prr='pacman -Rsn'
-alias Ps='pacman -Ss'
-alias Pi='pacman -Si'
-alias Pii='pacman -Sii'
-alias R='sudo '
+alias R='run0 '
 alias E='sudoedit --'
+
+alias Pkg='pacman'
+alias Pkgu='pacman -Syu'
+alias Pkgrm='pacman -Rs'
+alias Pkgrmm='pacman -Rsn'
+alias Pkgg='pacman -Ss'
+alias Pkgi='pacman -Si'
+alias Pkgii='pacman -Sii'
+alias PkgRequires='pactree --unique'
+alias PkgRequiredBy='pactree --reverse'
 
 # shell
 alias p='print --'
 alias pf='printf'
-alias pn='printf "%s\n"'
-alias p0='printf "%s\0"'
+alias pn='printf -- "%s\n"'
+alias p0='printf -- "%s\0"'
 
 # external
 alias m='man'
 alias o='xdg-open'
 
 aliases[=]='noglob -zcalc'
-aliases[==]='noglob units --history "" --log ""'
+aliases[==]='noglob units --history ""'
 
 alias ns='notify-send'
 

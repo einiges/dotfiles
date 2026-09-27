@@ -10,36 +10,48 @@ autoload backward-kill-word-match && zle -N $_
 bindkey '\t' expand-or-complete-prefix
 
 # generate keyfile with 'autoload zkbd && zkbd'
-local kbdfile="$ZDOTDIR/.zkbd/$TERM-${${DISPLAY:t}:-$VENDOR-$OSTYPE}"
-[[ ! -f "$kbdfile" ]] && return 0
+local kbdfile="${ZDOTDIR:-$HOME}/.zkbd/$TERM-$VENDOR-$OSTYPE"
+if [[ ! -f "$kbdfile" ]]
+then return 0
+else source "$kbdfile"
+fi
 
 
-source "$kbdfile"
+zkbdbind() {
+	if (( # < 2)) || [[ ! -n "$1" ]]
+	then return 1
+	fi
 
-test -n "${key[Backspace]}"    && bindkey $_ backward-delete-char
-test -n "${key[C-Backspace]}"  && bindkey $_ backward-delete-word
-
-test -n "${key[S-Tab]}"        && bindkey $_ reverse-menu-complete
-
-test -n "${key[Delete]}"       && bindkey $_ delete-char
-test -n "${key[C-Delete]}"     && bindkey $_ delete-word
-
-test -n "${key[Insert]}"       && bindkey $_ overwrite-mode
-
-test -n "${key[Home]}"         && bindkey $_ beginning-of-line
-test -n "${key[Home]}"         && bindkey -M vicmd $_ vi-beginning-of-line
-
-test -n "${key[End]}"          && bindkey $_ end-of-line
-test -n "${key[End]}"          && bindkey -M vicmd $_ vi-end-of-line
-
-test -n "${key[Up]}"           && bindkey $_ up-line-or-history
-
-test -n "${key[Left]}"         && bindkey $_ backward-char
-test -n "${key[C-Left]}"       && bindkey $_ backward-word
-
-test -n "${key[Down]}"         && bindkey $_ down-line-or-history
-
-test -n "${key[Right]}"        && bindkey $_ forward-char
-test -n "${key[C-Right]}"      && bindkey $_ forward-word
-
+	if (( # == 2 ))
+	then bindkey "$@"
+	else bindkey "${@:2}"
+	fi
 }
+
+zkbdbind $key[Backspace]    backward-delete-char
+zkbdbind $key[C-Backspace]  backward-delete-word
+
+zkbdbind $key[S-Tab]        reverse-menu-complete
+
+zkbdbind $key[Delete]       delete-char
+zkbdbind $key[C-Delete]     delete-word
+
+zkbdbind $key[Insert]       overwrite-mode
+
+zkbdbind $key[Home]         beginning-of-line
+zkbdbind $key[Home]         -M vicmd $key[Home] vi-beginning-of-line
+
+zkbdbind $key[End]          end-of-line
+zkbdbind $key[End]          -M vicmd $key[End] vi-end-of-line
+
+zkbdbind $key[Up]           up-line-or-history
+
+zkbdbind $key[Left]         backward-char
+zkbdbind $key[C-Left]       backward-word
+
+zkbdbind $key[Down]         down-line-or-history
+
+zkbdbind $key[Right]        forward-char
+zkbdbind $key[C-Right]      forward-word
+}
+
